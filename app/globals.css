@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Φόρτωση των κρίσιμων στυλ πρώτα */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221 40% 39%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  /* Βασικά στυλ για το body */
+  body {
+    @apply bg-gradient-secondary min-h-screen text-base;
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Βελτιστοποίηση για content-visibility */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
+
+  /* Βελτιστοποίηση για LCP */
+  .hero-section {
+    @apply relative bg-gradient-primary text-white overflow-hidden;
+    content-visibility: visible !important;
+  }
+
+  /* Υπόλοιπα στυλ */
+  .text-justify-content {
+    @apply text-justify;
+  }
+
+  .section-primary {
+    @apply bg-gradient-primary text-white;
+  }
+
+  .section-secondary {
+    @apply bg-secondary text-primary;
+  }
+
+  .section-white {
+    @apply bg-white text-primary-dark;
+  }
+
+  .section-muted {
+    @apply bg-muted text-primary;
+  }
+}
+
+/* Hero section specific styles */
+.hero-section::before {
+  content: "";
+  @apply absolute inset-0 bg-primary-dark/20;
+}
+
+/* Card styles */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:scale-[1.02];
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-primary text-white hover:bg-primary-light transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-primary hover:bg-white transition-colors;
+}
+
+/* Text gradient */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+}
+
+/* Responsive typography */
+@screen sm {
+  html {
+    font-size: 14px;
+  }
+}
+
+@screen md {
+  html {
+    font-size: 16px;
+  }
+}
+
+@screen lg {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* Improved accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
