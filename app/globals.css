@@ -29,7 +29,7 @@
 
   /* Βασικά στυλ για το body */
   body {
-    @apply bg-gradient-secondary min-h-screen text-base;
+    @apply bg-white min-h-screen text-base;
     text-rendering: optimizeSpeed;
   }
 
@@ -41,7 +41,7 @@
 
   /* Βελτιστοποίηση για LCP */
   .hero-section {
-    @apply relative bg-gradient-primary text-white overflow-hidden;
+    @apply relative bg-blue-700 text-white overflow-hidden;
     content-visibility: visible !important;
   }
 
@@ -51,26 +51,26 @@
   }
 
   .section-primary {
-    @apply bg-gradient-primary text-white;
+    @apply bg-blue-700 text-white;
   }
 
   .section-secondary {
-    @apply bg-secondary text-primary;
+    @apply bg-gray-100 text-blue-700;
   }
 
   .section-white {
-    @apply bg-white text-primary-dark;
+    @apply bg-white text-gray-800;
   }
 
   .section-muted {
-    @apply bg-muted text-primary;
+    @apply bg-gray-50 text-blue-700;
   }
 }
 
 /* Hero section specific styles */
 .hero-section::before {
   content: "";
-  @apply absolute inset-0 bg-primary-dark/20;
+  @apply absolute inset-0 bg-black/20;
 }
 
 /* Card styles */
@@ -80,16 +80,16 @@
 
 /* Button styles */
 .btn-primary {
-  @apply bg-primary text-white hover:bg-primary-light transition-colors;
+  @apply bg-blue-700 text-white hover:bg-blue-600 transition-colors;
 }
 
 .btn-secondary {
-  @apply bg-secondary text-primary hover:bg-white transition-colors;
+  @apply bg-gray-100 text-blue-700 hover:bg-white transition-colors;
 }
 
 /* Text gradient */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-500;
 }
 
 /* Responsive typography */

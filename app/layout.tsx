@@ -1,5 +1,5 @@
 import "./globals.css"
-import { Outfit, Playfair_Display } from "next/font/google"
+import { Inter } from "next/font/google"
 import type React from "react"
 import { Toaster } from "sonner"
 import { CookieConsent } from "./components/cookie-consent"
@@ -11,21 +11,10 @@ import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
 import { LanguageProvider } from "./contexts/language-context"
 
-// Βελτιστοποίηση γραμματοσειρών με display: swap για καλύτερο FCP
-const outfit = Outfit({
-  subsets: ["latin", "greek"],
-  variable: "--font-outfit",
+// Απλοποιημένη ρύθμιση γραμματοσειράς
+const inter = Inter({
+  subsets: ["latin"],
   display: "swap",
-  preload: true,
-  fallback: ["system-ui", "sans-serif"],
-})
-
-const playfair = Playfair_Display({
-  subsets: ["latin", "greek"],
-  variable: "--font-playfair",
-  display: "swap",
-  preload: true,
-  fallback: ["Georgia", "serif"],
 })
 
 export const metadata: Metadata = {
@@ -91,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
   return (
-    <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
+    <html lang="el" className={`scroll-smooth ${inter.className}`}>
       <head>
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -101,10 +90,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="google" content="notranslate" />
         <Suspense fallback={null}>{gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}</Suspense>
       </head>
-      <body className="min-h-screen bg-background antialiased font-sans">
+      <body className="min-h-screen bg-background antialiased">
         <WebVitals />
         <LanguageProvider>
-          {children}
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
           <CookieConsent />
           <Toaster position="top-center" />
           <Analytics />
