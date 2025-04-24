@@ -1,5 +1,5 @@
 import "./globals.css"
-import { Inter } from "next/font/google"
+import { Outfit, Playfair_Display } from "next/font/google"
 import type React from "react"
 import { Toaster } from "sonner"
 import { CookieConsent } from "./components/cookie-consent"
@@ -11,9 +11,15 @@ import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
 import { LanguageProvider } from "./contexts/language-context"
 
-// Απλοποιημένη ρύθμιση γραμματοσειράς
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+})
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
   display: "swap",
 })
 
@@ -67,7 +73,7 @@ export const metadata: Metadata = {
   viewport: {
     width: "device-width",
     initialScale: 1,
-    maximumScale: 5,
+    maximumScale: 1,
   },
   verification: {
     google: "your-google-site-verification",
@@ -80,26 +86,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
   return (
-    <html lang="el" className={`scroll-smooth ${inter.className}`}>
+    <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
       <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link
+          rel="icon"
+          href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg"
+          type="image/jpeg"
+        />
+        <link
+          rel="shortcut icon"
+          href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg"
+          type="image/jpeg"
+        />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <meta name="google" content="notranslate" />
-        <Suspense fallback={null}>{gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}</Suspense>
-      </head>
-      <body className="min-h-screen bg-background antialiased">
-        <WebVitals />
-        <LanguageProvider>
-          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-          <CookieConsent />
-          <Toaster position="top-center" />
-          <Analytics />
-        </LanguageProvider>
-
-        {/* Μετακίνηση των scripts στο τέλος του body για καλύτερο TBT */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -113,6 +112,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        <meta name="google" content="notranslate" />
+        <Suspense fallback={null}>{gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}</Suspense>
+      </head>
+      <body className="min-h-screen bg-background antialiased font-sans">
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=G-Y7K0K22ZD9"
@@ -121,6 +124,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <WebVitals />
+        <LanguageProvider>
+          {children}
+          <CookieConsent />
+          <Toaster position="top-center" />
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   )

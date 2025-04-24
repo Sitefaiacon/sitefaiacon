@@ -8,11 +8,10 @@ interface OptimizedImageProps {
   alt: string
   width: number
   height: number
-  priority?: boolean
   className?: string
 }
 
-export function OptimizedImage({ src, alt, width, height, priority = false, className = "" }: OptimizedImageProps) {
+export function OptimizedImage({ src, alt, width, height, className = "" }: OptimizedImageProps) {
   const [isLoading, setLoading] = useState(true)
 
   return (
@@ -27,8 +26,7 @@ export function OptimizedImage({ src, alt, width, height, priority = false, clas
           ${isLoading ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}
         `}
         onLoadingComplete={() => setLoading(false)}
-        loading={priority ? "eager" : "lazy"}
-        priority={priority}
+        loading="lazy"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     </div>

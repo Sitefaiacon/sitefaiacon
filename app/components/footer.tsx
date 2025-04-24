@@ -1,20 +1,9 @@
-"use client"
-
 import Link from "next/link"
 import { Mail, MapPin, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Script from "next/script"
-import { useState } from "react"
 
 export function Footer() {
-  const [translateLoaded, setTranslateLoaded] = useState(false)
-
-  const loadTranslate = () => {
-    if (!translateLoaded) {
-      setTranslateLoaded(true)
-    }
-  }
-
   return (
     <>
       <footer className="bg-white border-t">
@@ -60,42 +49,28 @@ export function Footer() {
             <div className="mt-4 md:mt-0"></div>
           </div>
           <div className="mt-4 flex justify-center">
-            {/* Lazy load Google Translate με κουμπί */}
-            {!translateLoaded ? (
-              <Button variant="outline" size="sm" onClick={loadTranslate}>
-                Μετάφραση σελίδας
-              </Button>
-            ) : (
-              <div id="google_translate_element"></div>
-            )}
+            <div id="google_translate_element"></div>
           </div>
         </div>
       </footer>
-
-      {/* Φόρτωση του Google Translate μόνο όταν ζητηθεί */}
-      {translateLoaded && (
-        <>
-          <Script
-            src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-            strategy="lazyOnload"
-          />
-          <Script id="google-translate-init" strategy="lazyOnload">
-            {`
-              function googleTranslateElementInit() {
-                new google.translate.TranslateElement(
-                  {
-                    pageLanguage: 'el',
-                    includedLanguages: 'en,it,de,fr,ru',
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                    autoDisplay: false
-                  },
-                  'google_translate_element'
-                );
-              }
-            `}
-          </Script>
-        </>
-      )}
+      <Script
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+        strategy="lazyOnload"
+      />
+      <Script id="google-translate-init" strategy="lazyOnload">
+        {`
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+              {
+                pageLanguage: 'el',
+                includedLanguages: 'en,it,de,fr,ru',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+              },
+              'google_translate_element'
+            );
+          }
+        `}
+      </Script>
     </>
   )
 }

@@ -1,6 +1,5 @@
 import type React from "react"
-import { Suspense } from "react"
-import { Inter } from "next/font/google"
+import { Outfit, Playfair_Display } from "next/font/google"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "sonner"
@@ -10,9 +9,15 @@ import GoogleAnalytics from "../components/google-analytics"
 import { LanguageProvider } from "../contexts/language-context"
 import "../globals.css"
 
-// Απλοποιημένη ρύθμιση γραμματοσειράς
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+})
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
   display: "swap",
 })
 
@@ -34,10 +39,10 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
   return (
-    <html lang={lang} className={`scroll-smooth ${inter.className}`}>
-      <body className="min-h-screen bg-background antialiased">
+    <html lang={lang} className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
+      <body className="min-h-screen bg-background antialiased font-sans">
         <LanguageProvider initialLang={lang}>
-          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          {children}
           <WebVitals />
           <CookieConsent />
           <Toaster position="top-center" />

@@ -386,8 +386,7 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                       />
                     </div>
                     <h2 className="text-2xl font-bold mt-4">{isEnglish ? project.titleEn : project.title}</h2>
-                    <p className="text-gray-600">{isEnglish ? project.locationEn : project.location}</p>
-                    <p className="mt-2">{isEnglish ? project.descriptionEn : project.description}</p>
+                    {/* Οι περιγραφές τοποθεσίας και έργου αφαιρέθηκαν */}
                   </DialogContent>
                 </Dialog>
               </motion.div>

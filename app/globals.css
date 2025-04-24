@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Φόρτωση των κρίσιμων στυλ πρώτα */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -27,50 +26,40 @@
     --radius: 0.5rem;
   }
 
-  /* Βασικά στυλ για το body */
   body {
-    @apply bg-white min-h-screen text-base;
-    text-rendering: optimizeSpeed;
+    @apply bg-gradient-secondary min-h-screen text-base;
   }
 
-  /* Βελτιστοποίηση για content-visibility */
-  section {
-    content-visibility: auto;
-    contain-intrinsic-size: 0 500px;
-  }
-
-  /* Βελτιστοποίηση για LCP */
-  .hero-section {
-    @apply relative bg-blue-700 text-white overflow-hidden;
-    content-visibility: visible !important;
-  }
-
-  /* Υπόλοιπα στυλ */
+  /* Add this new class */
   .text-justify-content {
     @apply text-justify;
   }
 
   .section-primary {
-    @apply bg-blue-700 text-white;
+    @apply bg-gradient-primary text-white;
   }
 
   .section-secondary {
-    @apply bg-gray-100 text-blue-700;
+    @apply bg-secondary text-primary;
   }
 
   .section-white {
-    @apply bg-white text-gray-800;
+    @apply bg-white text-primary-dark;
   }
 
   .section-muted {
-    @apply bg-gray-50 text-blue-700;
+    @apply bg-muted text-primary;
   }
 }
 
 /* Hero section specific styles */
+.hero-section {
+  @apply relative bg-gradient-primary text-white overflow-hidden;
+}
+
 .hero-section::before {
   content: "";
-  @apply absolute inset-0 bg-black/20;
+  @apply absolute inset-0 bg-primary-dark/20;
 }
 
 /* Card styles */
@@ -80,16 +69,16 @@
 
 /* Button styles */
 .btn-primary {
-  @apply bg-blue-700 text-white hover:bg-blue-600 transition-colors;
+  @apply bg-primary text-white hover:bg-primary-light transition-colors;
 }
 
 .btn-secondary {
-  @apply bg-gray-100 text-blue-700 hover:bg-white transition-colors;
+  @apply bg-secondary text-primary hover:bg-white transition-colors;
 }
 
 /* Text gradient */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-500;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
 }
 
 /* Responsive typography */
