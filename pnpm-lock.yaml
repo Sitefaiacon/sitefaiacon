@@ -103,7 +103,7 @@ importers:
         version: 2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1))
       '@vercel/analytics':
         specifier: latest
-        version: 1.5.0(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.0.2))(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(next@15.2.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@5.28.2)(vue-router@4.5.0(vue@3.5.13(typescript@5.0.2)))(vue@3.5.13(typescript@5.0.2))
+        version: 1.5.0(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.0.2))(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(next@15.2.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@5.28.2)(vue-router@4.5.1(vue@3.5.13(typescript@5.0.2)))(vue@3.5.13(typescript@5.0.2))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.0.0)
@@ -124,7 +124,7 @@ importers:
         version: 8.5.1(react@19.0.0)
       framer-motion:
         specifier: latest
-        version: 12.9.1(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 12.9.2(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       input-otp:
         specifier: 1.4.1
         version: 1.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -181,7 +181,7 @@ importers:
         version: 3.5.13(typescript@5.0.2)
       vue-router:
         specifier: latest
-        version: 4.5.0(vue@3.5.13(typescript@5.0.2))
+        version: 4.5.1(vue@3.5.13(typescript@5.0.2))
       zod:
         specifier: ^3.24.1
         version: 3.24.1
@@ -1859,8 +1859,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@12.9.1:
-    resolution: {integrity: sha512-dZBp2TO0a39Cc24opshlLoM0/OdTZVKzcXWuhntfwy2Qgz3t9+N4sTyUqNANyHaRFiJUWbwwsXeDvQkEBPky+g==}
+  framer-motion@12.9.2:
+    resolution: {integrity: sha512-R0O3Jdqbfwywpm45obP+8sTgafmdEcUoShQTAV+rB5pi+Y1Px/FYL5qLLRe5tPtBdN1J4jos7M+xN2VV2oEAbQ==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -2583,8 +2583,8 @@ packages:
       vite:
         optional: true
 
-  vue-router@4.5.0:
-    resolution: {integrity: sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==}
+  vue-router@4.5.1:
+    resolution: {integrity: sha512-ogAF3P97NPm8fJsE4by9dwSYtDwXIY1nFY9T6DyQnGHd1E2Da94w9JIolpe42LJGIl0DwOHBi8TcRPlPGwbTtw==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -3777,7 +3777,7 @@ snapshots:
     dependencies:
       csstype: 3.1.3
 
-  '@vercel/analytics@1.5.0(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.0.2))(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(next@15.2.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@5.28.2)(vue-router@4.5.0(vue@3.5.13(typescript@5.0.2)))(vue@3.5.13(typescript@5.0.2))':
+  '@vercel/analytics@1.5.0(@remix-run/react@2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.0.2))(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(next@15.2.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@5.28.2)(vue-router@4.5.1(vue@3.5.13(typescript@5.0.2)))(vue@3.5.13(typescript@5.0.2))':
     optionalDependencies:
       '@remix-run/react': 2.16.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.0.2)
       '@sveltejs/kit': 2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1))
@@ -3785,7 +3785,7 @@ snapshots:
       react: 19.0.0
       svelte: 5.28.2
       vue: 3.5.13(typescript@5.0.2)
-      vue-router: 4.5.0(vue@3.5.13(typescript@5.0.2))
+      vue-router: 4.5.1(vue@3.5.13(typescript@5.0.2))
 
   '@vue/compiler-core@3.5.13':
     dependencies:
@@ -4154,7 +4154,7 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@12.9.1(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  framer-motion@12.9.2(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       motion-dom: 12.9.1
       motion-utils: 12.8.3
@@ -4879,7 +4879,7 @@ snapshots:
     optionalDependencies:
       vite: 6.3.3(@types/node@22.0.0)(jiti@1.21.7)(yaml@2.7.1)
 
-  vue-router@4.5.0(vue@3.5.13(typescript@5.0.2)):
+  vue-router@4.5.1(vue@3.5.13(typescript@5.0.2)):
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.0.2)
