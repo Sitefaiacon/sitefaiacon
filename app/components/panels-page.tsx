@@ -358,11 +358,100 @@ const faqData = [
     answerEl:
       "Απολύτως! Τα διακοσμητικά panels FaiáCon αναβαθμίζουν σημαντικά την αισθητική του χώρου, δημιουργώντας μια premium εμφάνιση που εντυπωσιάζει. Για χώρους βραχυχρόνιας μίσθωσης όπως Airbnb, έχει παρατηρηθεί αύξηση της αξίας ενοικίασης έως και 15%. Σε περίπτωση πώλησης, η αναβαθμισμένη αισθητική μπορεί να συμβάλει σημαντικά στην ταχύτερη πώληση και σε καλύτερη τιμή.",
     answerEn:
-      "FaiáCon decorative panels significantly upgrade the aesthetics of the space, creating a premium appearance that impresses. For short-term rental spaces such as Airbnb, an increase in rental value of up to 15% has been observed. In case of sale, the upgraded aesthetics can significantly contribute to a faster sale and a better price.",
+      "Absolutely! FaiáCon decorative panels significantly upgrade the aesthetics of the space, creating a premium appearance that impresses. For short-term rental spaces such as Airbnb, an increase in rental value of up to 15% has been observed. In case of sale, the upgraded aesthetics can significantly contribute to a faster sale and a better price.",
   },
 ]
 
-// Δεδομένα για τις οδηγίες εγκατάστασης
+// Δεδομένα για τις μαρτυρίες πελατών
+const testimonials = [
+  {
+    nameEl: "Γιώργος Παπαδόπουλος",
+    nameEn: "George Papadopoulos",
+    roleEl: "Αρχιτέκτονας",
+    roleEn: "Architect",
+    testimonialEl:
+      "Έχω χρησιμοποιήσει τα panels της ΦαιάCon σε πολλά έργα και είμαι πάντα εντυπωσιασμένος με την ποιότητα και την αισθητική τους. Οι πελάτες μου λατρεύουν το αποτέλεσμα και η εγκατάσταση είναι πάντα χωρίς προβλήματα.",
+    testimonialEn:
+      "I have used ΦαιάCon panels in many projects and I am always impressed with their quality and aesthetics. My clients love the result and the installation is always hassle-free.",
+    rating: 5,
+  },
+  {
+    nameEl: "Μαρία Κωνσταντίνου",
+    nameEn: "Maria Konstantinou",
+    roleEl: "Ιδιοκτήτρια Ξενοδοχείου",
+    roleEn: "Hotel Owner",
+    testimonialEl:
+      "Ανακαινίσαμε το λόμπι του ξενοδοχείου μας με τα PVC panels μαρμάρου και το αποτέλεσμα είναι εντυπωσιακό. Οι επισκέπτες μας συχνά ρωτούν αν είναι πραγματικό μάρμαρο! Η ποιότητα είναι εξαιρετική και η συντήρηση πολύ εύκολη.",
+    testimonialEn:
+      "We renovated our hotel lobby with PVC marble panels and the result is impressive. Our guests often ask if it's real marble! The quality is excellent and maintenance is very easy.",
+    rating: 5,
+  },
+  {
+    nameEl: "Δημήτρης Αντωνίου",
+    nameEn: "Dimitris Antoniou",
+    roleEl: "Εργολάβος",
+    roleEn: "Contractor",
+    testimonialEl:
+      "Συνεργάζομαι με τη ΦαιάCon για περισσότερα από 5 χρόνια και πάντα παραδίδουν προϊόντα υψηλής ποιότητας στην ώρα τους. Τα εύκαμπτα panels πέτρας είναι ιδιαίτερα δημοφιλή στους πελάτες μου για την αυθεντική τους εμφάνιση και την ευκολία εγκατάστασης.",
+    testimonialEn:
+      "I have been working with ΦαιάCon for more than 5 years and they always deliver high-quality products on time. The flexible stone panels are particularly popular with my clients for their authentic appearance and ease of installation.",
+    rating: 4,
+  },
+]
+
+// Δεδομένα για τον συγκριτικό πίνακα
+const comparisonData = [
+  {
+    featureEl: "Αντοχή στην υγρασία",
+    featureEn: "Moisture Resistance",
+    pvcMarble: { el: "Εξαιρετική", en: "Excellent" },
+    wood3d: { el: "Καλή", en: "Good" },
+    softStone: { el: "Εξαιρετική", en: "Excellent" },
+    specialty: { el: "Καλή έως Εξαιρετική", en: "Good to Excellent" },
+  },
+  {
+    featureEl: "Αντοχή στη φωτιά",
+    featureEn: "Fire Resistance",
+    pvcMarble: { el: "Μέτρια", en: "Moderate" },
+    wood3d: { el: "Καλή", en: "Good" },
+    softStone: { el: "Εξαιρετική", en: "Excellent" },
+    specialty: { el: "Καλή έως Εξαιρετική", en: "Good to Excellent" },
+  },
+  {
+    featureEl: "Ευκολία εγκατάστασης",
+    featureEn: "Ease of Installation",
+    pvcMarble: { el: "Πολύ εύκολη", en: "Very Easy" },
+    wood3d: { el: "Μέτρια", en: "Moderate" },
+    softStone: { el: "Εύκολη", en: "Easy" },
+    specialty: { el: "Μέτρια έως Εύκολη", en: "Moderate to Easy" },
+  },
+  {
+    featureEl: "Κόστος",
+    featureEn: "Cost",
+    pvcMarble: { el: "Οικονομικό", en: "Economical" },
+    wood3d: { el: "Μέτριο έως Υψηλό", en: "Moderate to High" },
+    softStone: { el: "Μέτριο", en: "Moderate" },
+    specialty: { el: "Μέτριο έως Υψηλό", en: "Moderate to High" },
+  },
+  {
+    featureEl: "Διάρκεια ζωής",
+    featureEn: "Lifespan",
+    pvcMarble: { el: "10+ χρόνια", en: "10+ years" },
+    wood3d: { el: "15+ χρόνια", en: "15+ years" },
+    softStone: { el: "20+ χρόνια", en: "20+ years" },
+    specialty: { el: "15+ χρόνια", en: "15+ years" },
+  },
+  {
+    featureEl: "Ηχομόνωση",
+    featureEn: "Sound Insulation",
+    pvcMarble: { el: "Χαμηλή", en: "Low" },
+    wood3d: { el: "Εξαιρετική", en: "Excellent" },
+    softStone: { el: "Μέτρια", en: "Moderate" },
+    specialty: { el: "Μέτρια έως Υψηλή", en: "Moderate to High" },
+  },
+]
+
+// Δεδομένα για τις οδηγίες εγκατάστασης\
 const installationSteps = [
   {
     titleEl: "Προετοιμασία επιφάνειας",
@@ -433,49 +522,6 @@ const deliveryServices = [
     descriptionEl: "Δυνατότητα παραλαβής από το κατάστημά μας στην Αθήνα. Δωρεάν για όλες τις παραγγελίες.",
     descriptionEn: "Option to pick up from our store in Athens. Free for all orders.",
     icon: "Store",
-  },
-]
-
-const comparisonData = [
-  {
-    featureEl: "Αντοχή στην Υγρασία",
-    featureEn: "Moisture Resistance",
-    pvcMarble: { el: "Υψηλή", en: "High" },
-    wood3d: { el: "Μεσαία", en: "Medium" },
-    softStone: { el: "Υψηλή", en: "High" },
-    specialty: { el: "Μεταβλητή", en: "Variable" },
-  },
-  {
-    featureEl: "Εύκολη Εγκατάσταση",
-    featureEn: "Easy Installation",
-    pvcMarble: { el: "Πολύ εύκολη", en: "Very easy" },
-    wood3d: { el: "Εύκολη", en: "Easy" },
-    softStone: { el: "Εύκολη", en: "Easy" },
-    specialty: { el: "Μεταβλητή", en: "Variable" },
-  },
-  {
-    featureEl: "Κόστος",
-    featureEn: "Cost",
-    pvcMarble: { el: "Χαμηλό", en: "Low" },
-    wood3d: { el: "Μεσαίο", en: "Medium" },
-    softStone: { el: "Μεσαίο", en: "Medium" },
-    specialty: { el: "Υψηλό", en: "High" },
-  },
-  {
-    featureEl: "Αισθητική",
-    featureEn: "Aesthetics",
-    pvcMarble: { el: "Μάρμαρο", en: "Marble" },
-    wood3d: { el: "Ξύλο & 3D", en: "Wood & 3D" },
-    softStone: { el: "Πέτρα", en: "Stone" },
-    specialty: { el: "Ειδική", en: "Specialty" },
-  },
-  {
-    featureEl: "Εφαρμογές",
-    featureEn: "Applications",
-    pvcMarble: { el: "Εσωτερική", en: "Interior" },
-    wood3d: { el: "Εσωτερική", en: "Interior" },
-    softStone: { el: "Εσωτερική/Εξωτερική", en: "Interior/Exterior" },
-    specialty: { el: "Ειδικές", en: "Specialty" },
   },
 ]
 
