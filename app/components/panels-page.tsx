@@ -4,12 +4,10 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, PenToolIcon as Tool, Ruler } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 import { ArchitecturalBackground } from "./architectural-background"
 import { useLanguage } from "../contexts/language-context"
 import { AnimatedSection } from "./animated-section"
 import { useState } from "react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 // Δεδομένα για τα panels
 const panelCategories = [
@@ -283,119 +281,6 @@ const panelCategories = [
         ],
       },
     ],
-  },
-]
-
-// Δεδομένα για τις συχνές ερωτήσεις
-const faqData = [
-  {
-    questionEl: "Ποια είναι η διαφορά μεταξύ των PVC panels και των panels πέτρας;",
-    questionEn: "What is the difference between PVC panels and stone panels?",
-    answerEl:
-      "Τα PVC panels είναι κατασκευασμένα από συνθετικό υλικό, είναι ελαφρύτερα, πιο οικονομικά και εύκολα στην εγκατάσταση. Τα panels πέτρας, ακόμη και τα εύκαμπτα, προσφέρουν πιο ρεαλιστική εμφάνιση φυσικής πέτρας και συχνά έχουν καλύτερη αντοχή στις υψηλές θερμοκρασίες.",
-    answerEn:
-      "PVC panels are made of synthetic material, are lighter, more economical, and easier to install. Stone panels, even flexible ones, offer a more realistic natural stone appearance and often have better resistance to high temperatures.",
-  },
-  {
-    questionEl: "Πόσο ανθεκτικά είναι τα panels σε υγρούς χώρους όπως μπάνια και πισίνες;",
-    questionEn: "How durable are the panels in wet areas such as bathrooms and pools?",
-    answerEl:
-      "Τα περισσότερα panels μας είναι σχεδιασμένα για να αντέχουν σε υγρά περιβάλλοντα. Ειδικά τα PVC panels και τα εύκαμπτα panels πέτρας είναι 100% αδιάβροχα και ανθεκτικά στη μούχλα, καθιστώντας τα ιδανικά για μπάνια, πισίνες και άλλους υγρούς χώρους.",
-    answerEn:
-      "Most of our panels are designed to withstand wet environments. Especially the PVC panels and flexible stone panels are 100% waterproof and mold-resistant, making them ideal for bathrooms, pools, and other wet areas.",
-  },
-  {
-    questionEl: "Πόσο δύσκολη είναι η εγκατάσταση των panels; Μπορώ να τα εγκαταστήσω μόνος μου;",
-    questionEn: "How difficult is the installation of panels? Can I install them myself?",
-    answerEl:
-      "Η εγκατάσταση των περισσότερων panels μας είναι σχετικά απλή και μπορεί να γίνει ως DIY έργο αν έχετε βασικές δεξιότητες και εργαλεία. Ωστόσο, για βέλτιστα αποτελέσματα, ειδικά σε μεγάλες επιφάνειες ή περίπλοκα σχέδια, συνιστούμε την εγκατάσταση από επαγγελματίες. Παρέχουμε αναλυτικές οδηγίες εγκατάστασης και υποστήριξη.",
-    answerEn:
-      "The installation of most of our panels is relatively simple and can be done as a DIY project if you have basic skills and tools. However, for optimal results, especially on large surfaces or complex designs, we recommend installation by professionals. We provide detailed installation instructions and support.",
-  },
-  {
-    questionEl: "Ποια είναι η διάρκεια ζωής των panels;",
-    questionEn: "What is the lifespan of the panels?",
-    answerEl:
-      "Η διάρκεια ζωής των panels μας ποικίλλει ανάλογα με τον τύπο και τις συνθήκες χρήσης, αλλά τα περισσότερα προϊόντα μας έχουν διάρκεια ζωής τουλάχιστον 10 χρόνια με σωστή συντήρηση. Τα PVC panels και τα εύκαμπτα panels πέτρας είναι ιδιαίτερα ανθεκτικά και μπορούν να διαρκέσουν ακόμη περισσότερο.",
-    answerEn:
-      "The lifespan of our panels varies depending on the type and conditions of use, but most of our products have a lifespan of at least 10 years with proper maintenance. PVC panels and flexible stone panels are particularly durable and can last even longer.",
-  },
-  {
-    questionEl: "Προσφέρετε εγγύηση για τα προϊόντα σας;",
-    questionEn: "Do you offer a warranty for your products?",
-    answerEl:
-      "Ναι, όλα τα προϊόντα μας καλύπτονται από εγγύηση κατασκευαστή. Η διάρκεια και οι όροι της εγγύησης ποικίλλουν ανάλογα με τον τύπο του προϊόντος. Επικοινωνήστε μαζί μας για λεπτομέρειες σχετικά με την εγγύηση για συγκεκριμένα προϊόντα.",
-    answerEn:
-      "Yes, all our products are covered by a manufacturer's warranty. The duration and terms of the warranty vary depending on the type of product. Contact us for details about the warranty for specific products.",
-  },
-  {
-    questionEl: "Μπορώ να παραγγείλω δείγματα πριν αγοράσω μεγαλύτερες ποσότητες;",
-    questionEn: "Can I order samples before purchasing larger quantities?",
-    answerEl:
-      "Ναι, προσφέρουμε δείγματα για τα περισσότερα προϊόντα μας. Αυτό σας επιτρέπει να δείτε και να αισθανθείτε την ποιότητα και την εμφάνιση των panels πριν κάνετε μια μεγαλύτερη επένδυση. Επικοινωνήστε μαζί μας για να παραγγείλετε δείγματα.",
-    answerEn:
-      "Yes, we offer samples for most of our products. This allows you to see and feel the quality and appearance of the panels before making a larger investment. Contact us to order samples.",
-  },
-  {
-    questionEl: "Πόσο χρόνο διαρκεί η εγκατάσταση των panels;",
-    questionEn: "How long does the installation of panels take?",
-    answerEl:
-      "Η εγκατάσταση των panels μας είναι εξαιρετικά γρήγορη, με τους περισσότερους χώρους να ολοκληρώνονται σε μόλις μία ημέρα. Αυτό εξαρτάται από το μέγεθος του χώρου και την πολυπλοκότητα του σχεδίου, αλλά σε κάθε περίπτωση είναι πολύ ταχύτερη από τις παραδοσιακές μεθόδους ανακαίνισης.",
-    answerEn:
-      "The installation of our panels is extremely fast, with most spaces being completed in just one day. This depends on the size of the space and the complexity of the design, but in any case it is much faster than traditional renovation methods.",
-  },
-  {
-    questionEl: "Πώς συγκρίνονται τα panels με την παραδοσιακή βαφή σε όρους κόστους και διάρκειας ζωής;",
-    questionEn: "How do panels compare to traditional paint in terms of cost and lifespan?",
-    answerEl:
-      "Αν και το αρχικό κόστος των panels είναι υψηλότερο από την απλή βαφή, η μακροπρόθεσμη αξία τους είναι πολύ μεγαλύτερη. Ενώ η βαφή χρειάζεται ανανέωση κάθε 2-3 χρόνια, τα panels μας διατηρούν την εμφάνισή τους για 10+ χρόνια χωρίς συντήρηση. Επιπλέον, προσφέρουν πολύ καλύτερη αισθητική, προστασία και αναβάθμιση της αξίας του ακινήτου.",
-    answerEn:
-      "Although the initial cost of panels is higher than simple painting, their long-term value is much greater. While paint needs renewal every 2-3 years, our panels maintain their appearance for 10+ years without maintenance. Additionally, they offer much better aesthetics, protection, and upgrade of the property's value.",
-  },
-  {
-    questionEl: "Μπορούν τα panels να αυξήσουν την αξία του ακινήτου μου;",
-    questionEn: "Can panels increase the value of my property?",
-    answerEl:
-      "Απολύτως! Τα διακοσμητικά panels FaiáCon αναβαθμίζουν σημαντικά την αισθητική του χώρου, δημιουργώντας μια premium εμφάνιση που εντυπωσιάζει. Για χώρους βραχυχρόνιας μίσθωσης όπως Airbnb, έχει παρατηρηθεί αύξηση της αξίας ενοικίασης έως και 15%. Σε περίπτωση πώλησης, η αναβαθμισμένη αισθητική μπορεί να συμβάλει σημαντικά στην ταχύτερη πώληση και σε καλύτερη τιμή.",
-    answerEn:
-      "Absolutely! FaiáCon decorative panels significantly upgrade the aesthetics of the space, creating a premium appearance that impresses. For short-term rental spaces such as Airbnb, an increase in rental value of up to 15% has been observed. In case of sale, the upgraded aesthetics can significantly contribute to a faster sale and a better price.",
-  },
-]
-
-// Δεδομένα για τις μαρτυρίες πελατών
-const testimonials = [
-  {
-    nameEl: "Γιώργος Παπαδόπουλος",
-    nameEn: "George Papadopoulos",
-    roleEl: "Αρχιτέκτονας",
-    roleEn: "Architect",
-    testimonialEl:
-      "Έχω χρησιμοποιήσει τα panels της ΦαιάCon σε πολλά έργα και είμαι πάντα εντυπωσιασμένος με την ποιότητα και την αισθητική τους. Οι πελάτες μου λατρεύουν το αποτέλεσμα και η εγκατάσταση είναι πάντα χωρίς προβλήματα.",
-    testimonialEn:
-      "I have used ΦαιάCon panels in many projects and I am always impressed with their quality and aesthetics. My clients love the result and the installation is always hassle-free.",
-    rating: 5,
-  },
-  {
-    nameEl: "Μαρία Κωνσταντίνου",
-    nameEn: "Maria Konstantinou",
-    roleEl: "Ιδιοκτήτρια Ξενοδοχείου",
-    roleEn: "Hotel Owner",
-    testimonialEl:
-      "Ανακαινίσαμε το λόμπι του ξενοδοχείου μας με τα PVC panels μαρμάρου και το αποτέλεσμα είναι εντυπωσιακό. Οι επισκέπτες μας συχνά ρωτούν αν είναι πραγματικό μάρμαρο! Η ποιότητα είναι εξαιρετική και η συντήρηση πολύ εύκολη.",
-    testimonialEn:
-      "We renovated our hotel lobby with PVC marble panels and the result is impressive. Our guests often ask if it's real marble! The quality is excellent and maintenance is very easy.",
-    rating: 5,
-  },
-  {
-    nameEl: "Δημήτρης Αντωνίου",
-    nameEn: "Dimitris Antoniou",
-    roleEl: "Εργολάβος",
-    roleEn: "Contractor",
-    testimonialEl:
-      "Συνεργάζομαι με τη ΦαιάCon για περισσότερα από 5 χρόνια και πάντα παραδίδουν προϊόντα υψηλής ποιότητας στην ώρα τους. Τα εύκαμπτα panels πέτρας είναι ιδιαίτερα δημοφιλή στους πελάτες μου για την αυθεντική τους εμφάνιση και την ευκολία εγκατάστασης.",
-    testimonialEn:
-      "I have been working with ΦαιάCon for more than 5 years and they always deliver high-quality products on time. The flexible stone panels are particularly popular with my clients for their authentic appearance and ease of installation.",
-    rating: 4,
   },
 ]
 
@@ -830,116 +715,6 @@ export default function PanelsPage({ lang }: { lang: string }) {
                 </Link>
               </Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="relative py-24 md:py-32 bg-white">
-        <div className="container relative z-10 px-4">
-          <AnimatedSection className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-              {isEnglish ? "Frequently Asked Questions" : "Συχνές Ερωτήσεις"}
-            </h2>
-            <p className="text-xl text-gray-600 text-justify-content">
-              {isEnglish
-                ? "Find answers to common questions about our panels"
-                : "Βρείτε απαντήσεις σε συχνές ερωτήσεις σχετικά με τα panels μας"}
-            </p>
-          </AnimatedSection>
-
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4">
-              {faqData.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="bg-gray-50 rounded-lg overflow-hidden">
-                  <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-gray-100 transition-colors">
-                    <span className="text-left font-medium text-primary">
-                      {isEnglish ? faq.questionEn : faq.questionEl}
-                    </span>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-4 pt-2 text-gray-700 text-justify-content">
-                    {isEnglish ? faq.answerEn : faq.answerEl}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-
-            <div className="mt-12 text-center">
-              <p className="text-gray-600 mb-4">
-                {isEnglish ? "Can't find the answer you're looking for?" : "Δεν βρίσκετε την απάντηση που αναζητάτε;"}
-              </p>
-              <Button className="bg-primary hover:bg-primary/90" asChild>
-                <Link href={`/${lang}/appointment`}>
-                  {isEnglish ? "Contact Our Experts" : "Επικοινωνήστε με τους Ειδικούς μας"}
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Application Examples Section */}
-      <section className="relative py-24 md:py-32 bg-primary text-white">
-        <ArchitecturalBackground className="opacity-10" />
-        <div className="container relative z-10 px-4">
-          <AnimatedSection className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              {isEnglish ? "Application Examples" : "Παραδείγματα Εφαρμογών"}
-            </h2>
-            <p className="text-xl text-white/80 text-justify-content">
-              {isEnglish
-                ? "Discover how our panels can transform your spaces"
-                : "Ανακαλύψτε πώς τα panels μας μπορούν να μεταμορφώσουν τους χώρους σας"}
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: isEnglish ? "Indoor Applications" : "Εσωτερικές Εφαρμογές",
-                description: isEnglish
-                  ? "Perfect for living rooms, bedrooms, kitchens, and commercial spaces like hotels and restaurants"
-                  : "Ιδανικό για σαλόνια, υπνοδωμάτια, κουζίνες και εμπορικούς χώρους όπως ξενοδοχεία και εστιατόρια",
-                image: "/placeholder.svg?height=400&width=600",
-              },
-              {
-                title: isEnglish ? "Outdoor Applications" : "Εξωτερικές Εφαρμογές",
-                description: isEnglish
-                  ? "Weather-resistant panels for building facades, garden walls, and outdoor entertainment areas"
-                  : "Ανθεκτικά στις καιρικές συνθήκες panels για προσόψεις κτιρίων, τοίχους κήπων και εξωτερικούς χώρους ψυχαγωγίας",
-                image: "/placeholder.svg?height=400&width=600",
-              },
-              {
-                title: isEnglish ? "Pool Areas" : "Χώροι Πισίνας",
-                description: isEnglish
-                  ? "Waterproof panels perfect for pool surroundings and wet areas, resistant to chlorine and moisture"
-                  : "Αδιάβροχα panels ιδανικά για περιβάλλοντα πισίνας και υγρούς χώρους, ανθεκτικά στο χλώριο και την υγρασία",
-                image: "/placeholder.svg?height=400&width=600",
-              },
-            ].map((example, index) => (
-              <motion.div
-                key={example.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden h-full">
-                  <div className="relative h-64">
-                    <Image
-                      src={example.image || "/placeholder.svg"}
-                      alt={example.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-2">{example.title}</h3>
-                    <p className="text-white/80 text-justify-content">{example.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
