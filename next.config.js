@@ -8,8 +8,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com", "v0.blob.com"],
     unoptimized: true,
-    domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com", "v0.blob.com", "your-cdn-domain.com"],
   },
 }
 

@@ -1,12 +1,8 @@
 import "./globals.css"
 import { Outfit, Playfair_Display } from "next/font/google"
 import type React from "react"
-import { Toaster } from "@/components/ui/toaster"
-import { CookieConsent } from "./components/cookie-consent"
 import Script from "next/script"
-import { WebVitals } from "./components/web-vitals"
 import type { Metadata } from "next"
-import GoogleAnalytics from "./components/google-analytics"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
 import { LanguageProvider } from "./contexts/language-context"
@@ -113,7 +109,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <meta name="google" content="notranslate" />
-        <Suspense fallback={null}>{gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}</Suspense>
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
         <noscript>
@@ -124,12 +119,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <WebVitals />
         <LanguageProvider>
-          {children}
-          <CookieConsent />
-          <Toaster />
-          <Analytics />
+          <Suspense>
+            {children}
+            <Analytics />
+          </Suspense>
         </LanguageProvider>
       </body>
     </html>
