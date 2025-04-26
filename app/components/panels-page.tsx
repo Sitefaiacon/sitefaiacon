@@ -385,31 +385,6 @@ const installationSteps = [
   },
 ]
 
-// Δεδομένα για τις υπηρεσίες παράδοσης
-const deliveryServices = [
-  {
-    titleEl: "Τυπική Παράδοση",
-    titleEn: "Standard Delivery",
-    descriptionEl: "Παράδοση εντός 5-7 εργάσιμων ημερών σε όλη την Ελλάδα. Δωρεάν για παραγγελίες άνω των 500€.",
-    descriptionEn: "Delivery within 5-7 working days throughout Greece. Free for orders over €500.",
-    icon: "Truck",
-  },
-  {
-    titleEl: "Επείγουσα Παράδοση",
-    titleEn: "Express Delivery",
-    descriptionEl: "Παράδοση εντός 2-3 εργάσιμων ημερών. Διαθέσιμη με επιπλέον χρέωση.",
-    descriptionEn: "Delivery within 2-3 working days. Available at an additional charge.",
-    icon: "Clock",
-  },
-  {
-    titleEl: "Παραλαβή από το Κατάστημα",
-    titleEn: "Store Pickup",
-    descriptionEl: "Δυνατότητα παραλαβής από το κατάστημά μας στην Αθήνα. Δωρεάν για όλες τις παραγγελίες.",
-    descriptionEn: "Option to pick up from our store in Athens. Free for all orders.",
-    icon: "Store",
-  },
-]
-
 export default function PanelsPage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState("pvc-marble")
@@ -440,7 +415,7 @@ export default function PanelsPage({ lang }: { lang: string }) {
                 <p className="leading-relaxed text-justify-content">
                   {isEnglish
                     ? "At ΦαιάCon, we offer a wide range of high-quality decorative panels for various construction and renovation applications. While our panels are not insulation materials, they are perfect for aesthetic purposes, offering advantages that surpass traditional paint: they don't stain, have superior durability, and significantly upgrade your home's quality. Our panels provide a 3D stone or marble appearance without the difficulty of installing real materials, with waterproof and UV-resistant properties ideal for wet environments or exterior walls."
-                    : "Στη ΦαιάCon, προσφέρουμε μια ευρεία γκάμα διακοσμητικών panels υψηλής ποιότητας για διάφορες εφαρμογές κατασκευής και ανακαίνισης. Αν και τα panels μας δεν είναι μονωτικά υλικά, είναι τέλεια για αισθητικούς λόγους, προσφέροντας πλεονεκτήματα που ξεπερνούν την παραδοσιακή μπογιά: δεν λερώνουν, έχουν εξαιρετική ανθεκτικότητα και αναβαθμίζουν σημαντικά την ποιότητα του σπιτιού σας. Τα panels μας προσφέρουν 3D όψη πέτρας ή μαρμάρου χωρίς τη δυσκολία της τοποθέτησης πραγματικών υλικών, με αδιάβροχες και UV-resistant ιδιότητες ιδανικές για υγρά περιβάλλοντα ή εξωτερικούς τοίχους."}
+                    : "Στη ΦαιάCon, προσφέρουμε μια ευρεία γκάμα διακοσμητικών panels υψηλής ποιότητας για διάφορες εφαρμογές κατασκευής και ανακαίνισης. Αν και τα panels μας δεν είναι μονωτικά υλικά, είναι τέλεια για αισθητικούς λόγους, προσφέροντας πλεονεκτήματα που ξεπερνούν την παραδοσιακή μπογιά: δεν λερώνουν, έχουν εξαιρετική ανθεκτικότητα και αναβαθμίζουν σημαντικά την ποιότητα του σπιτιού σας. Τα panels μας προσφέρουν 3D όψη πέτρας ή μαρμάρου χωρίς τη δυσκολία της τοποθέτησης."}
                 </p>
               </div>
 
