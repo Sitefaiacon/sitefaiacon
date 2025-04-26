@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  output: "export",
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -8,7 +8,6 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com", "v0.blob.com"],
     unoptimized: true,
   },
 }

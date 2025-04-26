@@ -20,61 +20,8 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://faiacon.gr"),
-  title: {
-    default: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Κατασκευές & Ανακαινίσεις",
-    template: "%s | ΦαιάCon Κέρκυρα",
-  },
-  description:
-    "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Εξειδίκευση σε κατασκευές, ανακαινίσεις, διατηρητέα κτίρια και πισίνες. Άριστη ποιότητα & εμπειρία από το 1990.",
-  keywords: [
-    "κατασκευαστική εταιρεία κέρκυρα",
-    "ανακαινίσεις κέρκυρα",
-    "κατασκευή σπιτιού κέρκυρα",
-    "ανακαίνιση σπιτιού κέρκυρα",
-    "διατηρητέα κτίρια κέρκυρα",
-    "κατασκευή πισίνας κέρκυρα",
-  ],
-  authors: [{ name: "ΦαιάCon" }],
-  creator: "ΦαιάCon",
-  publisher: "ΦαιάCon",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας",
-    description:
-      "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Εξειδίκευση σε κατασκευές, ανακαινίσεις, διατηρητέα κτίρια και πισίνες.",
-    url: "https://faiacon.gr",
-    siteName: "ΦαιάCon",
-    locale: "el_GR",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
-  verification: {
-    google: "your-google-site-verification",
-  },
-  category: "construction",
+  title: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας",
+  description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα.",
     generator: 'v0.dev'
 }
 
