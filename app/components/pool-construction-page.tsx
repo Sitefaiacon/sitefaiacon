@@ -280,35 +280,6 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
         </div>
       </section>
 
-      {/* Related Products Section */}
-      <section className="relative py-16 md:py-24 bg-white">
-        <SectionBackground />
-        <div className="container relative z-10 px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
-                {isEnglish ? "Related Products" : "Σχετικά Προϊόντα"}
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 text-justify-content">
-                {isEnglish
-                  ? "Discover our specialized materials for pool construction and surrounding areas"
-                  : "Ανακαλύψτε τα εξειδικευμένα υλικά μας για την κατασκευή πισίνας και τον περιβάλλοντα χώρο"}
-              </p>
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
-                <Link href={`/${lang}/pool-construction/panels`}>
-                  {isEnglish ? "Explore ΦαιάCon Panels" : "Εξερευνήστε τα ΦαιάCon Panels"}
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Call to Action Section */}
       <section className="relative py-24 md:py-32 bg-white">
         <SectionBackground />

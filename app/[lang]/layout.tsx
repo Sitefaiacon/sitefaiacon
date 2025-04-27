@@ -2,9 +2,13 @@ import type React from "react"
 import { Outfit, Playfair_Display } from "next/font/google"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/react"
+import { Toaster } from "sonner"
+import { CookieConsent } from "../components/cookie-consent"
+import { WebVitals } from "../components/web-vitals"
+import GoogleAnalytics from "../components/google-analytics"
 import { LanguageProvider } from "../contexts/language-context"
+import { Suspense } from "react" // Add this import
 import "../globals.css"
-import { Suspense } from "react"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -33,14 +37,23 @@ export default function RootLayout({
   children: React.ReactNode
   params: { lang: string }
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
+
   return (
     <html lang={lang} className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
       <body className="min-h-screen bg-background antialiased font-sans">
         <LanguageProvider initialLang={lang}>
-          <Suspense>
-            {children}
-            <Analytics />
+          {children}
+          <WebVitals />
+          {/* Wrap CookieConsent in Suspense as it likely uses useSearchParams */}
+          <Suspense
+            fallback={<div className="fixed bottom-0 w-full p-4 bg-background/80 backdrop-blur-sm">Loading...</div>}
+          >
+            <CookieConsent />
           </Suspense>
+          <Toaster position="top-center" />
+          <Analytics />
+          {gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}
         </LanguageProvider>
       </body>
     </html>
