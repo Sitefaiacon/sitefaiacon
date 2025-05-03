@@ -65,7 +65,7 @@ export function ProjectCard({ title, location, image, onClick, priority = false 
         )}
       </div>
       <h3 className="text-xl font-semibold mb-1">{title}</h3>
-      <p className="text-gray-600">{location}</p>
+      {/* Η περιγραφή τοποθεσίας αφαιρέθηκε */}
     </div>
   )
 }

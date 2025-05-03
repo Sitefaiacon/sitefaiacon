@@ -372,7 +372,7 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                       />
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px]" aria-describedby={`project-description-${project.id}`}>
+                  <DialogContent className="sm:max-w-[800px]">
                     <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                       <Image
                         src={project.image || "/placeholder.svg"}
@@ -386,10 +386,7 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                       />
                     </div>
                     <h2 className="text-2xl font-bold mt-4">{isEnglish ? project.titleEn : project.title}</h2>
-                    <p className="text-gray-600">{isEnglish ? project.locationEn : project.location}</p>
-                    <p id={`project-description-${project.id}`} className="mt-2">
-                      {isEnglish ? project.descriptionEn : project.description}
-                    </p>
+                    {/* Οι περιγραφές τοποθεσίας και έργου αφαιρέθηκαν */}
                   </DialogContent>
                 </Dialog>
               </motion.div>

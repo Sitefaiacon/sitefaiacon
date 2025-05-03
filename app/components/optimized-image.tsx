@@ -9,10 +9,9 @@ interface OptimizedImageProps {
   width: number
   height: number
   className?: string
-  priority?: boolean
 }
 
-export function OptimizedImage({ src, alt, width, height, className = "", priority = false }: OptimizedImageProps) {
+export function OptimizedImage({ src, alt, width, height, className = "" }: OptimizedImageProps) {
   const [isLoading, setLoading] = useState(true)
 
   return (
@@ -27,10 +26,8 @@ export function OptimizedImage({ src, alt, width, height, className = "", priori
           ${isLoading ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"}
         `}
         onLoadingComplete={() => setLoading(false)}
-        loading={priority ? "eager" : "lazy"}
+        loading="lazy"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        placeholder={isLoading ? "blur" : "empty"}
-        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ3NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
       />
     </div>
   )
