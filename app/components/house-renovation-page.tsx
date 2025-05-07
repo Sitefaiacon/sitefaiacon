@@ -55,7 +55,7 @@ export default function HouseRenovationPage({ lang }: { lang: string }) {
           <div className="max-w-4xl mx-auto">
             <AnimatedSection className="space-y-6">
               <div className="text-lg space-y-6">
-                <p className="leading-relaxed mt-8 text-justify-content">
+                <p className="leading-relaxed mt-8">
                   {isEnglish
                     ? "Our company offers specialized construction and renovation solutions, ensuring the highest quality and durability in every project. With years of experience in the industry and specialized crews, we undertake every task with professionalism, precision, and consistency."
                     : "Η εταιρεία μας προσφέρει εξειδικευμένες κατασκευαστικές και ανακαινιστικές λύσεις, διασφαλίζοντας την υψηλότερη ποιότητα και αντοχή σε κάθε έργο. Με πολυετή εμπειρία στον κλάδο και εξειδικευμένα συνεργεία, αναλαμβάνουμε κάθε εργασία με επαγγελματισμό, ακρίβεια και συνέπεια."}
@@ -278,10 +278,10 @@ export default function HouseRenovationPage({ lang }: { lang: string }) {
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               {isEnglish ? "Estimate Your Renovation Cost" : "Εκτιμήστε το Κόστος Ανακαίνισης"}
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-600">
               {isEnglish
-                ? "With our Cost Calculator, you can easily get a quick estimate for your home renovation or door and window replacement. Simply fill in details such as the size of the space, number of rooms, material (e.g., aluminum, PVC, wood), and the quality you desire (basic, mid-range, or premium). We provide you with a hypothetical price to give you a general idea of the cost – it's not the final offer, but a useful first step. If you want accurate pricing, ask us for a quote!"
-                : "Με τον Υπολογιστή Κόστους μας, μπορείς εύκολα να πάρεις μια γρήγορη εκτίμηση για την ανακαίνιση του σπιτιού σου ή την αντικατάσταση πορτών και παραθύρων. Συμπλήρωσε απλά στοιχεία όπως το μέγεθος του χώρου, τον αριθμό των δωματίων, το υλικό (π.χ. αλουμίνιο, PVC, ξύλο) και την ποιότητα που επιθυμείς (βασική, μεσαία ή premium). Σου δίνουμε μια υποθετική τιμή για να έχεις μια γενική ιδέα του κόστους – δεν είναι η τελική προσφορά, αλλά ένα χρήσιμο πρώτο βήμα. Αν θέλεις ακριβή κοστολόγηση, ζήτα μας προσφορά!"}
+                ? "Use our calculator to get a rough estimate for your renovation project"
+                : "Χρησιμοποιήστε τον υπολογιστή μας για να πάρετε μια πρώτη εκτίμηση για το έργο ανακαίνισής σας"}
             </p>
           </AnimatedSection>
           <RenovationCostCalculator />

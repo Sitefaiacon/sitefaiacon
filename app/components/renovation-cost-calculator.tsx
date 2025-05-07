@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useLanguage } from "../contexts/language-context"
 
 // Constants for Doors & Windows Calculator
 const materialOptions = ["aluminum", "pvc", "wood"] as const
@@ -40,7 +39,7 @@ const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
 }
 
 export function RenovationCostCalculator() {
-  const { isEnglish } = useLanguage()
+  const [isEnglish, setIsEnglish] = useState(false) // Updated line
   const [activeTab, setActiveTab] = useState("renovation")
 
   // State for Renovation Calculator
@@ -70,9 +69,6 @@ export function RenovationCostCalculator() {
   const [interiorDoors, setInteriorDoors] = useState(0)
   const [mainEntrance, setMainEntrance] = useState(0)
   const [windowsCost, setWindowsCost] = useState<string | null>(null)
-
-  //New State Variable
-  const [totalCost, setTotalCost] = useState<string | null>(null)
 
   // Constants for Renovation Calculator
   const baseCostPerM2 = 415
@@ -111,7 +107,6 @@ export function RenovationCostCalculator() {
     premium: "Premium",
     "General Renovation": "Γενική Ανακαίνιση",
     "Doors & Windows": "Πόρτες & Παράθυρα",
-    "Total Estimated Cost:": "Συνολικό Εκτιμώμενο Κόστος:",
   }
 
   const translate = (text: string) => {
@@ -132,15 +127,21 @@ export function RenovationCostCalculator() {
   }, [poolType, renovationQuality])
 
   useEffect(() => {
-    calculateWindowsCost()
-  }, [material, windowsQuality]) // Updated dependencies
-
-  useEffect(() => {
-    const renovationCostNumber = renovationCost ? Number.parseFloat(renovationCost) : 0
-    const windowsCostNumber = windowsCost ? Number.parseFloat(windowsCost) : 0
-    const newTotalCost = (renovationCostNumber + windowsCostNumber).toFixed(2)
-    setTotalCost(newTotalCost)
-  }, [renovationCost, windowsCost])
+    // Φόρτωση αποθηκευμένων τιμών κατά την εκκίνηση
+    const savedValues = localStorage.getItem("windowsCalculatorValues")
+    if (savedValues) {
+      const values = JSON.parse(savedValues)
+      setWindows(values.windows)
+      setBalconyDoors(values.balconyDoors)
+      setInteriorDoors(values.interiorDoors)
+      setMainEntrance(values.mainEntrance)
+      setMaterial(values.material)
+      setWindowsQuality(values.windowsQuality)
+      if (values.windowsCost) {
+        setWindowsCost(values.windowsCost)
+      }
+    }
+  }, [])
 
   // Calculation functions
   const calculateRenovationCost = () => {
@@ -187,6 +188,20 @@ export function RenovationCostCalculator() {
       interiorDoors * windowCosts.interiorDoor[material][windowsQuality] +
       mainEntrance * windowCosts.mainEntrance[material][windowsQuality]
     setWindowsCost(cost.toFixed(2))
+
+    // Αποθήκευση τιμών στο localStorage
+    localStorage.setItem(
+      "windowsCalculatorValues",
+      JSON.stringify({
+        windows,
+        balconyDoors,
+        interiorDoors,
+        mainEntrance,
+        material,
+        windowsQuality,
+        windowsCost: cost.toFixed(2),
+      }),
+    )
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
@@ -414,6 +429,10 @@ export function RenovationCostCalculator() {
             </Select>
           </div>
 
+          <Button onClick={calculateWindowsCost} className="w-full mt-4">
+            {isEnglish ? "Calculate" : "Υπολογισμός"}
+          </Button>
+
           {windowsCost && (
             <div className="mt-4 text-center">
               <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
@@ -423,12 +442,9 @@ export function RenovationCostCalculator() {
         </TabsContent>
       </Tabs>
 
-      {totalCost && (
-        <div className="mt-6 pt-4 border-t border-gray-200">
-          <p className="font-bold text-lg text-center">{translate("Total Estimated Cost:")}</p>
-          <p className="text-3xl text-primary text-center">€{totalCost}</p>
-        </div>
-      )}
+      <Button onClick={() => setIsEnglish(!isEnglish)} variant="outline" className="w-full mt-4">
+        {isEnglish ? "Ελληνικά" : "English"}
+      </Button>
     </div>
   )
 }

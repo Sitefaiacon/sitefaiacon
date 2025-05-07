@@ -43,12 +43,14 @@ export default function RootLayout({
     <html lang={lang} className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
       <body className="min-h-screen bg-background antialiased font-sans">
         <LanguageProvider initialLang={lang}>
-          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-          <WebVitals />
-          <CookieConsent />
-          <Toaster position="top-center" />
-          <Analytics />
-          {gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}
+          <Suspense>
+            {children}
+            <WebVitals />
+            <CookieConsent />
+            <Toaster position="top-center" />
+            <Analytics />
+            {gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}
+          </Suspense>
         </LanguageProvider>
       </body>
     </html>

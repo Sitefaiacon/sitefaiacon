@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import SiteLayout from "../components/site-layout"
+import { SiteLayout } from "../components/site-layout"
 import { Button } from "@/components/ui/button"
 import { Waves, ThermometerSun, Shield, Timer, CheckCircle2 } from "lucide-react"
 import Link from "next/link"

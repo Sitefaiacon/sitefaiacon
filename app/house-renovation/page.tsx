@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import SiteLayout from "../components/site-layout"
+import { SiteLayout } from "../components/site-layout"
 import { Button } from "@/components/ui/button"
 import { Paintbrush, Hammer, RouteIcon as Road, Sprout, Thermometer, HardHat } from "lucide-react"
 import { CheckCircle2 } from "lucide-react"

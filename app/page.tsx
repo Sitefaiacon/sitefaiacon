@@ -7,7 +7,7 @@ import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CalendarDays,
 import Link from "next/link"
 import { ArchitecturalBackground } from "./components/architectural-background"
 import { SectionBackground } from "./components/section-background"
-import SiteLayout from "./components/site-layout"
+import { SiteLayout } from "./components/site-layout"
 import { useLanguage } from "./contexts/language-context"
 
 export default function HomePage() {

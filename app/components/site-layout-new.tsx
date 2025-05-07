@@ -18,5 +18,3 @@ export default function SiteLayout({ children, showHero = false }: SiteLayoutPro
     </div>
   )
 }
-
-export { SiteLayout }

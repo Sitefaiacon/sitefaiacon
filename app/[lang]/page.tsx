@@ -3,7 +3,7 @@ import HomePage from "../components/home-page"
 
 export default function Home({ params: { lang } }: { params: { lang: string } }) {
   return (
-    <SiteLayout>
+    <SiteLayout showHero={true}>
       <HomePage lang={lang} />
     </SiteLayout>
   )

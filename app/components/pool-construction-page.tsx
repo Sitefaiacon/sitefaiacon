@@ -47,7 +47,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
               className="space-y-8"
             >
               <div className="text-lg">
-                <p className="leading-relaxed text-justify-content">
+                <p className="leading-relaxed">
                   {isEnglish ? "Our company specializes in creating " : "Η εταιρεία μας ειδικεύεται στην δημιουργία "}
                   <span className="text-primary font-bold">
                     {isEnglish ? "customized high-tech pools" : "προσαρμοσμένων πισίνων υψηλής τεχνολογίας"}
@@ -87,7 +87,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
                       <h4 className="font-bold text-primary">
                         {isEnglish ? "Top Quality Products & Materials" : "Προϊόντα & Υλικά Κορυφαίας Ποιότητας"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "We use materials of guaranteed durability (certified by European standards), offering long-term performance and safety."
                           : "Χρησιμοποιούμε εγγυημένης ανθεκτικότητας υλικά (πιστοποιημένα με ευρωπαϊκά πρότυπα), που προσφέρουν μακροχρόνια απόδοση και ασφάλεια."}
@@ -100,7 +100,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
                       <h4 className="font-bold text-primary">
                         {isEnglish ? "Experience & Expertise" : "Εμπειρία & Εξειδίκευση"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "Your project is assigned to highly trained professionals (plumbers, electricians, structural engineers) with proven experience in large-scale projects."
                           : "Το έργο σας ανατίθεται σε άριστα καταρτισμένους επαγγελματίες (υδραυλικούς, ηλεκτρολόγους, δομικούς μηχανικούς) με τεκμηριωμένη εμπειρία σε έργα κλίμακας."}
@@ -113,7 +113,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
                       <h4 className="font-bold text-primary">
                         {isEnglish ? "Time-efficient solutions" : "Χρονοαποδοτικές λύσεις"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "We deliver every project within the agreed deadlines, without compromising on quality."
                           : "Παραδίδουμε κάθε έργο εντός των συμφωνημένων προθεσμιών, χωρίς θυσίες στην ποιότητα."}
@@ -126,7 +126,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
                       <h4 className="font-bold text-primary">
                         {isEnglish ? "Comprehensive 'Turnkey' Service" : "Ολοκληρωμένη Υπηρεσία «Κλειδί στο Χέρι»"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "From the initial study to the final delivery, we handle every process (design, permits, installation, trial operation)."
                           : "Από την πρώτη μελέτη έως την τελική παράδοση, αναλαμβάνουμε κάθε διαδικασία (σχεδιασμός, άδειες, εγκατάσταση, δοκιμαστική λειτουργία)."}
@@ -142,7 +142,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
                     ? "Let us transform your vision into reality"
                     : "Αφήστε μας να μετατρέψουμε την όρασή σας σε πραγματικότητα"}
                 </h3>
-                <p className="text-lg text-justify-content">
+                <p className="text-lg">
                   {isEnglish
                     ? "With a focus on innovation, precision, and affordability, we create recreational spaces that express your style and promote well-being."
                     : "Με γνώμονα την καινοτομία, την ακρίβεια και την προσιτή τιμή, δημιουργούμε χώρους αναψυχής που εκφράζουν το στυλ σας και προάγουν τη well-being ζωή."}
@@ -177,7 +177,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               {isEnglish ? "Features" : "Χαρακτηριστικά"}
             </h2>
-            <p className="text-xl text-gray-600 text-justify-content">
+            <p className="text-xl text-gray-600">
               {isEnglish ? "Modern solutions for the ideal pool" : "Σύγχρονες λύσεις για την ιδανική πισίνα"}
             </p>
           </motion.div>
@@ -227,7 +227,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
                 <div className="h-full p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
                   <feature.icon className="w-16 h-16 text-primary mb-8" />
                   <h3 className="text-3xl font-semibold mb-6 text-primary">{feature.title}</h3>
-                  <p className="text-lg text-gray-700 leading-relaxed text-justify-content">{feature.description}</p>
+                  <p className="text-lg text-gray-700 leading-relaxed">{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -249,7 +249,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {isEnglish ? "Chemical-Free Pools – The Ultimate Solution" : "Πισίνες Χωρίς Χημικά – Η Απόλυτη Λύση"}
               </h2>
-              <p className="text-lg text-white/80 mb-8 text-justify-content">
+              <p className="text-lg text-white/80 mb-8">
                 {isEnglish
                   ? "No more chemicals! Our pools operate with electrolysis, providing crystal-clear water without dangerous chemical additives. This means:"
                   : "Τέλος στα χημικά! Οι πισίνες μας λειτουργούν με ηλεκτρόλυση, παρέχοντας κρυστάλλινο νερό χωρίς επικίνδυνα χημικά πρόσθετα. Αυτό σημαίνει:"}
@@ -280,35 +280,6 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
         </div>
       </section>
 
-      {/* Related Products Section */}
-      <section className="relative py-16 md:py-24 bg-white">
-        <SectionBackground />
-        <div className="container relative z-10 px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
-                {isEnglish ? "Related Products" : "Σχετικά Προϊόντα"}
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 text-justify-content">
-                {isEnglish
-                  ? "Discover our specialized materials for pool construction and surrounding areas"
-                  : "Ανακαλύψτε τα εξειδικευμένα υλικά μας για την κατασκευή πισίνας και τον περιβάλλοντα χώρο"}
-              </p>
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
-                <Link href={`/${lang}/pool-construction/panels`}>
-                  {isEnglish ? "Explore ΦαιάCon Panels" : "Εξερευνήστε τα ΦαιάCon Panels"}
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Call to Action Section */}
       <section className="relative py-24 md:py-32 bg-white">
         <SectionBackground />
@@ -323,7 +294,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
               <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
                 {isEnglish ? "Ready to Get Your Dream Pool?" : "Έτοιμοι να Αποκτήσετε την Πισίνα των Ονείρων σας;"}
               </h2>
-              <p className="text-lg text-gray-600 mb-8 text-justify-content">
+              <p className="text-lg text-gray-600 mb-8">
                 {isEnglish
                   ? "Contact us today to discuss your ideas and receive a personalized quote."
                   : "Επικοινωνήστε μαζί μας σήμερα για να συζητήσουμε τις ιδέες σας και να λάβετε μια εξατομικευμένη προσφορά."}

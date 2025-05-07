@@ -49,7 +49,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
               className="space-y-6"
             >
               <div className="text-lg space-y-6">
-                <p className="leading-relaxed mt-8 text-justify-content">
+                <p className="leading-relaxed mt-8">
                   {isEnglish
                     ? "If you dream of building your home or business space, you know that the process can seem overwhelming: from finding the ideal plot to managing the required permits and bureaucracy. We are here to handle every step, so you can focus on your vision."
                     : "Αν ονειρεύεστε να χτίσετε το σπίτι ή το επαγγελματικό σας χώρο, ξέρετε ότι η διαδικασία μπορεί να φαίνεται συντριπτική: από την εύρεση του ιδανικού οικοπέδου έως τη διαχείριση των απαιτούμενων αδειών και τη γραφειοκρατία."}
@@ -71,11 +71,9 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                         <span className="font-bold text-primary">
                           {isEnglish ? "Bureaucracy, Without Stress:" : "Γραφειοκρατία, Χωρίς Άγχος:"}
                         </span>{" "}
-                        <p className="text-justify-content">
-                          {isEnglish
-                            ? "We handle every document, permit, and legal process, ensuring everything meets legislative requirements."
-                            : "Ασχολούμαστε με κάθε έγγραφο, άδεια και νομική διαδικασία, διασφαλίζοντας ότι όλα πληρούν τις νομοθετικές απαιτήσεις."}
-                        </p>
+                        {isEnglish
+                          ? "We handle every document, permit, and legal process, ensuring everything meets legislative requirements."
+                          : "Ασχολούμαστε με κάθε έγγραφο, άδεια και νομική διαδικασία, διασφαλίζοντας ότι όλα πληρούν τις νομοθετικές απαιτήσεις."}
                       </div>
                     </li>
                     <li className="flex gap-4">
@@ -84,11 +82,9 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                         <span className="font-bold text-primary">
                           {isEnglish ? "Land Acquisition:" : "Εύρεση Οικοπέδου:"}
                         </span>{" "}
-                        <p className="text-justify-content">
-                          {isEnglish
-                            ? "With local network knowledge and criteria (such as building regulations, access to services, project scale), we help you find the ideal space for your project."
-                            : "Με γνώσεις τοπικού δικτύου και κριτήρια (όπως δόμηση, πρόσβαση σε υπηρεσίες, κλίμακα έργου), σας βοηθάμε να βρείτε τον ιδανικό χώρο για το έργο σας."}
-                        </p>
+                        {isEnglish
+                          ? "With local network knowledge and criteria (such as building regulations, access to services, project scale), we help you find the ideal space for your project."
+                          : "Με γνώσεις τοπικού δικτύου και κριτήρια (όπως δόμηση, πρόσβαση σε υπηρεσίες, κλίμακα έργου), σας βοηθάμε να βρείτε τον ιδανικό χώρο για το έργο σας."}
                       </div>
                     </li>
                     <li className="flex gap-4">
@@ -97,11 +93,9 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                         <span className="font-bold text-primary">
                           {isEnglish ? "Clear Timeframes:" : "Χρονικά Πλαίσια με Σαφήνεια:"}
                         </span>{" "}
-                        <p className="text-justify-content">
-                          {isEnglish
-                            ? "We set realistic deadlines for each phase of the project, with transparency in every development."
-                            : "Καθορίζουμε ρεαλιστικές προθεσμίες για κάθε φάση του έργου, με διαφάνεια σε κάθε εξέλιξη."}
-                        </p>
+                        {isEnglish
+                          ? "We set realistic deadlines for each phase of the project, with transparency in every development."
+                          : "Καθορίζουμε ρεαλιστικές προθεσμίες για κάθε φάση του έργου, με διαφάνεια σε κάθε εξέλιξη."}
                       </div>
                     </li>
                   </ul>
@@ -118,11 +112,9 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                         <span className="font-bold text-primary">
                           {isEnglish ? "Experience & Expertise:" : "Εμπειρία & Εξειδίκευση:"}
                         </span>{" "}
-                        <p className="text-justify-content">
-                          {isEnglish
-                            ? "Years of industry activity and dozens of successful projects are the best guarantee."
-                            : "Χρόνια δραστηριότητας στον κλάδο και δεκάδες επιτυχημένα έργα είναι η καλύτερη εγγύηση."}
-                        </p>
+                        {isEnglish
+                          ? "Years of industry activity and dozens of successful projects are the best guarantee."
+                          : "Χρόνια δραστηριότητας στον κλάδο και δεκάδες επιτυχημένα έργα είναι η καλύτερη εγγύηση."}
                       </div>
                     </li>
                     <li className="flex gap-4">
@@ -131,11 +123,9 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                         <span className="font-bold text-primary">
                           {isEnglish ? "Personal Approach:" : "Προσωπική Προσέγγιση:"}
                         </span>{" "}
-                        <p className="text-justify-content">
-                          {isEnglish
-                            ? "Every client is unique. We design solutions that exclusively fit your needs."
-                            : "Κάθε πελάτης είναι μοναδικός. Σχεδιάζουμε λύσεις που ταιριάζουν αποκλειστικά στις ανάγκες σας."}
-                        </p>
+                        {isEnglish
+                          ? "Every client is unique. We design solutions that exclusively fit your needs."
+                          : "Κάθε πελάτης είναι μοναδικός. Σχεδιάζουμε λύσεις που ταιριάζουν αποκλειστικά στις ανάγκες σας."}
                       </div>
                     </li>
                     <li className="flex gap-4">
@@ -144,11 +134,9 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                         <span className="font-bold text-primary">
                           {isEnglish ? "Safety & Trust:" : "Ασφάλεια & Εμπιστοσύνη:"}
                         </span>{" "}
-                        <p className="text-justify-content">
-                          {isEnglish
-                            ? "We are by your side from the first meeting to the handover of the keys."
-                            : "Είμαστε δίπλα σας από την πρώτη συνάντηση έως την παράδοση των κλειδιών."}
-                        </p>
+                        {isEnglish
+                          ? "We are by your side from the first meeting to the handover of the keys."
+                          : "Είμαστε δίπλα σας από την πρώτη συνάντηση έως την παράδοση των κλειδιών."}
                       </div>
                     </li>
                   </ul>
@@ -160,7 +148,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                       ? "The Step Towards Realizing Your Dream"
                       : "Το Βήμα Προς την Ολοκλήρωση του Ονείρου σας"}
                   </h3>
-                  <p className="text-lg text-justify-content">
+                  <p className="text-lg">
                     {isEnglish
                       ? "Leave the complex terms and endless obligations to us."
                       : "Αφήστε τους πολύπλοκους όρους και τις ατέλειωτες υποχρεώσεις σε εμάς."}
@@ -197,7 +185,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               {isEnglish ? "Our Services" : "Οι Υπηρεσίες μας"}
             </h2>
-            <p className="text-xl text-gray-600 text-justify-content">
+            <p className="text-xl text-gray-600">
               {isEnglish
                 ? "Comprehensive construction services tailored to your needs"
                 : "Ολοκληρωμένες υπηρεσίες κατασκευής προσαρμοσμένες στις ανάγκες σας"}
@@ -249,7 +237,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 <div className="h-full p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
                   <service.icon className="w-16 h-16 text-primary mb-8" />
                   <h3 className="text-3xl font-semibold mb-6 text-primary">{service.title}</h3>
-                  <p className="text-lg text-gray-700 leading-relaxed text-justify-content">{service.description}</p>
+                  <p className="text-lg text-gray-700 leading-relaxed">{service.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -269,7 +257,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
             className="max-w-4xl mx-auto text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">{isEnglish ? "Our Approach" : "Η Προσέγγισή μας"}</h2>
-            <p className="text-lg text-white/80 text-justify-content">
+            <p className="text-lg text-white/80">
               {isEnglish
                 ? "The process of building your house is carefully designed to ensure the best possible outcome"
                 : "Η διαδικασία κατασκευής του σπιτιού σας είναι προσεκτικά σχεδιασμένη για να εξασφαλίσει το καλύτερο δυνατό αποτέλεσμα"}
@@ -300,7 +288,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 ).map((item, index) => (
                   <li key={index} className="flex items-start">
                     <CheckCircle className="w-6 h-6 text-accent mr-2 flex-shrink-0 mt-1" />
-                    <span className="text-white/90 text-justify-content">{item}</span>
+                    <span className="text-white/90">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -309,7 +297,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
               <h3 className="text-2xl font-semibold text-white mb-4">
                 {isEnglish ? "Why Choose Us" : "Γιατί να μας Επιλέξετε"}
               </h3>
-              <p className="text-white/90 mb-4 text-justify-content">
+              <p className="text-white/90 mb-4">
                 {isEnglish
                   ? "With over 25 years of experience in house construction, we bring expertise and innovation to every project. Our team of experienced professionals ensures that your dream home becomes a reality, on time and within budget."
                   : "Με πάνω από 25 χρόνια εμπειρίας στην κατασκευή σπιτιών, φέρνουμε εξειδίκευση και καινοτομία σε κάθε έργο. Η ομάδα μας από έμπειρους επαγγελματίες εξασφαλίζει ότι το όνειρό σας για το ιδανικό σπίτι γίνεται πραγματικότητα, εγκαίρως και εντός προϋπολογισμού."}
@@ -342,7 +330,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
               {isEnglish ? "Recent Projects" : "Πρόσφατα Έργα"}
             </h2>
-            <p className="text-lg text-gray-600 text-justify-content">
+            <p className="text-lg text-gray-600">
               {isEnglish
                 ? "Take a look at some of our most recent house construction projects we've completed"
                 : "Ρίξτε μια ματιά σε μερικά από τα πιο πρόσφατα έργα κατασκευής σπιτιών που έχουμε ολοκληρώσει"}
@@ -411,7 +399,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {isEnglish ? "Ready to Start Your Project?" : "Έτοιμοι να Ξεκινήσετε το Έργο σας;"}
               </h2>
-              <p className="text-lg text-white/80 mb-8 text-justify-content">
+              <p className="text-lg text-white/80 mb-8">
                 {isEnglish
                   ? "Contact us today to discuss how we can make your dream of a new home a reality."
                   : "Επικοινωνήστε μαζί μας σήμερα για να συζητήσουμε πώς μπορούμε να κάνουμε το όνειρό σας για ένα νέο σπίτι πραγματικότητα."}

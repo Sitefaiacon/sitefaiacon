@@ -30,11 +30,6 @@
     @apply bg-gradient-secondary min-h-screen text-base;
   }
 
-  /* Add this new class */
-  .text-justify-content {
-    @apply text-justify;
-  }
-
   .section-primary {
     @apply bg-gradient-primary text-white;
   }

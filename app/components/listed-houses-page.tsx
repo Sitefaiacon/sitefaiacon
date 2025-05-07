@@ -47,7 +47,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
               className="space-y-8"
             >
               <div className="text-lg">
-                <p className="leading-relaxed text-justify-content">
+                <p className="leading-relaxed">
                   {isEnglish
                     ? "Corfu, with its rich architectural heritage, hosts one of the most authentic and well-preserved historical settlements in Greece. Its listed buildings are living monuments of the island's history and culture. However, their maintenance and restoration require "
                     : "Η Κέρκυρα, με την πλούσια αρχιτεκτονική της κληρονομιά, φιλοξενεί έναν από τους πιο αυθεντικούς και καλοδιατηρημένους ιστορικούς οικισμούς της Ελλάδας. Τα διατηρητέα κτίρια της αποτελούν ζωντανά μνημεία της ιστορίας και του πολιτισμού του νησιού, ωστόσο, η συντήρηση και η αποκατάστασή τους απαιτούν "}
@@ -64,7 +64,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
                 <h3 className="text-2xl font-bold text-primary mb-6">
                   {isEnglish ? "The Uniqueness of Restoration Projects" : "Η Ιδιαιτερότητα των Έργων Αποκατάστασης"}
                 </h3>
-                <p className="mb-4 text-justify-content">
+                <p className="mb-4">
                   {isEnglish
                     ? "Listed buildings are constructed with techniques and materials that differ from modern constructions, making each restoration project unique. The main challenges we face include:"
                     : "Τα διατηρητέα κτίρια είναι κατασκευασμένα με τεχνικές και υλικά που διαφέρουν από τις σύγχρονες κατασκευές, γεγονός που καθιστά κάθε έργο αποκατάστασης μοναδικό. Οι βασικές προκλήσεις που αντιμετωπίζουμε περιλαμβάνουν:"}
@@ -78,7 +78,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
                           ? "Preserving architectural authenticity"
                           : "Διατήρηση της αρχιτεκτονικής αυθεντικότητας"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "We restore each building with absolute respect for its historical details, using traditional techniques and natural materials such as stone, wood, and lime mortars."
                           : "Αποκαθιστούμε κάθε κτίριο με απόλυτο σεβασμό στις ιστορικές του λεπτομέρειες, χρησιμοποιώντας παραδοσιακές τεχνικές και φυσικά υλικά, όπως πέτρα, ξύλο και ασβεστοκονιάματα."}
@@ -93,7 +93,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
                           ? "Structural reinforcement and restoration"
                           : "Στατική ενίσχυση και δομική αποκατάσταση"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "We proceed with reinforcements using modern but discreet methods, maintaining the original aesthetics of the building."
                           : "Προχωράμε σε ενισχύσεις με σύγχρονες αλλά διακριτικές μεθόδους, διατηρώντας την αρχική αισθητική του κτιρίου."}
@@ -106,7 +106,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
                       <h4 className="font-bold text-primary">
                         {isEnglish ? "Compliance with regulations" : "Συμβατότητα με κανονισμούς"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "We have the experience to handle the entire licensing process, ensuring full legality for your project."
                           : "Διαθέτουμε την εμπειρία να αναλάβουμε όλη τη διαδικασία αδειοδότησης, εξασφαλίζοντας την πλήρη νομιμότητα του έργου σας."}
@@ -121,7 +121,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
                           ? "Energy upgrade without altering aesthetics"
                           : "Ενεργειακή αναβάθμιση χωρίς αλλοίωση της αισθητικής"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "We upgrade buildings energetically, applying thermal insulation techniques and energy-efficient solutions without affecting their historical identity."
                           : "Αναβαθμίζουμε ενεργειακά τα κτίρια, εφαρμόζοντας τεχνικές θερμομόνωσης και ενεργειακά αποδοτικές λύσεις, χωρίς να επηρεάζουμε την ιστορική τους ταυτότητα."}
@@ -134,7 +134,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
                       <h4 className="font-bold text-primary">
                         {isEnglish ? "Restoration of traditional elements" : "Αποκατάσταση παραδοσιακών στοιχείων"}
                       </h4>
-                      <p className="text-justify-content">
+                      <p>
                         {isEnglish
                           ? "We place particular emphasis on the restoration of wooden frames, decorative elements, ceilings, and floors, so that the building retains its authentic character."
                           : "Δίνουμε ιδιαίτερη έμφαση στην αναπαλαίωση ξύλινων κουφωμάτων, διακοσμητικών στοιχείων, οροφών και πατωμάτων, ώστε το κτίριο να διατηρήσει τον αυθεντικό του χαρακτήρα."}
@@ -198,7 +198,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
               {isEnglish ? "Our Services" : "Οι Υπηρεσίες μας"}
             </h2>
-            <p className="text-xl text-gray-600 text-justify-content">
+            <p className="text-xl text-gray-600">
               {isEnglish
                 ? "Comprehensive restoration and renovation services for listed buildings"
                 : "Ολοκληρωμένες υπηρεσίες αποκατάστασης και αναπαλαίωσης διατηρητέων κτιρίων"}
@@ -246,7 +246,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
                 <div className="h-full p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
                   <service.icon className="w-16 h-16 text-primary mb-8" />
                   <h3 className="text-3xl font-semibold mb-6 text-primary">{service.title}</h3>
-                  <p className="text-lg text-gray-700 leading-relaxed text-justify-content">{service.description}</p>
+                  <p className="text-lg text-gray-700 leading-relaxed">{service.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -270,7 +270,7 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
                   ? "Ready to Highlight Your Building's History?"
                   : "Έτοιμοι να Αναδείξετε την Ιστορία του Κτιρίου σας;"}
               </h2>
-              <p className="text-lg text-white/80 mb-8 text-justify-content">
+              <p className="text-lg text-white/80 mb-8">
                 {isEnglish
                   ? "Contact us today to discuss how we can restore and upgrade your listed property, combining its historical value with modern amenities."
                   : "Επικοινωνήστε μαζί μας σήμερα για να συζητήσουμε πώς μπορούμε να αποκαταστήσουμε και να αναβαθμίσουμε το διατηρητέο σας ακίνητο, συνδυάζοντας την ιστορική του αξία με σύγχρονες ανέσεις."}
