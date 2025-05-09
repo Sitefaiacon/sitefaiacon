@@ -290,7 +290,8 @@ const projects = [
   },
 ]
 
-export default function OurProjectsPage({ lang }: { lang: string }) {
+export default function OurProjectsPage({ lang = "el" }: { lang?: string }) {
+  // Use the provided lang or get it from the context
   const { isEnglish } = useLanguage()
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
 
