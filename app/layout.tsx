@@ -1,6 +1,8 @@
 import "./globals.css"
 import { Outfit, Playfair_Display } from "next/font/google"
 import type React from "react"
+import { Toaster } from "sonner"
+import { CookieConsent } from "./components/cookie-consent"
 import Script from "next/script"
 import type { Metadata } from "next"
 import { Suspense } from "react"
@@ -71,6 +73,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
             <Analytics />
           </Suspense>
+          <CookieConsent />
+          <Toaster position="top-center" />
         </LanguageProvider>
       </body>
     </html>
