@@ -32,9 +32,9 @@ export default function HomePage({ lang }: { lang: string }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="space-y-6"
+                className="space-y-8"
               >
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight drop-shadow-lg">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight drop-shadow-lg mt-8 sm:mt-12 md:mt-16">
                   ΦαιάCon
                 </h1>
                 <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-medium tracking-wide drop-shadow-lg bg-primary-dark/30 inline-block px-4 sm:px-6 py-2 rounded-full">
@@ -137,7 +137,7 @@ export default function HomePage({ lang }: { lang: string }) {
             </div>
 
             <div className="prose prose-lg max-w-none mb-12">
-              <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8">
+              <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify-content">
                 {isEnglish
                   ? "FaiaCon, based in Corfu, is a reference point in the construction sector, offering high-quality services in house construction, home renovation, listed buildings restoration, and luxury pool construction. With over 35 years of experience, our technical team guarantees innovation, durability, and aesthetic excellence in every project we undertake."
                   : "Η ΦαίαCon, με έδρα την Κέρκυρα, αποτελεί σημείο αναφοράς στον χώρο των κατασκευών, προσφέροντας υψηλής ποιότητας υπηρεσίες στην κατασκευή σπιτιών, την ανακαίνιση κατοικιών, τη δημιουργία διατηρητέων κτιρίων και την κατασκευή πολυτελών πισινών. Με εμπειρία άνω των 35 ετών, η τεχνική μας ομάδα εγγυάται καινοτομία, αντοχή και αισθητική υπεροχή σε κάθε έργο που αναλαμβάνουμε."}
@@ -235,7 +235,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-6">
               {isEnglish ? "Our Services" : "Οι Υπηρεσίες μας"}
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 text-justify-content">
               {isEnglish
                 ? "Comprehensive construction and renovation services tailored to your needs"
                 : "Ολοκληρωμένες υπηρεσίες κατασκευής και ανακαίνισης προσαρμοσμένες στις ανάγκες σας"}
@@ -306,20 +306,13 @@ export default function HomePage({ lang }: { lang: string }) {
                 <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
                   {isEnglish ? "Estimate Your Renovation Cost" : "Εκτιμήστε το Κόστος Ανακαίνισης"}
                 </h2>
-                <p className="text-xl text-gray-600">
+                <p className="text-xl text-gray-600 mb-8 text-justify-content">
                   {isEnglish
-                    ? "Use our calculator to get a quick estimate for your renovation project"
-                    : "Χρησιμοποιήστε τον υπολογιστή μας για να πάρετε μια γρήγορη εκτίμηση για το έργο ανακαίνισής σας"}
+                    ? "With our Cost Calculator, you can easily get a quick estimate for your home renovation or door and window replacement. Simply fill in details such as the size of the space, number of rooms, material (e.g., aluminum, PVC, wood), and the quality you desire (basic, mid-range, or premium). We provide you with a hypothetical price to give you a general idea of the cost – it's not the final offer, but a useful first step. If you want accurate pricing, ask us for a quote!"
+                    : "Με τον Υπολογιστή Κόστους μας, μπορείς εύκολα να πάρεις μια γρήγορη εκτίμηση για την ανακαίνιση του σπιτιού σου ή την αντικατάσταση πορτών και παραθύρων. Συμπλήρωσε απλά στοιχεία όπως το μέγεθος του χώρου, τον αριθμό των δωματίων, το υλικό (π.χ. αλουμίνιο, PVC, ξύλο) και την ποιότητα που επιθυμείς (βασική, μεσαία ή premium). Σου δίνουμε μια υποθετική τιμή για να έχεις μια γενική ιδέα του κόστους – δεν είναι η τελική προσφορά, αλλά ένα χρήσιμο πρώτο βήμα. Αν θέλεις ακριβή κοστολόγηση, ζήτα μας προσφορά!"}
                 </p>
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <RenovationCostCalculator />
-              </motion.div>
+              <RenovationCostCalculator />
             </div>
           </section>
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { SiteLayout } from "../components/site-layout"
+import SiteLayout from "../components/site-layout"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, Building, Shield, Zap, PaintbrushIcon as PaintBrush } from "lucide-react"
 import Link from "next/link"
@@ -225,7 +225,7 @@ export default function ListedHouses() {
                 title: isEnglish ? "Energy Upgrade" : "Ενεργειακή Αναβάθμιση",
                 description: isEnglish
                   ? "We improve the energy efficiency of listed buildings while maintaining their authentic aesthetics. We apply thermal insulation techniques compatible with restoration principles, upgrade heating and cooling systems, and install energy-efficient frames that respect the building's architecture. This ensures lower energy consumption, greater comfort for users, and increased sustainability of the construction, without affecting its traditional character."
-                  : "Βελτιώνουμε την ενεργειακή απόδοση των διατηρητέων κτιρίων, διατηρώντας ταυτόχρονα την αυθεντική αισθητική τους. Εφαρμόζουμε τεχνικές θερμομόνωσης συμβατές με τις αρχές της αποκατάστασης, αναβαθμίζουμε τα συστήματα θέρμανσης και ψύξης και τοποθετούμε ενεργειακά αποδοτικά κουφώματα που σέβονται την αρχιτεκτονική του κτιρίου. Έτσι, εξασφαλίζουμε χαμηλότερη κατανάλωση ενέργειας, μεγαλύτερη άνεση για τους χρήστες και αυξημένη βιωσιμότητα της κατασκευής, χωρίς να επηρεάζεται ο παραδοσιακός της χαρακτήρας.",
+                  : "Βελτιώνουμε την ενεργειακή απόδοση των διατηρητέων κτιρίων, διατηρώντας ταυτόχρονα την αυθεντική αισθητική τους. Εφαρμόζουμε τεχνικές θερμομόνωσης συμβατές με τις αρχές της αποκατάστασης, αναβαθμίζουμε τα συστήματα θέρμανσης και ψύξης και τοποθετούμε ενεργειακά αποδοτικά κουφώματα που σέβονται την αρχιτεκτονική του κτιρίου. Έτσι, εξασφαλίζουμε χαμηλότερη κατανάλωση ενέργειας, μεγαλύ��ερη άνεση για τους χρήστες και αυξημένη βιωσιμότητα της κατασκευής, χωρίς να επηρεάζεται ο παραδοσιακός της χαρακτήρας.",
               },
               {
                 icon: PaintBrush,

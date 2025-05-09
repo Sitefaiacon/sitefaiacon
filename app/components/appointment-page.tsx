@@ -91,7 +91,7 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                   <AlertTitle className="text-green-800">
                     {isEnglish ? "Successful Submission!" : "Επιτυχής Αποστολή!"}
                   </AlertTitle>
-                  <AlertDescription className="text-green-700">
+                  <AlertDescription className="text-green-700 text-justify-content">
                     {isEnglish
                       ? "Your message has been sent successfully. We will contact you soon."
                       : "Το μήνυμά σας στάλθηκε με επιτυχία. Θα επικοινωνήσουμε μαζί σας σύντομα."}
@@ -116,7 +116,7 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                 {formError && (
                   <Alert className="mb-6 bg-red-50 border-red-200">
                     <AlertTitle className="text-red-800">{isEnglish ? "Error" : "Σφάλμα"}</AlertTitle>
-                    <AlertDescription className="text-red-700">{formError}</AlertDescription>
+                    <AlertDescription className="text-red-700 text-justify-content">{formError}</AlertDescription>
                   </Alert>
                 )}
 
@@ -244,7 +244,7 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                     ].map((item, index) => (
                       <li key={index} className="flex items-start">
                         <CheckCircle className="w-6 h-6 text-primary mr-2 flex-shrink-0 mt-1" />
-                        <span className="text-gray-600">{item}</span>
+                        <span className="text-gray-600 text-justify-content">{item}</span>
                       </li>
                     ))}
                   </ul>

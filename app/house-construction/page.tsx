@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { SiteLayout } from "../components/site-layout"
+import SiteLayout from "../components/site-layout"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, PenToolIcon as Tool, Shield, Zap } from "lucide-react"
 import { PenToolIcon } from "lucide-react"
