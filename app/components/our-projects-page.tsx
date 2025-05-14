@@ -290,8 +290,7 @@ const projects = [
   },
 ]
 
-export default function OurProjectsPage({ lang = "el" }: { lang?: string }) {
-  // Use the provided lang or get it from the context
+export default function OurProjectsPage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
 
@@ -387,7 +386,7 @@ export default function OurProjectsPage({ lang = "el" }: { lang?: string }) {
                       />
                     </div>
                     <h2 className="text-2xl font-bold mt-4">{isEnglish ? project.titleEn : project.title}</h2>
-                    {/* Οι περιγραφές τοποθεσίας και έργου αφαιρέθηκαν */}
+                    <p className="text-gray-600">{isEnglish ? project.locationEn : project.location}</p>
                   </DialogContent>
                 </Dialog>
               </motion.div>

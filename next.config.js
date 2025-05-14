@@ -5,14 +5,8 @@ const nextConfig = {
     domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com", "v0.blob.com", "your-cdn-domain.com"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    formats: ["image/webp"], // ✅ επιτρεπόμενη τιμή
+    formats: ["image/webp", "image/jpeg"],
     unoptimized: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
   },
   async headers() {
     return [
@@ -58,13 +52,13 @@ const nextConfig = {
   },
   experimental: {
     webVitalsAttribution: ["CLS", "LCP"],
-    // Προσθέτω το esmExternals: false που βοηθάει στην επίλυση του προβλήματος
-    esmExternals: false,
   },
-  // Προσθέτω το swcMinify: false που βοηθάει στην επίλυση του προβλήματος
-  swcMinify: false,
-  // Σχολιάζω το output: "export" προσωρινά για να δούμε αν αυτό προκαλεί το πρόβλημα
-  // output: "export",
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 }
 
 module.exports = nextConfig

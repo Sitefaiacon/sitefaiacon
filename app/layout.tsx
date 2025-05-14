@@ -4,7 +4,9 @@ import type React from "react"
 import { Toaster } from "sonner"
 import { CookieConsent } from "./components/cookie-consent"
 import Script from "next/script"
+import { WebVitals } from "./components/web-vitals"
 import type { Metadata } from "next"
+import GoogleAnalytics from "./components/google-analytics"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
 import { LanguageProvider } from "./contexts/language-context"
@@ -22,8 +24,61 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας",
-  description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα.",
+  metadataBase: new URL("https://faiacon.gr"),
+  title: {
+    default: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Κατασκευές & Ανακαινίσεις",
+    template: "%s | ΦαιάCon Κέρκυρα",
+  },
+  description:
+    "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Εξειδίκευση σε κατασκευές, ανακαινίσεις, διατηρητέα κτίρια και πισίνες. Άριστη ποιότητα & εμπειρία από το 1990.",
+  keywords: [
+    "κατασκευαστική εταιρεία κέρκυρα",
+    "ανακαινίσεις κέρκυρα",
+    "κατασκευή σπιτιού κέρκυρα",
+    "ανακαίνιση σπιτιού κέρκυρα",
+    "διατηρητέα κτίρια κέρκυρα",
+    "κατασκευή πισίνας κέρκυρα",
+  ],
+  authors: [{ name: "ΦαιάCon" }],
+  creator: "ΦαιάCon",
+  publisher: "ΦαιάCon",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας",
+    description:
+      "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Εξειδίκευση σε κατασκευές, ανακαινίσεις, διατηρητέα κτίρια και πισίνες.",
+    url: "https://faiacon.gr",
+    siteName: "ΦαιάCon",
+    locale: "el_GR",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
+  verification: {
+    google: "your-google-site-verification",
+  },
+  category: "construction",
     generator: 'v0.dev'
 }
 
@@ -58,6 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <meta name="google" content="notranslate" />
+        <Suspense fallback={null}>{gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}</Suspense>
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
         <noscript>
@@ -68,13 +124,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <WebVitals />
         <LanguageProvider>
-          <Suspense>
-            {children}
-            <Analytics />
-          </Suspense>
+          {children}
           <CookieConsent />
           <Toaster position="top-center" />
+          <Analytics />
         </LanguageProvider>
       </body>
     </html>

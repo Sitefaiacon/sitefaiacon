@@ -32,9 +32,9 @@ export default function HomePage({ lang }: { lang: string }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="space-y-8"
+                className="space-y-6"
               >
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight drop-shadow-lg mt-8 sm:mt-12 md:mt-16">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight drop-shadow-lg">
                   ΦαιάCon
                 </h1>
                 <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-medium tracking-wide drop-shadow-lg bg-primary-dark/30 inline-block px-4 sm:px-6 py-2 rounded-full">
