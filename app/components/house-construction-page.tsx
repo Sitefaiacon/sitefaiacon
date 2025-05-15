@@ -235,7 +235,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 title: isEnglish ? "Energy Efficiency" : "Ενεργειακή Απόδοση",
                 description: isEnglish
                   ? "Modern design requires energy savings and sustainability. We incorporate energy-efficient solutions, from thermal insulation to renewable energy sources, to reduce your building's operating costs and contribute to a greener future."
-                  : "Ο σύγχρονος σχεδιασμός απαιτεί εξοικονόμηση ενέργειας και βιωσιμότητα. Ενσωματώνουμε ενεργειακά αποδοτικές λύσεις, από θερμομόνωση έως ανανεώσιμες πηγές ενέργειας, για να μειώσουμε το κόστος λειτουργίας του κτιρίου σας και να συμβάλλουμε σε ένα πιο πράσινο μέλλον.",
+                  : "Ο σύγχρονος σχεδιασμός απαιτεί εξοικονόμηση ενέργειας και βιωσιμότητα. Ενσωματώνουμε ενεργειακά αποδοτικές λύσεις, από θερμομόνωση έως ανανεώσιμες πηγές ενέργειας, ��ια να μειώσουμε το κόστος λειτουργίας του κτιρίου σας και να συμβάλλουμε σε ένα πιο πράσινο μέλλον.",
                 href: "/services/energy-efficiency",
               },
             ].map((service, index) => (
