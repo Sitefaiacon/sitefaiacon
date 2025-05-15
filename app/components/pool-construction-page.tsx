@@ -116,7 +116,7 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
                       <p className="text-justify-content">
                         {isEnglish
                           ? "We deliver every project within the agreed deadlines, without compromising on quality."
-                          : "Παραδίδουμε κάθε έργο εντός των συμφωνημένων προθεσμιών, χωρίς θυσίες στην ποιότητα."}
+                          : "Παραδίδουμε κ��θε έργο εντός των συμφωνημένων προθεσμιών, χωρίς θυσίες στην ποιότητα."}
                       </p>
                     </div>
                   </div>

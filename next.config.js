@@ -5,7 +5,7 @@ const nextConfig = {
     domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com", "v0.blob.com", "your-cdn-domain.com"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    formats: ["image/webp", "image/jpeg", "image/avif"],
+    formats: ["image/webp", "image/avif"],
     unoptimized: true,
   },
   async headers() {
