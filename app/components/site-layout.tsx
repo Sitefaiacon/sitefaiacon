@@ -9,8 +9,8 @@ interface SiteLayoutProps {
   showHero?: boolean
 }
 
-// Εξάγουμε τη συνάρτηση ως named export
-export function SiteLayout({ children, showHero = false }: SiteLayoutProps) {
+//κρατάμε μόνο το named export 
+export default function SiteLayout({ children, showHero = false }: SiteLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
@@ -19,6 +19,3 @@ export function SiteLayout({ children, showHero = false }: SiteLayoutProps) {
     </div>
   )
 }
-
-// Επίσης την εξάγουμε ως default export
-export default SiteLayout
