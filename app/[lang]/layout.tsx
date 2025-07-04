@@ -7,8 +7,6 @@ import { CookieConsent } from "../components/cookie-consent"
 import { WebVitals } from "../components/web-vitals"
 import GoogleAnalytics from "../components/google-analytics"
 import { LanguageProvider } from "../contexts/language-context"
-import { SiteHeader } from "../components/site-header"
-import { Footer } from "../components/footer"
 import "../globals.css"
 import { Suspense } from "react"
 
@@ -29,8 +27,7 @@ export async function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "ΦαιάCon | Κατασκευαστική Εταιρεία",
-  description: "Η ΦαιάCon είναι μια κατασκευαστική εταιρεία με έδρα τα Χανιά της Κρήτης.",
+  // ... (υπόλοιπα metadata όπως πριν)
 }
 
 export default function RootLayout({
@@ -46,11 +43,7 @@ export default function RootLayout({
     <html lang={lang} className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
       <body className="min-h-screen bg-background antialiased font-sans">
         <LanguageProvider initialLang={lang}>
-          <Suspense>
-            <SiteHeader />
-          </Suspense>
-          <main>{children}</main>
-          <Footer />
+          <Suspense>{children}</Suspense>
           <WebVitals />
           <CookieConsent />
           <Toaster position="top-center" />

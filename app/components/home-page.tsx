@@ -9,21 +9,12 @@ import Link from "next/link"
 import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
 import { RenovationCostCalculator } from "./renovation-cost-calculator"
-import { SiteLayout } from "./site-layout"
-// ... other imports
 
-interface HomePageProps {
-  lang: string
-  searchParams: URLSearchParams
-}
-
-export function HomePage({ lang, searchParams }: HomePageProps) {
-  // Now you can safely use searchParams here
-  // const someParam = searchParams.get('someParam')
+export default function HomePage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
 
   return (
-    <SiteLayout>
+    <>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <ArchitecturalBackground />
@@ -437,8 +428,6 @@ export function HomePage({ lang, searchParams }: HomePageProps) {
           </section>
         </div>
       </section>
-    </SiteLayout>
+    </>
   )
 }
-
-export default HomePage

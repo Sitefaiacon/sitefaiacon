@@ -1,42 +1,31 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
-const defaultLocale = "el"
-const locales = ["en", "el"]
+// Βεβαιωθείτε ότι το middleware χειρίζεται σωστά τα paths του Vercel Analytics
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
 
-// Add a matcher for all routes except for the ones that don't need locale
-export const config = {
-  matcher: [
-    // Skip all internal paths (_next, api, etc)
-    "/((?!api|_next/static|_next/image|_vercel/insights|favicon.ico|robots.txt|sitemap.xml).*)",
-  ],
+  // Skip Vercel Analytics paths completely
+  if (pathname.startsWith("/_vercel/insights")) {
+    return NextResponse.next()
+  }
+
+  // If path already starts with /el or /en, don't modify it
+  if (pathname.match(/^\/(en|el)($|\/)/)) {
+    return NextResponse.next()
+  }
+
+  // For all other paths, prefix with /el (default language)
+  const url = request.nextUrl.clone()
+  url.pathname = `/el${pathname}`
+  return NextResponse.redirect(url)
 }
 
-export function middleware(request: NextRequest) {
-  // Check if the path starts with Vercel Analytics paths and skip processing
-  if (request.nextUrl.pathname.startsWith("/_vercel/insights")) {
-    return NextResponse.next()
-  }
-
-  // Skip static files and API routes
-  if (
-    request.nextUrl.pathname.includes("/api/") ||
-    request.nextUrl.pathname.includes("/_next/") ||
-    request.nextUrl.pathname.includes("/favicon.ico") ||
-    request.nextUrl.pathname.includes("/robots.txt") ||
-    request.nextUrl.pathname.includes("/sitemap.xml")
-  ) {
-    return NextResponse.next()
-  }
-
-  // Check if the pathname has a locale prefix
-  const pathname = request.nextUrl.pathname
-  const pathnameHasLocale = locales.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`)
-
-  if (pathnameHasLocale) return NextResponse.next()
-
-  // Redirect if there is no locale
-  const locale = defaultLocale
-  request.nextUrl.pathname = `/${locale}${pathname}`
-  return NextResponse.redirect(request.nextUrl)
+// Update the matcher configuration to exclude Vercel Analytics paths
+export const config = {
+  matcher: [
+    // Skip all internal paths (_next, api)
+    // Skip all static files (images, etc)
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
 }
