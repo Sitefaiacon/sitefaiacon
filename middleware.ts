@@ -4,8 +4,18 @@ import type { NextRequest } from "next/server"
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // Skip static files and assets
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".") ||
+    pathname.startsWith("/favicon")
+  ) {
+    return NextResponse.next()
+  }
+
   // If path already starts with /el or /en, don't modify it
-  if (pathname.match(/^\/(en|el)($|\/)/)) {
+  if (pathname.startsWith("/el") || pathname.startsWith("/en")) {
     return NextResponse.next()
   }
 
@@ -17,8 +27,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next, api)
-    // Skip all static files (images, etc)
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    // Match all paths except static files
+    "/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)",
   ],
 }
