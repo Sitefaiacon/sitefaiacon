@@ -1,4 +1,5 @@
 "use client"
+// Updated: Force GitHub sync - removed useLanguage dependency
 
 import { useState, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -13,8 +14,9 @@ import { sendEmail } from "../actions/send-email"
 import { toast } from "sonner"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
-// Use Greek as default language for this page
-const usePageLanguage = () => {
+// Local language hook - always returns Greek as default
+// This avoids dependency on LanguageProvider during static generation
+function usePageLanguage() {
   return { isEnglish: false }
 }
 
