@@ -30,13 +30,14 @@ export const metadata: Metadata = {
   // ... (υπόλοιπα metadata όπως πριν)
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params: { lang },
+  params,
 }: {
   children: React.ReactNode
-  params: { lang: string }
+  params: Promise<{ lang: string }>
 }) {
+  const { lang } = await params
   const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
   return (
