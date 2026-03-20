@@ -1,39 +1,12 @@
 import type React from "react"
-import { Outfit, Playfair_Display } from "next/font/google"
-import type { Metadata, Viewport } from "next"
-import { Analytics } from "@vercel/analytics/react"
-import { Toaster } from "sonner"
-import { CookieConsent } from "../components/cookie-consent"
-import { WebVitals } from "../components/web-vitals"
-import GoogleAnalytics from "../components/google-analytics"
+import type { Metadata } from "next"
 import { LanguageProvider } from "../contexts/language-context"
-import "../globals.css"
-import { Suspense } from "react"
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  display: "swap",
-})
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-})
 
 export async function generateStaticParams() {
   return [{ lang: "el" }, { lang: "en" }]
 }
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-}
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://faiacon.gr"),
   title: {
     default: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Κατασκευές & Ανακαινίσεις",
     template: "%s | ΦαιάCon Κέρκυρα",
@@ -42,7 +15,7 @@ export const metadata: Metadata = {
     "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Εξειδίκευση σε κατασκευές, ανακαινίσεις, διατηρητέα κτίρια και πισίνες.",
 }
 
-export default async function RootLayout({
+export default async function LangLayout({
   children,
   params,
 }: {
@@ -50,20 +23,10 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>
 }) {
   const { lang } = await params
-  const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
   return (
-    <html lang={lang} className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
-      <body className="min-h-screen bg-background antialiased font-sans">
-        <LanguageProvider initialLang={lang}>
-          <Suspense>{children}</Suspense>
-          <WebVitals />
-          <CookieConsent />
-          <Toaster position="top-center" />
-          <Analytics />
-          {gaId && <GoogleAnalytics GA_MEASUREMENT_ID={gaId} />}
-        </LanguageProvider>
-      </body>
-    </html>
+    <LanguageProvider initialLang={lang}>
+      {children}
+    </LanguageProvider>
   )
 }
