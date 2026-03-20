@@ -37,8 +37,9 @@ export function LanguageProvider({
 
 export function useLanguage() {
   const context = useContext(LanguageContext)
+  // Return default values instead of throwing during SSR/static generation
   if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider")
+    return { isEnglish: false, toggleLanguage: () => {} }
   }
   return context
 }
