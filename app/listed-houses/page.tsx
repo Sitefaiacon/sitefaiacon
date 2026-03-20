@@ -7,10 +7,10 @@ import { CheckCircle2, Building, Shield, Zap, PaintbrushIcon as PaintBrush } fro
 import Link from "next/link"
 import { ArchitecturalBackground } from "../components/architectural-background"
 import { SectionBackground } from "../components/section-background"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguageSafe } from "@/contexts/language-context"
 
 export default function ListedHouses() {
-  const { isEnglish } = useLanguage()
+  const { isEnglish } = useLanguageSafe()
 
   return (
     <SiteLayout>

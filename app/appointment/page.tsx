@@ -12,13 +12,13 @@ import { SectionBackground } from "../components/section-background"
 import { sendEmail } from "../actions/send-email"
 import { toast } from "sonner"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguageSafe } from "@/contexts/language-context"
 
 export default function Appointment() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
   const [isSuccess, setIsSuccess] = useState(false)
-  const { isEnglish } = useLanguage()
+  const { isEnglish } = useLanguageSafe()
 
   const handleSubmit = useCallback(
     async (formData: FormData) => {

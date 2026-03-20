@@ -8,7 +8,7 @@ import { CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import { ArchitecturalBackground } from "../components/architectural-background"
 import { SectionBackground } from "../components/section-background"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguageSafe } from "@/contexts/language-context"
 
 const renovationServices = [
   { icon: HardHat, label: "Επισκευή Στέγης", labelEn: "Roof Repair", href: "/house-renovation/roof-repair" },
@@ -20,7 +20,7 @@ const renovationServices = [
 ]
 
 export default function HouseRenovation() {
-  const { isEnglish } = useLanguage()
+  const { isEnglish } = useLanguageSafe()
 
   return (
     <SiteLayout>
