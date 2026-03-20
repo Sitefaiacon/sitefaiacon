@@ -125,7 +125,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
         <WebVitals />
-        <LanguageProvider>
+        <LanguageProvider initialLang="el">
           {children}
           <CookieConsent />
           <Toaster position="top-center" />
