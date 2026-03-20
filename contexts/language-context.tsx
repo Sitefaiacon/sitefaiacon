@@ -1,4 +1,5 @@
 "use client"
+// Language Context Provider - No throw errors, safe defaults
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { useRouter, usePathname } from "next/navigation"
