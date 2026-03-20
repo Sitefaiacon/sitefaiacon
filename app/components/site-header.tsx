@@ -5,7 +5,7 @@ import { Menu } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useState, useEffect } from "react"
 import { LanguageSwitcher } from "./language-switcher"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguage } from "@/contexts/language-context"
 import { usePathname } from "next/navigation"
 
 const navItems = [

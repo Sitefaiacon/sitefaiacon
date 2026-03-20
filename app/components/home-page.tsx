@@ -1,6 +1,6 @@
 "use client"
 
-import { useLanguage } from "../contexts/language-context"
+import { useLanguage } from "@/contexts/language-context"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CalendarDays, CheckCircle2 } from "lucide-react"

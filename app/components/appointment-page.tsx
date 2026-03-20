@@ -11,7 +11,7 @@ import { SectionBackground } from "./section-background"
 import { sendEmail } from "../actions/send-email"
 import { toast } from "sonner"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function AppointmentPage({ lang }: { lang: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false)

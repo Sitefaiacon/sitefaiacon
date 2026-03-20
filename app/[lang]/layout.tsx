@@ -6,7 +6,7 @@ import { Toaster } from "sonner"
 import { CookieConsent } from "../components/cookie-consent"
 import { WebVitals } from "../components/web-vitals"
 import GoogleAnalytics from "../components/google-analytics"
-import { LanguageProvider } from "../contexts/language-context"
+import { LanguageProvider } from "@/contexts/language-context"
 import "../globals.css"
 
 const outfit = Outfit({

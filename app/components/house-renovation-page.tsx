@@ -15,7 +15,7 @@ import {
 import Link from "next/link"
 import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguage } from "@/contexts/language-context"
 import { RenovationCostCalculator } from "./renovation-cost-calculator"
 
 const renovationServices = [

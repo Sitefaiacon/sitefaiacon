@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguage } from "@/contexts/language-context"
 import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
 import { Button } from "@/components/ui/button"

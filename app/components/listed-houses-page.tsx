@@ -6,7 +6,7 @@ import { CheckCircle2, Building2, Shield, Zap } from "lucide-react"
 import Link from "next/link"
 import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function ListedHousesPage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
