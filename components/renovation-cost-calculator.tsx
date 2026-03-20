@@ -73,4 +73,3 @@ export function RenovationCostCalculator() {
     </div>
   )
 }
-

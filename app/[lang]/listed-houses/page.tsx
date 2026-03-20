@@ -8,4 +8,3 @@ export default function ListedHouses({ params: { lang } }: { params: { lang: str
     </SiteLayout>
   )
 }
-

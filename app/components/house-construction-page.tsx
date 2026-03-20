@@ -416,4 +416,3 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
     </>
   )
 }
-

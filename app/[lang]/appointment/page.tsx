@@ -8,4 +8,3 @@ export default function Appointment({ params: { lang } }: { params: { lang: stri
     </SiteLayout>
   )
 }
-

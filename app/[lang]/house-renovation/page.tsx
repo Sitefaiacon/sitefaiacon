@@ -11,4 +11,3 @@ export default function HouseRenovation({ params: { lang } }: { params: { lang: 
     </LanguageProvider>
   )
 }
-

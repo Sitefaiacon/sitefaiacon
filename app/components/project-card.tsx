@@ -69,4 +69,3 @@ export function ProjectCard({ title, location, image, onClick, priority = false 
     </div>
   )
 }
-

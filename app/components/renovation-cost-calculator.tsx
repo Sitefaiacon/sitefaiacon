@@ -246,4 +246,3 @@ function translateCategory(category: string): string {
   }
   return translations[category] || category
 }
-

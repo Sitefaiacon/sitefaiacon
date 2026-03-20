@@ -34,4 +34,3 @@ export function CallToAction({ title, description, buttonText = "Κλείστε 
     </section>
   )
 }
-

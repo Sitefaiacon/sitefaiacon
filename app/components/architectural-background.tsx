@@ -30,4 +30,3 @@ export function ArchitecturalBackground({ className = "" }: { className?: string
     </div>
   )
 }
-

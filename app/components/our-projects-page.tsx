@@ -425,4 +425,3 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
     </>
   )
 }
-

@@ -21,4 +21,3 @@ export function SiteLayout({ children, showHero = false }: SiteLayoutProps) {
     </div>
   )
 }
-

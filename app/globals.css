@@ -24,14 +24,18 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --gradient-primary: linear-gradient(to bottom, #2B4B8C, #1E3563);
+    --gradient-secondary: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
   }
 
   body {
-    @apply bg-gradient-secondary min-h-screen text-base;
+    background: var(--gradient-secondary);
+    @apply min-h-screen text-base;
   }
 
   .section-primary {
-    @apply bg-gradient-primary text-white;
+    background: var(--gradient-primary);
+    @apply text-white;
   }
 
   .section-secondary {
@@ -49,7 +53,8 @@
 
 /* Hero section specific styles */
 .hero-section {
-  @apply relative bg-gradient-primary text-white overflow-hidden;
+  @apply relative text-white overflow-hidden;
+  background: var(--gradient-primary);
 }
 
 .hero-section::before {
@@ -111,4 +116,3 @@
     display: none !important;
   }
 }
-

@@ -314,4 +314,3 @@ export default function HouseRenovationPage({ lang }: { lang: string }) {
     </>
   )
 }
-

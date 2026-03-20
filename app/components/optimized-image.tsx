@@ -32,4 +32,3 @@ export function OptimizedImage({ src, alt, width, height, className = "" }: Opti
     </div>
   )
 }
-

@@ -8,4 +8,3 @@ export default function HouseConstruction({ params: { lang } }: { params: { lang
     </SiteLayout>
   )
 }
-
