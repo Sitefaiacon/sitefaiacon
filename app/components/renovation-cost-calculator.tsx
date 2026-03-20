@@ -51,8 +51,7 @@ export function RenovationCostCalculator() {
     painting: Number(area) * 25,
   }
 
-  const poolCostsPerM2 = {
-    none: { basic: 0, midRange: 0, luxury: 0 },
+  const poolCostsPerM2: Record<string, Record<string, { cost: number; materials: string }>> = {
     concrete: {
       basic: { cost: 500, materials: "Βασικά πλακάκια" },
       midRange: { cost: 1000, materials: "Κεραμικά πλακάκια υψηλής ποιότητας" },
@@ -89,12 +88,11 @@ export function RenovationCostCalculator() {
     totalCost *= agePenalty[ageCategory as keyof typeof agePenalty]
     if (numericArea > 125) totalCost *= 0.92
 
-    if (poolType !== "none" && poolSize >= 8) {
-      const poolQualityLevel = quality as keyof (typeof poolCostsPerM2)[typeof poolType][number]
-      totalCost += Math.max(
-        poolSize * poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][poolQualityLevel].cost,
-        5800,
-      )
+    if (poolType !== "none" && poolSize >= 8 && poolCostsPerM2[poolType]) {
+      const poolData = poolCostsPerM2[poolType][quality]
+      if (poolData) {
+        totalCost += Math.max(poolSize * poolData.cost, 5800)
+      }
     }
 
     return totalCost.toFixed(2)
@@ -214,15 +212,11 @@ export function RenovationCostCalculator() {
         <Button onClick={calculateCost} className="w-full mt-4">
           {isEnglish ? "Calculate" : "Υπολογισμός"}
         </Button>
-        {poolType !== "none" && (
+        {poolType !== "none" && poolCostsPerM2[poolType] && poolCostsPerM2[poolType][quality] && (
           <div className="mt-4 text-sm text-gray-600">
             <p>{isEnglish ? "Pool Materials:" : "Υλικά Πισίνας:"}</p>
             <p className="font-medium">
-              {
-                poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][
-                  quality as keyof (typeof poolCostsPerM2)[typeof poolType]
-                ].materials
-              }
+              {poolCostsPerM2[poolType][quality].materials}
             </p>
           </div>
         )}
