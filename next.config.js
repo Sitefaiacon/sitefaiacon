@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// Build version: 3 - Force cache invalidation
 const nextConfig = {
   reactStrictMode: true,
   eslint: {
