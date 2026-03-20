@@ -4,19 +4,15 @@ import { Resend } from "resend"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-interface EmailFormData {
-  name?: string
-  email: string
-  phone: string
-  message: string
-}
-
-export async function sendEmail(formData: EmailFormData): Promise<{
+export async function sendEmail(formData: FormData): Promise<{
   success: boolean
   message: string
   messageEn: string
 }> {
-  const { name, email, phone, message } = formData
+  const name = formData.get("name") as string | null
+  const email = formData.get("email") as string
+  const phone = formData.get("phone") as string
+  const message = formData.get("message") as string
 
   // Validate required fields
   if (!email || !phone || !message) {

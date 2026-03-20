@@ -38,17 +38,17 @@ export default function AppointmentPage() {
     setIsSubmitting(true)
 
     try {
-      const result = await sendEmail({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        message: `
+      const emailFormData = new FormData()
+      emailFormData.append("name", formData.name)
+      emailFormData.append("email", formData.email)
+      emailFormData.append("phone", formData.phone)
+      emailFormData.append("message", `
           Υπηρεσία: ${formData.service}
           Ημερομηνία: ${date ? date.toLocaleDateString("el-GR") : "Δεν επιλέχθηκε"}
           
           Μήνυμα: ${formData.message}
-        `,
-      })
+        `)
+      const result = await sendEmail(emailFormData)
 
       if (result.success) {
         toast.success(result.message)
