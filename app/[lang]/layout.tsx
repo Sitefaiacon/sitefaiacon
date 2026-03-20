@@ -1,3 +1,4 @@
+// Cache buster v4 - forced rebuild
 import type React from "react"
 import type { Metadata } from "next"
 import { LanguageProvider } from "../contexts/language-context"
