@@ -21,7 +21,7 @@ function AnalyticsTracking({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string })
     // Check if consent is given (integrate with your cookie consent)
     const hasConsent = localStorage.getItem("cookieConsent") === "all"
 
-    if (hasConsent) {
+    if (hasConsent && typeof window !== "undefined" && window.gtag) {
       window.gtag("config", GA_MEASUREMENT_ID, {
         page_path: url,
       })
