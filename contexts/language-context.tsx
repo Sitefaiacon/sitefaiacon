@@ -36,3 +36,8 @@ export function useLanguage() {
   }
   return context
 }
+
+export function useLanguageSafe() {
+  const context = useContext(LanguageContext)
+  return context ?? { isEnglish: false, toggleLanguage: () => {} }
+}
