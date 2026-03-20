@@ -9,7 +9,7 @@ import type { Metadata } from "next"
 import GoogleAnalytics from "./components/google-analytics"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LanguageProvider } from "./contexts/language-context"
+import { LanguageProvider } from "@/contexts/language-context"
 
 const outfit = Outfit({
   subsets: ["latin"],

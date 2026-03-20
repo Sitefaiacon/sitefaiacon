@@ -10,7 +10,13 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
-export function LanguageProvider({ children, initialLang = "el" }: { children: ReactNode; initialLang?: string }) {
+export function LanguageProvider({
+  children,
+  initialLang = "el",
+}: {
+  children: ReactNode
+  initialLang?: string
+}) {
   const [isEnglish, setIsEnglish] = useState(initialLang === "en")
   const router = useRouter()
   const pathname = usePathname()
