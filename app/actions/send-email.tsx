@@ -37,14 +37,6 @@ export async function sendEmail(formData: FormData) {
       }
     }
 
-    // Detailed console logging for debugging
-    console.log("Attempting to send email with details:", {
-      name,
-      email,
-      phone,
-      messageLength: message?.length,
-    })
-
     const { data, error } = await resend.emails.send({
       from: "Faiacon Website <onboarding@resend.dev>",
       to: ["faiacon@yahoo.com"],
@@ -74,7 +66,6 @@ export async function sendEmail(formData: FormData) {
       throw new Error(error.message)
     }
 
-    console.log("Email sent successfully:", data)
     return {
       success: true,
       message: "Το μήνυμά σας στάλθηκε με επιτυχία! Θα επικοινωνήσουμε μαζί σας σύντομα.",
