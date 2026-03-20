@@ -79,16 +79,23 @@
 
 /* Button styles */
 .btn-primary {
-  @apply bg-primary text-white hover:bg-primary-light transition-colors;
+  @apply bg-primary text-white transition-colors;
+}
+.btn-primary:hover {
+  background-color: rgb(58, 101, 189);
 }
 
 .btn-secondary {
-  @apply bg-secondary text-primary hover:bg-white transition-colors;
+  @apply bg-secondary text-primary transition-colors;
+}
+.btn-secondary:hover {
+  @apply bg-white;
 }
 
 /* Text gradient */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(to right, rgb(43, 75, 140), rgb(58, 101, 189));
 }
 
 /* Responsive typography */
