@@ -9,7 +9,7 @@ import type { Metadata } from "next"
 import GoogleAnalytics from "./components/google-analytics"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LanguageProvider } from "./contexts/language-context"
+import { LanguageProvider } from "@/contexts/language-context"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     google: "your-google-site-verification",
   },
   category: "construction",
-    generator: 'v0.dev'
+    generator: 'v0.app'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -125,7 +125,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
         <WebVitals />
-        <LanguageProvider>
+        <LanguageProvider initialLang="el">
           {children}
           <CookieConsent />
           <Toaster position="top-center" />

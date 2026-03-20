@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import SiteLayout from "../components/site-layout"
+import { SiteLayout } from "../components/site-layout"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, PenToolIcon as Tool, Shield, Zap } from "lucide-react"
 import { PenToolIcon } from "lucide-react"
@@ -9,10 +9,10 @@ import Image from "next/image"
 import { ArchitecturalBackground } from "../components/architectural-background"
 import { SectionBackground } from "../components/section-background"
 import Link from "next/link"
-import { useLanguage } from "../contexts/language-context"
+import { useLanguageSafe } from "@/contexts/language-context"
 
 export default function HouseConstruction() {
-  const { isEnglish } = useLanguage()
+  const { isEnglish } = useLanguageSafe()
 
   return (
     <SiteLayout>

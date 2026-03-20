@@ -1,4 +1,5 @@
 "use client"
+// Language Context Provider - No throw errors, safe defaults
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { useRouter, usePathname } from "next/navigation"
@@ -10,7 +11,13 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
-export function LanguageProvider({ children, initialLang }: { children: ReactNode; initialLang: string }) {
+export function LanguageProvider({
+  children,
+  initialLang = "el",
+}: {
+  children: ReactNode
+  initialLang?: string
+}) {
   const [isEnglish, setIsEnglish] = useState(initialLang === "en")
   const router = useRouter()
   const pathname = usePathname()
@@ -31,8 +38,14 @@ export function LanguageProvider({ children, initialLang }: { children: ReactNod
 
 export function useLanguage() {
   const context = useContext(LanguageContext)
+  // Return default values instead of throwing during SSR/static generation
   if (context === undefined) {
-    throw new Error("useLanguage must be used within a LanguageProvider")
+    return { isEnglish: false, toggleLanguage: () => {} }
   }
   return context
+}
+
+export function useLanguageSafe() {
+  const context = useContext(LanguageContext)
+  return context ?? { isEnglish: false, toggleLanguage: () => {} }
 }

@@ -23,28 +23,25 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#2B4B8C",
-          light: "#3A65BD",
-          dark: "#1E3563",
-          foreground: "#FFFFFF",
+          DEFAULT: "rgb(43, 75, 140)",
+          light: "rgb(58, 101, 189)",
+          dark: "rgb(30, 53, 99)",
+          foreground: "rgb(255, 255, 255)",
         },
         secondary: {
-          DEFAULT: "#E8EDF7",
-          foreground: "#2B4B8C",
+          DEFAULT: "rgb(232, 237, 247)",
+          foreground: "rgb(43, 75, 140)",
         },
         accent: {
-          DEFAULT: "#FFB74D",
-          foreground: "#1E3563",
+          DEFAULT: "rgb(255, 183, 77)",
+          foreground: "rgb(30, 53, 99)",
         },
         muted: {
-          DEFAULT: "#F8FAFD",
-          foreground: "#64748B",
+          DEFAULT: "rgb(248, 250, 253)",
+          foreground: "rgb(100, 116, 139)",
         },
       },
-      backgroundImage: {
-        "gradient-primary": "linear-gradient(to bottom, #2B4B8C, #1E3563)",
-        "gradient-secondary": "linear-gradient(to bottom, #E8EDF7, #FFFFFF)",
-      },
+
       fontFamily: {
         sans: ["var(--font-outfit)"],
         serif: ["var(--font-playfair)"],

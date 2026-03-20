@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .bg-gradient-primary {
+    background: linear-gradient(to bottom, #2B4B8C, #1E3563);
+  }
+  .bg-gradient-secondary {
+    background: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -24,19 +33,18 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --gradient-primary: linear-gradient(to bottom, #2B4B8C, #1E3563);
+    --gradient-secondary: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
   }
 
   body {
-    @apply bg-gradient-secondary min-h-screen text-base;
-  }
-
-  /* Add this new class */
-  .text-justify-content {
-    @apply text-justify;
+    background: var(--gradient-secondary);
+    @apply min-h-screen text-base;
   }
 
   .section-primary {
-    @apply bg-gradient-primary text-white;
+    background: var(--gradient-primary);
+    @apply text-white;
   }
 
   .section-secondary {
@@ -54,12 +62,14 @@
 
 /* Hero section specific styles */
 .hero-section {
-  @apply relative bg-gradient-primary text-white overflow-hidden;
+  @apply relative text-white overflow-hidden;
+  background: var(--gradient-primary);
 }
 
 .hero-section::before {
   content: "";
-  @apply absolute inset-0 bg-primary-dark/20;
+  @apply absolute inset-0;
+  background-color: rgba(30, 53, 99, 0.2);
 }
 
 /* Card styles */
@@ -69,16 +79,23 @@
 
 /* Button styles */
 .btn-primary {
-  @apply bg-primary text-white hover:bg-primary-light transition-colors;
+  @apply bg-primary text-white transition-colors;
+}
+.btn-primary:hover {
+  background-color: rgb(58, 101, 189);
 }
 
 .btn-secondary {
-  @apply bg-secondary text-primary hover:bg-white transition-colors;
+  @apply bg-secondary text-primary transition-colors;
+}
+.btn-secondary:hover {
+  @apply bg-white;
 }
 
 /* Text gradient */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(to right, rgb(43, 75, 140), rgb(58, 101, 189));
 }
 
 /* Responsive typography */

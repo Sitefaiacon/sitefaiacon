@@ -1,7 +1,8 @@
-import SiteLayout from "../../components/site-layout"
+import { SiteLayout } from "../../components/site-layout"
 import HouseConstructionPage from "../../components/house-construction-page"
 
-export default function HouseConstruction({ params: { lang } }: { params: { lang: string } }) {
+export default async function HouseConstruction({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
   return (
     <SiteLayout>
       <HouseConstructionPage lang={lang} />
