@@ -5,7 +5,7 @@ import { Toaster } from "sonner"
 import { CookieConsent } from "./components/cookie-consent"
 import Script from "next/script"
 import { WebVitals } from "./components/web-vitals"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import GoogleAnalytics from "./components/google-analytics"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
@@ -22,6 +22,12 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   display: "swap",
 })
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://faiacon.gr"),
@@ -69,11 +75,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
   },
   verification: {
     google: "your-google-site-verification",
