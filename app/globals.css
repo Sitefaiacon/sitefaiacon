@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .bg-gradient-primary {
+    background: linear-gradient(to bottom, #2B4B8C, #1E3563);
+  }
+  .bg-gradient-secondary {
+    background: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
