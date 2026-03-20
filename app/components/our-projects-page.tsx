@@ -364,14 +364,19 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                 <Dialog>
                   <DialogTrigger asChild>
                     <div onClick={() => setSelectedProject(project)}>
-                      <ProjectCard title="" location="" image={project.image} priority={index < 6} hideText={true} />
+                      <ProjectCard
+                        title={isEnglish ? project.titleEn : project.title}
+                        location={isEnglish ? project.locationEn : project.location}
+                        image={project.image}
+                        priority={index < 6}
+                      />
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
-                    <div className="relative aspect-video w-full overflow-hidden">
+                  <DialogContent className="sm:max-w-[800px]">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                       <Image
                         src={project.image || "/placeholder.svg"}
-                        alt=""
+                        alt={isEnglish ? project.titleEn : project.title}
                         fill
                         className="object-cover"
                         onError={(e) => {
@@ -380,6 +385,9 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                         }}
                       />
                     </div>
+                    <h2 className="text-2xl font-bold mt-4">{isEnglish ? project.titleEn : project.title}</h2>
+                    <p className="text-gray-600">{isEnglish ? project.locationEn : project.location}</p>
+                    <p className="mt-2">{isEnglish ? project.descriptionEn : project.description}</p>
                   </DialogContent>
                 </Dialog>
               </motion.div>
@@ -417,3 +425,4 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
     </>
   )
 }
+

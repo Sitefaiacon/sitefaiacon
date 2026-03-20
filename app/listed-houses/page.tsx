@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import SiteLayout from "../components/site-layout"
+import { SiteLayout } from "../components/site-layout"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, Building, Shield, Zap, PaintbrushIcon as PaintBrush } from "lucide-react"
 import Link from "next/link"
@@ -284,3 +284,4 @@ export default function ListedHouses() {
     </SiteLayout>
   )
 }
+

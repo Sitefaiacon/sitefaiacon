@@ -1,4 +1,4 @@
-import SiteLayout from "../../components/site-layout"
+import { SiteLayout } from "../../components/site-layout"
 import ListedHousesPage from "../../components/listed-houses-page"
 
 export default function ListedHouses({ params: { lang } }: { params: { lang: string } }) {
@@ -8,3 +8,4 @@ export default function ListedHouses({ params: { lang } }: { params: { lang: str
     </SiteLayout>
   )
 }
+

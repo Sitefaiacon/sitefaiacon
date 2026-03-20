@@ -8,3 +8,4 @@ export default function Portfolio({ params: { lang } }: { params: { lang: string
     </SiteLayout>
   )
 }
+

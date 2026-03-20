@@ -1,4 +1,4 @@
-import SiteLayout from "../../components/site-layout"
+import { SiteLayout } from "../../components/site-layout"
 import HouseConstructionPage from "../../components/house-construction-page"
 
 export default function HouseConstruction({ params: { lang } }: { params: { lang: string } }) {
@@ -8,3 +8,4 @@ export default function HouseConstruction({ params: { lang } }: { params: { lang
     </SiteLayout>
   )
 }
+

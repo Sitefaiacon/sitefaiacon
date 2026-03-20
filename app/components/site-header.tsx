@@ -39,25 +39,25 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#1e3771] ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gradient-primary ${
         isScrolled ? "shadow-lg" : ""
       }`}
     >
       <div className="max-w-[1800px] mx-auto px-4">
-        <div className="flex items-center h-16">
+        <div className="flex items-center h-16 sm:h-20 md:h-24">
           <Link
             href={`/${lang}`}
-            className="font-serif text-2xl font-bold text-white tracking-tight hover:text-secondary transition-colors mr-8"
+            className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight hover:text-secondary transition-colors pl-2 sm:pl-4 md:pl-12"
           >
             ΦαιάCon
           </Link>
 
-          <nav className="hidden lg:flex items-center justify-center flex-1">
+          <nav className="hidden lg:flex ml-auto space-x-4 xl:space-x-8 pr-2 sm:pr-4 md:pr-12">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={`/${lang}${item.href}`}
-                className={`px-4 py-2 text-sm font-normal text-white hover:text-secondary transition-colors ${
+                className={`text-sm xl:text-base font-medium text-white hover:text-secondary transition-colors tracking-wide whitespace-nowrap ${
                   pathname === `/${lang}${item.href}` ? "text-secondary" : ""
                 }`}
               >
@@ -67,24 +67,24 @@ export function SiteHeader() {
           </nav>
 
           {/* Add Language Switcher */}
-          <div className="ml-auto">
+          <div className="ml-4">
             <LanguageSwitcher />
           </div>
 
-          <div className="lg:hidden ml-auto">
+          <div className="lg:hidden ml-auto pr-2 sm:pr-4">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-white" aria-label="Άνοιγμα μενού">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-[#1e3771] w-[300px]">
+              <SheetContent side="right" className="bg-gradient-primary w-[300px]">
                 <nav className="flex flex-col space-y-4 mt-8">
                   {navItems.map((item) => (
                     <Link
                       key={item.href}
                       href={`/${lang}${item.href}`}
-                      className={`text-lg font-medium text-white hover:text-secondary transition-colors ${
+                      className={`text-lg font-medium text-white hover:text-secondary transition-colors tracking-wide ${
                         pathname === `/${lang}${item.href}` ? "text-secondary" : ""
                       }`}
                     >
@@ -100,3 +100,4 @@ export function SiteHeader() {
     </header>
   )
 }
+

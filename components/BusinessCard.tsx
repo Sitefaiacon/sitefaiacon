@@ -33,3 +33,4 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ name, title, phone, 
     </Card>
   )
 }
+

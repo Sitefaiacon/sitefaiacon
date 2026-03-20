@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     google: "your-google-site-verification",
   },
   category: "construction",
-    generator: 'v0.dev'
+    generator: 'v0.app'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -135,3 +135,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+

@@ -1,4 +1,4 @@
-import SiteLayout from "../components/site-layout"
+import { SiteLayout } from "../components/site-layout"
 import HomePage from "../components/home-page"
 
 export default function Home({ params: { lang } }: { params: { lang: string } }) {
@@ -8,3 +8,4 @@ export default function Home({ params: { lang } }: { params: { lang: string } })
     </SiteLayout>
   )
 }
+

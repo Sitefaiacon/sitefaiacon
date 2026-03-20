@@ -8,7 +8,6 @@ import { WebVitals } from "../components/web-vitals"
 import GoogleAnalytics from "../components/google-analytics"
 import { LanguageProvider } from "../contexts/language-context"
 import "../globals.css"
-import { Suspense } from "react"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -43,7 +42,7 @@ export default function RootLayout({
     <html lang={lang} className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
       <body className="min-h-screen bg-background antialiased font-sans">
         <LanguageProvider initialLang={lang}>
-          <Suspense>{children}</Suspense>
+          {children}
           <WebVitals />
           <CookieConsent />
           <Toaster position="top-center" />
@@ -54,3 +53,4 @@ export default function RootLayout({
     </html>
   )
 }
+

@@ -8,3 +8,4 @@ export default function OurProjects({ params: { lang } }: { params: { lang: stri
     </SiteLayout>
   )
 }
+
