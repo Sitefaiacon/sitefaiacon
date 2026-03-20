@@ -351,7 +351,7 @@ export default function HomePage() {
                 <Link href="/portfolio">
                   <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
                     <Image
-                      src={project.image || "/placeholder.svg"}
+                      src={project.image || "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/final_cleaned_logo%20test.JPG-FSlTAEvg6sCAKPe8rqG14XlINZsV8d.jpeg"}
                       alt={project.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

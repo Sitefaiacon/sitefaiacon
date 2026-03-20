@@ -2,8 +2,13 @@ import "./globals.css"
 import { Outfit, Playfair_Display } from "next/font/google"
 import type React from "react"
 import { Toaster } from "sonner"
-import { CookieConsent } from "./components/cookie-consent"
 import Script from "next/script"
+import dynamic from "next/dynamic"
+
+// Lazy load non-critical components
+const CookieConsent = dynamic(() => import("./components/cookie-consent").then(mod => mod.CookieConsent), {
+  ssr: false
+})
 import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import GoogleAnalytics from "./components/google-analytics"
@@ -89,6 +94,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
       <head>
+        {/* Preconnect to external resources for faster loading */}
+        <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link
           rel="icon"
           href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg"

@@ -370,13 +370,13 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                   <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
                     <div className="relative aspect-video w-full overflow-hidden">
                       <Image
-                        src={project.image || "/placeholder.svg"}
+                        src={project.image}
                         alt=""
                         fill
                         className="object-cover"
                         onError={(e) => {
                           const img = e.target as HTMLImageElement
-                          img.src = "/placeholder.svg"
+                          img.style.display = "none"
                         }}
                       />
                     </div>
@@ -405,7 +405,7 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
               <p className="text-lg text-white/80 mb-8">
                 {isEnglish
                   ? "Contact us today to discuss how we can bring your vision to life."
-                  : "Επικοινωνήστε μαζί μας σήμερα για να συζητήσουμε πώς μπορούμε να ζωντανέψουμε το όραμά σας."}
+                  : "Επικοινωνήστε μαζί μας ��ήμερα για να συζητήσουμε πώς μπορούμε να ζωντανέψουμε το όραμά σας."}
               </p>
               <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
                 <a href={`/${lang}/appointment`}>{isEnglish ? "Book a Free Appointment" : "Κλείστε Δωρεάν Ραντεβού"}</a>
