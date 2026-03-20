@@ -3,12 +3,7 @@ import { Outfit, Playfair_Display } from "next/font/google"
 import type React from "react"
 import { Toaster } from "sonner"
 import Script from "next/script"
-import dynamic from "next/dynamic"
-
-// Lazy load non-critical components
-const CookieConsent = dynamic(() => import("./components/cookie-consent").then(mod => mod.CookieConsent), {
-  ssr: false
-})
+import { CookieConsent } from "./components/cookie-consent"
 import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import GoogleAnalytics from "./components/google-analytics"
