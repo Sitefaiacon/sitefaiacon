@@ -83,6 +83,7 @@ export const metadata: Metadata = {
     generator: 'v0.dev'
 }
 
+// Force cache invalidation - v2
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
