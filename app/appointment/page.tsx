@@ -12,17 +12,21 @@ import { SectionBackground } from "../components/section-background"
 import { sendEmail } from "../actions/send-email"
 import { toast } from "sonner"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { useLanguageSafe } from "@/contexts/language-context"
+
+// Use Greek as default language for this page
+const usePageLanguage = () => {
+  return { isEnglish: false }
+}
 
 export default function Appointment() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
   const [isSuccess, setIsSuccess] = useState(false)
-  const { isEnglish } = useLanguageSafe()
+  const { isEnglish } = usePageLanguage()
 
   const handleSubmit = useCallback(
     async (formData: FormData) => {
-      if (isSubmitting) return // Prevent multiple submissions
+      if (isSubmitting) return
 
       setIsSubmitting(true)
       setFormError(null)
@@ -33,10 +37,8 @@ export default function Appointment() {
         if (result.success) {
           setIsSuccess(true)
           toast.success(isEnglish ? result.messageEn : result.message)
-          // Reset the form
           const form = document.querySelector("form") as HTMLFormElement
           form?.reset()
-          // Scroll to success message
           window.scrollTo({ top: 0, behavior: "smooth" })
         } else {
           setFormError(isEnglish ? result.messageEn : result.message)
@@ -57,7 +59,6 @@ export default function Appointment() {
 
   return (
     <SiteLayout>
-      {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <ArchitecturalBackground />
         <div className="relative z-10 container px-4">
@@ -79,12 +80,10 @@ export default function Appointment() {
         </div>
       </section>
 
-      {/* Main Content Section */}
       <section className="relative py-24">
         <SectionBackground />
         <div className="container relative z-10 px-4">
           <div className="max-w-5xl mx-auto">
-            {/* Success Message */}
             {isSuccess && (
               <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
                 <Alert className="bg-green-50 border-green-200">
@@ -102,7 +101,6 @@ export default function Appointment() {
             )}
 
             <div className="grid md:grid-cols-2 gap-12">
-              {/* Form Section */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -113,7 +111,6 @@ export default function Appointment() {
                   {isEnglish ? "Contact Form" : "Φόρμα Επικοινωνίας"}
                 </h2>
 
-                {/* Error Message */}
                 {formError && (
                   <Alert className="mb-6 bg-red-50 border-red-200">
                     <AlertTitle className="text-red-800">{isEnglish ? "Error" : "Σφάλμα"}</AlertTitle>
@@ -193,7 +190,6 @@ export default function Appointment() {
                 </form>
               </motion.div>
 
-              {/* Contact Information */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
