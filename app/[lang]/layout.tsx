@@ -1,6 +1,6 @@
 import type React from "react"
 import { Outfit, Playfair_Display } from "next/font/google"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "sonner"
 import { CookieConsent } from "../components/cookie-consent"
@@ -26,8 +26,20 @@ export async function generateStaticParams() {
   return [{ lang: "el" }, { lang: "en" }]
 }
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+}
+
 export const metadata: Metadata = {
-  // ... (υπόλοιπα metadata όπως πριν)
+  metadataBase: new URL("https://faiacon.gr"),
+  title: {
+    default: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Κατασκευές & Ανακαινίσεις",
+    template: "%s | ΦαιάCon Κέρκυρα",
+  },
+  description:
+    "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Εξειδίκευση σε κατασκευές, ανακαινίσεις, διατηρητέα κτίρια και πισίνες.",
 }
 
 export default async function RootLayout({
