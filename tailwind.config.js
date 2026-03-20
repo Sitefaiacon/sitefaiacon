@@ -41,10 +41,7 @@ module.exports = {
           foreground: "#64748B",
         },
       },
-      backgroundImage: {
-        "gradient-primary": "linear-gradient(to bottom, #2B4B8C, #1E3563)",
-        "gradient-secondary": "linear-gradient(to bottom, #E8EDF7, #FFFFFF)",
-      },
+
       fontFamily: {
         sans: ["var(--font-outfit)"],
         serif: ["var(--font-playfair)"],
