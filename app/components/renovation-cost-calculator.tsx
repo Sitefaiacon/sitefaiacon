@@ -253,18 +253,20 @@ export function RenovationCostCalculator() {
     setWindowsCost(cost.toFixed(2))
   }
 
-  const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
-    <div>
-      <Label htmlFor={label}>{translate(label)}</Label>
-      <Input
-        id={label}
-        type="number"
-        value={value}
-        onChange={(e) => onChange(Number.parseInt(e.target.value) || 0)}
-        min="0"
-      />
-    </div>
-  )
+  const renderInput = (label: string, value: number, onChange: (value: number) => void) => {
+    return (
+      <div>
+        <Label htmlFor={label}>{translate(label)}</Label>
+        <Input
+          id={label}
+          type="number"
+          value={value}
+          onChange={(e) => onChange(Number.parseInt(e.target.value) || 0)}
+          min="0"
+        />
+      </div>
+    )
+  }
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
