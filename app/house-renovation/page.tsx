@@ -2,9 +2,7 @@ import { redirect } from "next/navigation"
 
 export default function HouseRenovation() {
   redirect("/el/house-renovation")
-
-  return (
-    <SiteLayout>
+}
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <ArchitecturalBackground />

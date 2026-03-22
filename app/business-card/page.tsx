@@ -1,11 +1,8 @@
-"use client"
-
-import { BusinessCard } from "@/components/BusinessCard"
+import { redirect } from "next/navigation"
 
 export default function BusinessCardPage() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <BusinessCard
+  redirect("/el")
+}
         name="Φαίακας Κατασκευαστική"
         title="Τεχνική Κατασκευαστική Εταιρεία"
         phone="+30 6987797679"

@@ -1,6 +1,8 @@
-import { OptimizedImage } from "../components/optimized-image"
+import { redirect } from "next/navigation"
 
-async function getProjects() {
+export default function Projects() {
+  redirect("/el/our-projects")
+}
   // Since this is a server component, we can directly access the file system or database
   // For this example, we'll return mock data
   return [
