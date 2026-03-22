@@ -1,9 +1,7 @@
-// Cache buster v4
 import SiteLayout from "../../components/site-layout"
 import AppointmentPage from "../../components/appointment-page"
 
-export default async function Appointment({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
+export default function Appointment({ params: { lang } }: { params: { lang: string } }) {
   return (
     <SiteLayout>
       <AppointmentPage lang={lang} />

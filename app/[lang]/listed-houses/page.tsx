@@ -1,9 +1,7 @@
-// Cache buster v4
 import SiteLayout from "../../components/site-layout"
 import ListedHousesPage from "../../components/listed-houses-page"
 
-export default async function ListedHouses({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
+export default function ListedHouses({ params: { lang } }: { params: { lang: string } }) {
   return (
     <SiteLayout>
       <ListedHousesPage lang={lang} />
