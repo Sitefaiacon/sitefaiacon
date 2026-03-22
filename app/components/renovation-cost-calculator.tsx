@@ -9,8 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 export default function RenovationCostCalculator() {
   const [isEnglish, setIsEnglish] = useState(true)
   const [activeTab, setActiveTab] = useState('renovation')
-
-  // Renovation inputs
+  
+  // Renovation
   const [area, setArea] = useState(100)
   const [bathrooms, setBathrooms] = useState(1)
   const [kitchens, setKitchens] = useState(1)
@@ -20,23 +20,23 @@ export default function RenovationCostCalculator() {
   const [hasPool, setHasPool] = useState(false)
   const [poolType, setPoolType] = useState('standard')
   const [poolSize, setPoolSize] = useState(30)
-
-  // Windows inputs
+  
+  // Windows
   const [windows, setWindows] = useState(5)
   const [balconyDoors, setBalconyDoors] = useState(2)
   const [interiorDoors, setInteriorDoors] = useState(8)
   const [mainEntrance, setMainEntrance] = useState(1)
   const [material, setMaterial] = useState('aluminum')
   const [windowsQuality, setWindowsQuality] = useState('midRange')
-
-  // Form inputs
+  
+  // Form
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
-  const translate = (text: string) => {
+  const translate = (text: string): string => {
     const translations: Record<string, string> = {
       'Renovation Cost Calculator': 'Αριθμομηχανή Κόστους Ανακαίνισης',
       'Renovation': 'Ανακαίνιση',
@@ -62,16 +62,14 @@ export default function RenovationCostCalculator() {
       'PVC': 'PVC',
       'Wood': 'Ξύλο',
       'Request Your Free Quote': 'Ζητήστε Δωρεάν Προσφορά',
-      'Fill in your details': 'Συμπληρώστε τα στοιχεία σας',
       'Name': 'Όνομα',
       'Email': 'Email',
       'Phone (Optional)': 'Τηλέφωνο (Προαιρετικό)',
       'Request Quote': 'Ζητήστε Προσφορά',
       'Sending...': 'Αποστολή...',
       'Request received!': 'Το αίτημα παραλήφθηκε!',
-      'We will contact you shortly': 'Θα επικοινωνήσουμε μαζί σας σύντομα',
     }
-    return isEnglish ? text : translations[text] || text
+    return isEnglish ? text : (translations[text] || text)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,25 +88,8 @@ export default function RenovationCostCalculator() {
           name,
           email,
           phone,
-          renovationDetails: {
-            area,
-            bathrooms,
-            kitchens,
-            rooms,
-            buildingAge,
-            renovationQuality,
-            hasPool,
-            poolType,
-            poolSize,
-          },
-          windowsDetails: {
-            windows,
-            balconyDoors,
-            interiorDoors,
-            mainEntrance,
-            material,
-            windowsQuality,
-          },
+          renovationDetails: { area, bathrooms, kitchens, rooms, buildingAge, renovationQuality, hasPool, poolType, poolSize },
+          windowsDetails: { windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality },
         }),
       })
 
@@ -123,7 +104,6 @@ export default function RenovationCostCalculator() {
       }
     } catch (error) {
       console.error('Error:', error)
-      alert(isEnglish ? 'Error sending request' : 'Σφάλμα κατά την αποστολή')
     } finally {
       setIsSubmitting(false)
     }
@@ -152,96 +132,32 @@ export default function RenovationCostCalculator() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label>{translate('Area (m²)')}</Label>
-                <Input
-                  type="number"
-                  value={area}
-                  onChange={(e) => setArea(Number(e.target.value))}
-                  min="10"
-                />
+                <Input type="number" value={area} onChange={(e) => setArea(Number(e.target.value))} min="10" />
               </div>
               <div>
                 <Label>{translate('Bathrooms')}</Label>
-                <Input
-                  type="number"
-                  value={bathrooms}
-                  onChange={(e) => setBathrooms(Number(e.target.value))}
-                  min="0"
-                />
+                <Input type="number" value={bathrooms} onChange={(e) => setBathrooms(Number(e.target.value))} min="0" />
               </div>
               <div>
                 <Label>{translate('Kitchens')}</Label>
-                <Input
-                  type="number"
-                  value={kitchens}
-                  onChange={(e) => setKitchens(Number(e.target.value))}
-                  min="0"
-                />
+                <Input type="number" value={kitchens} onChange={(e) => setKitchens(Number(e.target.value))} min="0" />
               </div>
               <div>
                 <Label>{translate('Rooms')}</Label>
-                <Input
-                  type="number"
-                  value={rooms}
-                  onChange={(e) => setRooms(Number(e.target.value))}
-                  min="0"
-                />
+                <Input type="number" value={rooms} onChange={(e) => setRooms(Number(e.target.value))} min="0" />
               </div>
               <div>
                 <Label>{translate('Building Age (years)')}</Label>
-                <Input
-                  type="number"
-                  value={buildingAge}
-                  onChange={(e) => setBuildingAge(Number(e.target.value))}
-                  min="0"
-                />
+                <Input type="number" value={buildingAge} onChange={(e) => setBuildingAge(Number(e.target.value))} min="0" />
               </div>
               <div>
                 <Label>{translate('Quality')}</Label>
-                <select
-                  value={renovationQuality}
-                  onChange={(e) => setRenovationQuality(e.target.value)}
-                  className="w-full px-3 py-2 border rounded"
-                >
+                <select value={renovationQuality} onChange={(e) => setRenovationQuality(e.target.value)} className="w-full px-3 py-2 border rounded">
                   <option value="basic">{translate('Basic')}</option>
                   <option value="midRange">{translate('Mid-Range')}</option>
                   <option value="premium">{translate('Premium')}</option>
                 </select>
               </div>
-            </div>
-
-            <div className="border-t pt-4">
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={hasPool}
-                  onChange={(e) => setHasPool(e.target.checked)}
-                />
-                <span>{translate('Pool')}</span>
-              </label>
-              {hasPool && (
-                <div className="grid grid-cols-2 gap-4 mt-4">
-                  <div>
-                    <Label>{translate('Pool Type')}</Label>
-                    <select
-                      value={poolType}
-                      onChange={(e) => setPoolType(e.target.value)}
-                      className="w-full px-3 py-2 border rounded"
-                    >
-                      <option value="standard">Standard</option>
-                      <option value="premium">Premium</option>
-                    </select>
-                  </div>
-                  <div>
-                    <Label>{translate('Pool Size (m²)')}</Label>
-                    <Input
-                      type="number"
-                      value={poolSize}
-                      onChange={(e) => setPoolSize(Number(e.target.value))}
-                      min="5"
-                    />
-                  </div>
-                </div>
-              )}
             </div>
           </TabsContent>
 
@@ -249,47 +165,23 @@ export default function RenovationCostCalculator() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label>{translate('Windows')}</Label>
-                <Input
-                  type="number"
-                  value={windows}
-                  onChange={(e) => setWindows(Number(e.target.value))}
-                  min="0"
-                />
+                <Input type="number" value={windows} onChange={(e) => setWindows(Number(e.target.value))} min="0" />
               </div>
               <div>
                 <Label>{translate('Balcony Doors')}</Label>
-                <Input
-                  type="number"
-                  value={balconyDoors}
-                  onChange={(e) => setBalconyDoors(Number(e.target.value))}
-                  min="0"
-                />
+                <Input type="number" value={balconyDoors} onChange={(e) => setBalconyDoors(Number(e.target.value))} min="0" />
               </div>
               <div>
                 <Label>{translate('Interior Doors')}</Label>
-                <Input
-                  type="number"
-                  value={interiorDoors}
-                  onChange={(e) => setInteriorDoors(Number(e.target.value))}
-                  min="0"
-                />
+                <Input type="number" value={interiorDoors} onChange={(e) => setInteriorDoors(Number(e.target.value))} min="0" />
               </div>
               <div>
                 <Label>{translate('Main Entrance')}</Label>
-                <Input
-                  type="number"
-                  value={mainEntrance}
-                  onChange={(e) => setMainEntrance(Number(e.target.value))}
-                  min="0"
-                />
+                <Input type="number" value={mainEntrance} onChange={(e) => setMainEntrance(Number(e.target.value))} min="0" />
               </div>
               <div>
                 <Label>{translate('Material')}</Label>
-                <select
-                  value={material}
-                  onChange={(e) => setMaterial(e.target.value)}
-                  className="w-full px-3 py-2 border rounded"
-                >
+                <select value={material} onChange={(e) => setMaterial(e.target.value)} className="w-full px-3 py-2 border rounded">
                   <option value="aluminum">{translate('Aluminum')}</option>
                   <option value="pvc">{translate('PVC')}</option>
                   <option value="wood">{translate('Wood')}</option>
@@ -297,11 +189,7 @@ export default function RenovationCostCalculator() {
               </div>
               <div>
                 <Label>{translate('Quality')}</Label>
-                <select
-                  value={windowsQuality}
-                  onChange={(e) => setWindowsQuality(e.target.value)}
-                  className="w-full px-3 py-2 border rounded"
-                >
+                <select value={windowsQuality} onChange={(e) => setWindowsQuality(e.target.value)} className="w-full px-3 py-2 border rounded">
                   <option value="basic">{translate('Basic')}</option>
                   <option value="midRange">{translate('Mid-Range')}</option>
                   <option value="premium">{translate('Premium')}</option>
@@ -311,47 +199,27 @@ export default function RenovationCostCalculator() {
           </TabsContent>
         </Tabs>
 
-        <div className="mt-8 pt-6 border-t">
+        <div className="mt-6 pt-6 border-t">
           <h3 className="text-lg font-semibold mb-4">{translate('Request Your Free Quote')}</h3>
           {submitted ? (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
               <p className="text-green-800 font-medium">{translate('Request received!')}</p>
-              <p className="text-green-700 text-sm">{translate('We will contact you shortly')}</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label>{translate('Name')}</Label>
-                <Input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder={isEnglish ? 'Your name' : 'Το όνομά σας'}
-                />
+                <Input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Όνομα" />
               </div>
               <div>
                 <Label>{translate('Email')}</Label>
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                />
+                <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" />
               </div>
               <div>
                 <Label>{translate('Phone (Optional)')}</Label>
-                <Input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="+30 2661..."
-                />
+                <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+30 2661..." />
               </div>
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-primary hover:bg-primary-dark text-white"
-              >
+              <Button type="submit" disabled={isSubmitting} className="w-full bg-primary hover:bg-primary-dark text-white">
                 {isSubmitting ? translate('Sending...') : translate('Request Quote')}
               </Button>
             </form>
