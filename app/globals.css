@@ -27,7 +27,8 @@
   }
 
   body {
-    @apply bg-gradient-secondary min-h-screen text-base;
+    background-image: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
+    @apply min-h-screen text-base;
   }
 
   /* Add this new class */
@@ -36,7 +37,8 @@
   }
 
   .section-primary {
-    @apply bg-gradient-primary text-white;
+    background-image: linear-gradient(to bottom, #2B4B8C, #1E3563);
+    @apply text-white;
   }
 
   .section-secondary {
@@ -54,7 +56,8 @@
 
 /* Hero section specific styles */
 .hero-section {
-  @apply relative bg-gradient-primary text-white overflow-hidden;
+  background-image: linear-gradient(to bottom, #2B4B8C, #1E3563);
+  @apply relative text-white overflow-hidden;
 }
 
 .hero-section::before {
