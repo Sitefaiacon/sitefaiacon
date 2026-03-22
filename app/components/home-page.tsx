@@ -108,19 +108,20 @@ export default function HomePage({ lang }: { lang: string }) {
   return (
     <>
       {/* ─── HERO ─────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-end justify-start overflow-hidden bg-gradient-hero">
-        {/* Background image overlay */}
+      <section className="relative min-h-screen flex items-end justify-start overflow-hidden bg-primary-dark">
+        {/* Background logo with cranes - watermark style */}
         <div className="absolute inset-0">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CF%84%CE%B5%CE%BB%CE%B5%CE%B9%CF%89%CE%BC%CE%AD%CE%BD%CE%B7%20%CE%B2%CE%AF%CE%BB%CE%B1%20%CF%83%CE%B9%CE%BD%CE%B9%CE%AD%CF%82.jpg-TBv1Q93tF49zLCpwPjQIhP4OS6eJLq.jpeg"
-            alt="ΦαιάCon - Κατασκευή στην Κέρκυρα"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/final_cleaned_logo%20test.JPG-FSlTAEvg6sCAKPe8rqG14XlINZsV8d.jpeg"
+            alt="ΦαιάCon Logo Background"
             fill
-            className="object-cover opacity-35"
+            className="object-cover opacity-15"
             priority
             sizes="100vw"
           />
-          {/* Dark vignette bottom-to-top */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(221_52%_14%)] via-[hsl(221_52%_18%)/70%] to-transparent" />
+          {/* Gradient overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/95 via-primary-dark/85 to-primary/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-transparent to-primary-dark/50" />
         </div>
 
         {/* Hero content */}
