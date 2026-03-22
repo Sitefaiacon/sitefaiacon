@@ -351,7 +351,7 @@ export default function RenovationCostCalculator() {
                     onChange={(e) => setWindowsQuality(e.target.value)}
                     className="w-full px-3 py-2 border rounded-md"
                   >
-                    <option value="standard">{isEnglish ? 'Standard' : 'Τυπική'}</option>
+                    <option value="standard">{isEnglish ? 'Standard' : '��υπική'}</option>
                     <option value="premium">{isEnglish ? 'Premium' : 'Πρίμιουμ'}</option>
                   </select>
                 </div>
@@ -441,3 +441,5 @@ export default function RenovationCostCalculator() {
     </div>
   )
 }
+
+export default RenovationCostCalculator
