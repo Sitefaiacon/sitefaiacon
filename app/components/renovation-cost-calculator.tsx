@@ -440,6 +440,3 @@ export default function RenovationCostCalculator() {
       </div>
     </div>
   )
-}
-
-export default RenovationCostCalculator
