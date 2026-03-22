@@ -295,11 +295,6 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
 
   return (
     <>
-      <Head>
-        {projects.slice(0, 6).map((project) => (
-          <link key={project.id} rel="preload" as="image" href={project.image} type="image/jpeg" />
-        ))}
-      </Head>
       <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
         <ArchitecturalBackground />
         <div className="relative z-10 container px-4">
