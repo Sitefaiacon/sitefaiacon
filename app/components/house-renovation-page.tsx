@@ -16,7 +16,7 @@ import Link from "next/link"
 import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
 import { useLanguage } from "../contexts/language-context"
-import { RenovationCostCalculator } from "./renovation-cost-calculator"
+import RenovationCostCalculator from "./renovation-cost-calculator"
 
 const renovationServices = [
   { icon: HardHat, label: "Επισκευή Στέγης", labelEn: "Roof Repair", href: "/house-renovation/roof-repair" },
@@ -214,7 +214,7 @@ export default function HouseRenovationPage({ lang }: { lang: string }) {
                 title: isEnglish ? "Roof Repair" : "Επισκευή Στέγης",
                 description: isEnglish
                   ? "The roof is one of the most important elements of a building, as it protects the interior from weather conditions and wear. We undertake roof repair and maintenance, using top-quality waterproofing and insulation materials, ensuring long-term durability and safety."
-                  : "Η στέγη είναι από τα πιο σημαντικά στοιχεία ενός κτιρίου, καθώς προστατεύει το εσωτερικό από καιρικές συνθήκες και φθορές. Αναλαμβάνουμε την επισκευή και συντήρηση στεγών, χρησιμοποιώντας κορυφαία υλικά στεγανοποίησης και μόνωσης, εξασφαλίζοντας μακροχρόνια ανθεκτικότητα και ασφάλεια.",
+                  : "Η στέγη είναι από τα πιο σημαντικά στοιχεία ενός κτιρίου, καθώς προστατεύει το εσωτερικό από καιρικές συνθήκες και φθορές. Αναλαμβάνουμε την επισκευή και συντήρηση στεγών, χρησιμοποιώντας κορυφαία υλικά στεγανοποίησης και μόνωσης, εξασφαλίζοντας μ��κροχρόνια ανθεκτικότητα και ασφάλεια.",
               },
               {
                 icon: Thermometer,
@@ -228,7 +228,7 @@ export default function HouseRenovationPage({ lang }: { lang: string }) {
                 title: isEnglish ? "Stone Building" : "Χτίσιμο Πέτρας",
                 description: isEnglish
                   ? "Natural stone cladding adds aesthetic value, durability, and unique character to your building. We undertake professional stone building on facades, walls, and other surfaces, using traditional and modern installation techniques."
-                  : "Η επένδυση με φυσική πέτρα προσθέτει αισθητική αξία, ανθεκτικότητα και μοναδικό χαρακτήρα στο κτίριό σας. Αναλαμβάνουμε επαγγελματικό χτίσιμο πέτρας σε προσόψεις, μάντρες και άλλες επιφάνειες, χρησιμοποιώντας παραδοσιακές και σύγχρονες τεχνικές τοποθέτησης.",
+                  : "Η επένδυση με φυσική πέτρα προσθέτει αισθητική αξία, ανθεκτικότητα και μοναδικό χαρακτήρα στο κτίριό σας. Αναλαμβάνουμε επαγγελματικό χτίσιμο πέτρας σε προσόψ��ις, μάντρες και άλλες επιφάνειες, χρησιμοποιώντας παραδοσιακές και σύγχρονες τεχνικές τοποθέτησης.",
               },
               {
                 icon: Road,
