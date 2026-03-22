@@ -62,7 +62,9 @@
 
 .hero-section::before {
   content: "";
-  @apply absolute inset-0 bg-primary-dark/20;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(43, 75, 140, 0.2);
 }
 
 /* Card styles */
