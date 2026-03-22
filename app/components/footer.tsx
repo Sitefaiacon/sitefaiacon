@@ -60,14 +60,16 @@ export function Footer() {
       <Script id="google-translate-init" strategy="lazyOnload">
         {`
           function googleTranslateElementInit() {
-            new google.translate.TranslateElement(
-              {
-                pageLanguage: 'el',
-                includedLanguages: 'en,it,de,fr,ru',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-              },
-              'google_translate_element'
-            );
+            if (typeof google !== 'undefined' && google.translate) {
+              new google.translate.TranslateElement(
+                {
+                  pageLanguage: 'el',
+                  includedLanguages: 'en,it,de,fr,ru',
+                  layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                },
+                'google_translate_element'
+              );
+            }
           }
         `}
       </Script>
