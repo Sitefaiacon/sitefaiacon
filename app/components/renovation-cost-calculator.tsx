@@ -538,22 +538,22 @@ export function RenovationCostCalculator() {
                   placeholder={isEnglish ? "+30 2661..." : "+30 2661..."}
                 />
               </div>
-            <Button
-              onClick={handleSendEmail}
-              disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-primary-dark text-white"
-            >
-              {isSubmitting
-                ? isEnglish
-                  ? "Sending..."
-                  : "Αποστολή..."
-                : isEnglish
-                  ? "Request Free Quote"
-                  : "Ζητήστε Δωρεάν Προσφορά"}
-            </Button>
-          </div>
-        )}
+              <Button
+                onClick={handleSendEmail}
+                disabled={isSubmitting}
+                className="w-full bg-primary hover:bg-primary-dark text-white"
+              >
+                {isSubmitting
+                  ? isEnglish
+                    ? "Sending..."
+                    : "Αποστολή..."
+                  : isEnglish
+                    ? "Request Free Quote"
+                    : "Ζητήστε Δωρεάν Προσφορά"}
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
