@@ -74,6 +74,11 @@ export function RenovationCostCalculator() {
 
   //New State Variable
   const [totalCost, setTotalCost] = useState<string>("0.00")
+  const [email, setEmail] = useState<string>("")
+  const [name, setName] = useState<string>("")
+  const [phone, setPhone] = useState<string>("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [emailSubmitted, setEmailSubmitted] = useState(false)
 
   // Constants for Renovation Calculator
   const baseCostPerM2 = 415
@@ -117,6 +122,64 @@ export function RenovationCostCalculator() {
 
   const translate = (text: string) => {
     return isEnglish ? text : translations[text] || text
+  }
+
+  // Send email function
+  const handleSendEmail = async () => {
+    if (!email || !name) {
+      alert(isEnglish ? "Please enter your name and email" : "Παρακαλώ εισάγετε το όνομα και email σας")
+      return
+    }
+
+    setIsSubmitting(true)
+    try {
+      const response = await fetch("/api/send-estimate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          phone,
+          renovationCost,
+          windowsCost,
+          totalCost,
+          estimateDetails: {
+            area,
+            bathrooms,
+            kitchens,
+            rooms,
+            buildingAge,
+            poolType,
+            poolSize,
+            categories,
+            renovationQuality,
+            material,
+            windowsQuality,
+            windows,
+            balconyDoors,
+            interiorDoors,
+            mainEntrance,
+          },
+        }),
+      })
+
+      if (response.ok) {
+        setEmailSubmitted(true)
+        setTimeout(() => {
+          setEmailSubmitted(false)
+          setEmail("")
+          setName("")
+          setPhone("")
+        }, 3000)
+      }
+    } catch (error) {
+      console.error("Error sending email:", error)
+      alert(isEnglish ? "Error sending email" : "Σφάλμα κατά την αποστολή email")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   // Effects
@@ -436,6 +499,69 @@ export function RenovationCostCalculator() {
         <p className="font-bold text-lg text-center">{translate("Total Estimated Cost:")}</p>
         <p className="text-3xl text-primary text-center">€{totalCost}</p>
       </div>
+
+      {/* Email Section */}
+      {totalCost !== "0.00" && (
+        <div className="mt-6 pt-6 border-t border-gray-200">
+          <h3 className="text-lg font-semibold mb-4">
+            {isEnglish ? "Get Your Estimate" : "Λάβετε την Εκτίμησή σας"}
+          </h3>
+
+          {emailSubmitted ? (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+              <p className="text-green-800 font-medium">
+                {isEnglish ? "Estimate sent successfully!" : "Η εκτίμηση αποστάλθηκε με επιτυχία!"}
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <div>
+                <Label htmlFor="name">{isEnglish ? "Name" : "Όνομα"}</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={isEnglish ? "Your name" : "Το όνομά σας"}
+                />
+              </div>
+              <div>
+                <Label htmlFor="email">{isEnglish ? "Email" : "Email"}</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={isEnglish ? "your@email.com" : "το@email.σας"}
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone">{isEnglish ? "Phone (Optional)" : "Τηλέφωνο (Προαιρετικό)"}</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder={isEnglish ? "+30 2661..." : "+30 2661..."}
+                />
+              </div>
+              <Button
+                onClick={handleSendEmail}
+                disabled={isSubmitting}
+                className="w-full bg-primary hover:bg-primary-dark text-white"
+              >
+                {isSubmitting
+                  ? isEnglish
+                    ? "Sending..."
+                    : "Αποστολή..."
+                  : isEnglish
+                    ? "Send Estimate to Email"
+                    : "Αποστολή Εκτίμησης στο Email"}
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
