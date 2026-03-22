@@ -187,9 +187,6 @@ export function RenovationCostCalculator() {
     if (poolType === "liner" && renovationQuality === "basic") {
       setRenovationQuality("midRange")
     }
-  }, [poolType, renovationQuality])
-
-  useEffect(() => {
     if (poolType === "polyester" && renovationQuality !== "premium") {
       setRenovationQuality("premium")
     }
