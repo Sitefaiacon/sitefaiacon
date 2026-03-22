@@ -1,4 +1,7 @@
 {
+  "framework": "nextjs",
   "buildCommand": "next build",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "publicSource": "./public",
+  "installCommand": "pnpm install"
 }
