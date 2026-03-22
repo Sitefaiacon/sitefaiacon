@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
-// Build version: 3 - Force cache invalidation
+// Build version: 5 - Force complete cache invalidation
 const nextConfig = {
+  // Force clean build
+  cleanDistDir: true,
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
