@@ -442,12 +442,7 @@ export function RenovationCostCalculator() {
           <Button onClick={calculateRenovationCost} className="w-full mt-4">
             {isEnglish ? "Calculate" : "Υπολογισμός"}
           </Button>
-          {renovationCost && (
-            <div className="mt-4 text-center">
-              <p className="font-bold text-lg">{isEnglish ? "Estimated Cost:" : "Εκτιμώμενο Κόστος:"}</p>
-              <p className="text-2xl text-primary">{isEnglish ? `€${renovationCost}` : `${renovationCost}€`}</p>
-            </div>
-          )}
+
         </TabsContent>
 
         <TabsContent value="windows" className="space-y-4">
@@ -488,32 +483,30 @@ export function RenovationCostCalculator() {
             </Select>
           </div>
 
-          <div className="mt-4 text-center">
-            <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
-            <p className="text-2xl text-primary">€{windowsCost}</p>
-          </div>
+
         </TabsContent>
       </Tabs>
 
-      <div className="mt-6 pt-4 border-t border-gray-200">
-        <p className="font-bold text-lg text-center">{translate("Total Estimated Cost:")}</p>
-        <p className="text-3xl text-primary text-center">€{totalCost}</p>
-      </div>
+      {/* Quote Request Section */}
+      <div className="mt-6 pt-6 border-t border-gray-200">
+        <h3 className="text-lg font-semibold mb-2 text-center">
+          {isEnglish ? "Request Your Free Quote" : "Ζητήστε Δωρεάν Προσφορά"}
+        </h3>
+        <p className="text-sm text-gray-600 mb-4 text-center">
+          {isEnglish 
+            ? "Fill in your details and we will contact you with a personalized quote" 
+            : "Συμπληρώστε τα στοιχεία σας και θα επικοινωνήσουμε μαζί σας με εξατομικευμένη προσφορά"}
+        </p>
 
-      {/* Email Section */}
-      {totalCost !== "0.00" && (
-        <div className="mt-6 pt-6 border-t border-gray-200">
-          <h3 className="text-lg font-semibold mb-4">
-            {isEnglish ? "Get Your Estimate" : "Λάβετε την Εκτίμησή σας"}
-          </h3>
-
-          {emailSubmitted ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-              <p className="text-green-800 font-medium">
-                {isEnglish ? "Estimate sent successfully!" : "Η εκτίμηση αποστάλθηκε με επιτυχία!"}
-              </p>
-            </div>
-          ) : (
+        {emailSubmitted ? (
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+            <p className="text-green-800 font-medium">
+              {isEnglish 
+                ? "Request received! We will contact you shortly with your personalized quote." 
+                : "Το αίτημα παραλήφθηκε! Θα επικοινωνήσουμε μαζί σας σύντομα με την εξατομικευμένη προσφορά σας."}
+            </p>
+          </div>
+        ) : (
             <div className="space-y-3">
               <div>
                 <Label htmlFor="name">{isEnglish ? "Name" : "Όνομα"}</Label>
@@ -545,23 +538,21 @@ export function RenovationCostCalculator() {
                   placeholder={isEnglish ? "+30 2661..." : "+30 2661..."}
                 />
               </div>
-              <Button
-                onClick={handleSendEmail}
-                disabled={isSubmitting}
-                className="w-full bg-primary hover:bg-primary-dark text-white"
-              >
-                {isSubmitting
-                  ? isEnglish
-                    ? "Sending..."
-                    : "Αποστολή..."
-                  : isEnglish
-                    ? "Send Estimate to Email"
-                    : "Αποστολή Εκτίμησης στο Email"}
-              </Button>
-            </div>
-          )}
-        </div>
-      )}
+            <Button
+              onClick={handleSendEmail}
+              disabled={isSubmitting}
+              className="w-full bg-primary hover:bg-primary-dark text-white"
+            >
+              {isSubmitting
+                ? isEnglish
+                  ? "Sending..."
+                  : "Αποστολή..."
+                : isEnglish
+                  ? "Request Free Quote"
+                  : "Ζητήστε Δωρεάν Προσφορά"}
+            </Button>
+          </div>
+        )}
     </div>
   )
 }
