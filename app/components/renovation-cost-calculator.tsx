@@ -506,7 +506,7 @@ export function RenovationCostCalculator() {
             </p>
           </div>
         ) : (
-            <div className="space-y-3">
+          <div className="space-y-3">
               <div>
                 <Label htmlFor="name">{isEnglish ? "Name" : "Όνομα"}</Label>
                 <Input
