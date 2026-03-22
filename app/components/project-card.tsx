@@ -13,7 +13,7 @@ export function ProjectCard({ title, location, image, priority = false, hideText
     <div className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 bg-white h-full">
       <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image
-          src={image || "/placeholder.svg"}
+          src={image}
           alt={title}
           fill
           priority={true}
@@ -22,7 +22,7 @@ export function ProjectCard({ title, location, image, priority = false, hideText
           className="object-cover transition-transform duration-500 group-hover:scale-110"
           onError={(e) => {
             const img = e.target as HTMLImageElement
-            img.src = "/placeholder.svg"
+            img.style.display = "none"
           }}
         />
       </div>

@@ -341,17 +341,17 @@ export default function HouseConstruction() {
               {
                 title: isEnglish ? "Modern Villa" : "Μοντέρνα Βίλα",
                 location: isEnglish ? "Kassiopi, Corfu" : "Κασσιόπη, Κέρκυρα",
-                image: "/placeholder.svg?height=400&width=600",
+                image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/final_cleaned_logo%20test.JPG-FSlTAEvg6sCAKPe8rqG14XlINZsV8d.jpeg",
               },
               {
                 title: isEnglish ? "Traditional Residence" : "Παραδοσιακή Κατοικία",
                 location: isEnglish ? "Paleokastritsa, Corfu" : "Παλαιοκαστρίτσα, Κέρκυρα",
-                image: "/placeholder.svg?height=400&width=600",
+                image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/final_cleaned_logo%20test.JPG-FSlTAEvg6sCAKPe8rqG14XlINZsV8d.jpeg",
               },
               {
                 title: isEnglish ? "Luxury Apartment" : "Πολυτελές Διαμέρισμα",
                 location: isEnglish ? "Corfu Town" : "Πόλη της Κέρκυρας",
-                image: "/placeholder.svg?height=400&width=600",
+                image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/final_cleaned_logo%20test.JPG-FSlTAEvg6sCAKPe8rqG14XlINZsV8d.jpeg",
               },
             ].map((project, index) => (
               <motion.div
@@ -365,7 +365,7 @@ export default function HouseConstruction() {
                 <Link href="/portfolio">
                   <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
                     <Image
-                      src={project.image || "/placeholder.svg"}
+                      src={project.image}
                       alt={project.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-110"

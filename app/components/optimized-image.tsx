@@ -17,7 +17,7 @@ export function OptimizedImage({ src, alt, width, height, className = "" }: Opti
   return (
     <div className={`relative overflow-hidden ${className}`} style={{ aspectRatio: width / height }}>
       <Image
-        src={src || "/placeholder.svg"}
+        src={src}
         alt={alt}
         width={width}
         height={height}
