@@ -6,15 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CalendarDays, CheckCircle2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import dynamic from "next/dynamic"
 import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
-
-// Lazy load the calculator since it's below the fold
-const RenovationCostCalculator = dynamic(() => import("./renovation-cost-calculator").then(mod => mod.RenovationCostCalculator), {
-  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-xl" />,
-  ssr: false
-})
+import { RenovationCostCalculator } from "./renovation-cost-calculator"
 
 export default function HomePage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
@@ -381,7 +375,7 @@ export default function HomePage({ lang }: { lang: string }) {
                     <Link href={`/${lang}/our-projects`}>
                       <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
                         <Image
-                          src={project.image}
+                          src={project.image || "/placeholder.svg"}
                           alt={isEnglish ? project.titleEn : project.title}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -437,3 +431,4 @@ export default function HomePage({ lang }: { lang: string }) {
     </>
   )
 }
+

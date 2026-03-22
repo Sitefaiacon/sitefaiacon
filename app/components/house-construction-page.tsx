@@ -235,7 +235,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 title: isEnglish ? "Energy Efficiency" : "Ενεργειακή Απόδοση",
                 description: isEnglish
                   ? "Modern design requires energy savings and sustainability. We incorporate energy-efficient solutions, from thermal insulation to renewable energy sources, to reduce your building's operating costs and contribute to a greener future."
-                  : "Ο σύγχρονος σχεδιασμός απαιτεί εξοικονόμηση ενέργειας και βιω��ιμότητα. Ενσωματώνουμε ενεργειακά αποδοτικές λύσεις, από θερμομόνωση έως ανανεώσιμες πηγές ενέργειας, για να μειώσουμε το κόστος λειτουργίας του κτιρίου σας και να συμβάλλουμε σε ένα πιο πράσινο μέλλον.",
+                  : "Ο σύγχρονος σχεδιασμός απαιτεί εξοικονόμηση ενέργειας και βιωσιμότητα. Ενσωματώνουμε ενεργειακά αποδοτικές λύσεις, από θερμομόνωση έως ανανεώσιμες πηγές ενέργειας, για να μειώσουμε το κόστος λειτουργίας του κτιρίου σας και να συμβάλλουμε σε ένα πιο πράσινο μέλλον.",
                 href: "/services/energy-efficiency",
               },
             ].map((service, index) => (
@@ -345,7 +345,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
             <p className="text-lg text-gray-600 text-justify-content">
               {isEnglish
                 ? "Take a look at some of our most recent house construction projects we've completed"
-                : "Ρίξτε μια ματιά σε μερικά από τα πιο πρόσφατα έργα κατασκευής ��πιτιών που έχουμε ολοκληρώσει"}
+                : "Ρίξτε μια ματιά σε μερικά από τα πιο πρόσφατα έργα κατασκευής σπιτιών που έχουμε ολοκληρώσει"}
             </p>
           </motion.div>
 
@@ -381,7 +381,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 <Link href={`/${lang}/our-projects`}>
                   <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
                     <Image
-                      src={project.image}
+                      src={project.image || "/placeholder.svg"}
                       alt={project.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
@@ -428,3 +428,4 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
     </>
   )
 }
+

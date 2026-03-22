@@ -1,11 +1,17 @@
+import { Suspense } from "react"
 import SiteLayout from "../components/site-layout"
 import HomePage from "../components/home-page"
 
-export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
+export default function Home({ params }: { params: { lang: string } }) {
+  // Ensure lang is a valid value
+  const lang = params?.lang && ["el", "en"].includes(params.lang) ? params.lang : "el"
+
   return (
     <SiteLayout>
-      <HomePage lang={lang} />
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+        <HomePage lang={lang} />
+      </Suspense>
     </SiteLayout>
   )
 }
+

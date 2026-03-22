@@ -27,8 +27,7 @@
   }
 
   body {
-    background-image: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
-    @apply min-h-screen text-base;
+    @apply bg-gradient-secondary min-h-screen text-base;
   }
 
   /* Add this new class */
@@ -37,8 +36,7 @@
   }
 
   .section-primary {
-    background-image: linear-gradient(to bottom, #2B4B8C, #1E3563);
-    @apply text-white;
+    @apply bg-gradient-primary text-white;
   }
 
   .section-secondary {
@@ -56,15 +54,12 @@
 
 /* Hero section specific styles */
 .hero-section {
-  background-image: linear-gradient(to bottom, #2B4B8C, #1E3563);
-  @apply relative text-white overflow-hidden;
+  @apply relative bg-gradient-primary text-white overflow-hidden;
 }
 
 .hero-section::before {
   content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(43, 75, 140, 0.2);
+  @apply absolute inset-0 bg-primary-dark/20;
 }
 
 /* Card styles */
@@ -74,29 +69,16 @@
 
 /* Button styles */
 .btn-primary {
-  background-color: #2B4B8C;
-  color: white;
-  transition: background-color 0.2s;
-}
-.btn-primary:hover {
-  background-color: #4A6BA8;
+  @apply bg-primary text-white hover:bg-primary-light transition-colors;
 }
 
 .btn-secondary {
-  background-color: hsl(210 40% 96.1%);
-  color: #2B4B8C;
-  transition: background-color 0.2s;
-}
-.btn-secondary:hover {
-  background-color: white;
+  @apply bg-secondary text-primary hover:bg-white transition-colors;
 }
 
 /* Text gradient */
 .text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(to right, #2B4B8C, #4A6BA8);
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
 }
 
 /* Responsive typography */
@@ -134,3 +116,4 @@
     display: none !important;
   }
 }
+

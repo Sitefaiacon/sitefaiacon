@@ -23,8 +23,6 @@ export function ArchitecturalBackground({ className = "" }: { className?: string
           fill
           className="object-cover"
           priority
-          sizes="100vw"
-          quality={85}
         />
         {/* Enhanced gradient overlay for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/90 via-primary-dark/80 to-primary/70" />
@@ -32,3 +30,4 @@ export function ArchitecturalBackground({ className = "" }: { className?: string
     </div>
   )
 }
+

@@ -6,3 +6,4 @@ export function SectionBackground({ className = "" }: { className?: string }) {
     </div>
   )
 }
+
