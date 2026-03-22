@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+// Update import to use default import
 import SiteLayout from "../components/site-layout"
 import { Button } from "@/components/ui/button"
 import { Waves, ThermometerSun, Shield, Timer, CheckCircle2 } from "lucide-react"
@@ -310,3 +311,4 @@ export default function PoolConstruction() {
     </SiteLayout>
   )
 }
+

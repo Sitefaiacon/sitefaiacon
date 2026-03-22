@@ -287,3 +287,4 @@ export default function ListedHousesPage({ lang }: { lang: string }) {
     </>
   )
 }
+

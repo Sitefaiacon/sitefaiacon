@@ -133,7 +133,7 @@ export function RenovationCostCalculator() {
 
   useEffect(() => {
     calculateWindowsCost()
-  }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance])
+  }, [material, windowsQuality]) // Updated dependencies
 
   useEffect(() => {
     const renovationCostNumber = renovationCost ? Number.parseFloat(renovationCost) : 0
@@ -432,3 +432,4 @@ export function RenovationCostCalculator() {
     </div>
   )
 }
+

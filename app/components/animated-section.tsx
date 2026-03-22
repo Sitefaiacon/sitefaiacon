@@ -21,3 +21,4 @@ export function AnimatedSection({ children, className = "" }: AnimatedSectionPro
     </motion.div>
   )
 }
+

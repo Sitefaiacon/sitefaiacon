@@ -99,7 +99,7 @@ export default function PortfolioPage({ lang }: { lang: string }) {
                     <div onClick={() => setSelectedProject(project)}>
                       <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
                         <Image
-                          src={project.image}
+                          src={project.image || "/placeholder.svg"}
                           alt={isEnglish ? project.title : project.titleEl}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -114,7 +114,7 @@ export default function PortfolioPage({ lang }: { lang: string }) {
                   <DialogContent className="sm:max-w-[800px]">
                     <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                       <Image
-                        src={project.image}
+                        src={project.image || "/placeholder.svg"}
                         alt={isEnglish ? project.title : project.titleEl}
                         fill
                         className="object-cover"
@@ -160,3 +160,4 @@ export default function PortfolioPage({ lang }: { lang: string }) {
     </>
   )
 }
+

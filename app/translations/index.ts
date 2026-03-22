@@ -24,3 +24,4 @@ export const translations = {
 }
 
 export type Locale = keyof typeof translations
+

@@ -364,22 +364,30 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                 <Dialog>
                   <DialogTrigger asChild>
                     <div onClick={() => setSelectedProject(project)}>
-                      <ProjectCard title="" location="" image={project.image} priority={index < 6} hideText={true} />
+                      <ProjectCard
+                        title={isEnglish ? project.titleEn : project.title}
+                        location={isEnglish ? project.locationEn : project.location}
+                        image={project.image}
+                        priority={index < 6}
+                      />
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
-                    <div className="relative aspect-video w-full overflow-hidden">
+                  <DialogContent className="sm:max-w-[800px]">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                       <Image
-                        src={project.image}
-                        alt=""
+                        src={project.image || "/placeholder.svg"}
+                        alt={isEnglish ? project.titleEn : project.title}
                         fill
                         className="object-cover"
                         onError={(e) => {
                           const img = e.target as HTMLImageElement
-                          img.style.display = "none"
+                          img.src = "/placeholder.svg"
                         }}
                       />
                     </div>
+                    <h2 className="text-2xl font-bold mt-4">{isEnglish ? project.titleEn : project.title}</h2>
+                    <p className="text-gray-600">{isEnglish ? project.locationEn : project.location}</p>
+                    <p className="mt-2">{isEnglish ? project.descriptionEn : project.description}</p>
                   </DialogContent>
                 </Dialog>
               </motion.div>
@@ -405,7 +413,7 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
               <p className="text-lg text-white/80 mb-8">
                 {isEnglish
                   ? "Contact us today to discuss how we can bring your vision to life."
-                  : "Επικοινωνήστε μαζί μας ��ήμερα για να συζητήσουμε πώς μπορούμε να ζωντανέψουμε το όραμά σας."}
+                  : "Επικοινωνήστε μαζί μας σήμερα για να συζητήσουμε πώς μπορούμε να ζωντανέψουμε το όραμά σας."}
               </p>
               <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
                 <a href={`/${lang}/appointment`}>{isEnglish ? "Book a Free Appointment" : "Κλείστε Δωρεάν Ραντεβού"}</a>
@@ -417,3 +425,4 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
     </>
   )
 }
+

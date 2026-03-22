@@ -8,8 +8,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "../contexts/language-context"
-import Image from "next/image"
-import { CheckCircle2, Bath, UtensilsCrossed, Layers, Plug, Building, Paintbrush } from "lucide-react"
+import Image from "next/image" // Για να φορτώσουμε το λογότυπο
+import { CheckCircle2 } from "lucide-react"
 
 // Constants for Doors & Windows Calculator
 const materialOptions = ["aluminum", "pvc", "wood"] as const
@@ -362,30 +362,30 @@ export function RenovationCostCalculator() {
               />
             </div>
           )}
-
           <div className="relative z-10">
             <Label>{isEnglish ? "Categories" : "Κατηγορίες"}</Label>
-            {[
-              { key: "bathroom", icon: Bath, label: isEnglish ? "Bathroom" : "Μπάνιο" },
-              { key: "kitchen", icon: UtensilsCrossed, label: isEnglish ? "Kitchen" : "Κουζίνα" },
-              { key: "flooring", icon: Layers, label: isEnglish ? "Flooring" : "Δάπεδα" },
-              { key: "electrical", icon: Plug, label: isEnglish ? "Electrical" : "Ηλεκτρολογικά" },
-              { key: "structural", icon: Building, label: isEnglish ? "Structural" : "Δομικά" },
-              { key: "painting", icon: Paintbrush, label: isEnglish ? "Painting" : "Βαφή" },
-            ].map(({ key, icon: Icon, label }) => (
+            {Object.entries(categories).map(([key, value]) => (
               <div key={key} className="flex items-center space-x-2 mb-2">
                 <Checkbox
                   id={key}
-                  checked={categories[key as keyof typeof categories]}
+                  checked={value}
                   onCheckedChange={(checked) => {
                     setCategories((prev) => ({ ...prev, [key]: checked === true }))
                     setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
                   }}
                 />
-                <div className="flex items-center space-x-2">
-                  <Icon className="h-5 w-5 text-primary" />
-                  <Label htmlFor={key}>{label}</Label>
-                </div>
+                <Label htmlFor={key}>
+                  {isEnglish
+                    ? key.charAt(0).toUpperCase() + key.slice(1)
+                    : {
+                        bathroom: "Μπάνιο",
+                        kitchen: "Κουζίνα",
+                        flooring: "Δάπεδα",
+                        electrical: "Ηλεκτρολογικά",
+                        structural: "Δομικά",
+                        painting: "Βαφή",
+                      }[key]}
+                </Label>
               </div>
             ))}
           </div>
@@ -565,3 +565,4 @@ const styles = `
     }
   }
 `
+

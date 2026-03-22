@@ -1,11 +1,11 @@
 import SiteLayout from "../components/site-layout"
 import HomePage from "../components/home-page"
 
-export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
+export default function Home({ params: { lang } }: { params: { lang: string } }) {
   return (
     <SiteLayout>
       <HomePage lang={lang} />
     </SiteLayout>
   )
 }
+
