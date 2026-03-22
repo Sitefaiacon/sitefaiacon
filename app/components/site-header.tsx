@@ -66,10 +66,7 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* Add Language Switcher */}
-          <div className="ml-auto">
-            <LanguageSwitcher />
-          </div>
+
 
           <div className="lg:hidden ml-auto">
             <Sheet>
