@@ -1,4 +1,4 @@
-// Cache buster v4 - forced rebuild
+// CACHE BUSTER V6 - FORCED REBUILD
 import SiteLayout from "../components/site-layout"
 import HomePage from "../components/home-page"
 
