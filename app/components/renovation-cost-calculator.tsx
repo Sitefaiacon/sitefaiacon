@@ -69,10 +69,10 @@ export function RenovationCostCalculator() {
   const [balconyDoors, setBalconyDoors] = useState(0)
   const [interiorDoors, setInteriorDoors] = useState(0)
   const [mainEntrance, setMainEntrance] = useState(0)
-  const [windowsCost, setWindowsCost] = useState<string | null>(null)
+  const [windowsCost, setWindowsCost] = useState<string>("0.00")
 
   //New State Variable
-  const [totalCost, setTotalCost] = useState<string | null>(null)
+  const [totalCost, setTotalCost] = useState<string>("0.00")
 
   // Constants for Renovation Calculator
   const baseCostPerM2 = 415
@@ -414,21 +414,17 @@ export function RenovationCostCalculator() {
             </Select>
           </div>
 
-          {windowsCost && (
-            <div className="mt-4 text-center">
-              <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
-              <p className="text-2xl text-primary">€{windowsCost}</p>
-            </div>
-          )}
+          <div className="mt-4 text-center">
+            <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
+            <p className="text-2xl text-primary">€{windowsCost}</p>
+          </div>
         </TabsContent>
       </Tabs>
 
-      {totalCost && (
-        <div className="mt-6 pt-4 border-t border-gray-200">
-          <p className="font-bold text-lg text-center">{translate("Total Estimated Cost:")}</p>
-          <p className="text-3xl text-primary text-center">€{totalCost}</p>
-        </div>
-      )}
+      <div className="mt-6 pt-4 border-t border-gray-200">
+        <p className="font-bold text-lg text-center">{translate("Total Estimated Cost:")}</p>
+        <p className="text-3xl text-primary text-center">€{totalCost}</p>
+      </div>
     </div>
   )
 }
