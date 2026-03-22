@@ -1,26 +1,7 @@
-"use client"
-
-import { motion } from "framer-motion"
-import SiteLayout from "../components/site-layout"
-import { Button } from "@/components/ui/button"
-import { Paintbrush, Hammer, RouteIcon as Road, Sprout, Thermometer, HardHat } from "lucide-react"
-import { CheckCircle2 } from "lucide-react"
-import Link from "next/link"
-import { ArchitecturalBackground } from "../components/architectural-background"
-import { SectionBackground } from "../components/section-background"
-import { useLanguage } from "../contexts/language-context"
-
-const renovationServices = [
-  { icon: HardHat, label: "Επισκευή Στέγης", labelEn: "Roof Repair", href: "/house-renovation/roof-repair" },
-  { icon: Thermometer, label: "Θερμοπρόσοψη", labelEn: "Thermal Insulation", href: "/house-renovation/thermoprosopsi" },
-  { icon: Hammer, label: "Χτίσιμο πέτρας", labelEn: "Stone Building", href: "/house-renovation/stone-building" },
-  { icon: Road, label: "Κατασκευή δρόμων", labelEn: "Road Construction", href: "/house-renovation/road-construction" },
-  { icon: Sprout, label: "Κήποι", labelEn: "Gardens", href: "/house-renovation/gardens" },
-  { icon: Paintbrush, label: "Βαψίματα", labelEn: "Painting", href: "/house-renovation/painting" },
-]
+import { redirect } from "next/navigation"
 
 export default function HouseRenovation() {
-  const { isEnglish } = useLanguage()
+  redirect("/el/house-renovation")
 
   return (
     <SiteLayout>

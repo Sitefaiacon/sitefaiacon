@@ -1,24 +1,7 @@
-"use client"
-
-import { useState, useCallback } from "react"
-import { motion } from "framer-motion"
-import SiteLayout from "../components/site-layout"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Clock, MapPin, Phone, Mail, CheckCircle, Loader2 } from "lucide-react"
-import { ArchitecturalBackground } from "../components/architectural-background"
-import { SectionBackground } from "../components/section-background"
-import { sendEmail } from "../actions/send-email"
-import { toast } from "sonner"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { useLanguage } from "../contexts/language-context"
+import { redirect } from "next/navigation"
 
 export default function Appointment() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [formError, setFormError] = useState<string | null>(null)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const { isEnglish } = useLanguage()
+  redirect("/el/appointment")
 
   const handleSubmit = useCallback(
     async (formData: FormData) => {
