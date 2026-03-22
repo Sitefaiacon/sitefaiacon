@@ -74,16 +74,29 @@
 
 /* Button styles */
 .btn-primary {
-  @apply bg-primary text-white hover:bg-primary-light transition-colors;
+  background-color: #2B4B8C;
+  color: white;
+  transition: background-color 0.2s;
+}
+.btn-primary:hover {
+  background-color: #4A6BA8;
 }
 
 .btn-secondary {
-  @apply bg-secondary text-primary hover:bg-white transition-colors;
+  background-color: hsl(210 40% 96.1%);
+  color: #2B4B8C;
+  transition: background-color 0.2s;
+}
+.btn-secondary:hover {
+  background-color: white;
 }
 
 /* Text gradient */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #2B4B8C, #4A6BA8);
 }
 
 /* Responsive typography */
