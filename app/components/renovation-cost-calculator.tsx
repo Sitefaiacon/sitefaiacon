@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "../contexts/language-context"
+import { Bath, ChefHat, Layers, Zap, Building2, Paintbrush } from "lucide-react"
 
 // Constants for Doors & Windows Calculator
 const materialOptions = ["aluminum", "pvc", "wood"] as const
@@ -317,30 +318,40 @@ export function RenovationCostCalculator() {
           )}
           <div className="relative z-10">
             <Label>{isEnglish ? "Categories" : "Κατηγορίες"}</Label>
-            {Object.entries(categories).map(([key, value]) => (
-              <div key={key} className="flex items-center space-x-2">
-                <Checkbox
-                  id={key}
-                  checked={value}
-                  onCheckedChange={(checked) => {
-                    setCategories((prev) => ({ ...prev, [key]: checked === true }))
-                    calculateRenovationCost()
-                  }}
-                />
-                <Label htmlFor={key}>
-                  {isEnglish
-                    ? key.charAt(0).toUpperCase() + key.slice(1)
-                    : {
-                        bathroom: "Μπάνιο",
-                        kitchen: "Κουζίνα",
-                        flooring: "Δάπεδα",
-                        electrical: "Ηλεκτρολογικά",
-                        structural: "Δομικά",
-                        painting: "Βαφή",
-                      }[key]}
-                </Label>
-              </div>
-            ))}
+            {Object.entries(categories).map(([key, value]) => {
+              const categoryIcons: Record<string, React.ReactNode> = {
+                bathroom: <Bath className="w-4 h-4 text-primary" />,
+                kitchen: <ChefHat className="w-4 h-4 text-primary" />,
+                flooring: <Layers className="w-4 h-4 text-primary" />,
+                electrical: <Zap className="w-4 h-4 text-primary" />,
+                structural: <Building2 className="w-4 h-4 text-primary" />,
+                painting: <Paintbrush className="w-4 h-4 text-primary" />,
+              }
+              const categoryLabels: Record<string, string> = {
+                bathroom: "Μπάνιο",
+                kitchen: "Κουζίνα",
+                flooring: "Δάπεδα",
+                electrical: "Ηλεκτρολογικά",
+                structural: "Δομικά",
+                painting: "Βαφή",
+              }
+              return (
+                <div key={key} className="flex items-center space-x-2 py-1">
+                  <Checkbox
+                    id={key}
+                    checked={value}
+                    onCheckedChange={(checked) => {
+                      setCategories((prev) => ({ ...prev, [key]: checked === true }))
+                      calculateRenovationCost()
+                    }}
+                  />
+                  {categoryIcons[key]}
+                  <Label htmlFor={key} className="cursor-pointer">
+                    {isEnglish ? key.charAt(0).toUpperCase() + key.slice(1) : categoryLabels[key]}
+                  </Label>
+                </div>
+              )
+            })}
           </div>
           <div className="relative z-30">
             <Label>{isEnglish ? "Quality" : "Ποιότητα"}</Label>
