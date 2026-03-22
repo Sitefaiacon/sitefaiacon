@@ -555,5 +555,6 @@ export function RenovationCostCalculator() {
           )}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
+}
