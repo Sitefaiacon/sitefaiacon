@@ -1,5 +1,6 @@
 "use client"
 
+// Force recompile - remove Head dependency
 import { useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
@@ -8,7 +9,6 @@ import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import Head from "next/head"
 import { ProjectCard } from "./project-card"
 
 const projects = [
@@ -296,11 +296,6 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
 
   return (
     <>
-      <Head>
-        {projects.slice(0, 6).map((project) => (
-          <link key={project.id} rel="preload" as="image" href={project.image} type="image/jpeg" />
-        ))}
-      </Head>
       <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
         <ArchitecturalBackground />
         <div className="relative z-10 container px-4">

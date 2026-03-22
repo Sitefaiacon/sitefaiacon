@@ -14,15 +14,16 @@ const languages = {
 export function LanguageSwitcher() {
   const pathname = usePathname()
   const router = useRouter()
-  const { isEnglish, toggleLanguage } = useLanguage()
+  const { isEnglish } = useLanguage()
 
   const currentLang = isEnglish ? "en" : "el"
 
   const switchLanguage = (lang: string) => {
+    if (lang === currentLang) return
     // Remove any existing language prefix and add the new one
-    const newPathname = `/${lang}${pathname.replace(/^\/(en|el)/, "") || "/"}`
+    const pathWithoutLang = pathname.replace(/^\/(en|el)/, "") || ""
+    const newPathname = `/${lang}${pathWithoutLang}`
     router.push(newPathname.replace(/\/+/g, "/")) // Clean up any double slashes
-    toggleLanguage()
   }
 
   return (

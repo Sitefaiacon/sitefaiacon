@@ -1,32 +1,25 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 type LanguageContextType = {
   isEnglish: boolean
-  toggleLanguage: () => void
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children, initialLang }: { children: ReactNode; initialLang: string }) {
   const [isEnglish, setIsEnglish] = useState(initialLang === "en")
-  const router = useRouter()
   const pathname = usePathname()
 
-  const toggleLanguage = () => {
-    const newLang = isEnglish ? "el" : "en"
-    setIsEnglish(!isEnglish)
-    const newPathname = pathname.replace(/^\/(en|el)/, `/${newLang}`)
-    router.push(newPathname)
-  }
-
+  // Update language state when pathname changes
   useEffect(() => {
-    setIsEnglish(initialLang === "en")
-  }, [initialLang])
+    const langFromPath = pathname.startsWith("/en") ? "en" : "el"
+    setIsEnglish(langFromPath === "en")
+  }, [pathname])
 
-  return <LanguageContext.Provider value={{ isEnglish, toggleLanguage }}>{children}</LanguageContext.Provider>
+  return <LanguageContext.Provider value={{ isEnglish }}>{children}</LanguageContext.Provider>
 }
 
 export function useLanguage() {

@@ -27,7 +27,8 @@
   }
 
   body {
-    @apply bg-gradient-secondary min-h-screen text-base;
+    background-image: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
+    @apply min-h-screen text-base;
   }
 
   /* Add this new class */
@@ -36,7 +37,8 @@
   }
 
   .section-primary {
-    @apply bg-gradient-primary text-white;
+    background-image: linear-gradient(to bottom, #2B4B8C, #1E3563);
+    @apply text-white;
   }
 
   .section-secondary {
@@ -54,12 +56,15 @@
 
 /* Hero section specific styles */
 .hero-section {
-  @apply relative bg-gradient-primary text-white overflow-hidden;
+  background-image: linear-gradient(to bottom, #2B4B8C, #1E3563);
+  @apply relative text-white overflow-hidden;
 }
 
 .hero-section::before {
   content: "";
-  @apply absolute inset-0 bg-primary-dark/20;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(43, 75, 140, 0.2);
 }
 
 /* Card styles */
@@ -69,16 +74,29 @@
 
 /* Button styles */
 .btn-primary {
-  @apply bg-primary text-white hover:bg-primary-light transition-colors;
+  background-color: #2B4B8C;
+  color: white;
+  transition: background-color 0.2s;
+}
+.btn-primary:hover {
+  background-color: #4A6BA8;
 }
 
 .btn-secondary {
-  @apply bg-secondary text-primary hover:bg-white transition-colors;
+  background-color: hsl(210 40% 96.1%);
+  color: #2B4B8C;
+  transition: background-color 0.2s;
+}
+.btn-secondary:hover {
+  background-color: white;
 }
 
 /* Text gradient */
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #2B4B8C, #4A6BA8);
 }
 
 /* Responsive typography */

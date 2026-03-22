@@ -1,4 +1,3 @@
-// CACHE BUSTER V6 - FORCED REBUILD
 import "./globals.css"
 import { Outfit, Playfair_Display } from "next/font/google"
 import type React from "react"
@@ -8,7 +7,6 @@ import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LanguageProvider } from "./contexts/language-context"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -35,6 +33,7 @@ export const metadata: Metadata = {
     template: "%s | ΦαιάCon Κέρκυρα",
   },
   description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα.",
+    generator: 'v0.app'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -50,14 +49,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
         <WebVitals />
-        <LanguageProvider>
-          {children}
-          <Suspense fallback={null}>
-            <CookieConsent />
-          </Suspense>
-          <Toaster position="top-center" />
-          <Analytics />
-        </LanguageProvider>
+        {children}
+        <Suspense fallback={null}>
+          <CookieConsent />
+        </Suspense>
+        <Toaster position="top-center" />
+        <Analytics />
       </body>
     </html>
   )
