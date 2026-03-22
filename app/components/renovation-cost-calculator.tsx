@@ -553,6 +553,7 @@ export function RenovationCostCalculator() {
             </Button>
           </div>
         )}
+      </div>
     </div>
   )
 }
