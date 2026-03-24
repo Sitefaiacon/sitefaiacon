@@ -4,30 +4,30 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 30 20% 96%;
+    --foreground: 20 15% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 20 15% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221 40% 39%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 20 15% 15%;
+    --primary: 20 25% 25%;
+    --primary-foreground: 30 20% 96%;
+    --secondary: 30 20% 96%;
+    --secondary-foreground: 20 25% 25%;
+    --muted: 30 15% 92%;
+    --muted-foreground: 20 10% 50%;
+    --accent: 35 85% 55%;
+    --accent-foreground: 20 25% 25%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive-foreground: 30 20% 96%;
+    --border: 30 15% 88%;
+    --input: 30 15% 90%;
+    --ring: 20 25% 25%;
     --radius: 0.5rem;
   }
 
   body {
-    background-image: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
+    background-color: hsl(var(--background));
     @apply min-h-screen text-base;
   }
 
@@ -36,67 +36,46 @@
     @apply text-justify;
   }
 
-  .section-primary {
-    background-image: linear-gradient(to bottom, #2B4B8C, #1E3563);
-    @apply text-white;
-  }
-
-  .section-secondary {
-    @apply bg-secondary text-primary;
-  }
-
   .section-white {
-    @apply bg-white text-primary-dark;
+    @apply bg-white text-foreground;
   }
 
-  .section-muted {
-    @apply bg-muted text-primary;
+  .section-cream {
+    @apply bg-secondary text-foreground;
   }
 }
 
 /* Hero section specific styles */
 .hero-section {
-  background-image: linear-gradient(to bottom, #2B4B8C, #1E3563);
   @apply relative text-white overflow-hidden;
 }
 
-.hero-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(43, 75, 140, 0.2);
+.hero-overlay {
+  @apply absolute inset-0 bg-black/40;
 }
 
 /* Card styles */
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-lg hover:scale-[1.02];
+  @apply transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:-translate-y-1;
 }
 
-/* Button styles */
-.btn-primary {
-  background-color: #2B4B8C;
-  color: white;
-  transition: background-color 0.2s;
-}
-.btn-primary:hover {
-  background-color: #4A6BA8;
+/* Elegant spacing and typography */
+.text-luxury-headline {
+  @apply font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight;
 }
 
-.btn-secondary {
-  background-color: hsl(210 40% 96.1%);
-  color: #2B4B8C;
-  transition: background-color 0.2s;
-}
-.btn-secondary:hover {
-  background-color: white;
+.text-luxury-subheading {
+  @apply font-serif text-2xl md:text-3xl tracking-wide;
 }
 
-/* Text gradient */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(to right, #2B4B8C, #4A6BA8);
+/* Text accent color */
+.text-accent-gold {
+  @apply text-accent;
+}
+
+/* Premium button styles */
+.btn-luxury {
+  @apply transition-all duration-300 hover:shadow-lg;
 }
 
 /* Responsive typography */
