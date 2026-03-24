@@ -78,7 +78,7 @@ export function RenovationCostCalculator() {
   const [totalCost, setTotalCost] = useState<string | null>(null)
 
   // Constants for Renovation Calculator
-  const baseCostPerM2 = 445
+  const baseCostPerM2 = 520
   const qualityMultipliers = { basic: 1.0, midRange: 1.3, premium: 1.6 }
   const agePenalty = { ancient: 1.25, old: 1.15, modern: 1.0 }
   const categoryModifiers = {
