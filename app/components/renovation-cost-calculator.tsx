@@ -190,7 +190,12 @@ export function RenovationCostCalculator() {
     const renovationCostValue = calculateRenovationCost()
     const windowsCostValue = calculateWindowsCost()
     
-    // Prepare calculator data for the API
+    // Check if renovation has any selected categories
+    const hasRenovationSelections = Object.values(categories).some(Boolean)
+    // Check if windows has any items
+    const hasWindowsSelections = windows > 0 || balconyDoors > 0 || interiorDoors > 0 || mainEntrance > 0
+    
+    // Prepare calculator data for the API - always include both if they have selections
     const calculatorData = {
       renovation: {
         area: Number(area),
@@ -202,7 +207,8 @@ export function RenovationCostCalculator() {
         poolSize: poolType !== "none" ? poolSize : 0,
         categories,
         renovationQuality,
-        renovationCost: tab === "renovation" ? parseFloat(renovationCostValue) : 0,
+        // Include renovation cost if there are selections or if user is in renovation tab
+        renovationCost: hasRenovationSelections ? parseFloat(renovationCostValue) : 0,
       },
       windows: {
         windows,
@@ -211,11 +217,12 @@ export function RenovationCostCalculator() {
         mainEntrance,
         material,
         quality: windowsQuality,
-        windowsCost: tab === "windows" ? parseFloat(windowsCostValue) : 0,
+        // Include windows cost if there are selections or if user is in windows tab
+        windowsCost: hasWindowsSelections ? parseFloat(windowsCostValue) : 0,
       },
-      totalCost: tab === "renovation" 
-        ? parseFloat(renovationCostValue) 
-        : parseFloat(windowsCostValue),
+      // Total cost is the sum of both
+      totalCost: (hasRenovationSelections ? parseFloat(renovationCostValue) : 0) + 
+                 (hasWindowsSelections ? parseFloat(windowsCostValue) : 0),
     }
 
     setPendingCalculatorData(calculatorData)

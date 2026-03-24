@@ -88,7 +88,7 @@ function generateEmailHTML(lead: CalculatorLead): string {
   }
   
   // Selected categories
-  const selectedCategories = Object.entries(renovation.categories)
+  const selectedCategories = Object.entries(renovation.categories || {})
     .filter(([_, value]) => value)
     .map(([key]) => {
       const categoryLabels: Record<string, string> = {
@@ -101,6 +101,9 @@ function generateEmailHTML(lead: CalculatorLead): string {
       }
       return categoryLabels[key] || key
     })
+  
+  // Check if renovation has any data (not just cost)
+  const hasRenovationData = renovation.area > 0 || selectedCategories.length > 0 || renovation.renovationCost > 0
   
   return `
 <!DOCTYPE html>
@@ -160,16 +163,16 @@ function generateEmailHTML(lead: CalculatorLead): string {
     </tr>
     
     <!-- Two Column Layout: Renovation & Windows Side by Side -->
-    ${(renovation.renovationCost > 0 || windows.windowsCost > 0) ? `
+    ${(hasRenovationData || windows.windowsCost > 0) ? `
     <tr>
       <td style="padding: 25px; border-bottom: 1px solid #e9ecef;">
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
             <!-- Left Column: Γενική Ανακαίνιση -->
-            <td style="width: 48%; vertical-align: top; padding-right: 15px; ${renovation.renovationCost > 0 ? '' : 'opacity: 0.5;'}">
+            <td style="width: 48%; vertical-align: top; padding-right: 15px; ${hasRenovationData ? '' : 'opacity: 0.5;'}">
               <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; height: 100%;">
                 <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Γενική Ανακαίνιση</h2>
-                ${renovation.renovationCost > 0 ? `
+                ${hasRenovationData ? `
                 <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 13px;">
                   <tr>
                     <td style="color: #6c757d;">Εμβαδόν:</td>
