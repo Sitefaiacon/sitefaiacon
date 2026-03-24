@@ -1,23 +1,18 @@
 import "./globals.css"
-import { Outfit, Playfair_Display, Oswald } from "next/font/google"
+import { Outfit, Playfair_Display } from "next/font/google"
+import type React from "react"
+import { Toaster } from "sonner"
+import { CookieConsent } from "./components/cookie-consent"
+import { WebVitals } from "./components/web-vitals"
+import type { Metadata, Viewport } from "next"
+import { Suspense } from "react"
+import { Analytics } from "@vercel/analytics/react"
+import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema } from "./components/structured-data"
 
 const outfit = Outfit({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   variable: "--font-outfit",
   display: "swap",
-})
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-})
-
-const oswald = Oswald({
-  subsets: ["latin", "latin-ext", "cyrillic"],
-  variable: "--font-oswald",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
 })
 
 const playfair = Playfair_Display({
@@ -115,7 +110,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable} ${oswald.variable}`}>
+    <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
       <head>
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
