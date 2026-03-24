@@ -16,6 +16,7 @@ export async function sendEmail(formData: FormData) {
       return {
         success: false,
         message: "Παρακαλώ συμπληρώστε όλα τα απαραίτητα πεδία.",
+        messageEn: "Please fill in all required fields.",
       }
     }
 
@@ -25,6 +26,7 @@ export async function sendEmail(formData: FormData) {
       return {
         success: false,
         message: "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email.",
+        messageEn: "Please enter a valid email address.",
       }
     }
 
@@ -34,6 +36,7 @@ export async function sendEmail(formData: FormData) {
       return {
         success: false,
         message: "Παρακαλώ εισάγετε έναν έγκυρο αριθμό κινητού τηλεφώνου.",
+        messageEn: "Please enter a valid mobile phone number.",
       }
     }
 
@@ -78,6 +81,7 @@ export async function sendEmail(formData: FormData) {
     return {
       success: true,
       message: "Το μήνυμά σας στάλθηκε με επιτυχία! Θα επικοινωνήσουμε μαζί σας σύντομα.",
+      messageEn: "Your message has been sent successfully! We will contact you soon.",
     }
   } catch (error) {
     console.error("Failed to send email:", error)
@@ -85,6 +89,8 @@ export async function sendEmail(formData: FormData) {
       success: false,
       message:
         "Παρουσιάστηκε σφάλμα κατά την αποστολή του μηνύματος. Παρακαλώ δοκιμάστε ξανά ή επικοινωνήστε μαζί μας τηλεφωνικά στο 6987797679.",
+      messageEn:
+        "An error occurred while sending the message. Please try again or contact us by phone at +30 6987797679.",
     }
   }
 }
