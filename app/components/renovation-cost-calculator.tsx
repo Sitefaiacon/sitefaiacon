@@ -228,7 +228,6 @@ export function RenovationCostCalculator() {
 
   // Handle "Calculate" button click - show lead form instead of result
   const handleCalculateClick = () => {
-    console.log("[v0] Calculate button clicked")
     // Calculate costs synchronously first
     const numericArea = Number(area)
     const selectedCategories = Object.values(categories).filter(Boolean).length
@@ -263,10 +262,8 @@ export function RenovationCostCalculator() {
       }
     }
 
-    console.log("[v0] Calculated cost:", totalCostCalc)
     setRenovationCost(totalCostCalc)
     
-    console.log("[v0] Opening lead form")
     // Then show the lead capture form
     setShowLeadForm(true)
   }
