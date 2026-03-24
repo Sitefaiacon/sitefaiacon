@@ -3,9 +3,6 @@ import { Resend } from 'resend'
 import type { CalculatorLead } from '@/lib/types/calculator-lead'
 import { generateLeadSummary, formatCost } from '@/lib/types/calculator-lead'
 
-// Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 // Email configuration from environment variables with fallbacks
 const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'faiacon@yahoo.com'
 const LEADS_FROM_EMAIL = process.env.LEADS_FROM_EMAIL || 'onboarding@resend.dev'
@@ -374,6 +371,9 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     }
+    
+    // Initialize Resend with API key (lazy initialization inside handler)
+    const resend = new Resend(process.env.RESEND_API_KEY)
     
     // Create lead object
     const lead: CalculatorLead = {
