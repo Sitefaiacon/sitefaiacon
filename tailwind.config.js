@@ -48,6 +48,7 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-outfit)"],
         serif: ["var(--font-playfair)"],
+        logo: ["var(--font-oswald)"],
       },
     },
   },

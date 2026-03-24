@@ -1,5 +1,5 @@
 import "./globals.css"
-import { Outfit, Playfair_Display } from "next/font/google"
+import { Outfit, Playfair_Display, Oswald } from "next/font/google"
 import type React from "react"
 import { Toaster } from "sonner"
 import { CookieConsent } from "./components/cookie-consent"
@@ -19,6 +19,13 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
+})
+
+const oswald = Oswald({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-oswald",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 })
 
 export const viewport: Viewport = {
@@ -110,7 +117,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
+    <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable} ${oswald.variable}`}>
       <head>
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
