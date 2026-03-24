@@ -20,24 +20,24 @@ type Quality = (typeof qualityOptions)[number]
 
 const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
   window: {
-    aluminum: { basic: 500, midRange: 600, premium: 700 },
-    pvc: { basic: 400, midRange: 500, premium: 600 },
-    wood: { basic: 600, midRange: 700, premium: 800 },
+    aluminum: { basic: 530, midRange: 630, premium: 730 },
+    pvc: { basic: 430, midRange: 530, premium: 630 },
+    wood: { basic: 630, midRange: 730, premium: 830 },
   },
   balconyDoor: {
-    aluminum: { basic: 900, midRange: 1000, premium: 1100 },
-    pvc: { basic: 800, midRange: 900, premium: 1000 },
-    wood: { basic: 1000, midRange: 1100, premium: 1200 },
+    aluminum: { basic: 930, midRange: 1030, premium: 1130 },
+    pvc: { basic: 830, midRange: 930, premium: 1030 },
+    wood: { basic: 1030, midRange: 1130, premium: 1230 },
   },
   interiorDoor: {
-    aluminum: { basic: 300, midRange: 400, premium: 500 },
-    pvc: { basic: 250, midRange: 350, premium: 450 },
-    wood: { basic: 400, midRange: 500, premium: 600 },
+    aluminum: { basic: 330, midRange: 430, premium: 530 },
+    pvc: { basic: 280, midRange: 380, premium: 480 },
+    wood: { basic: 430, midRange: 530, premium: 630 },
   },
   mainEntrance: {
-    aluminum: { basic: 1500, midRange: 1800, premium: 2000 },
-    pvc: { basic: 1300, midRange: 1500, premium: 1700 },
-    wood: { basic: 1800, midRange: 2000, premium: 2200 },
+    aluminum: { basic: 1530, midRange: 1830, premium: 2030 },
+    pvc: { basic: 1330, midRange: 1530, premium: 1730 },
+    wood: { basic: 1830, midRange: 2030, premium: 2230 },
   },
 }
 
@@ -78,22 +78,22 @@ export function RenovationCostCalculator() {
   const [totalCost, setTotalCost] = useState<string | null>(null)
 
   // Constants for Renovation Calculator
-  const baseCostPerM2 = 415
+  const baseCostPerM2 = 445
   const qualityMultipliers = { basic: 1.0, midRange: 1.3, premium: 1.6 }
   const agePenalty = { ancient: 1.25, old: 1.15, modern: 1.0 }
   const categoryModifiers = {
-    bathroom: 2500,
-    kitchen: 4000,
-    flooring: 40,
-    electrical: 500,
-    structural: 100,
-    painting: 25,
+    bathroom: 2530,
+    kitchen: 4030,
+    flooring: 70,
+    electrical: 530,
+    structural: 130,
+    painting: 55,
   }
   const poolCostsPerM2 = {
     none: { basic: 0, midRange: 0, premium: 0 },
-    liner: { midRange: 1025, premium: 1185 },
-    polyester: { premium: 1225 },
-    concrete: { basic: 1125, midRange: 1225, premium: 1325 },
+    liner: { midRange: 1055, premium: 1215 },
+    polyester: { premium: 1255 },
+    concrete: { basic: 1155, midRange: 1255, premium: 1355 },
   }
 
   // Translations
@@ -252,7 +252,7 @@ export function RenovationCostCalculator() {
           <p className="leading-relaxed text-justify-content">
             {isEnglish
               ? "If you dream of building your home or business space, you know that the process can seem overwhelming: from finding the ideal plot to managing the required permits and bureaucracy. We are here to handle every step, so you can focus on your vision."
-              : "Αν ονειρεύεστε να χτίσετε το σπίτι ή το επαγγελματικό σας χώρο, ξέρετε ότι η διαδικασία μπορεί να φαίνεται συντριπτική: από την εύρεση του ιδανικού οικοπέδου έως τη διαχείριση των απαιτούμενων αδειών και τη γραφειοκρατία. Εμείς είμαστε εδώ για να αναλάβουμε κάθε βήμα, ώστε εσείς να εστιάσετε στο όραμά σας."}
+              : "Αν ονειρεύεστε να χτίσετε το σ��ίτι ή το επαγγελματικό σας χώρο, ξέρετε ότι η διαδικασία μπορεί να φαίνεται συντριπτική: από την εύρεση του ιδανικού οικοπέδου έως τη διαχείριση των απαιτούμενων αδειών και τη γραφειοκρατία. Εμείς είμαστε εδώ για να αναλάβουμε κάθε βήμα, ώστε εσείς να εστιάσετε στο όραμά σας."}
           </p>
           <div>
             <Label htmlFor="area">{isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}</Label>
@@ -355,7 +355,7 @@ export function RenovationCostCalculator() {
                 value={poolSize}
                 onChange={(e) => {
                   setPoolSize(Number(e.target.value))
-                  setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδ��μένα
+                  setShowResults(false) // Κρύβει α��οτελέσματα όταν αλλάζουν δεδ��μένα
                 }}
                 min="1"
                 max="50"
