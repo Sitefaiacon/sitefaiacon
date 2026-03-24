@@ -64,7 +64,7 @@ export default function HomePage({ lang }: { lang: string }) {
                   className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white/30"
                   asChild
                 >
-                  <Link href="#renovation-calculator" className="flex items-center gap-2">
+                  <Link href={`/${lang}/cost-calculator`} className="flex items-center gap-2">
                     <Calculator className="w-5 h-5" />
                     {isEnglish ? "Cost Calculator" : "Υπολογιστής Κόστους"}
                   </Link>
@@ -261,7 +261,7 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-              {isEnglish ? "Estimate Your Renovation Cost" : "Εκτιμήστε το Κόστος Ανακαίνισης"}
+              {isEnglish ? "Estimate Your Renovation Cost" : "Εκτιμ��στε το Κόστος Ανακαίνισης"}
             </h2>
             <p className="text-xl text-gray-600 mb-8 text-justify-content">
               {isEnglish
