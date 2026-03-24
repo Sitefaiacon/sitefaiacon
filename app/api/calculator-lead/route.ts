@@ -6,8 +6,8 @@ import { generateLeadSummary, formatCost } from '@/lib/types/calculator-lead'
 // Initialize Resend with API key
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// Email configuration from environment variables
-const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL
+// Email configuration from environment variables with fallbacks
+const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'faiacon@yahoo.com'
 const LEADS_FROM_EMAIL = process.env.LEADS_FROM_EMAIL || 'onboarding@resend.dev'
 
 // Validation helpers
@@ -369,14 +369,6 @@ export async function POST(request: NextRequest) {
     // Check environment variables
     if (!process.env.RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not configured')
-      return NextResponse.json(
-        { success: false, errors: ['Σφάλμα διαμόρφωσης email. Παρακαλώ επικοινωνήστε απευθείας μαζί μας.'] },
-        { status: 500 }
-      )
-    }
-    
-    if (!LEADS_TO_EMAIL) {
-      console.error('LEADS_TO_EMAIL is not configured')
       return NextResponse.json(
         { success: false, errors: ['Σφάλμα διαμόρφωσης email. Παρακαλώ επικοινωνήστε απευθείας μαζί μας.'] },
         { status: 500 }
