@@ -19,7 +19,7 @@ export default function HomePage({ lang }: { lang: string }) {
   const whatsappMessage = isEnglish 
     ? "Hello, I'd like to get an estimate for my property renovation in Corfu."
     : "Γεία σας, θα ήθελα να λάβω μια εκτίμηση για την ανακαίνιση του ακινήτου μου στην Κέρκυρα."
-  const whatsappLink = `https://wa.me/306945000000?text=${encodeURIComponent(whatsappMessage)}`
+  const whatsappLink = `https://wa.me/306987797679?text=${encodeURIComponent(whatsappMessage)}`
 
   return (
     <>
