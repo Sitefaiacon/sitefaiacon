@@ -91,12 +91,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           rel="icon"
           href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg"
-          type="image/jpeg"
         />
         <link
           rel="shortcut icon"
           href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg"
-          type="image/jpeg"
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <Script
