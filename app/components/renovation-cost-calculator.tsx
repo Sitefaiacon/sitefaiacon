@@ -174,8 +174,9 @@ export function RenovationCostCalculator() {
 
     if (poolType !== "none" && !isNaN(poolSize)) {
       const poolTypeCosts = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2]
-      if (poolTypeCosts && renovationQuality in poolTypeCosts) {
-        const poolCostPerM2 = poolTypeCosts[renovationQuality as keyof typeof poolTypeCosts]
+      const quality = renovationQuality as "basic" | "midRange" | "premium"
+      if (poolTypeCosts && quality in poolTypeCosts) {
+        const poolCostPerM2 = (poolTypeCosts as Record<string, number>)[quality]
         if (poolCostPerM2) {
           const poolCost = (poolCostPerM2 - 100) * poolSize
           totalCostCalc += poolCost > 0 ? poolCost : 0
@@ -253,8 +254,9 @@ export function RenovationCostCalculator() {
 
     if (poolType !== "none" && !isNaN(poolSize)) {
       const poolTypeCosts = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2]
-      if (poolTypeCosts && renovationQuality in poolTypeCosts) {
-        const poolCostPerM2 = poolTypeCosts[renovationQuality as keyof typeof poolTypeCosts]
+      const quality = renovationQuality as "basic" | "midRange" | "premium"
+      if (poolTypeCosts && quality in poolTypeCosts) {
+        const poolCostPerM2 = (poolTypeCosts as Record<string, number>)[quality]
         if (poolCostPerM2) {
           const poolCost = (poolCostPerM2 - 100) * poolSize
           totalCostCalc += poolCost > 0 ? poolCost : 0
@@ -396,7 +398,7 @@ export function RenovationCostCalculator() {
                           flooring: "Δάπεδα",
                           electrical: "Ηλεκτρολογικά",
                           structural: "Δομικά",
-                          painting: "Βαφή",
+                          painting: "Βαφ��",
                         }[key]}
                   </Label>
                 </div>
