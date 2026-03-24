@@ -36,7 +36,7 @@ export default function CostCalculatorPage({ lang }: { lang: string }) {
         {
           question: "How accurate is this calculator?",
           answer:
-            "Our calculator provides a reliable estimate based on current market rates in Corfu. Final pricing may vary based on specific requirements, materials chosen, and site conditions. For an exact quote, contact us for a free on-site assessment.",
+            "Our calculator provides a reliable estimate based on current market rates. Final pricing may vary based on specific requirements, materials chosen, and site conditions. For an exact quote, contact us for a free on-site assessment.",
         },
         {
           question: "What factors affect renovation cost?",
@@ -58,7 +58,7 @@ export default function CostCalculatorPage({ lang }: { lang: string }) {
         {
           question: "Πόσο ακριβής είναι αυτός ο υπολογιστής;",
           answer:
-            "Ο υπολογιστής μας παρέχει αξιόπιστη εκτίμηση βασισμένη στις τρέχουσες τιμές αγοράς στην Κέρκυρα. Η τελική τιμή μπορεί να διαφέρει ανάλογα με τις συγκεκριμένες απαιτήσεις, τα υλικά και τις συνθήκες του χώρου. Για ακριβή προσφορά, επικοινωνήστε μαζί μας για δωρεάν επιτόπια εκτίμηση.",
+            "Ο υπολογιστής μας παρέχει αξιόπιστη εκτίμηση βασισμένη στις τρέχουσες τιμές αγοράς. Η τελική τιμή μπορεί να διαφέρει ανάλογα με τις συγκεκριμένες απαιτήσεις, τα υλικά και τις συνθήκες του χώρου. Για ακριβή προσφορά, επικοινωνήστε μαζί μας για δωρεάν επιτόπια εκτίμηση.",
         },
         {
           question: "Ποιοι παράγοντες επηρεάζουν το κόστος ανακαίνισης;",
