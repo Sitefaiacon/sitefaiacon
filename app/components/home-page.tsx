@@ -67,14 +67,14 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100 leading-relaxed">
                 {isEnglish 
                   ? "We provide full renovation and construction services to help you maximize your property's value, rental income, or resale potential."
-                  : "Αναλαμβάνουμε πλήρως την ανακαίνιση για Airbnb ή πώληση με υψηλή αξία"}
+                  : "Αναλαμβάνουμε πλήρως την ανακαίνιση ώστε το ακίνητό σας να είναι έτοιμο για Airbnb ή πώληση με υψηλή αξία."}
               </p>
 
               {/* Trust Line */}
               <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto drop-shadow-lg font-light">
                 {isEnglish 
                   ? "Trusted local contractor with 35+ years of experience"
-                  : "Έμπειροι τοπικοί ανάδοχοι με εμπειρία 35+ ετών"}
+                  : "Εγκωρισμένοι τοποικοί ανάδοχοι με εμπειρία 35+ ετών"}
               </p>
 
               {/* CTA Buttons - Only 2 */}
