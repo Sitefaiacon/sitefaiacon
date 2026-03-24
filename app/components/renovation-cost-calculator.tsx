@@ -62,6 +62,8 @@ export function RenovationCostCalculator() {
   })
   const [renovationQuality, setRenovationQuality] = useState("basic")
   const [renovationCost, setRenovationCost] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; message: string } | null>(null)
 
   // State for Doors & Windows Calculator
   const [material, setMaterial] = useState<Material>("aluminum")
@@ -171,6 +173,7 @@ export function RenovationCostCalculator() {
     }
 
     setRenovationCost(totalCost.toFixed(2))
+    return totalCost.toFixed(2)
   }
 
   const calculateWindowsCost = () => {
@@ -180,6 +183,81 @@ export function RenovationCostCalculator() {
       interiorDoors * windowCosts.interiorDoor[material][windowsQuality] +
       mainEntrance * windowCosts.mainEntrance[material][windowsQuality]
     setWindowsCost(cost.toFixed(2))
+    return cost.toFixed(2)
+  }
+
+  const handleGetQuote = async (tab: "renovation" | "windows") => {
+    setIsSubmitting(true)
+    setSubmitMessage(null)
+
+    try {
+      let cost = ""
+      const leadData: any = {
+        type: tab,
+        timestamp: new Date().toISOString(),
+      }
+
+      if (tab === "renovation") {
+        cost = calculateRenovationCost()
+        leadData.data = {
+          area: Number(area),
+          bathrooms,
+          kitchens,
+          rooms,
+          buildingAge,
+          poolType,
+          poolSize: poolType !== "none" ? poolSize : 0,
+          categories,
+          quality: renovationQuality,
+          estimatedCost: cost,
+        }
+      } else {
+        cost = calculateWindowsCost()
+        leadData.data = {
+          windows,
+          balconyDoors,
+          interiorDoors,
+          mainEntrance,
+          material,
+          quality: windowsQuality,
+          estimatedCost: cost,
+        }
+      }
+
+      const response = await fetch("/api/calculator-lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(leadData),
+      })
+
+      if (response.ok) {
+        setSubmitMessage({
+          type: "success",
+          message: isEnglish
+            ? "Quote request sent successfully! We will contact you shortly."
+            : "Η αίτηση προσφοράς στάλθηκε με επιτυχία! Θα σας επικοινωνήσουμε σύντομα.",
+        })
+      } else {
+        setSubmitMessage({
+          type: "error",
+          message: isEnglish
+            ? "Error sending quote request. Please try again."
+            : "Σφάλμα κατά την αποστολή αίτησης. Παρακαλώ προσπαθήστε ξανά.",
+        })
+      }
+    } catch (error) {
+      console.error("[v0] Error submitting quote:", error)
+      setSubmitMessage({
+        type: "error",
+        message: isEnglish
+          ? "Error sending quote request. Please try again."
+          : "Σφάλμα κατά την αποστολή αίτησης. Παρακαλώ προσπαθήστε ξανά.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
@@ -393,10 +471,11 @@ export function RenovationCostCalculator() {
           </div>
 
           <Button 
-            onClick={calculateRenovationCost} 
-            className="w-full h-11 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+            onClick={() => handleGetQuote("renovation")}
+            disabled={isSubmitting}
+            className="w-full h-11 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium disabled:opacity-50"
           >
-            {translate("Get Quote")}
+            {isSubmitting ? (isEnglish ? "Sending..." : "Αποστολή...") : translate("Get Quote")}
           </Button>
 
           {renovationCost && (
@@ -407,6 +486,18 @@ export function RenovationCostCalculator() {
               <p className="text-2xl font-bold text-primary mt-1">
                 {isEnglish ? `€${renovationCost}` : `${renovationCost}€`}
               </p>
+            </div>
+          )}
+
+          {submitMessage && (
+            <div
+              className={`mt-4 p-4 rounded-lg text-sm ${
+                submitMessage.type === "success"
+                  ? "bg-green-100 text-green-800 border border-green-300"
+                  : "bg-red-100 text-red-800 border border-red-300"
+              }`}
+            >
+              {submitMessage.message}
             </div>
           )}
         </TabsContent>
@@ -450,16 +541,29 @@ export function RenovationCostCalculator() {
           </div>
 
           <Button 
-            onClick={calculateWindowsCost} 
-            className="w-full h-11 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+            onClick={() => handleGetQuote("windows")}
+            disabled={isSubmitting}
+            className="w-full h-11 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium disabled:opacity-50"
           >
-            {translate("Get Quote")}
+            {isSubmitting ? (isEnglish ? "Sending..." : "Αποστολή...") : translate("Get Quote")}
           </Button>
 
           <div className="mt-4 text-center p-4 bg-muted rounded-lg">
             <p className="font-medium text-sm text-muted-foreground">{translate("Estimated Cost:")}</p>
             <p className="text-2xl font-bold text-primary mt-1">€{windowsCost}</p>
           </div>
+
+          {submitMessage && (
+            <div
+              className={`mt-4 p-4 rounded-lg text-sm ${
+                submitMessage.type === "success"
+                  ? "bg-green-100 text-green-800 border border-green-300"
+                  : "bg-red-100 text-red-800 border border-red-300"
+              }`}
+            >
+              {submitMessage.message}
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>
