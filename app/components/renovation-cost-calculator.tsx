@@ -86,6 +86,7 @@ export function RenovationCostCalculator() {
     structural: 130,
     painting: 55,
   }
+  const electricalGeneralRepairCost = 2500 // Extra cost for general repairs
   const poolCostsPerM2 = {
     none: { basic: 0, midRange: 0, premium: 0 },
     liner: { midRange: 1055, premium: 1215 },
@@ -152,7 +153,8 @@ export function RenovationCostCalculator() {
                   ? kitchens
                   : key === "electrical"
                     ? rooms
-                    : numericArea)
+                    : numericArea) +
+            (key === "electrical" ? electricalGeneralRepairCost : 0)
           : acc,
       0,
     )
