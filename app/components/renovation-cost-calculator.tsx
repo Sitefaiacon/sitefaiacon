@@ -186,14 +186,11 @@ export function RenovationCostCalculator() {
   }
 
   const handleGetQuote = (tab: "renovation" | "windows") => {
-    // Calculate BOTH costs internally (user won't see them)
-    const renovationCostValue = parseFloat(calculateRenovationCost())
-    const windowsCostValue = parseFloat(calculateWindowsCost())
+    // Calculate cost internally (user won't see it)
+    const renovationCostValue = calculateRenovationCost()
+    const windowsCostValue = calculateWindowsCost()
     
-    // Calculate total from both tabs
-    const totalCost = renovationCostValue + windowsCostValue
-    
-    // Prepare calculator data for the API - include ALL data from both tabs
+    // Prepare calculator data for the API
     const calculatorData = {
       renovation: {
         area: Number(area),
@@ -205,7 +202,7 @@ export function RenovationCostCalculator() {
         poolSize: poolType !== "none" ? poolSize : 0,
         categories,
         renovationQuality,
-        renovationCost: renovationCostValue,
+        renovationCost: tab === "renovation" ? parseFloat(renovationCostValue) : 0,
       },
       windows: {
         windows,
@@ -214,12 +211,13 @@ export function RenovationCostCalculator() {
         mainEntrance,
         material,
         quality: windowsQuality,
-        windowsCost: windowsCostValue,
+        windowsCost: tab === "windows" ? parseFloat(windowsCostValue) : 0,
       },
-      totalCost: totalCost,
+      totalCost: tab === "renovation" 
+        ? parseFloat(renovationCostValue) 
+        : parseFloat(windowsCostValue),
     }
 
-    console.log("[v0] Calculator data:", calculatorData)
     setPendingCalculatorData(calculatorData)
     setIsModalOpen(true)
   }
