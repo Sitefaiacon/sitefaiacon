@@ -138,12 +138,17 @@ export function RenovationCostCalculator() {
 
   useEffect(() => {
     calculateWindowsCost()
-  }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance])
+  }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance, calculateWindowsCost])
 
   useEffect(() => {
     const newTotalCost = renovationCost + windowsCost
     setTotalCost(newTotalCost)
   }, [renovationCost, windowsCost])
+
+  // Auto-calculate renovation cost whenever inputs change
+  useEffect(() => {
+    calculateRenovationCost()
+  }, [calculateRenovationCost])
 
   // Calculation functions
   const calculateRenovationCost = useCallback(() => {
@@ -221,8 +226,45 @@ export function RenovationCostCalculator() {
 
   // Handle "Calculate" button click - show lead form instead of result
   const handleCalculateClick = () => {
-    // First calculate the costs internally
-    calculateRenovationCost()
+    console.log("[v0] Calculate button clicked")
+    // Calculate costs synchronously first
+    const numericArea = Number(area)
+    const selectedCategories = Object.values(categories).filter(Boolean).length
+    const categoryCost = Object.entries(categories).reduce(
+      (acc, [key, isSelected]) =>
+        isSelected
+          ? acc +
+            categoryModifiers[key as keyof typeof categoryModifiers] *
+              (key === "bathroom"
+                ? bathrooms
+                : key === "kitchen"
+                  ? kitchens
+                  : key === "electrical"
+                    ? rooms
+                    : numericArea)
+          : acc,
+      0,
+    )
+
+    const baseCost = selectedCategories > 1 ? numericArea * baseCostPerM2 : 0
+    let totalCostCalc = (baseCost + categoryCost) * qualityMultipliers[renovationQuality]
+
+    const ageCategory = 2024 - buildingAge > 40 ? "ancient" : 2024 - buildingAge >= 20 ? "old" : "modern"
+    totalCostCalc *= agePenalty[ageCategory]
+    if (numericArea > 125) totalCostCalc *= 0.92
+
+    if (poolType !== "none" && !isNaN(poolSize)) {
+      const poolCostPerM2 = poolCostsPerM2[poolType]?.[renovationQuality as keyof typeof poolCostsPerM2.liner]
+      if (poolCostPerM2) {
+        const poolCost = (poolCostPerM2 - 100) * poolSize
+        totalCostCalc += poolCost > 0 ? poolCost : 0
+      }
+    }
+
+    console.log("[v0] Calculated cost:", totalCostCalc)
+    setRenovationCost(totalCostCalc)
+    
+    console.log("[v0] Opening lead form")
     // Then show the lead capture form
     setShowLeadForm(true)
   }
