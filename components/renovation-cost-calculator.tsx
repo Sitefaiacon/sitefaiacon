@@ -533,10 +533,24 @@ export function RenovationCostCalculator() {
         </TabsContent>
       </Tabs>
 
-      {showResults && totalCost && (
+      {showResults && (renovationCost || windowsCost) && (
         <div className="mt-6 pt-4 border-t border-gray-200 text-center">
-          <p className="font-bold text-lg">{translate("Total Estimated Cost:")}</p>
-          <p className="text-3xl text-blue-600">€{totalCost}</p>
+          {renovationCost && Number(renovationCost) > 0 && (
+            <div className="mb-2">
+              <p className="text-sm text-gray-600">{isEnglish ? "General Renovation:" : "Γενική Ανακαίνιση:"}</p>
+              <p className="text-xl text-blue-600">{isEnglish ? `€${renovationCost}` : `${renovationCost}€`}</p>
+            </div>
+          )}
+          {windowsCost && Number(windowsCost) > 0 && (
+            <div className="mb-2">
+              <p className="text-sm text-gray-600">{isEnglish ? "Doors & Windows:" : "Πόρτες & Παράθυρα:"}</p>
+              <p className="text-xl text-blue-600">{isEnglish ? `€${windowsCost}` : `${windowsCost}€`}</p>
+            </div>
+          )}
+          <div className="mt-4 pt-2 border-t border-gray-100">
+            <p className="font-bold text-lg">{translate("Total Estimated Cost:")}</p>
+            <p className="text-3xl text-blue-600">{isEnglish ? `€${totalCost}` : `${totalCost}€`}</p>
+          </div>
           <Button
             className="mt-4 bg-blue-600 hover:bg-blue-700"
             onClick={() => (window.location.href = "/el/appointment")}
