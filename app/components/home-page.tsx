@@ -91,7 +91,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 </Button>
                 <Button
                   size="lg"
-                  className="bg-accent text-white hover:bg-accent/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
                   asChild
                 >
                   <Link href={whatsappLink} target="_blank" className="flex items-center gap-2">
