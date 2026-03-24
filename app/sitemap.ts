@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${baseUrl}/el/cost-calculator`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.98,
+    },
+    {
       url: `${baseUrl}/el/house-renovation`,
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
@@ -66,6 +72,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
       priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/en/cost-calculator`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.93,
     },
     {
       url: `${baseUrl}/en/house-renovation`,

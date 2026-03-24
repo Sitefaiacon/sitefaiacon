@@ -7,7 +7,7 @@ import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema } from "./components/structured-data"
+import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema } from "./components/structured-data"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -126,6 +126,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RenovationCalculatorSchema />
         <ServiceSchema />
         <FAQSchema />
+        <ReviewSchema />
+        <OfferCatalogSchema />
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
         <WebVitals />

@@ -260,6 +260,176 @@ export function BreadcrumbSchema({ items }: { items: { name: string; url: string
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
+export function ReviewSchema() {
+  const reviews = [
+    {
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: {
+        "@type": "Person",
+        name: "Μαρία Κ.",
+      },
+      reviewBody:
+        "Εξαιρετική δουλειά στην ανακαίνιση του σπιτιού μας. Επαγγελματισμός και ποιότητα σε κάθε λεπτομέρεια.",
+      datePublished: "2024-12-15",
+    },
+    {
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: {
+        "@type": "Person",
+        name: "Γιώργος Π.",
+      },
+      reviewBody:
+        "Κατασκεύασαν την πισίνα μας με άψογο τρόπο. Τήρησαν το χρονοδιάγραμμα και τον προϋπολογισμό.",
+      datePublished: "2024-11-20",
+    },
+    {
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+      author: {
+        "@type": "Person",
+        name: "John S.",
+      },
+      reviewBody:
+        "Excellent work on our villa restoration in Corfu. The team was professional and the results exceeded our expectations.",
+      datePublished: "2024-10-05",
+    },
+  ]
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://faiacon.gr/#reviews",
+    name: "ΦαιάCon",
+    review: reviews,
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
+export function PriceRangeSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "PriceSpecification",
+    "@id": "https://faiacon.gr/#pricing",
+    priceCurrency: "EUR",
+    eligibleRegion: {
+      "@type": "Place",
+      name: "Κέρκυρα, Ελλάδα",
+    },
+    description: "Ενδεικτικές τιμές ανακαίνισης ανά τ.μ.",
+    minPrice: "490",
+    maxPrice: "780",
+    unitText: "ανά τ.μ.",
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
+export function OfferCatalogSchema({ isEnglish = false }: { isEnglish?: boolean }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name: isEnglish ? "FaiaCon Renovation Services" : "Υπηρεσίες Ανακαίνισης ΦαιάCon",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: isEnglish ? "Bathroom Renovation" : "Ανακαίνιση Μπάνιου",
+          description: isEnglish
+            ? "Complete bathroom renovation including tiles, plumbing, and fixtures"
+            : "Ολοκληρωμένη ανακαίνιση μπάνιου με πλακάκια, υδραυλικά και είδη υγιεινής",
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: "2530",
+          priceCurrency: "EUR",
+          unitText: isEnglish ? "per bathroom" : "ανά μπάνιο",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: isEnglish ? "Kitchen Renovation" : "Ανακαίνιση Κουζίνας",
+          description: isEnglish
+            ? "Complete kitchen renovation including cabinets, countertops, and appliances"
+            : "Ολοκληρωμένη ανακαίνιση κουζίνας με ντουλάπια, πάγκους και ηλεκτρικές συσκευές",
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: "4030",
+          priceCurrency: "EUR",
+          unitText: isEnglish ? "per kitchen" : "ανά κουζίνα",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: isEnglish ? "Flooring Installation" : "Τοποθέτηση Δαπέδων",
+          description: isEnglish
+            ? "Professional flooring installation with various materials"
+            : "Επαγγελματική τοποθέτηση δαπέδων με διάφορα υλικά",
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: "70",
+          priceCurrency: "EUR",
+          unitText: isEnglish ? "per m²" : "ανά τ.μ.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: isEnglish ? "Painting Services" : "Υπηρεσίες Βαφής",
+          description: isEnglish ? "Interior and exterior painting services" : "Υπηρεσίες εσωτερικής και εξωτερικής βαφής",
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: "55",
+          priceCurrency: "EUR",
+          unitText: isEnglish ? "per m²" : "ανά τ.μ.",
+        },
+      },
+    ],
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
+export function VideoSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: "Πώς να χρησιμοποιήσετε τον Υπολογιστή Κόστους Ανακαίνισης",
+    description:
+      "Οδηγίες για τη χρήση του δωρεάν online υπολογιστή κόστους ανακαίνισης της ΦαιάCon",
+    thumbnailUrl:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
+    uploadDate: "2024-01-01",
+    contentUrl: "https://faiacon.gr/videos/calculator-tutorial",
+    embedUrl: "https://faiacon.gr/videos/calculator-tutorial/embed",
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
 export function HowToSchema({ isEnglish = false }: { isEnglish?: boolean }) {
   const schema = {
     "@context": "https://schema.org",
