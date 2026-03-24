@@ -3,7 +3,7 @@
 import { useLanguage } from "../contexts/language-context"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CalendarDays, CheckCircle2 } from "lucide-react"
+import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CalendarDays, CheckCircle2, Calculator } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
@@ -61,7 +61,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="mt-8 sm:mt-12"
+                className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
               >
                 <Button
                   size="lg"
@@ -69,6 +69,16 @@ export default function HomePage({ lang }: { lang: string }) {
                   asChild
                 >
                   <Link href={`/${lang}/appointment`}>{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white/30"
+                  asChild
+                >
+                  <Link href="#renovation-calculator" className="flex items-center gap-2">
+                    <Calculator className="w-5 h-5" />
+                    {isEnglish ? "Cost Calculator" : "Υπολογιστής Κόστους"}
+                  </Link>
                 </Button>
               </motion.div>
             </div>
@@ -146,7 +156,7 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify-content">
                 {isEnglish
                   ? "FaiaCon, based in Corfu, is a reference point in the construction sector, offering high-quality services in house construction, home renovation, listed buildings restoration, and luxury pool construction. With over 35 years of experience, our technical team guarantees innovation, durability, and aesthetic excellence in every project we undertake."
-                  : "Η ΦαίαCon, με έδρα την Κέρκυρα, αποτελεί σημείο αναφοράς στον χώρο των κατασκευών, προσφέροντας υψηλής ποιότητας υπηρεσίες στην κατασκευή σπιτιών, την ανακαίνιση κατοικιών, τη δημιουργία διατηρητέων κτιρίων και την κατασκευή πολυτελών πισινών. Με εμπειρία άνω των 35 ετών, η τεχνική μας ομάδα εγγυάται καινοτομία, αντοχή και αισθητική υπεροχή σε κάθε έργο που αναλαμβάνουμε."}
+                  : "Η ΦαίαCon, με έδρα την Κέρκυρα, αποτελεί σημείο αναφοράς στον χώρο των κατασκευών, προσφέροντας υψηλής ποιότητας υπηρεσίες στην κατασκευή σπιτιών, την ανακαίνιση κατοικιών, τη δημιουργία διατηρητέων κτιρίων και την κατασκευή πολυτελών πισινών. Με εμπειρία άνω των 35 ετών, η τεχνική μας ομάδα εγγυάται καινοτομία, αντοχή και ��ισθητική υπεροχή σε κάθε έργο που αναλαμβάνουμε."}
               </p>
             </div>
 
@@ -300,7 +310,7 @@ export default function HomePage({ lang }: { lang: string }) {
           </div>
 
           {/* Renovation Cost Calculator Section */}
-          <section className="relative py-24 md:py-32 bg-gray-100">
+          <section id="renovation-calculator" className="relative py-24 md:py-32 bg-gray-100 scroll-mt-20">
             <div className="container relative z-10 px-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
