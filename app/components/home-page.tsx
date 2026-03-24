@@ -245,7 +245,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "Airbnb & Rental Ready" : "Έτοιμο για Airbnb & Ενοικίαση",
                 description: isEnglish
                   ? "Transform your property into an attractive rental investment with high income potential."
-                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοι��ίασης με υψηλό δυναμικό εισοδήματος.",
+                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοικίασης με υψηλό δυναμικό εισοδήματος.",
                 href: "/house-renovation",
               },
               {
@@ -259,7 +259,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "Add Luxury & Investment Value" : "Προσθέστε Πολυτέλεια & Αξία",
                 description: isEnglish
                   ? "Premium pools and luxury upgrades that enhance lifestyle and property appeal."
-                  : "Πρίμιουμ πισίνες και πολυτελείς αναβ��θμίσεις που ενισχύουν την αξία του ακινήτου.",
+                  : "Πισίνες και πολυτελείς αναβαθμίσεις που ενισχύουν την αξία του ακινήτου.",
                 href: "/pool-construction",
               },
             ].map((service) => (
