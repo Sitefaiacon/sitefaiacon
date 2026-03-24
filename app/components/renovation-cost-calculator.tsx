@@ -377,7 +377,7 @@ export function RenovationCostCalculator() {
             <div className="relative z-10">
               <Label>{isEnglish ? "Categories" : "Κατηγορίες"}</Label>
               {Object.entries(categories).map(([key, value]) => (
-                <div key={key} className="flex items-center space-x-2">
+                <div key={key} className="flex items-center space-x-3">
                   <Checkbox
                     id={key}
                     checked={value}
@@ -385,7 +385,15 @@ export function RenovationCostCalculator() {
                       setCategories((prev) => ({ ...prev, [key]: checked === true }))
                     }}
                   />
-                  <Label htmlFor={key}>
+                  <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    {key === "bathroom" && <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm0-7H1v2h10v-2zm0-2H1v2h10V9zm6-3V3h-2v3h2zm4 0V3h-2v3h2zm-8-1h10v2H13V5z" />}
+                    {key === "kitchen" && <path d="M17 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3-9H5V5h10v5z" />}
+                    {key === "flooring" && <path d="M3 11h2v10H3zm4 0h2v10H7zm4 0h2v10h-2zm4 0h2v10h-2zm4 0h2v10h-2zM3 3h18v2H3z" />}
+                    {key === "electrical" && <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />}
+                    {key === "structural" && <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6.36L23 9 12 3z" />}
+                    {key === "painting" && <path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2s-.68-.55-.68-1.87V4c0-.81.48-1.5 1.34-1.5h5.34c.9 0 1.35.59 1.35 1.5V10h1.3c1.02 0 1.6.63 1.6 1.8V14c0 1.39-.77 2-2.3 2-.63 0-1.23-.22-1.68-.63.09-.33.16-.68.16-1.05a2.98 2.98 0 0 0-5.33-1.82z" />}
+                  </svg>
+                  <Label htmlFor={key} className="cursor-pointer">
                     {isEnglish
                       ? key.charAt(0).toUpperCase() + key.slice(1)
                       : {
