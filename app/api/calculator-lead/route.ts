@@ -105,6 +105,81 @@ function generateEmailHTML(lead: CalculatorLead): string {
   // Check if renovation has any data (not just cost)
   const hasRenovationData = renovation.area > 0 || selectedCategories.length > 0 || renovation.renovationCost > 0
   
+  // Cost calculation constants (same as in calculator)
+  const baseCostPerM2 = 490
+  const qualityMultipliers: Record<string, number> = { basic: 1.0, midRange: 1.3, premium: 1.6 }
+  const agePenalty: Record<string, number> = { ancient: 1.25, old: 1.15, modern: 1.0 }
+  const categoryModifiers: Record<string, number> = {
+    bathroom: 2530,
+    kitchen: 4030,
+    flooring: 70,
+    electrical: 530,
+    structural: 130,
+    painting: 55,
+  }
+  const poolCostsPerM2: Record<string, Record<string, number>> = {
+    none: { basic: 0, midRange: 0, premium: 0 },
+    liner: { midRange: 1055, premium: 1215 },
+    polyester: { premium: 1255 },
+    concrete: { basic: 1155, midRange: 1255, premium: 1355 },
+  }
+  
+  // Calculate cost breakdown for renovation
+  const getAgeCategory = (year: number) => {
+    if (year < 1970) return 'ancient'
+    if (year < 2000) return 'old'
+    return 'modern'
+  }
+  
+  const ageCategory = getAgeCategory(renovation.buildingAge)
+  const agePenaltyLabels: Record<string, string> = { ancient: 'Πριν το 1970 (+25%)', old: '1970-2000 (+15%)', modern: 'Μετά το 2000 (0%)' }
+  
+  // Calculate individual costs
+  const baseCost = renovation.area * baseCostPerM2
+  const qualityMultiplier = qualityMultipliers[renovation.renovationQuality] || 1
+  const ageMultiplier = agePenalty[ageCategory] || 1
+  
+  // Category costs
+  const bathroomCost = renovation.bathrooms * categoryModifiers.bathroom * (renovation.categories?.bathroom ? 1 : 0)
+  const kitchenCost = renovation.kitchens * categoryModifiers.kitchen * (renovation.categories?.kitchen ? 1 : 0)
+  const flooringCost = renovation.area * categoryModifiers.flooring * (renovation.categories?.flooring ? 1 : 0)
+  const electricalCost = renovation.rooms * categoryModifiers.electrical * (renovation.categories?.electrical ? 1 : 0)
+  const structuralCost = renovation.area * categoryModifiers.structural * (renovation.categories?.structural ? 1 : 0)
+  const paintingCost = renovation.area * categoryModifiers.painting * (renovation.categories?.painting ? 1 : 0)
+  
+  // Pool cost
+  const poolCostPerM2 = poolCostsPerM2[renovation.poolType]?.[renovation.renovationQuality] || 0
+  const poolCost = renovation.poolType !== 'none' ? (renovation.poolSize || 0) * poolCostPerM2 : 0
+  
+  // Windows costs breakdown
+  const windowCosts: Record<string, Record<string, Record<string, number>>> = {
+    window: {
+      aluminum: { basic: 530, midRange: 630, premium: 730 },
+      pvc: { basic: 430, midRange: 530, premium: 630 },
+      wood: { basic: 630, midRange: 730, premium: 830 },
+    },
+    balconyDoor: {
+      aluminum: { basic: 930, midRange: 1030, premium: 1130 },
+      pvc: { basic: 830, midRange: 930, premium: 1030 },
+      wood: { basic: 1030, midRange: 1130, premium: 1230 },
+    },
+    interiorDoor: {
+      aluminum: { basic: 330, midRange: 430, premium: 530 },
+      pvc: { basic: 280, midRange: 380, premium: 480 },
+      wood: { basic: 430, midRange: 530, premium: 630 },
+    },
+    mainEntrance: {
+      aluminum: { basic: 1530, midRange: 1830, premium: 2030 },
+      pvc: { basic: 1330, midRange: 1530, premium: 1730 },
+      wood: { basic: 1830, midRange: 2030, premium: 2230 },
+    },
+  }
+  
+  const windowUnitCost = windowCosts.window[windows.material]?.[windows.quality] || 0
+  const balconyDoorUnitCost = windowCosts.balconyDoor[windows.material]?.[windows.quality] || 0
+  const interiorDoorUnitCost = windowCosts.interiorDoor[windows.material]?.[windows.quality] || 0
+  const mainEntranceUnitCost = windowCosts.mainEntrance[windows.material]?.[windows.quality] || 0
+  
   return `
 <!DOCTYPE html>
 <html lang="el">
@@ -173,45 +248,81 @@ function generateEmailHTML(lead: CalculatorLead): string {
               <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; height: 100%;">
                 <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Γενική Ανακαίνιση</h2>
                 ${hasRenovationData ? `
-                <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 13px;">
+                <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 12px;">
+                  <tr style="background-color: #e9ecef;">
+                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px;">Βασικά Στοιχεία</td>
+                  </tr>
                   <tr>
                     <td style="color: #6c757d;">Εμβαδόν:</td>
                     <td style="color: #212529; text-align: right;">${renovation.area} τ.μ.</td>
                   </tr>
                   <tr>
-                    <td style="color: #6c757d;">Μπάνια:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.bathrooms}</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Κουζίνες:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.kitchens}</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Δωμάτια:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.rooms}</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Έτος:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.buildingAge}</td>
-                  </tr>
-                  <tr>
                     <td style="color: #6c757d;">Ποιότητα:</td>
-                    <td style="color: #212529; text-align: right; font-weight: 600;">${qualityLabels[renovation.renovationQuality]}</td>
+                    <td style="color: #212529; text-align: right;">${qualityLabels[renovation.renovationQuality]} (x${qualityMultiplier})</td>
                   </tr>
-                  ${selectedCategories.length > 0 ? `
                   <tr>
-                    <td colspan="2" style="color: #6c757d; padding-top: 8px;">Κατηγορίες: ${selectedCategories.join(', ')}</td>
+                    <td style="color: #6c757d;">Έτος (${renovation.buildingAge}):</td>
+                    <td style="color: #212529; text-align: right;">${agePenaltyLabels[ageCategory]}</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d;">Βασικό κόστος:</td>
+                    <td style="color: #3a5a8c; text-align: right; font-weight: 600;">${renovation.area} x ${baseCostPerM2}€ = ${formatCost(baseCost)}</td>
+                  </tr>
+                  
+                  ${selectedCategories.length > 0 ? `
+                  <tr style="background-color: #e9ecef;">
+                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px; padding-top: 10px;">Ανάλυση Κατηγοριών</td>
+                  </tr>
+                  ${renovation.categories?.bathroom && renovation.bathrooms > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Μπάνια (${renovation.bathrooms}):</td>
+                    <td style="color: #212529; text-align: right;">${renovation.bathrooms} x ${formatCost(categoryModifiers.bathroom)} = ${formatCost(bathroomCost)}</td>
                   </tr>
                   ` : ''}
-                  ${renovation.poolType !== 'none' ? `
+                  ${renovation.categories?.kitchen && renovation.kitchens > 0 ? `
                   <tr>
-                    <td style="color: #6c757d;">Πισίνα:</td>
-                    <td style="color: #212529; text-align: right;">${poolLabels[renovation.poolType]} - ${renovation.poolSize} τ.μ.</td>
+                    <td style="color: #6c757d;">Κουζίνες (${renovation.kitchens}):</td>
+                    <td style="color: #212529; text-align: right;">${renovation.kitchens} x ${formatCost(categoryModifiers.kitchen)} = ${formatCost(kitchenCost)}</td>
+                  </tr>
+                  ` : ''}
+                  ${renovation.categories?.flooring ? `
+                  <tr>
+                    <td style="color: #6c757d;">Δάπεδα:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.area} τ.μ. x ${categoryModifiers.flooring}€ = ${formatCost(flooringCost)}</td>
+                  </tr>
+                  ` : ''}
+                  ${renovation.categories?.electrical && renovation.rooms > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Ηλεκτρολογικά (${renovation.rooms} δωμ.):</td>
+                    <td style="color: #212929; text-align: right;">${renovation.rooms} x ${formatCost(categoryModifiers.electrical)} = ${formatCost(electricalCost)}</td>
+                  </tr>
+                  ` : ''}
+                  ${renovation.categories?.structural ? `
+                  <tr>
+                    <td style="color: #6c757d;">Δομικά:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.area} τ.μ. x ${categoryModifiers.structural}€ = ${formatCost(structuralCost)}</td>
+                  </tr>
+                  ` : ''}
+                  ${renovation.categories?.painting ? `
+                  <tr>
+                    <td style="color: #6c757d;">Βαφή:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.area} τ.μ. x ${categoryModifiers.painting}€ = ${formatCost(paintingCost)}</td>
+                  </tr>
+                  ` : ''}
+                  ` : ''}
+                  
+                  ${renovation.poolType !== 'none' ? `
+                  <tr style="background-color: #e9ecef;">
+                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px; padding-top: 10px;">Πισίνα</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d;">${poolLabels[renovation.poolType]}:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.poolSize} τ.μ. x ${formatCost(poolCostPerM2)} = ${formatCost(poolCost)}</td>
                   </tr>
                   ` : ''}
                 </table>
-                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #dee2e6;">
-                  <p style="margin: 0; color: #6c757d; font-size: 12px;">Κόστος Ανακαίνισης</p>
+                <div style="margin-top: 15px; padding-top: 10px; border-top: 2px solid #3a5a8c;">
+                  <p style="margin: 0; color: #6c757d; font-size: 11px;">Σύνολο x Ποιότητα (${qualityMultiplier}) x Ηλικία (${ageMultiplier})</p>
                   <p style="margin: 5px 0 0 0; color: #3a5a8c; font-size: 22px; font-weight: 700;">${formatCost(renovation.renovationCost)}</p>
                 </div>
                 ` : `
@@ -229,42 +340,49 @@ function generateEmailHTML(lead: CalculatorLead): string {
               <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; height: 100%;">
                 <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Πόρτες & Παράθυρα</h2>
                 ${windows.windowsCost > 0 ? `
-                <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 13px;">
-                  ${windows.windows > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Παράθυρα:</td>
-                    <td style="color: #212529; text-align: right;">${windows.windows}</td>
+                <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 12px;">
+                  <tr style="background-color: #e9ecef;">
+                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px;">Επιλογές</td>
                   </tr>
-                  ` : ''}
-                  ${windows.balconyDoors > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Μπαλκονόπορτες:</td>
-                    <td style="color: #212529; text-align: right;">${windows.balconyDoors}</td>
-                  </tr>
-                  ` : ''}
-                  ${windows.interiorDoors > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Εσωτ. Πόρτες:</td>
-                    <td style="color: #212529; text-align: right;">${windows.interiorDoors}</td>
-                  </tr>
-                  ` : ''}
-                  ${windows.mainEntrance > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Κεντρ. Είσοδος:</td>
-                    <td style="color: #212529; text-align: right;">${windows.mainEntrance}</td>
-                  </tr>
-                  ` : ''}
                   <tr>
                     <td style="color: #6c757d;">Υλικό:</td>
-                    <td style="color: #212529; text-align: right;">${materialLabels[windows.material]}</td>
+                    <td style="color: #212529; text-align: right; font-weight: 600;">${materialLabels[windows.material]}</td>
                   </tr>
                   <tr>
                     <td style="color: #6c757d;">Ποιότητα:</td>
                     <td style="color: #212529; text-align: right; font-weight: 600;">${qualityLabels[windows.quality]}</td>
                   </tr>
+                  
+                  <tr style="background-color: #e9ecef;">
+                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px; padding-top: 10px;">Ανάλυση Κόστους</td>
+                  </tr>
+                  ${windows.windows > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Παράθυρα (${windows.windows}):</td>
+                    <td style="color: #212529; text-align: right;">${windows.windows} x ${formatCost(windowUnitCost)} = ${formatCost(windows.windows * windowUnitCost)}</td>
+                  </tr>
+                  ` : ''}
+                  ${windows.balconyDoors > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Μπαλκονόπορτες (${windows.balconyDoors}):</td>
+                    <td style="color: #212529; text-align: right;">${windows.balconyDoors} x ${formatCost(balconyDoorUnitCost)} = ${formatCost(windows.balconyDoors * balconyDoorUnitCost)}</td>
+                  </tr>
+                  ` : ''}
+                  ${windows.interiorDoors > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Εσωτ. Πόρτες (${windows.interiorDoors}):</td>
+                    <td style="color: #212529; text-align: right;">${windows.interiorDoors} x ${formatCost(interiorDoorUnitCost)} = ${formatCost(windows.interiorDoors * interiorDoorUnitCost)}</td>
+                  </tr>
+                  ` : ''}
+                  ${windows.mainEntrance > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Κεντρ. Είσοδος (${windows.mainEntrance}):</td>
+                    <td style="color: #212529; text-align: right;">${windows.mainEntrance} x ${formatCost(mainEntranceUnitCost)} = ${formatCost(windows.mainEntrance * mainEntranceUnitCost)}</td>
+                  </tr>
+                  ` : ''}
                 </table>
-                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #dee2e6;">
-                  <p style="margin: 0; color: #6c757d; font-size: 12px;">Κόστος Κουφωμάτων</p>
+                <div style="margin-top: 15px; padding-top: 10px; border-top: 2px solid #3a5a8c;">
+                  <p style="margin: 0; color: #6c757d; font-size: 11px;">Σύνολο Κουφωμάτων</p>
                   <p style="margin: 5px 0 0 0; color: #3a5a8c; font-size: 22px; font-weight: 700;">${formatCost(windows.windowsCost)}</p>
                 </div>
                 ` : `
