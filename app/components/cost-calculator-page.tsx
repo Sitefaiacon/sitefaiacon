@@ -5,6 +5,7 @@ import dynamic from "next/dynamic"
 import { Calculator, CheckCircle, Clock, Euro, Phone, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { PricingGuideComponent } from "./pricing-guide"
 
 const RenovationCostCalculator = dynamic(
   () => import("./renovation-cost-calculator").then((mod) => mod.RenovationCostCalculator),
@@ -29,24 +30,6 @@ export default function CostCalculatorPage({ lang }: { lang: string }) {
         { icon: Clock, title: "Άμεσα Αποτελέσματα", description: "Λάβετε εκτίμηση σε δευτερόλεπτα" },
         { icon: Shield, title: "Ακριβείς Τιμές", description: "Βασισμένες σε πραγματικές τιμές αγοράς" },
         { icon: CheckCircle, title: "Όλες οι Υπηρεσίες", description: "Μπάνιο, κουζίνα, δάπεδα & άλλα" },
-      ]
-
-  const pricingInfo = isEnglish
-    ? [
-        { service: "Bathroom Renovation", price: "from €2,530", unit: "per bathroom" },
-        { service: "Kitchen Renovation", price: "from €4,030", unit: "per kitchen" },
-        { service: "Flooring", price: "from €70", unit: "per m²" },
-        { service: "Painting", price: "from €55", unit: "per m²" },
-        { service: "Electrical Work", price: "from €530", unit: "per room" },
-        { service: "Windows & Doors", price: "from €430", unit: "per unit" },
-      ]
-    : [
-        { service: "Ανακαίνιση Μπάνιου", price: "από €2.530", unit: "ανά μπάνιο" },
-        { service: "Ανακαίνιση Κουζίνας", price: "από €4.030", unit: "ανά κουζίνα" },
-        { service: "Δάπεδα", price: "από €70", unit: "ανά τ.μ." },
-        { service: "Βαφή", price: "από €55", unit: "ανά τ.μ." },
-        { service: "Ηλεκτρολογικά", price: "από €530", unit: "ανά δωμάτιο" },
-        { service: "Κουφώματα", price: "από €430", unit: "ανά τεμάχιο" },
       ]
 
   const faqs = isEnglish
@@ -158,34 +141,18 @@ export default function CostCalculatorPage({ lang }: { lang: string }) {
       {/* Pricing Guide */}
       <section className="py-16 sm:py-24 bg-gray-50">
         <div className="container px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-4">
                 {isEnglish ? "Indicative Pricing Guide" : "Ενδεικτικός Οδηγός Τιμών"}
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-lg">
                 {isEnglish
                   ? "Starting prices for common renovation services in Corfu"
                   : "Αρχικές τιμές για συνηθισμένες υπηρεσίες ανακαίνισης στην Κέρκυρα"}
               </p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {pricingInfo.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
-                >
-                  <h3 className="font-semibold text-lg mb-2">{item.service}</h3>
-                  <p className="text-2xl font-bold text-primary">{item.price}</p>
-                  <p className="text-sm text-gray-500">{item.unit}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-center text-sm text-gray-500 mt-6">
-              {isEnglish
-                ? "* Prices are indicative and may vary based on specific requirements"
-                : "* Οι τιμές είναι ενδεικτικές και μπορεί να διαφέρουν ανάλογα με τις συγκεκριμένες απαιτήσεις"}
-            </p>
+            <PricingGuideComponent />
           </div>
         </div>
       </section>
