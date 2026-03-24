@@ -145,11 +145,6 @@ export function RenovationCostCalculator() {
     setTotalCost(newTotalCost)
   }, [renovationCost, windowsCost])
 
-  // Auto-calculate renovation cost whenever inputs change
-  useEffect(() => {
-    calculateRenovationCost()
-  }, [calculateRenovationCost])
-
   // Calculation functions
   const calculateRenovationCost = useCallback(() => {
     const numericArea = Number(area)
