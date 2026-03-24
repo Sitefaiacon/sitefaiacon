@@ -109,6 +109,7 @@ export function RenovationCostCalculator() {
     "Calculate your renovation cost in 1 minute!": "Υπολογίστε το κόστος της ανακαίνισής σας σε 1 λεπτό!",
     "Request a Quote": "Ζητήστε Προσφορά",
     Calculate: "Υπολογισμός",
+    "Get Quote": "Λάβετε Προσφορά",
     aluminum: "Αλουμίνιο",
     pvc: "PVC",
     wood: "Ξύλο",
@@ -354,7 +355,7 @@ export function RenovationCostCalculator() {
                 value={poolSize}
                 onChange={(e) => {
                   setPoolSize(Number(e.target.value))
-                  setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                  setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδ��μένα
                 }}
                 min="1"
                 max="50"
@@ -412,8 +413,8 @@ export function RenovationCostCalculator() {
               </SelectContent>
             </Select>
           </div>
-          <Button onClick={calculateRenovationCost} className="w-full mt-4 bg-blue-600 hover:bg-blue-700">
-            {translate("Calculate")}
+          <Button onClick={calculateRenovationCost} className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+            {translate("Get Quote")}
           </Button>
           {showResults && renovationCost && (
             <div className="mt-4 text-center">
