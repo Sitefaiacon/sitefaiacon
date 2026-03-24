@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -8,6 +8,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "../contexts/language-context"
+import { LeadCaptureForm } from "./lead-capture-form"
+import type { CalculatorSelections } from "@/lib/types/calculator-lead"
 
 // Constants for Doors & Windows Calculator
 const materialOptions = ["aluminum", "pvc", "wood"] as const
@@ -41,7 +43,7 @@ const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
 
 export function RenovationCostCalculator() {
   const { isEnglish } = useLanguage()
-  const [activeTab, setActiveTab] = useState("renovation")
+  const [activeTab, setActiveTab] = useState<"renovation" | "windows">("renovation")
 
   // State for Renovation Calculator
   const [area, setArea] = useState<string>("50")
@@ -49,7 +51,7 @@ export function RenovationCostCalculator() {
   const [kitchens, setKitchens] = useState(1)
   const [rooms, setRooms] = useState(2)
   const [buildingAge, setBuildingAge] = useState(2000)
-  const [poolType, setPoolType] = useState("none")
+  const [poolType, setPoolType] = useState<"none" | "concrete" | "polyester" | "liner">("none")
   const [poolSize, setPoolSize] = useState(18)
   const [categories, setCategories] = useState({
     bathroom: false,
@@ -59,8 +61,8 @@ export function RenovationCostCalculator() {
     structural: false,
     painting: false,
   })
-  const [renovationQuality, setRenovationQuality] = useState("basic")
-  const [renovationCost, setRenovationCost] = useState<string | null>(null)
+  const [renovationQuality, setRenovationQuality] = useState<"basic" | "midRange" | "premium">("basic")
+  const [renovationCost, setRenovationCost] = useState<number>(0)
 
   // State for Doors & Windows Calculator
   const [material, setMaterial] = useState<Material>("aluminum")
@@ -69,10 +71,13 @@ export function RenovationCostCalculator() {
   const [balconyDoors, setBalconyDoors] = useState(0)
   const [interiorDoors, setInteriorDoors] = useState(0)
   const [mainEntrance, setMainEntrance] = useState(0)
-  const [windowsCost, setWindowsCost] = useState<string | null>(null)
+  const [windowsCost, setWindowsCost] = useState<number>(0)
 
-  //New State Variable
-  const [totalCost, setTotalCost] = useState<string | null>(null)
+  // Total Cost State
+  const [totalCost, setTotalCost] = useState<number>(0)
+
+  // Lead Capture Form State
+  const [showLeadForm, setShowLeadForm] = useState(false)
 
   // Constants for Renovation Calculator
   const baseCostPerM2 = 415
@@ -91,6 +96,12 @@ export function RenovationCostCalculator() {
     liner: { midRange: 1025, premium: 1185 },
     polyester: { premium: 1225 },
     concrete: { basic: 1125, midRange: 1225, premium: 1325 },
+  }
+
+  // Helper function to safely get pool cost without TypeScript issues
+  const getPoolCostPerM2 = (type: string, quality: string): number => {
+    const poolData = poolCostsPerM2 as Record<string, Record<string, number>>
+    return poolData[type]?.[quality] ?? 0
   }
 
   // Translations
@@ -131,19 +142,8 @@ export function RenovationCostCalculator() {
     }
   }, [poolType, renovationQuality])
 
-  useEffect(() => {
-    calculateWindowsCost()
-  }, [material, windowsQuality]) // Updated dependencies
-
-  useEffect(() => {
-    const renovationCostNumber = renovationCost ? Number.parseFloat(renovationCost) : 0
-    const windowsCostNumber = windowsCost ? Number.parseFloat(windowsCost) : 0
-    const newTotalCost = (renovationCostNumber + windowsCostNumber).toFixed(2)
-    setTotalCost(newTotalCost)
-  }, [renovationCost, windowsCost])
-
   // Calculation functions
-  const calculateRenovationCost = () => {
+  const calculateRenovationCost = useCallback(() => {
     const numericArea = Number(area)
     const selectedCategories = Object.values(categories).filter(Boolean).length
     const categoryCost = Object.entries(categories).reduce(
@@ -163,30 +163,109 @@ export function RenovationCostCalculator() {
     )
 
     const baseCost = selectedCategories > 1 ? numericArea * baseCostPerM2 : 0
-    let totalCost = (baseCost + categoryCost) * qualityMultipliers[renovationQuality as keyof typeof qualityMultipliers]
+    let totalCostCalc = (baseCost + categoryCost) * qualityMultipliers[renovationQuality]
 
     const ageCategory = 2024 - buildingAge > 40 ? "ancient" : 2024 - buildingAge >= 20 ? "old" : "modern"
-    totalCost *= agePenalty[ageCategory as keyof typeof agePenalty]
-    if (numericArea > 125) totalCost *= 0.92
+    totalCostCalc *= agePenalty[ageCategory]
+    if (numericArea > 125) totalCostCalc *= 0.92
 
     if (poolType !== "none" && !isNaN(poolSize)) {
-      const poolCost =
-        (poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][renovationQuality as keyof typeof qualityMultipliers] -
-          100) *
-        poolSize
-      totalCost += poolCost > 0 ? poolCost : 0
+      const poolCostPerM2 = getPoolCostPerM2(poolType, renovationQuality)
+      if (poolCostPerM2 > 0) {
+        const poolCost = (poolCostPerM2 - 100) * poolSize
+        totalCostCalc += poolCost > 0 ? poolCost : 0
+      }
     }
 
-    setRenovationCost(totalCost.toFixed(2))
-  }
+    setRenovationCost(totalCostCalc)
+  }, [area, bathrooms, kitchens, rooms, buildingAge, poolType, poolSize, categories, renovationQuality])
 
-  const calculateWindowsCost = () => {
+  const calculateWindowsCost = useCallback(() => {
     const cost =
-      windows * windowCosts.window[material][windowsQuality] +
-      balconyDoors * windowCosts.balconyDoor[material][windowsQuality] +
-      interiorDoors * windowCosts.interiorDoor[material][windowsQuality] +
-      mainEntrance * windowCosts.mainEntrance[material][windowsQuality]
-    setWindowsCost(cost.toFixed(2))
+      windows * windowCosts.window[material as keyof typeof windowCosts.window][windowsQuality as keyof typeof windowCosts.window.aluminum] +
+      balconyDoors * windowCosts.balconyDoor[material as keyof typeof windowCosts.balconyDoor][windowsQuality as keyof typeof windowCosts.balconyDoor.aluminum] +
+      interiorDoors * windowCosts.interiorDoor[material as keyof typeof windowCosts.interiorDoor][windowsQuality as keyof typeof windowCosts.interiorDoor.aluminum] +
+      mainEntrance * windowCosts.mainEntrance[material as keyof typeof windowCosts.mainEntrance][windowsQuality as keyof typeof windowCosts.mainEntrance.aluminum]
+    setWindowsCost(cost)
+  }, [windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality])
+
+  // Effects that depend on the calculation functions
+  useEffect(() => {
+    calculateWindowsCost()
+  }, [calculateWindowsCost])
+
+  useEffect(() => {
+    const newTotalCost = renovationCost + windowsCost
+    setTotalCost(newTotalCost)
+  }, [renovationCost, windowsCost])
+
+  // Prepare selections for lead capture
+  const getCalculatorSelections = (): CalculatorSelections => ({
+    activeTab,
+    renovation: {
+      area: Number(area),
+      bathrooms,
+      kitchens,
+      rooms,
+      buildingAge,
+      poolType,
+      poolSize,
+      categories,
+      renovationQuality,
+      renovationCost,
+    },
+    windows: {
+      windows,
+      balconyDoors,
+      interiorDoors,
+      mainEntrance,
+      material,
+      quality: windowsQuality,
+      windowsCost,
+    },
+    totalCost,
+  })
+
+  // Handle "Calculate" button click - show lead form instead of result
+  const handleCalculateClick = () => {
+    // Calculate costs synchronously first
+    const numericArea = Number(area)
+    const selectedCategories = Object.values(categories).filter(Boolean).length
+    const categoryCost = Object.entries(categories).reduce(
+      (acc, [key, isSelected]) =>
+        isSelected
+          ? acc +
+            categoryModifiers[key as keyof typeof categoryModifiers] *
+              (key === "bathroom"
+                ? bathrooms
+                : key === "kitchen"
+                  ? kitchens
+                  : key === "electrical"
+                    ? rooms
+                    : numericArea)
+          : acc,
+      0,
+    )
+
+    const baseCost = selectedCategories > 1 ? numericArea * baseCostPerM2 : 0
+    let totalCostCalc = (baseCost + categoryCost) * qualityMultipliers[renovationQuality]
+
+    const ageCategory = 2024 - buildingAge > 40 ? "ancient" : 2024 - buildingAge >= 20 ? "old" : "modern"
+    totalCostCalc *= agePenalty[ageCategory]
+    if (numericArea > 125) totalCostCalc *= 0.92
+
+    if (poolType !== "none" && !isNaN(poolSize)) {
+      const poolCostPerM2 = getPoolCostPerM2(poolType, renovationQuality)
+      if (poolCostPerM2 > 0) {
+        const poolCost = (poolCostPerM2 - 100) * poolSize
+        totalCostCalc += poolCost > 0 ? poolCost : 0
+      }
+    }
+
+    setRenovationCost(totalCostCalc)
+    
+    // Then show the lead capture form
+    setShowLeadForm(true)
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
@@ -203,233 +282,218 @@ export function RenovationCostCalculator() {
   )
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-primary">{translate("Renovation Cost Calculator")}</h2>
+    <>
+      <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-primary">{translate("Renovation Cost Calculator")}</h2>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-4">
-          <TabsTrigger value="renovation">{translate("General Renovation")}</TabsTrigger>
-          <TabsTrigger value="windows">{translate("Doors & Windows")}</TabsTrigger>
-        </TabsList>
+        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "renovation" | "windows")} className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-4">
+            <TabsTrigger value="renovation">{translate("General Renovation")}</TabsTrigger>
+            <TabsTrigger value="windows">{translate("Doors & Windows")}</TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="renovation" className="space-y-4">
-          <div>
-            <Label htmlFor="area">{isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}</Label>
-            <Input
-              id="area"
-              type="number"
-              value={area}
-              onChange={(e) => {
-                setArea(e.target.value)
-                calculateRenovationCost()
-              }}
-              min="1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="bathrooms">{isEnglish ? "Bathrooms" : "Μπάνια"}</Label>
-            <Input
-              id="bathrooms"
-              type="number"
-              value={bathrooms}
-              onChange={(e) => {
-                setBathrooms(Number(e.target.value))
-                calculateRenovationCost()
-              }}
-              min="0"
-            />
-          </div>
-          <div>
-            <Label htmlFor="kitchens">{isEnglish ? "Kitchens" : "Κουζίνες"}</Label>
-            <Input
-              id="kitchens"
-              type="number"
-              value={kitchens}
-              onChange={(e) => {
-                setKitchens(Number(e.target.value))
-                calculateRenovationCost()
-              }}
-              min="0"
-            />
-          </div>
-          <div>
-            <Label htmlFor="rooms">{isEnglish ? "Rooms" : "Δωμάτια"}</Label>
-            <Input
-              id="rooms"
-              type="number"
-              value={rooms}
-              onChange={(e) => {
-                setRooms(Number(e.target.value))
-                calculateRenovationCost()
-              }}
-              min="0"
-            />
-          </div>
-          <div>
-            <Label htmlFor="buildingAge">{isEnglish ? "Building Year" : "Έτος Κατασκευής"}</Label>
-            <Input
-              id="buildingAge"
-              type="number"
-              value={buildingAge}
-              onChange={(e) => {
-                setBuildingAge(Number(e.target.value))
-                calculateRenovationCost()
-              }}
-              min="1900"
-              max="2024"
-            />
-          </div>
-          <div className="relative z-30">
-            <Label>{isEnglish ? "Pool Type" : "Τύπος Πισίνας"}</Label>
-            <Select
-              value={poolType}
-              onValueChange={(value) => {
-                setPoolType(value as "none" | "concrete" | "polyester" | "liner")
-                calculateRenovationCost()
-              }}
-            >
-              <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent position="popper" sideOffset={5} className="z-[100] bg-white">
-                <SelectItem value="none">{isEnglish ? "None" : "Καμία"}</SelectItem>
-                <SelectItem value="concrete">{isEnglish ? "Concrete" : "Μπετόν"}</SelectItem>
-                <SelectItem value="polyester">{isEnglish ? "Polyester" : "Πολυεστερική"}</SelectItem>
-                <SelectItem value="liner">{isEnglish ? "Liner" : "Με επένδυση"}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          {poolType !== "none" && (
+          <TabsContent value="renovation" className="space-y-4">
             <div>
-              <Label htmlFor="poolSize">{isEnglish ? "Pool Size (m²)" : "Μέγεθος Πισίνας (τ.μ.)"}</Label>
+              <Label htmlFor="area">{isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}</Label>
               <Input
-                id="poolSize"
+                id="area"
                 type="number"
-                value={poolSize}
-                onChange={(e) => {
-                  setPoolSize(Number(e.target.value))
-                  calculateRenovationCost()
-                }}
+                value={area}
+                onChange={(e) => setArea(e.target.value)}
                 min="1"
-                max="50"
               />
             </div>
-          )}
-          <div className="relative z-10">
-            <Label>{isEnglish ? "Categories" : "Κατηγορίες"}</Label>
-            {Object.entries(categories).map(([key, value]) => (
-              <div key={key} className="flex items-center space-x-2">
-                <Checkbox
-                  id={key}
-                  checked={value}
-                  onCheckedChange={(checked) => {
-                    setCategories((prev) => ({ ...prev, [key]: checked === true }))
-                    calculateRenovationCost()
-                  }}
+            <div>
+              <Label htmlFor="bathrooms">{isEnglish ? "Bathrooms" : "Μπάνια"}</Label>
+              <Input
+                id="bathrooms"
+                type="number"
+                value={bathrooms}
+                onChange={(e) => setBathrooms(Number(e.target.value))}
+                min="0"
+              />
+            </div>
+            <div>
+              <Label htmlFor="kitchens">{isEnglish ? "Kitchens" : "Κουζίνες"}</Label>
+              <Input
+                id="kitchens"
+                type="number"
+                value={kitchens}
+                onChange={(e) => setKitchens(Number(e.target.value))}
+                min="0"
+              />
+            </div>
+            <div>
+              <Label htmlFor="rooms">{isEnglish ? "Rooms" : "Δωμάτια"}</Label>
+              <Input
+                id="rooms"
+                type="number"
+                value={rooms}
+                onChange={(e) => setRooms(Number(e.target.value))}
+                min="0"
+              />
+            </div>
+            <div>
+              <Label htmlFor="buildingAge">{isEnglish ? "Building Year" : "Έτος Κατασκευής"}</Label>
+              <Input
+                id="buildingAge"
+                type="number"
+                value={buildingAge}
+                onChange={(e) => setBuildingAge(Number(e.target.value))}
+                min="1900"
+                max="2024"
+              />
+            </div>
+            <div className="relative z-30">
+              <Label>{isEnglish ? "Pool Type" : "Τύπος Πισίνας"}</Label>
+              <Select
+                value={poolType}
+                onValueChange={(value) => setPoolType(value as "none" | "concrete" | "polyester" | "liner")}
+              >
+                <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent position="popper" sideOffset={5} className="z-[100] bg-white">
+                  <SelectItem value="none">{isEnglish ? "None" : "Καμία"}</SelectItem>
+                  <SelectItem value="concrete">{isEnglish ? "Concrete" : "Μπετόν"}</SelectItem>
+                  <SelectItem value="polyester">{isEnglish ? "Polyester" : "Πολυεστερική"}</SelectItem>
+                  <SelectItem value="liner">{isEnglish ? "Liner" : "Με επένδυση"}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {poolType !== "none" && (
+              <div>
+                <Label htmlFor="poolSize">{isEnglish ? "Pool Size (m²)" : "Μέγεθος Πισίνας (τ.μ.)"}</Label>
+                <Input
+                  id="poolSize"
+                  type="number"
+                  value={poolSize}
+                  onChange={(e) => setPoolSize(Number(e.target.value))}
+                  min="1"
+                  max="50"
                 />
-                <Label htmlFor={key}>
-                  {isEnglish
-                    ? key.charAt(0).toUpperCase() + key.slice(1)
-                    : {
-                        bathroom: "Μπάνιο",
-                        kitchen: "Κουζίνα",
-                        flooring: "Δάπεδα",
-                        electrical: "Ηλεκτρολογικά",
-                        structural: "Δομικά",
-                        painting: "Βαφή",
-                      }[key]}
-                </Label>
               </div>
-            ))}
-          </div>
-          <div className="relative z-30">
-            <Label>{isEnglish ? "Quality" : "Ποιότητα"}</Label>
-            <Select
-              value={renovationQuality}
-              onValueChange={(value) => {
-                setRenovationQuality(value as "basic" | "midRange" | "premium")
-                calculateRenovationCost()
-              }}
-            >
-              <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent position="popper" sideOffset={5} className="z-[100] bg-white">
-                {poolType !== "liner" && poolType !== "polyester" && (
-                  <SelectItem value="basic">{isEnglish ? "Basic" : "Βασική"}</SelectItem>
-                )}
-                {poolType !== "polyester" && (
-                  <SelectItem value="midRange">{isEnglish ? "Mid-Range" : "Μεσαία"}</SelectItem>
-                )}
-                <SelectItem value="premium">{isEnglish ? "Premium" : "Premium"}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <Button onClick={calculateRenovationCost} className="w-full mt-4">
-            {isEnglish ? "Calculate" : "Υπολογισμός"}
-          </Button>
-          {renovationCost && (
-            <div className="mt-4 text-center">
-              <p className="font-bold text-lg">{isEnglish ? "Estimated Cost:" : "Εκτιμώμενο Κόστος:"}</p>
-              <p className="text-2xl text-primary">{isEnglish ? `€${renovationCost}` : `${renovationCost}€`}</p>
+            )}
+            <div className="relative z-10">
+              <Label>{isEnglish ? "Categories" : "Κατηγορίες"}</Label>
+              {Object.entries(categories).map(([key, value]) => (
+                <div key={key} className="flex items-center space-x-3">
+                  <Checkbox
+                    id={key}
+                    checked={value}
+                    onCheckedChange={(checked) => {
+                      setCategories((prev) => ({ ...prev, [key]: checked === true }))
+                    }}
+                  />
+                  <svg className="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    {key === "bathroom" && <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm0-7H1v2h10v-2zm0-2H1v2h10V9zm6-3V3h-2v3h2zm4 0V3h-2v3h2zm-8-1h10v2H13V5z" />}
+                    {key === "kitchen" && <path d="M17 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3-9H5V5h10v5z" />}
+                    {key === "flooring" && <path d="M3 11h2v10H3zm4 0h2v10H7zm4 0h2v10h-2zm4 0h2v10h-2zm4 0h2v10h-2zM3 3h18v2H3z" />}
+                    {key === "electrical" && <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />}
+                    {key === "structural" && <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6.36L23 9 12 3z" />}
+                    {key === "painting" && <path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2s-.68-.55-.68-1.87V4c0-.81.48-1.5 1.34-1.5h5.34c.9 0 1.35.59 1.35 1.5V10h1.3c1.02 0 1.6.63 1.6 1.8V14c0 1.39-.77 2-2.3 2-.63 0-1.23-.22-1.68-.63.09-.33.16-.68.16-1.05a2.98 2.98 0 0 0-5.33-1.82z" />}
+                  </svg>
+                  <Label htmlFor={key} className="cursor-pointer">
+                    {isEnglish
+                      ? key.charAt(0).toUpperCase() + key.slice(1)
+                      : {
+                          bathroom: "Μπάνιο",
+                          kitchen: "Κουζίνα",
+                          flooring: "Δάπεδα",
+                          electrical: "Ηλεκτρολογικά",
+                          structural: "Δομικά",
+                          painting: "Βαφή",
+                        }[key]}
+                  </Label>
+                </div>
+              ))}
             </div>
-          )}
-        </TabsContent>
-
-        <TabsContent value="windows" className="space-y-4">
-          {renderInput("Windows", windows, setWindows)}
-          {renderInput("Balcony Doors", balconyDoors, setBalconyDoors)}
-          {renderInput("Interior Doors", interiorDoors, setInteriorDoors)}
-          {renderInput("Main Entrance", mainEntrance, setMainEntrance)}
-
-          <div>
-            <Label>{translate("Material")}</Label>
-            <Select value={material} onValueChange={(value) => setMaterial(value as Material)}>
-              <SelectTrigger>
-                <SelectValue>{isEnglish ? material.toUpperCase() : translate(material)}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {materialOptions.map((m) => (
-                  <SelectItem key={m} value={m}>
-                    {isEnglish ? m.toUpperCase() : translate(m)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label>{translate("Quality")}</Label>
-            <Select value={windowsQuality} onValueChange={(value) => setWindowsQuality(value as Quality)}>
-              <SelectTrigger>
-                <SelectValue>{isEnglish ? windowsQuality.toUpperCase() : translate(windowsQuality)}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {qualityOptions.map((q) => (
-                  <SelectItem key={q} value={q}>
-                    {isEnglish ? q.toUpperCase() : translate(q)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {windowsCost && (
-            <div className="mt-4 text-center">
-              <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
-              <p className="text-2xl text-primary">€{windowsCost}</p>
+            <div className="relative z-30">
+              <Label>{isEnglish ? "Quality" : "Ποιότητα"}</Label>
+              <Select
+                value={renovationQuality}
+                onValueChange={(value) => setRenovationQuality(value as "basic" | "midRange" | "premium")}
+              >
+                <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent position="popper" sideOffset={5} className="z-[100] bg-white">
+                  {poolType !== "liner" && poolType !== "polyester" && (
+                    <SelectItem value="basic">{isEnglish ? "Basic" : "Βασική"}</SelectItem>
+                  )}
+                  {poolType !== "polyester" && (
+                    <SelectItem value="midRange">{isEnglish ? "Mid-Range" : "Μεσαία"}</SelectItem>
+                  )}
+                  <SelectItem value="premium">{isEnglish ? "Premium" : "Premium"}</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-          )}
-        </TabsContent>
-      </Tabs>
+            <Button onClick={handleCalculateClick} className="w-full mt-4 bg-primary hover:bg-primary/90">
+              {isEnglish ? "Get Quote" : "Λάβετε Προσφορά"}
+            </Button>
+          </TabsContent>
 
-      {totalCost && (
+          <TabsContent value="windows" className="space-y-4">
+            {renderInput("Windows", windows, setWindows)}
+            {renderInput("Balcony Doors", balconyDoors, setBalconyDoors)}
+            {renderInput("Interior Doors", interiorDoors, setInteriorDoors)}
+            {renderInput("Main Entrance", mainEntrance, setMainEntrance)}
+
+            <div>
+              <Label>{translate("Material")}</Label>
+              <Select value={material} onValueChange={(value) => setMaterial(value as Material)}>
+                <SelectTrigger className="bg-white">
+                  <SelectValue>{isEnglish ? material.toUpperCase() : translate(material)}</SelectValue>
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  {materialOptions.map((m) => (
+                    <SelectItem key={m} value={m}>
+                      {isEnglish ? m.toUpperCase() : translate(m)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label>{translate("Quality")}</Label>
+              <Select value={windowsQuality} onValueChange={(value) => setWindowsQuality(value as Quality)}>
+                <SelectTrigger className="bg-white">
+                  <SelectValue>{isEnglish ? windowsQuality.toUpperCase() : translate(windowsQuality)}</SelectValue>
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  {qualityOptions.map((q) => (
+                    <SelectItem key={q} value={q}>
+                      {isEnglish ? q.toUpperCase() : translate(q)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Button onClick={handleCalculateClick} className="w-full mt-4 bg-primary hover:bg-primary/90">
+              {isEnglish ? "Get Quote" : "Λάβετε Προσφορά"}
+            </Button>
+          </TabsContent>
+        </Tabs>
+
+        {/* Info text instead of showing the cost */}
         <div className="mt-6 pt-4 border-t border-gray-200">
-          <p className="font-bold text-lg text-center">{translate("Total Estimated Cost:")}</p>
-          <p className="text-3xl text-primary text-center">€{totalCost}</p>
+          <p className="text-center text-sm text-gray-600">
+            {isEnglish 
+              ? "Fill in your details and get a personalized cost estimate."
+              : "Συμπληρώστε τις επιλογές σας και λάβετε προσωπική εκτίμηση κόστους."}
+          </p>
         </div>
-      )}
-    </div>
+      </div>
+
+      {/* Lead Capture Form Modal */}
+      <LeadCaptureForm
+        isOpen={showLeadForm}
+        onClose={() => setShowLeadForm(false)}
+        selections={getCalculatorSelections()}
+        isEnglish={isEnglish}
+      />
+    </>
   )
 }
-

@@ -226,7 +226,7 @@ const projects = [
     id: 25,
     title: "Τελειωμένη Ανακαίνιση Στέγης",
     titleEn: "Completed Roof Renovation",
-    description: "Ολοκληρωμένη ανακαίνιση στέγης με κεραμίδια και ικριώματα",
+    description: "Ολοκληρωμένη ανακαίνιση στέγης με κερα��ίδια και ικριώματα",
     descriptionEn: "Completed roof renovation with terracotta tiles and scaffolding",
     location: "Κέρκυρα",
     locationEn: "Corfu",
@@ -298,7 +298,7 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
     <>
       <Head>
         {projects.slice(0, 6).map((project) => (
-          <link key={project.id} rel="preload" as="image" href={project.image} type="image/jpeg" />
+          <link key={project.id} rel="preload" as="image" href={project.image} />
         ))}
       </Head>
       <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
