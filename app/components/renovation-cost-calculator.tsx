@@ -138,7 +138,7 @@ export function RenovationCostCalculator() {
 
   useEffect(() => {
     calculateWindowsCost()
-  }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance, calculateWindowsCost])
+  }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance])
 
   useEffect(() => {
     const newTotalCost = renovationCost + windowsCost
