@@ -98,6 +98,12 @@ export function RenovationCostCalculator() {
     concrete: { basic: 1125, midRange: 1225, premium: 1325 },
   }
 
+  // Helper function to safely get pool cost without TypeScript issues
+  const getPoolCostPerM2 = (type: string, quality: string): number => {
+    const poolData = poolCostsPerM2 as Record<string, Record<string, number>>
+    return poolData[type]?.[quality] ?? 0
+  }
+
   // Translations
   const translations: Record<string, string> = {
     "Renovation Cost Calculator": "Υπολογιστής Κόστους Ανακαίνισης",
@@ -173,14 +179,10 @@ export function RenovationCostCalculator() {
     if (numericArea > 125) totalCostCalc *= 0.92
 
     if (poolType !== "none" && !isNaN(poolSize)) {
-      const poolTypeCosts = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2]
-      const quality = renovationQuality as "basic" | "midRange" | "premium"
-      if (poolTypeCosts && quality in poolTypeCosts) {
-        const poolCostPerM2 = (poolTypeCosts as Record<string, number>)[quality]
-        if (poolCostPerM2) {
-          const poolCost = (poolCostPerM2 - 100) * poolSize
-          totalCostCalc += poolCost > 0 ? poolCost : 0
-        }
+      const poolCostPerM2 = getPoolCostPerM2(poolType, renovationQuality)
+      if (poolCostPerM2 > 0) {
+        const poolCost = (poolCostPerM2 - 100) * poolSize
+        totalCostCalc += poolCost > 0 ? poolCost : 0
       }
     }
 
@@ -253,14 +255,10 @@ export function RenovationCostCalculator() {
     if (numericArea > 125) totalCostCalc *= 0.92
 
     if (poolType !== "none" && !isNaN(poolSize)) {
-      const poolTypeCosts = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2]
-      const quality = renovationQuality as "basic" | "midRange" | "premium"
-      if (poolTypeCosts && quality in poolTypeCosts) {
-        const poolCostPerM2 = (poolTypeCosts as Record<string, number>)[quality]
-        if (poolCostPerM2) {
-          const poolCost = (poolCostPerM2 - 100) * poolSize
-          totalCostCalc += poolCost > 0 ? poolCost : 0
-        }
+      const poolCostPerM2 = getPoolCostPerM2(poolType, renovationQuality)
+      if (poolCostPerM2 > 0) {
+        const poolCost = (poolCostPerM2 - 100) * poolSize
+        totalCostCalc += poolCost > 0 ? poolCost : 0
       }
     }
 
@@ -396,7 +394,7 @@ export function RenovationCostCalculator() {
                           bathroom: "Μπάνιο",
                           kitchen: "Κουζίνα",
                           flooring: "Δάπεδα",
-                          electrical: "Ηλεκτρολογικά",
+                          electrical: "Ηλεκτ��ολογικά",
                           structural: "Δομικά",
                           painting: "Βαφ��",
                         }[key]}
