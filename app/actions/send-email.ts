@@ -48,7 +48,7 @@ export async function sendEmail(formData: FormData) {
     const { data, error } = await resend.emails.send({
       from: "Faiacon Website <onboarding@resend.dev>",
       to: ["faiacon@yahoo.com"],
-      reply_to: email,
+      replyTo: email,
       subject: `Νέα Φόρμα Επικοινωνίας από ${name || email}`,
       text: `
         Όνομα: ${name || "Δεν δόθηκε"}
