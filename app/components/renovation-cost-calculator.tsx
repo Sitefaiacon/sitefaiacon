@@ -188,10 +188,10 @@ export function RenovationCostCalculator() {
 
   const calculateWindowsCost = useCallback(() => {
     const cost =
-      windows * windowCosts.window[material][windowsQuality] +
-      balconyDoors * windowCosts.balconyDoor[material][windowsQuality] +
-      interiorDoors * windowCosts.interiorDoor[material][windowsQuality] +
-      mainEntrance * windowCosts.mainEntrance[material][windowsQuality]
+      windows * windowCosts.window[material as keyof typeof windowCosts.window][windowsQuality as keyof typeof windowCosts.window.aluminum] +
+      balconyDoors * windowCosts.balconyDoor[material as keyof typeof windowCosts.balconyDoor][windowsQuality as keyof typeof windowCosts.balconyDoor.aluminum] +
+      interiorDoors * windowCosts.interiorDoor[material as keyof typeof windowCosts.interiorDoor][windowsQuality as keyof typeof windowCosts.interiorDoor.aluminum] +
+      mainEntrance * windowCosts.mainEntrance[material as keyof typeof windowCosts.mainEntrance][windowsQuality as keyof typeof windowCosts.mainEntrance.aluminum]
     setWindowsCost(cost)
   }, [windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality])
 
