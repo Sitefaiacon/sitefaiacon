@@ -142,15 +142,6 @@ export function RenovationCostCalculator() {
     }
   }, [poolType, renovationQuality])
 
-  useEffect(() => {
-    calculateWindowsCost()
-  }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance])
-
-  useEffect(() => {
-    const newTotalCost = renovationCost + windowsCost
-    setTotalCost(newTotalCost)
-  }, [renovationCost, windowsCost])
-
   // Calculation functions
   const calculateRenovationCost = useCallback(() => {
     const numericArea = Number(area)
@@ -197,6 +188,16 @@ export function RenovationCostCalculator() {
       mainEntrance * windowCosts.mainEntrance[material as keyof typeof windowCosts.mainEntrance][windowsQuality as keyof typeof windowCosts.mainEntrance.aluminum]
     setWindowsCost(cost)
   }, [windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality])
+
+  // Effects that depend on the calculation functions
+  useEffect(() => {
+    calculateWindowsCost()
+  }, [calculateWindowsCost])
+
+  useEffect(() => {
+    const newTotalCost = renovationCost + windowsCost
+    setTotalCost(newTotalCost)
+  }, [renovationCost, windowsCost])
 
   // Prepare selections for lead capture
   const getCalculatorSelections = (): CalculatorSelections => ({
@@ -394,9 +395,9 @@ export function RenovationCostCalculator() {
                           bathroom: "Μπάνιο",
                           kitchen: "Κουζίνα",
                           flooring: "Δάπεδα",
-                          electrical: "Ηλεκτ��ολογικά",
+                          electrical: "Ηλεκτρολογικά",
                           structural: "Δομικά",
-                          painting: "Βαφ��",
+                          painting: "Βαφή",
                         }[key]}
                   </Label>
                 </div>
