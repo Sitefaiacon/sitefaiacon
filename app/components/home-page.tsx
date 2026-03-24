@@ -92,6 +92,15 @@ export default function HomePage({ lang }: { lang: string }) {
                     {isEnglish ? "WhatsApp Estimate" : "WhatsApp Εκτίμηση"}
                   </Link>
                 </Button>
+                <Button
+                  size="lg"
+                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                  asChild
+                >
+                  <Link href={`/${lang}/appointment`}>
+                    {isEnglish ? "Book Free Appointment" : "Κλείστε Δωρεάν Ραντεβού"}
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
