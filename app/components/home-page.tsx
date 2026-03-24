@@ -43,6 +43,14 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="relative z-10 container px-4 animate-fade-in">
           <div className="max-w-5xl mx-auto">
             <div className="text-center space-y-8">
+              {/* Brand Label */}
+              <div className="animate-fade-in">
+                <p className="text-sm sm:text-base md:text-lg font-light sm:font-light text-white/80 tracking-widest drop-shadow-md">
+                  {isEnglish ? "FaiaCon Technical Construction" : "ΦαιάCon Τεχνική Κατασκευαστική"}
+                </p>
+              </div>
+
+              {/* Main Headline */}
               <div className="space-y-6 animate-slide-up">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-lg leading-tight">
                   {isEnglish 
@@ -244,7 +252,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "Add Luxury & Investment Value" : "Προσθέστε Πολυτέλεια & Αξία",
                 description: isEnglish
                   ? "Premium pools and luxury upgrades that enhance lifestyle and property appeal."
-                  : "Πρίμιουμ πισίνες και πολυτελείς αναβαθμίσεις που ενισχύουν την αξία του ακινήτου.",
+                  : "Πρίμιουμ πισίνες και πολυτελείς αναβ��θμίσεις που ενισχύουν την αξία του ακινήτου.",
                 href: "/pool-construction",
               },
             ].map((service) => (
