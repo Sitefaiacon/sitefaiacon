@@ -45,7 +45,7 @@ export function Footer() {
           </div>
 
           <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-600">&copy; {new Date().getFullYear()} Faiacon. All rights reserved.</p>
+            <p className="text-gray-600">&copy; {new Date().getFullYear()} <span className="font-logo font-bold italic">ΦαιάCon</span>. All rights reserved.</p>
             <div className="mt-4 md:mt-0"></div>
           </div>
           <div className="mt-4 flex justify-center">

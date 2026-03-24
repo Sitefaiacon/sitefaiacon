@@ -45,7 +45,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <div className="text-center space-y-8">
               {/* Brand Label */}
               <div className="animate-fade-in mb-2">
-                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white/90 tracking-wide drop-shadow-lg uppercase">
+                <p className="font-logo text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold italic text-white/90 tracking-wide drop-shadow-lg uppercase">
                   {isEnglish ? "FaiaCon Technical Construction" : "ΦαιάCon Τεχνική Κατασκευαστική"}
                 </p>
                 <div className="mt-3 mx-auto w-24 sm:w-32 md:w-40 h-0.5 bg-white/40 rounded-full"></div>
@@ -248,7 +248,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "Airbnb & Rental Ready" : "Έτοιμο για Airbnb & Ενοικίαση",
                 description: isEnglish
                   ? "Transform your property into an attractive rental investment with high income potential."
-                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοικίασης με υψηλό δυναμικό εισοδήματος.",
+                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοι��ίασης με υψηλό δυναμικό εισοδήματος.",
                 href: "/house-renovation",
               },
               {

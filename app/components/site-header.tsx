@@ -48,7 +48,7 @@ export function SiteHeader() {
         <div className="flex items-center h-16">
           <Link
             href={`/${lang}`}
-            className="font-serif text-2xl font-bold text-white tracking-tight hover:text-secondary transition-colors mr-8"
+            className="font-logo text-2xl font-bold italic text-white tracking-tight hover:text-secondary transition-colors mr-8"
           >
             ΦαιάCon
           </Link>

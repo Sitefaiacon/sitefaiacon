@@ -31,7 +31,7 @@ export function Navbar() {
 
           {/* Centered Logo */}
           <Link href="/" className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <span className="text-2xl font-bold text-primary">ΦαιαCon</span>
+            <span className="font-logo text-2xl font-bold italic text-primary">ΦαιάCon</span>
           </Link>
 
           {/* Book Appointment Button */}
