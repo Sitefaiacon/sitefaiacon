@@ -106,16 +106,23 @@ export function QuoteRequestModal({
       <DialogContent className="sm:max-w-md bg-background border-border">
         {submitStatus === "success" ? (
           <div className="flex flex-col items-center justify-center py-8 text-center">
-            <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
-            <DialogTitle className="text-xl font-semibold text-foreground mb-2">
+            <div className="w-16 h-16 rounded-full border-4 border-green-500 flex items-center justify-center mb-4">
+              <CheckCircle className="w-10 h-10 text-green-500" />
+            </div>
+            <DialogTitle className="text-xl font-semibold text-foreground mb-3">
               {isEnglish ? "Request Submitted!" : "Η αίτηση υποβλήθηκε!"}
             </DialogTitle>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-2">
               {isEnglish 
-                ? "We will contact you shortly with your personalized quote."
-                : "Θα επικοινωνήσουμε μαζί σας σύντομα με την εξατομικευμένη προσφορά σας."}
+                ? "Thank you! We will process your details and send you a personalized cost estimate within the next few hours."
+                : "Σας ευχαριστούμε! Θα επεξεργαστούμε τα στοιχεία σας και θα σας στείλουμε μια εξατομικευμένη εκτίμηση κόστους μέσα στις επόμενες ώρες."}
             </p>
-            <Button onClick={handleClose} className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <p className="text-sm text-muted-foreground mb-6">
+              {isEnglish 
+                ? "For faster service, you can also send us a message on WhatsApp with photos of your space."
+                : "Για πιο άμεση εξυπηρέτηση, μπορείτε να μας στείλετε και μήνυμα στο WhatsApp με φωτογραφίες του χώρου σας."}
+            </p>
+            <Button onClick={handleClose} className="bg-primary hover:bg-primary/90 text-primary-foreground px-8">
               {isEnglish ? "Close" : "Κλείσιμο"}
             </Button>
           </div>
