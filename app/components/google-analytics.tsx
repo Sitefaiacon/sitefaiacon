@@ -4,6 +4,14 @@ import Script from "next/script"
 import { usePathname, useSearchParams } from "next/navigation"
 import { Suspense, useEffect } from "react"
 
+// Declare gtag on window object for TypeScript
+declare global {
+  interface Window {
+    gtag: (command: string, arg: string, config?: Record<string, any>) => void
+    dataLayer: Array<any>
+  }
+}
+
 function AnalyticsTracking({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
