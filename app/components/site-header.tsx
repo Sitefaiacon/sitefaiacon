@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation"
 
 const navItems = [
   { href: "/", label: "Αρχική", labelEn: "Home" },
+  { href: "/cost-calculator", label: "Υπολογιστής Κόστους", labelEn: "Cost Calculator" },
   { href: "/house-construction", label: "Κατασκευή Σπιτιού", labelEn: "House Construction" },
   { href: "/house-renovation", label: "Ανακαίνιση Σπιτιού", labelEn: "House Renovation" },
   { href: "/listed-houses", label: "Διατηρητέα Κτίρια", labelEn: "Listed Houses" },
