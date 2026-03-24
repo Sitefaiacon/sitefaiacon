@@ -4,7 +4,11 @@ import { Resend } from "resend"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function sendEmail(formData: FormData) {
+export async function sendEmail(formData: FormData): Promise<{
+  success: boolean
+  message: string
+  messageEn: string
+}> {
   try {
     const name = formData.get("name") as string
     const email = formData.get("email") as string
