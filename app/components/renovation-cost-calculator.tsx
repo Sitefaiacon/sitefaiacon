@@ -75,7 +75,7 @@ export function RenovationCostCalculator() {
   const [windowsCost, setWindowsCost] = useState<string>("0.00")
 
   // Constants for Renovation Calculator
-  const baseCostPerM2 = 520
+  const baseCostPerM2 = 490
   const qualityMultipliers = { basic: 1.0, midRange: 1.3, premium: 1.6 }
   const agePenalty = { ancient: 1.25, old: 1.15, modern: 1.0 }
   const categoryModifiers = {
@@ -352,7 +352,7 @@ export function RenovationCostCalculator() {
               </SelectTrigger>
               <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background border-border">
                 <SelectItem value="none">{isEnglish ? "None" : "Καμία"}</SelectItem>
-                <SelectItem value="concrete">{isEnglish ? "Concrete" : "Μπετ��ν"}</SelectItem>
+                <SelectItem value="concrete">{isEnglish ? "Concrete" : "Μπ��τ��ν"}</SelectItem>
                 <SelectItem value="polyester">{isEnglish ? "Polyester" : "Πολυεστερική"}</SelectItem>
                 <SelectItem value="liner">{isEnglish ? "Liner" : "Με επένδυση"}</SelectItem>
               </SelectContent>
