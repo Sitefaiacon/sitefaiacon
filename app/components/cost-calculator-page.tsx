@@ -5,7 +5,6 @@ import dynamic from "next/dynamic"
 import { Calculator, CheckCircle, Clock, Euro, Phone, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { PricingGuideComponent } from "./pricing-guide"
 
 const RenovationCostCalculator = dynamic(
   () => import("./renovation-cost-calculator").then((mod) => mod.RenovationCostCalculator),
@@ -138,25 +137,6 @@ export default function CostCalculatorPage({ lang }: { lang: string }) {
         </div>
       </section>
 
-      {/* Pricing Guide */}
-      <section className="py-16 sm:py-24 bg-gray-50">
-        <div className="container px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-4">
-                {isEnglish ? "Indicative Pricing Guide" : "Ενδεικτικός Οδηγός Τιμών"}
-              </h2>
-              <p className="text-gray-600 text-lg">
-                {isEnglish
-                  ? "Starting prices for common renovation services in Corfu"
-                  : "Αρχικές τιμές για συνηθισμένες υπηρεσίες ανακαίνισης στην Κέρκυρα"}
-              </p>
-            </div>
-            <PricingGuideComponent />
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section className="py-16 sm:py-24 bg-white">
         <div className="container px-4">
@@ -190,24 +170,11 @@ export default function CostCalculatorPage({ lang }: { lang: string }) {
                 ? "Contact us for a free on-site assessment and detailed quote for your project"
                 : "Επικοινωνήστε μαζί μας για δωρεάν επιτόπια εκτίμηση και αναλυτική προσφορά για το έργο σας"}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                <Link href={`/${lang}/appointment`}>
-                  {isEnglish ? "Book Free Appointment" : "Κλείστε Δωρεάν Ραντεβού"}
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10"
-                asChild
-              >
-                <Link href={`/${lang}/contact`} className="flex items-center gap-2">
-                  <Phone className="w-5 h-5" />
-                  {isEnglish ? "Contact Us" : "Επικοινωνία"}
-                </Link>
-              </Button>
-            </div>
+            <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
+              <Link href={`/${lang}/appointment`}>
+                {isEnglish ? "Book Free Appointment" : "Κλείστε Δωρεάν Ραντεβού"}
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
