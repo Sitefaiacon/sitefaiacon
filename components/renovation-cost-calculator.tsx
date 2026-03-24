@@ -120,8 +120,14 @@ export function RenovationCostCalculator() {
     "Total Estimated Cost:": "Συνολικό Εκτιμώμενο Κόστος:",
     "Why work with us?": "Γιατί να συνεργαστείτε μαζί μας;",
     "Top Quality Products & Materials": "Προϊόντα & Υλικά Κορυφαίας Ποιότητας",
+    "Professional Team": "Επαγγελματική Ομάδα",
     "Let us transform your vision into reality": "Αφήστε μας να μετατρέψουμε την όρασή σας σε πραγματικότητα",
-    "Modern solutions for the ideal pool": "Σύγχρονες λύσεις για την ιδανική πισίνα",
+    "Project Details": "Στοιχεία Έργου",
+    "Pool & Specialties": "Πισίνα & Ειδικότητες",
+    "Pool Type": "Τύπος Πισίνας",
+    "Renovation Categories": "Κατηγορίες Ανακαίνισης",
+    "Door & Window Quantities": "Ποσότητες Πορτών & Παραθύρων",
+    "Materials & Quality": "Υλικά & Ποιότητα",
   }
 
   const translate = (text: string) => {
@@ -222,107 +228,106 @@ export function RenovationCostCalculator() {
   )
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto calculator">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-blue-600">{translate("Renovation Cost Calculator")}</h2>
-        <Image
-          src="/path-to-your-logo.png" // Αντικατέστησε με το σωστό path του λογότυπου σου
-          alt="Faiacon Logo"
-          width={100} // Ρύθμισε το μέγεθος ανάλογα
-          height={50}
-          className="object-contain"
-        />
+    <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg max-w-2xl mx-auto calculator">
+      <div className="mb-6">
+        <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">{translate("Renovation Cost Calculator")}</h2>
+        <p className="text-base md:text-lg text-gray-600">
+          {translate("Calculate your renovation cost in 1 minute!")}
+        </p>
       </div>
-      <p className="text-lg mb-4 text-gray-700 text-justify-content">
-        {translate("Calculate your renovation cost in 1 minute!")}
-      </p>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-4 bg-blue-100">
-          <TabsTrigger value="renovation" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+        <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-100 rounded-lg p-1">
+          <TabsTrigger value="renovation" className="rounded-md data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all">
             {translate("General Renovation")}
           </TabsTrigger>
-          <TabsTrigger value="windows" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+          <TabsTrigger value="windows" className="rounded-md data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all">
             {translate("Doors & Windows")}
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="renovation" className="space-y-4">
-          <p className="leading-relaxed text-justify-content">
+        <TabsContent value="renovation" className="space-y-6">
+          <p className="leading-relaxed text-gray-600">
             {isEnglish
               ? "If you dream of building your home or business space, you know that the process can seem overwhelming: from finding the ideal plot to managing the required permits and bureaucracy. We are here to handle every step, so you can focus on your vision."
               : "Αν ονειρεύεστε να χτίσετε το σπίτι ή το επαγγελματικό σας χώρο, ξέρετε ότι η διαδικασία μπορεί να φαίνεται συντριπτική: από την εύρεση του ιδανικού οικοπέδου έως τη διαχείριση των απαιτούμενων αδειών και τη γραφειοκρατία. Εμείς είμαστε εδώ για να αναλάβουμε κάθε βήμα, ώστε εσείς να εστιάσετε στο όραμά σας."}
           </p>
-          <div>
-            <Label htmlFor="area">{isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}</Label>
-            <Input
-              id="area"
-              type="number"
-              value={area}
-              onChange={(e) => {
-                setArea(e.target.value)
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-              }}
-              min="1"
-              className="w-full mb-2"
-            />
-          </div>
-          <div>
-            <Label htmlFor="bathrooms">{isEnglish ? "Bathrooms" : "Μπάνια"}</Label>
-            <Input
-              id="bathrooms"
-              type="number"
-              value={bathrooms}
-              onChange={(e) => {
-                setBathrooms(Number(e.target.value))
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-              }}
-              min="0"
-              className="w-full mb-2"
-            />
-          </div>
-          <div>
-            <Label htmlFor="kitchens">{isEnglish ? "Kitchens" : "Κουζίνες"}</Label>
-            <Input
-              id="kitchens"
-              type="number"
-              value={kitchens}
-              onChange={(e) => {
-                setKitchens(Number(e.target.value))
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-              }}
-              min="0"
-              className="w-full mb-2"
-            />
-          </div>
-          <div>
-            <Label htmlFor="rooms">{isEnglish ? "Rooms" : "Δωμάτια"}</Label>
-            <Input
-              id="rooms"
-              type="number"
-              value={rooms}
-              onChange={(e) => {
-                setRooms(Number(e.target.value))
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-              }}
-              min="0"
-              className="w-full mb-2"
-            />
-          </div>
-          <div>
-            <Label htmlFor="buildingAge">{isEnglish ? "Building Year" : "Έτος Κατασκευής"}</Label>
-            <Input
-              id="buildingAge"
-              type="number"
-              value={buildingAge}
-              onChange={(e) => {
-                setBuildingAge(Number(e.target.value))
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-              }}
-              min="1900"
-              max="2024"
-              className="w-full mb-2"
-            />
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">{isEnglish ? "Project Details" : "Στοιχεία Έργου"}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="area" className="font-medium">{isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}</Label>
+                <Input
+                  id="area"
+                  type="number"
+                  value={area}
+                  onChange={(e) => {
+                    setArea(e.target.value)
+                    setShowResults(false)
+                  }}
+                  min="1"
+                  className="w-full mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="buildingAge" className="font-medium">{isEnglish ? "Building Year" : "Έτος Κατασκευής"}</Label>
+                <Input
+                  id="buildingAge"
+                  type="number"
+                  value={buildingAge}
+                  onChange={(e) => {
+                    setBuildingAge(Number(e.target.value))
+                    setShowResults(false)
+                  }}
+                  min="1900"
+                  max="2024"
+                  className="w-full mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="bathrooms" className="font-medium">{isEnglish ? "Bathrooms" : "Μπάνια"}</Label>
+                <Input
+                  id="bathrooms"
+                  type="number"
+                  value={bathrooms}
+                  onChange={(e) => {
+                    setBathrooms(Number(e.target.value))
+                    setShowResults(false)
+                  }}
+                  min="0"
+                  className="w-full mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="kitchens" className="font-medium">{isEnglish ? "Kitchens" : "Κουζίνες"}</Label>
+                <Input
+                  id="kitchens"
+                  type="number"
+                  value={kitchens}
+                  onChange={(e) => {
+                    setKitchens(Number(e.target.value))
+                    setShowResults(false)
+                  }}
+                  min="0"
+                  className="w-full mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="rooms" className="font-medium">{isEnglish ? "Rooms" : "Δωμάτια"}</Label>
+                <Input
+                  id="rooms"
+                  type="number"
+                  value={rooms}
+                  onChange={(e) => {
+                    setRooms(Number(e.target.value))
+                    setShowResults(false)
+                  }}
+                  min="0"
+                  className="w-full mt-1"
+                />
+              </div>
+            </div>
           </div>
           <div className="relative z-30">
             <Label>{isEnglish ? "Pool Type" : "Τύπος Πισίνας"}</Label>
@@ -354,7 +359,7 @@ export function RenovationCostCalculator() {
                 value={poolSize}
                 onChange={(e) => {
                   setPoolSize(Number(e.target.value))
-                  setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                  setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδ��μένα
                 }}
                 min="1"
                 max="50"
@@ -390,15 +395,15 @@ export function RenovationCostCalculator() {
             ))}
           </div>
           <div className="relative z-30">
-            <Label>{isEnglish ? "Quality" : "Ποιότητα"}</Label>
+            <Label className="font-medium">{isEnglish ? "Quality" : "Ποιότητα"}</Label>
             <Select
               value={renovationQuality}
               onValueChange={(value) => {
                 setRenovationQuality(value as "basic" | "midRange" | "premium")
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
             >
-              <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white mb-2">
+              <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white mt-1">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent position="popper" sideOffset={5} className="z-[100] bg-white">
@@ -412,20 +417,23 @@ export function RenovationCostCalculator() {
               </SelectContent>
             </Select>
           </div>
-          <Button onClick={calculateRenovationCost} className="w-full mt-4 bg-blue-600 hover:bg-blue-700">
+
+          <Button onClick={calculateRenovationCost} className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition-all">
             {translate("Calculate")}
           </Button>
+
           {showResults && renovationCost && (
-            <div className="mt-4 text-center">
-              <p className="font-bold text-lg">{isEnglish ? "Estimated Cost:" : "Εκτιμώμενο Κόστος:"}</p>
-              <p className="text-2xl text-blue-600">{isEnglish ? `€${renovationCost}` : `${renovationCost}€`}</p>
+            <div className="mt-6 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg text-center">
+              <p className="text-sm text-gray-600 mb-2">{isEnglish ? "Estimated Cost:" : "Εκτιμώμενο Κόστος:"}</p>
+              <p className="text-4xl font-bold text-blue-600">{isEnglish ? `€${renovationCost}` : `${renovationCost}€`}</p>
             </div>
           )}
-          <div className="bg-gray-50 p-8 rounded-xl shadow-sm">
-            <h3 className="text-2xl font-bold text-primary mb-6">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-sm border border-blue-200">
+            <h3 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+              <CheckCircle2 className="w-6 h-6 text-blue-600" />
               {isEnglish ? "Why work with us?" : "Γιατί να συνεργαστείτε μαζί μας;"}
             </h3>
-            <div className="space-y-6">
+            <div className="space-y-4">
               {[
                 {
                   title: isEnglish ? "Top Quality Products & Materials" : "Προϊόντα & Υλικά Κορυφαίας Ποιότητας",
@@ -433,115 +441,146 @@ export function RenovationCostCalculator() {
                     ? "We use materials of guaranteed durability (certified by European standards), offering long-term performance and safety."
                     : "Χρησιμοποιούμε εγγυημένης ανθεκτικότητας υλικά (πιστοποιημένα με ευρωπαϊκά πρότυπα), που προσφέρουν μακροχρόνια απόδοση και ασφάλεια.",
                 },
+                {
+                  title: isEnglish ? "Professional Team" : "Επαγγελματική Ομάδα",
+                  description: isEnglish
+                    ? "Our experienced team brings expertise and attention to detail to every project, ensuring exceptional results."
+                    : "Η έμπειρη ομάδα μας φέρνει τεχνογνωσία και προσοχή στις λεπτομέρειες σε κάθε έργο, εξασφαλίζοντας εξαιρετικά αποτελέσματα.",
+                },
               ].map((item, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                <div key={index} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold text-primary">{item.title}</h4>
-                    <p className="text-justify-content">{item.description}</p>
+                    <h4 className="font-semibold text-blue-900">{item.title}</h4>
+                    <p className="text-sm text-gray-700 mt-1">{item.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-primary/5 p-8 rounded-xl">
-            <h3 className="text-2xl font-bold text-primary mb-4">
+
+          <div className="bg-blue-600 text-white p-6 rounded-xl shadow-lg">
+            <h3 className="text-xl font-bold mb-2">
               {isEnglish
                 ? "Let us transform your vision into reality"
                 : "Αφήστε μας να μετατρέψουμε την όρασή σας σε πραγματικότητα"}
             </h3>
-            <p className="text-lg text-justify-content">
+            <p className="text-blue-100">
               {isEnglish
                 ? "With a focus on innovation, precision, and affordability, we create recreational spaces that express your style and promote well-being."
-                : "Με γνώμονα την καινοτομία, την ακρίβεια και την προσιτή τιμή, δημιουργούμε χώρους αναψυχής που εκφράζουν το στυλ σας και προάγουν τη well-being ζωή."}
+                : "Με γνώμονα την καινοτομία, την ακρίβεια και την προσιτή τιμή, δημιουργούμε χώρους αναψυχής που εκφράζουν το στυλ σας και προάγουν τη ζωή."}
             </p>
           </div>
-          <p className="text-xl text-gray-600 text-justify-content">
-            {isEnglish ? "Modern solutions for the ideal pool" : "Σύγχρονες λύσεις για την ιδανική πισίνα"}
-          </p>
         </TabsContent>
 
-        <TabsContent value="windows" className="space-y-4">
-          {renderInput("Windows", windows, (value) => {
-            setWindows(value)
-            setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-          })}
-          {renderInput("Balcony Doors", balconyDoors, (value) => {
-            setBalconyDoors(value)
-            setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-          })}
-          {renderInput("Interior Doors", interiorDoors, (value) => {
-            setInteriorDoors(value)
-            setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-          })}
-          {renderInput("Main Entrance", mainEntrance, (value) => {
-            setMainEntrance(value)
-            setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-          })}
+        <TabsContent value="windows" className="space-y-6">
+          <p className="leading-relaxed text-gray-600">
+            {isEnglish
+              ? "Calculate the cost of doors and windows for your renovation project. Choose your preferred material and quality level."
+              : "Υπολογίστε το κόστος πορτών και παραθύρων για το έργο ανακαίνισής σας. Επιλέξτε το προτιμώμενο υλικό και επίπεδο ποιότητας."}
+          </p>
 
-          <div>
-            <Label>{translate("Material")}</Label>
-            <Select
-              value={material}
-              onValueChange={(value) => {
-                setMaterial(value as Material)
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-              }}
-            >
-              <SelectTrigger className="mb-2">
-                <SelectValue>{isEnglish ? material.toUpperCase() : translate(material)}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {materialOptions.map((m) => (
-                  <SelectItem key={m} value={m}>
-                    {isEnglish ? m.toUpperCase() : translate(m)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">{isEnglish ? "Door & Window Quantities" : "Ποσότητες Πορτών & Παραθύρων"}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { label: "Windows", value: windows, onChange: setWindows },
+                { label: "Balcony Doors", value: balconyDoors, onChange: setBalconyDoors },
+                { label: "Interior Doors", value: interiorDoors, onChange: setInteriorDoors },
+                { label: "Main Entrance", value: mainEntrance, onChange: setMainEntrance },
+              ].map(({ label, value, onChange }) => (
+                <div key={label}>
+                  <Label htmlFor={label} className="font-medium">{translate(label)}</Label>
+                  <Input
+                    id={label}
+                    type="number"
+                    value={value}
+                    onChange={(e) => {
+                      onChange(Number.parseInt(e.target.value) || 0)
+                      setShowResults(false)
+                    }}
+                    min="0"
+                    className="w-full mt-1"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div>
-            <Label>{translate("Quality")}</Label>
-            <Select
-              value={windowsQuality}
-              onValueChange={(value) => {
-                setWindowsQuality(value as Quality)
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
-              }}
-            >
-              <SelectTrigger className="mb-2">
-                <SelectValue>{isEnglish ? windowsQuality.toUpperCase() : translate(windowsQuality)}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {qualityOptions.map((q) => (
-                  <SelectItem key={q} value={q}>
-                    {isEnglish ? q.toUpperCase() : translate(q)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">{isEnglish ? "Materials & Quality" : "Υλικά & Ποιότητα"}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label className="font-medium">{translate("Material")}</Label>
+                <Select
+                  value={material}
+                  onValueChange={(value) => {
+                    setMaterial(value as Material)
+                    setShowResults(false)
+                  }}
+                >
+                  <SelectTrigger className="mt-1">
+                    <SelectValue>{isEnglish ? material.toUpperCase() : translate(material)}</SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {materialOptions.map((m) => (
+                      <SelectItem key={m} value={m}>
+                        {isEnglish ? m.toUpperCase() : translate(m)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label className="font-medium">{translate("Quality")}</Label>
+                <Select
+                  value={windowsQuality}
+                  onValueChange={(value) => {
+                    setWindowsQuality(value as Quality)
+                    setShowResults(false)
+                  }}
+                >
+                  <SelectTrigger className="mt-1">
+                    <SelectValue>{isEnglish ? windowsQuality.toUpperCase() : translate(windowsQuality)}</SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {qualityOptions.map((q) => (
+                      <SelectItem key={q} value={q}>
+                        {isEnglish ? q.toUpperCase() : translate(q)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </div>
+
+          <Button onClick={calculateWindowsCost} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition-all">
+            {translate("Calculate")}
+          </Button>
 
           {showResults && windowsCost && (
-            <div className="mt-4 text-center">
-              <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
-              <p className="text-2xl text-blue-600">€{windowsCost}</p>
+            <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg text-center">
+              <p className="text-sm text-gray-600 mb-2">{translate("Estimated Cost:")}</p>
+              <p className="text-4xl font-bold text-blue-600">€{windowsCost}</p>
             </div>
           )}
         </TabsContent>
       </Tabs>
 
       {showResults && totalCost && (
-        <div className="mt-6 pt-4 border-t border-gray-200 text-center">
-          <p className="font-bold text-lg">{translate("Total Estimated Cost:")}</p>
-          <p className="text-3xl text-blue-600">€{totalCost}</p>
-          <Button
-            className="mt-4 bg-blue-600 hover:bg-blue-700"
-            onClick={() => (window.location.href = "/el/appointment")}
-          >
-            {translate("Request a Quote")}
-          </Button>
+        <div className="mt-8 pt-6 border-t-2 border-gray-200">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 rounded-xl shadow-lg">
+            <h3 className="text-lg font-semibold mb-2">{translate("Total Estimated Cost:")}</h3>
+            <p className="text-5xl font-bold mb-4">€{totalCost}</p>
+            <Button
+              className="w-full bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 rounded-lg transition-all"
+              onClick={() => (window.location.href = "/el/appointment")}
+            >
+              {translate("Request a Quote")}
+            </Button>
+          </div>
         </div>
       )}
     </div>
