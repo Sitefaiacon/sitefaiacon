@@ -159,98 +159,120 @@ function generateEmailHTML(lead: CalculatorLead): string {
       </td>
     </tr>
     
-    <!-- Renovation Details -->
-    ${renovation.renovationCost > 0 ? `
+    <!-- Two Column Layout: Renovation & Windows Side by Side -->
+    ${(renovation.renovationCost > 0 || windows.windowsCost > 0) ? `
     <tr>
       <td style="padding: 25px; border-bottom: 1px solid #e9ecef;">
-        <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 18px;">Γενική Ανακαίνιση</h2>
-        <table width="100%" cellpadding="5" cellspacing="0" style="font-size: 14px;">
+        <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
-            <td style="color: #6c757d; width: 140px;">Εμβαδόν:</td>
-            <td style="color: #212529;">${renovation.area} τ.μ.</td>
-          </tr>
-          <tr>
-            <td style="color: #6c757d;">Μπάνια:</td>
-            <td style="color: #212529;">${renovation.bathrooms}</td>
-          </tr>
-          <tr>
-            <td style="color: #6c757d;">Κουζίνες:</td>
-            <td style="color: #212529;">${renovation.kitchens}</td>
-          </tr>
-          <tr>
-            <td style="color: #6c757d;">Δωμάτια:</td>
-            <td style="color: #212529;">${renovation.rooms}</td>
-          </tr>
-          <tr>
-            <td style="color: #6c757d;">Έτος Κατασκευής:</td>
-            <td style="color: #212529;">${renovation.buildingAge}</td>
-          </tr>
-          <tr>
-            <td style="color: #6c757d;">Ποιότητα:</td>
-            <td style="color: #212529; font-weight: 600;">${qualityLabels[renovation.renovationQuality]}</td>
-          </tr>
-          ${selectedCategories.length > 0 ? `
-          <tr>
-            <td style="color: #6c757d;">Κατηγορίες:</td>
-            <td style="color: #212529;">${selectedCategories.join(', ')}</td>
-          </tr>
-          ` : ''}
-          ${renovation.poolType !== 'none' ? `
-          <tr>
-            <td style="color: #6c757d;">Πισίνα:</td>
-            <td style="color: #212529;">${poolLabels[renovation.poolType]} - ${renovation.poolSize} τ.μ.</td>
-          </tr>
-          ` : ''}
-          <tr>
-            <td style="color: #6c757d; font-weight: 600;">Κόστος Ανακαίνισης:</td>
-            <td style="color: #3a5a8c; font-weight: 700; font-size: 16px;">${formatCost(renovation.renovationCost)}</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    ` : ''}
-    
-    <!-- Windows & Doors Details -->
-    ${windows.windowsCost > 0 ? `
-    <tr>
-      <td style="padding: 25px; border-bottom: 1px solid #e9ecef;">
-        <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 18px;">Πόρτες & Παράθυρα</h2>
-        <table width="100%" cellpadding="5" cellspacing="0" style="font-size: 14px;">
-          ${windows.windows > 0 ? `
-          <tr>
-            <td style="color: #6c757d; width: 140px;">Παράθυρα:</td>
-            <td style="color: #212529;">${windows.windows}</td>
-          </tr>
-          ` : ''}
-          ${windows.balconyDoors > 0 ? `
-          <tr>
-            <td style="color: #6c757d;">Μπαλκονόπορτες:</td>
-            <td style="color: #212529;">${windows.balconyDoors}</td>
-          </tr>
-          ` : ''}
-          ${windows.interiorDoors > 0 ? `
-          <tr>
-            <td style="color: #6c757d;">Εσωτερικές Πόρτες:</td>
-            <td style="color: #212529;">${windows.interiorDoors}</td>
-          </tr>
-          ` : ''}
-          ${windows.mainEntrance > 0 ? `
-          <tr>
-            <td style="color: #6c757d;">Κεντρική Είσοδος:</td>
-            <td style="color: #212529;">${windows.mainEntrance}</td>
-          </tr>
-          ` : ''}
-          <tr>
-            <td style="color: #6c757d;">Υλικό:</td>
-            <td style="color: #212529;">${materialLabels[windows.material]}</td>
-          </tr>
-          <tr>
-            <td style="color: #6c757d;">Ποιότητα:</td>
-            <td style="color: #212529;">${qualityLabels[windows.quality]}</td>
-          </tr>
-          <tr>
-            <td style="color: #6c757d; font-weight: 600;">Κόστος Κουφωμάτων:</td>
-            <td style="color: #3a5a8c; font-weight: 700; font-size: 16px;">${formatCost(windows.windowsCost)}</td>
+            <!-- Left Column: Γενική Ανακαίνιση -->
+            <td style="width: 48%; vertical-align: top; padding-right: 15px; ${renovation.renovationCost > 0 ? '' : 'opacity: 0.5;'}">
+              <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; height: 100%;">
+                <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Γενική Ανακαίνιση</h2>
+                ${renovation.renovationCost > 0 ? `
+                <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 13px;">
+                  <tr>
+                    <td style="color: #6c757d;">Εμβαδόν:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.area} τ.μ.</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d;">Μπάνια:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.bathrooms}</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d;">Κουζίνες:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.kitchens}</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d;">Δωμάτια:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.rooms}</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d;">Έτος:</td>
+                    <td style="color: #212529; text-align: right;">${renovation.buildingAge}</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d;">Ποιότητα:</td>
+                    <td style="color: #212529; text-align: right; font-weight: 600;">${qualityLabels[renovation.renovationQuality]}</td>
+                  </tr>
+                  ${selectedCategories.length > 0 ? `
+                  <tr>
+                    <td colspan="2" style="color: #6c757d; padding-top: 8px;">Κατηγορίες: ${selectedCategories.join(', ')}</td>
+                  </tr>
+                  ` : ''}
+                  ${renovation.poolType !== 'none' ? `
+                  <tr>
+                    <td style="color: #6c757d;">Πισίνα:</td>
+                    <td style="color: #212529; text-align: right;">${poolLabels[renovation.poolType]} - ${renovation.poolSize} τ.μ.</td>
+                  </tr>
+                  ` : ''}
+                </table>
+                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #dee2e6;">
+                  <p style="margin: 0; color: #6c757d; font-size: 12px;">Κόστος Ανακαίνισης</p>
+                  <p style="margin: 5px 0 0 0; color: #3a5a8c; font-size: 22px; font-weight: 700;">${formatCost(renovation.renovationCost)}</p>
+                </div>
+                ` : `
+                <p style="color: #6c757d; font-size: 13px; text-align: center; margin: 20px 0;">Δεν επιλέχθηκε</p>
+                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #dee2e6;">
+                  <p style="margin: 0; color: #6c757d; font-size: 12px;">Κόστος Ανακαίνισης</p>
+                  <p style="margin: 5px 0 0 0; color: #6c757d; font-size: 22px; font-weight: 700;">0€</p>
+                </div>
+                `}
+              </div>
+            </td>
+            
+            <!-- Right Column: Πόρτες & Παράθυρα -->
+            <td style="width: 48%; vertical-align: top; padding-left: 15px; ${windows.windowsCost > 0 ? '' : 'opacity: 0.5;'}">
+              <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; height: 100%;">
+                <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Πόρτες & Παράθυρα</h2>
+                ${windows.windowsCost > 0 ? `
+                <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 13px;">
+                  ${windows.windows > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Παράθυρα:</td>
+                    <td style="color: #212529; text-align: right;">${windows.windows}</td>
+                  </tr>
+                  ` : ''}
+                  ${windows.balconyDoors > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Μπαλκονόπορτες:</td>
+                    <td style="color: #212529; text-align: right;">${windows.balconyDoors}</td>
+                  </tr>
+                  ` : ''}
+                  ${windows.interiorDoors > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Εσωτ. Πόρτες:</td>
+                    <td style="color: #212529; text-align: right;">${windows.interiorDoors}</td>
+                  </tr>
+                  ` : ''}
+                  ${windows.mainEntrance > 0 ? `
+                  <tr>
+                    <td style="color: #6c757d;">Κεντρ. Είσοδος:</td>
+                    <td style="color: #212529; text-align: right;">${windows.mainEntrance}</td>
+                  </tr>
+                  ` : ''}
+                  <tr>
+                    <td style="color: #6c757d;">Υλικό:</td>
+                    <td style="color: #212529; text-align: right;">${materialLabels[windows.material]}</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d;">Ποιότητα:</td>
+                    <td style="color: #212529; text-align: right; font-weight: 600;">${qualityLabels[windows.quality]}</td>
+                  </tr>
+                </table>
+                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #dee2e6;">
+                  <p style="margin: 0; color: #6c757d; font-size: 12px;">Κόστος Κουφωμάτων</p>
+                  <p style="margin: 5px 0 0 0; color: #3a5a8c; font-size: 22px; font-weight: 700;">${formatCost(windows.windowsCost)}</p>
+                </div>
+                ` : `
+                <p style="color: #6c757d; font-size: 13px; text-align: center; margin: 20px 0;">Δεν επιλέχθηκε</p>
+                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #dee2e6;">
+                  <p style="margin: 0; color: #6c757d; font-size: 12px;">Κόστος Κουφωμάτων</p>
+                  <p style="margin: 5px 0 0 0; color: #6c757d; font-size: 22px; font-weight: 700;">0€</p>
+                </div>
+                `}
+              </div>
+            </td>
           </tr>
         </table>
       </td>
