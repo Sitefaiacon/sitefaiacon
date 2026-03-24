@@ -42,17 +42,20 @@ export default function HomePage({ lang }: { lang: string }) {
         {/* Content */}
         <div className="relative z-10 container px-4 animate-fade-in">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center space-y-8">
-              {/* Brand Label */}
-              <div className="animate-fade-in mb-2">
-                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white/90 tracking-wide drop-shadow-lg uppercase">
-                  {isEnglish ? "FaiaCon Technical Construction" : "ΦαιάCon Τεχνική Κατασκευαστική"}
+            <div className="text-center space-y-6 sm:space-y-8">
+              {/* Brand Label - Premium Two-Line */}
+              <div className="animate-fade-in">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight">
+                  {isEnglish ? "FaiaCon" : "ΦαιάCon"}
+                </h2>
+                <p className="text-sm sm:text-base md:text-lg text-white/75 font-light tracking-wider mt-2 drop-shadow-lg">
+                  {isEnglish ? "Technical Construction" : "Τεχνική Κατασκευαστική"}
                 </p>
-                <div className="mt-3 mx-auto w-24 sm:w-32 md:w-40 h-0.5 bg-white/40 rounded-full"></div>
+                <div className="mt-4 mx-auto w-16 sm:w-20 md:w-24 h-0.5 bg-white/30 rounded-full"></div>
               </div>
 
               {/* Main Headline */}
-              <div className="space-y-6 animate-slide-up">
+              <div className="animate-slide-up mt-4 sm:mt-6">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-lg leading-tight">
                   {isEnglish 
                     ? "Turn Your Property in Corfu into a Profitable Investment"
@@ -60,18 +63,21 @@ export default function HomePage({ lang }: { lang: string }) {
                 </h1>
               </div>
 
+              {/* Subheadline - Shorter & Clearer */}
               <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100 leading-relaxed">
                 {isEnglish 
                   ? "We provide full renovation and construction services to help you maximize your property's value, rental income, or resale potential."
-                  : "Αναλαμβάνουμε πλήρως την ανακαίνιση ώστε το ακίνητό σας να είναι έτοιμο για Airbnb ή πώληση με υψηλή αξία."}
+                  : "Αναλαμβάνουμε πλήρως την ανακαίνιση για Airbnb ή πώληση με υψηλή αξία"}
               </p>
 
-              <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto drop-shadow-lg">
+              {/* Trust Line */}
+              <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto drop-shadow-lg font-light">
                 {isEnglish 
                   ? "Trusted local contractor with 35+ years of experience"
-                  : "Εγνωρισμένοι τοπικοί ανάδοχοι με εμπειρία 35+ ετών"}
+                  : "Έμπειροι τοπικοί ανάδοχοι με εμπειρία 35+ ετών"}
               </p>
 
+              {/* CTA Buttons - Only 2 */}
               <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up animation-delay-200">
                 <Button
                   size="lg"
@@ -85,21 +91,12 @@ export default function HomePage({ lang }: { lang: string }) {
                 </Button>
                 <Button
                   size="lg"
-                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="bg-accent text-white hover:bg-accent/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
                   asChild
                 >
                   <Link href={whatsappLink} target="_blank" className="flex items-center gap-2">
                     <MessageCircle className="w-5 h-5" />
                     {isEnglish ? "WhatsApp Estimate" : "WhatsApp Εκτίμηση"}
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-                  asChild
-                >
-                  <Link href={`/${lang}/appointment`}>
-                    {isEnglish ? "Book Free Appointment" : "Κλείστε Δωρεάν Ραντεβού"}
                   </Link>
                 </Button>
               </div>
@@ -248,7 +245,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "Airbnb & Rental Ready" : "Έτοιμο για Airbnb & Ενοικίαση",
                 description: isEnglish
                   ? "Transform your property into an attractive rental investment with high income potential."
-                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοικίασης με υψηλό δυναμικό εισοδήματος.",
+                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοι��ίασης με υψηλό δυναμικό εισοδήματος.",
                 href: "/house-renovation",
               },
               {
