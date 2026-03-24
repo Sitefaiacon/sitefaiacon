@@ -112,9 +112,9 @@ export default function HomePage({ lang }: { lang: string }) {
                 },
                 {
                   icon: Briefcase,
-                  number: "500+",
+                  number: "85+",
                   label: isEnglish ? "Completed Projects" : "Ολοκληρωμένα Έργα",
-                  description: isEnglish ? "Hundreds of satisfied clients" : "Εκατοντάδες ικανοποιημένοι πελάτες",
+                  description: isEnglish ? "Satisfied clients across Corfu" : "Ικανοποιημένοι πελάτες σε όλη την Κέρκυρα",
                 },
                 {
                   icon: Users,
