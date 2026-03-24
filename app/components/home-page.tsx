@@ -2,7 +2,7 @@
 
 import { useLanguage } from "../contexts/language-context"
 import { Button } from "@/components/ui/button"
-import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CalendarDays, CheckCircle2, Calculator } from "lucide-react"
+import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CheckCircle2, Calculator, Award, Briefcase, Users, MessageCircle } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
@@ -16,9 +16,14 @@ const RenovationCostCalculator = dynamic(() => import("./renovation-cost-calcula
 export default function HomePage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
 
+  const whatsappMessage = isEnglish 
+    ? "Hello, I'd like to get an estimate for my property renovation in Corfu."
+    : "Γεία σας, θα ήθελα να λάβω μια εκτίμηση για την ανακαίνιση του ακινήτου μου στην Κέρκυρα."
+  const whatsappLink = `https://wa.me/306987797679?text=${encodeURIComponent(whatsappMessage)}`
+
   return (
     <>
-      {/* Hero Section */}
+      {/* Enhanced Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#2c3e5c] via-[#3d5175] to-[#5c7191]">
         {/* Optimized Background - CSS only, no heavy image */}
         <div className="absolute inset-0">
@@ -38,81 +43,108 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="relative z-10 container px-4 animate-fade-in">
           <div className="max-w-5xl mx-auto">
             <div className="text-center space-y-8">
-              <div className="space-y-6 animate-slide-up">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight drop-shadow-lg">
-                  ΦαιάCon
-                </h1>
-                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-medium tracking-wide drop-shadow-lg bg-primary-dark/30 inline-block px-4 sm:px-6 py-2 rounded-full">
-                  {isEnglish ? "TECHNICAL CONSTRUCTION" : "ΤΕΧΝΙΚΗ ΚΑΤΑΣΚΕΥΑΣΤΙΚΗ"}
+              {/* Brand Label */}
+              <div className="animate-fade-in mb-2">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white/90 tracking-wide drop-shadow-lg uppercase">
+                  {isEnglish ? "FaiaCon Technical Construction" : "ΦαιάCon Τεχνική Κατασκευαστική"}
                 </p>
+                <div className="mt-3 mx-auto w-24 sm:w-32 md:w-40 h-0.5 bg-white/40 rounded-full"></div>
               </div>
 
-              <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100">
-                {isEnglish ? "Excellence in Construction since 1990" : "Αριστεία στις Κατασκευές από το 1990"}
+              {/* Main Headline */}
+              <div className="space-y-6 animate-slide-up">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-lg leading-tight">
+                  {isEnglish 
+                    ? "Turn Your Property in Corfu into a Profitable Investment"
+                    : "Μετατρέψτε το ακίνητό σας σε πηγή εισοδήματος στην Κέρκυρα"}
+                </h1>
+              </div>
+
+              <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100 leading-relaxed">
+                {isEnglish 
+                  ? "We provide full renovation and construction services to help you maximize your property's value, rental income, or resale potential."
+                  : "Αναλαμβάνουμε πλήρως την ανακαίνιση ώστε το ακίνητό σας να είναι έτοιμο για Airbnb ή πώληση με υψηλή αξία."}
+              </p>
+
+              <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto drop-shadow-lg">
+                {isEnglish 
+                  ? "Trusted local contractor with 35+ years of experience"
+                  : "Εγνωρισμένοι τοπικοί ανάδοχοι με εμπειρία 35+ ετών"}
               </p>
 
               <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up animation-delay-200">
                 <Button
                   size="lg"
-                  className="bg-white text-primary hover:bg-white/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-                  asChild
-                >
-                  <Link href={`/${lang}/appointment`}>{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
-                </Button>
-                <Button
-                  size="lg"
-                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white/30"
+                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
                   asChild
                 >
                   <Link href={`/${lang}/cost-calculator`} className="flex items-center gap-2">
                     <Calculator className="w-5 h-5" />
-                    {isEnglish ? "Cost Calculator" : "Υπολογιστής Κόστους"}
+                    {isEnglish ? "Calculate Cost" : "Υπολογίστε Κόστος"}
+                  </Link>
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                  asChild
+                >
+                  <Link href={whatsappLink} target="_blank" className="flex items-center gap-2">
+                    <MessageCircle className="w-5 h-5" />
+                    {isEnglish ? "WhatsApp Estimate" : "WhatsApp Εκτίμηση"}
+                  </Link>
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                  asChild
+                >
+                  <Link href={`/${lang}/appointment`}>
+                    {isEnglish ? "Book Free Appointment" : "Κλείστε Δωρεάν Ραντεβού"}
                   </Link>
                 </Button>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Quick Links */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-12 sm:mt-16 animate-slide-up animation-delay-300">
+      {/* Trust Section - NEW */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-white">
+        <div className="container relative z-10 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               {[
                 {
-                  icon: Home,
-                  label: "Κατασκευή Σπιτιού",
-                  labelEn: "House Construction",
-                  href: "/house-construction",
+                  icon: Award,
+                  number: "35+",
+                  label: isEnglish ? "Years of Experience" : "Έτη Εμπειρίας",
+                  description: isEnglish ? "Trusted in Corfu since 1990" : "Εμπιστευμένοι στην Κέρκυρα από το 1990",
                 },
                 {
-                  icon: Tool,
-                  label: "Ανακαίνιση Σπιτιού",
-                  labelEn: "House Renovation",
-                  href: "/house-renovation",
+                  icon: Briefcase,
+                  number: "85+",
+                  label: isEnglish ? "Completed Projects" : "Ολοκληρωμένα Έργα",
+                  description: isEnglish ? "Satisfied clients across Corfu" : "Ικανοποιημένοι πελάτες σε όλη την Κέρκυρα",
+                },
+                {
+                  icon: Users,
+                  number: "100%",
+                  label: isEnglish ? "Client Satisfaction" : "Ικανοποίηση Πελατών",
+                  description: isEnglish ? "International & local clients" : "Διεθνείς & τοπικοί πελάτες",
                 },
                 {
                   icon: Building2,
-                  label: "Διατηρητέα Κτίρια",
-                  labelEn: "Listed Houses",
-                  href: "/listed-houses",
+                  number: "1",
+                  label: isEnglish ? "Project Manager" : "Διευθυντής Έργου",
+                  description: isEnglish ? "Full project management" : "Πλήρης διαχείριση έργων",
                 },
-                {
-                  icon: Pool,
-                  label: "Κατασκευή Πισίνας",
-                  labelEn: "Pool Construction",
-                  href: "/pool-construction",
-                },
-              ].map((item) => (
-                <Link
-                  key={item.href}
-                  href={`/${lang}${item.href}`}
-                  className="group relative overflow-hidden rounded-xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-light to-primary opacity-90 group-hover:opacity-100 transition-opacity" />
-                  <div className="relative p-4 sm:p-6 flex flex-col items-center text-center space-y-2 sm:space-y-3">
-                    <item.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white group-hover:scale-110 transition-transform" />
-                    <span className="text-xs sm:text-sm font-medium text-white tracking-wide">
-                      {isEnglish ? item.labelEn : item.label}
-                    </span>
-                  </div>
-                </Link>
+              ].map((item, idx) => (
+                <div key={idx} className="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:shadow-lg transition-shadow">
+                  <item.icon className="w-10 h-10 sm:w-12 sm:h-12 text-primary mx-auto mb-4" />
+                  <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">{item.number}</div>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{item.label}</h3>
+                  <p className="text-sm text-gray-600">{item.description}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -120,42 +152,42 @@ export default function HomePage({ lang }: { lang: string }) {
       </section>
 
       {/* About Us Section */}
-      <section className="relative py-16 sm:py-24 md:py-32 bg-white">
+      <section className="relative py-16 sm:py-24 md:py-32 bg-gray-50">
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-                {isEnglish ? "Technical Construction Company of Corfu" : "Τεχνική Κατασκευαστική Κέρκυρας"}
+                {isEnglish ? "Why Property Owners Trust Faiacon" : "Γιατί μας Εμπιστεύονται οι Ιδιοκτήτες Ακινήτων"}
               </h2>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-600">{isEnglish ? "Since 1990" : "Από το 1990"}</p>
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-600">{isEnglish ? "Professional Results, Trusted Expertise" : "Επαγγελματικά αποτελέσματα, εμπιστευμένη τεχνογνωσία"}</p>
             </div>
 
             <div className="prose prose-lg max-w-none mb-12">
-              <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify-content">
+              <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
-                  ? "FaiaCon, based in Corfu, is a reference point in the construction sector, offering high-quality services in house construction, home renovation, listed buildings restoration, and luxury pool construction. With over 35 years of experience, our technical team guarantees innovation, durability, and aesthetic excellence in every project we undertake."
-                  : "Η ΦαίαCon, με έδρα την Κέρκυρα, αποτελεί σημείο αναφοράς στον χώρο των κατασκευών, προσφέροντας υψηλής ποιότητας υπηρεσίες στην κατασκευή σπιτιών, την ανακαίνιση κατοικιών, τη δημιουργία διατηρητέων κτιρίων και την κατασκευή πολυτελών πισινών. Με εμπειρία άνω των 35 ετών, η τεχνική μας ομάδα εγγυάται καινοτομία, αντοχή και αισθητική υπεροχή σε κάθε έργο που αναλαμβάνουμε."}
+                  ? "FaiaCon specializes in transforming properties into profitable investments. Whether you're looking to increase your property's market value, make it rental-ready for Airbnb, or improve its energy efficiency, our proven methods deliver results. From complete renovations to targeted upgrades, we manage every detail so your property reaches its full potential."
+                  : "Η FaiaCon ειδικεύεται στη μετατροπή ακινήτων σε κερδοφόρες επενδύσεις. Είτε θέλετε να αυξήσετε την αξία της ιδιοκτησίας σας, να την κάνετε έτοιμη για Airbnb, ή να βελτιώσετε την ενεργειακή της απόδοση, οι αποδεδειγμένες μέθοδοί μας παραδίδουν αποτελέσματα. Από ολοκληρωμένες ανακαινίσεις έως στοχευμένες αναβαθμίσεις, διαχειριζόμαστε κάθε λεπτομέρεια."}
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12">
               <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 hover:shadow-xl transition-shadow">
                 <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">
-                  {isEnglish ? "Why Choose FaiaCon?" : "Γιατί να επιλέξετε τη ΦαίαCon;"}
+                  {isEnglish ? "Our Approach" : "Η Μέθοδός μας"}
                 </h3>
                 <ul className="space-y-3 sm:space-y-4">
                   {(isEnglish
                     ? [
-                        "Expertise in architectural and construction excellence, with deep knowledge of local architectural heritage.",
-                        "Advanced construction techniques ensuring durability, energy efficiency, and resilience to Corfu's climate conditions.",
-                        "Comprehensive solutions from design and planning to project delivery.",
-                        "Reliability and transparency at every stage of our collaboration.",
+                        "Results-focused: Every renovation targets maximum value increase",
+                        "Local expertise: Deep knowledge of Corfu's market and climate",
+                        "Professional project management: Transparent timelines and budgets",
+                        "Quality guarantees: Durable, energy-efficient, modern finishes",
                       ]
                     : [
-                        "Εξειδίκευση στην αρχιτεκτονική και κατασκευαστική αρτιότητα, με βαθιά γνώση της τοπικής αρχιτεκτονικής κληρονομιάς.",
-                        "Προηγμένες τεχνικές κατασκευής που διασφαλίζουν την αντοχή, την ενεργειακή αποδοτικότητα και την ανθεκτικότητα στις κλιματικές συνθήκες της Κέρκυρας.",
-                        "Ολοκληρωμένες λύσεις από τη μελέτη και το σχεδιασμό έως την παράδοση του έργου.",
-                        "Αξιοπιστία και διαφάνεια σε κάθε στάδιο της συνεργασίας μας.",
+                        "Εστίαση στα αποτελέσματα: Κάθε ανακαίνιση στοχεύει στη μέγιστη αύξηση αξίας",
+                        "Τοπική τεχνογνωσία: Εις βάθος γνώση της αγοράς και του κλίματος της Κέρκυρας",
+                        "Επαγγελματική διαχείριση έργων: Διαφανείς χρονοδιαγράμματα και προϋπολογισμοί",
+                        "Εγγυήσεις ποιότητας: Ανθεκτικές, ενεργειακά αποδοτικές, σύγχρονες διακοσμήσεις",
                       ]
                   ).map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
@@ -168,84 +200,76 @@ export default function HomePage({ lang }: { lang: string }) {
 
               <div className="bg-primary rounded-2xl shadow-lg p-6 sm:p-8 text-white">
                 <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-                  {isEnglish ? "Our Commitment" : "Η Δέσμευσή μας"}
+                  {isEnglish ? "Your Benefits" : "Τα Οφέλη σας"}
                 </h3>
                 <p className="text-base sm:text-lg mb-6 sm:mb-8">
                   {isEnglish
-                    ? "With passion for detail and commitment to quality, we create constructions that stand out for their durability and aesthetics, harmonized with the unique environment of Corfu."
-                    : "Με πάθος για τη λεπτομέρεια και δέσμευση στην ποιότητα, δημιουργούμε κατασκευές που ξεχωρίζουν για την αντοχή και την αισθητική τους, εναρμονισμένες με το μοναδικό περιβάλλον της Κέρκυρας."}
+                    ? "Maximize your property's potential with complete renovation solutions. Our clients enjoy increased property values, higher rental rates, and modern, attractive homes—all managed by experienced professionals who care about your investment."
+                    : "Μεγιστοποιήστε το δυναμικό του ακινήτου σας με ολοκληρωμένες λύσεις ανακαίνισης. Οι πελάτες μας απολαμβάνουν αυξημένες αξίες ακινήτων, υψηλότερα ποσοστά ενοικίασης και σύγχρονα, ελκυστικά σπίτια."}
                 </p>
                 <div className="flex justify-center">
                   <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                    <Link href={`/${lang}/appointment`}>{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
+                    <Link href={whatsappLink} target="_blank" className="flex items-center gap-2">
+                      <MessageCircle className="w-5 h-5" />
+                      {isEnglish ? "Start Your Project" : "Ξεκινήστε το Έργό σας"}
+                    </Link>
                   </Button>
                 </div>
-              </div>
-            </div>
-
-            <div className="flex justify-center">
-              <div className="inline-flex items-center gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-muted rounded-full">
-                <CalendarDays className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                <span className="text-sm sm:text-base text-gray-600">
-                  {isEnglish
-                    ? "Book an appointment today and let's design your future together!"
-                    : "Κλείστε ένα ραντεβού σήμερα και ας σχεδιάσουμε μαζί το μέλλον σας!"}
-                </span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="relative py-16 sm:py-24 md:py-32 bg-gray-50">
+      {/* Services/Solutions Section - REFACTORED */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-white">
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-6">
-              {isEnglish ? "Our Services" : "Οι Υπηρεσίες μας"}
+              {isEnglish ? "Solutions for Property Owners & Investors" : "Λύσεις για Ιδιοκτήτες & Επενδυτές Ακινήτων"}
             </h2>
-            <p className="text-xl text-gray-600 text-justify-content">
+            <p className="text-base sm:text-lg text-gray-600">
               {isEnglish
-                ? "Comprehensive construction and renovation services tailored to your needs"
-                : "Ολοκληρωμένες υπηρεσίες κατασκευής και ανακαίνισης προσαρμοσμένες στις ανάγκες σας"}
+                ? "Results-focused services designed to increase property value and rental potential"
+                : "Υπηρεσίες εστιασμένες στα αποτελέσματα για αύξηση αξίας και δυναμικού ενοικίασης"}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {[
               {
-                title: isEnglish ? "House Construction" : "Κατασκευή Σπιτιού",
+                title: isEnglish ? "Increase Property Value" : "Αύξηση Αξίας Ακινήτου",
                 description: isEnglish
-                  ? "We create your dream home from the ground up."
-                  : "Δημιουργούμε το σπίτι των ονείρων σας από το μηδέν.",
-                href: "/house-construction",
-              },
-              {
-                title: isEnglish ? "House Renovation" : "Ανακαίνιση Σπιτιού",
-                description: isEnglish
-                  ? "Renew and modernize your existing space."
-                  : "Ανανεώστε και εκσυγχρονίστε τον υπάρχοντα χώρο σας.",
+                  ? "Professional renovations that maximize market value and modernize your space."
+                  : "Επαγγελματικές ανακαινίσεις που μεγιστοποιούν την αξία και εκσυγχρονίζουν το χώρο.",
                 href: "/house-renovation",
               },
               {
-                title: isEnglish ? "Listed Buildings" : "Διατηρητέα Κτίρια",
+                title: isEnglish ? "Airbnb & Rental Ready" : "Έτοιμο για Airbnb & Ενοικίαση",
                 description: isEnglish
-                  ? "Special care for historically significant properties."
-                  : "Ειδική φροντίδα για ιστορικά σημαντικά ακίνητα.",
-                href: "/listed-houses",
+                  ? "Transform your property into an attractive rental investment with high income potential."
+                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοικίασης με υψηλό δυναμικό εισοδήματος.",
+                href: "/house-renovation",
               },
               {
-                title: isEnglish ? "Pool Construction" : "Κατασκευή Πισίνας",
+                title: isEnglish ? "Energy Savings & Comfort" : "Εξοικονόμηση Ενέργειας & Άνεση",
                 description: isEnglish
-                  ? "Design and construction of pools with modern chemical-free systems."
-                  : "Σχεδιασμός και κατασκευή πισίνας με σύγχρονα συστήματα χωρίς χημικά.",
+                  ? "Modern thermal insulation and energy-efficient upgrades to reduce costs and improve comfort."
+                  : "Σύγχρονη θερμική μόνωση και αναβαθμίσεις για εξοικονόμηση ενέργειας και άνεση.",
+                href: "/house-renovation",
+              },
+              {
+                title: isEnglish ? "Add Luxury & Investment Value" : "Προσθέστε Πολυτέλεια & Αξία",
+                description: isEnglish
+                  ? "Premium pools and luxury upgrades that enhance lifestyle and property appeal."
+                  : "Πρίμιουμ πισίνες και πολυτελείς αναβ��θμίσεις που ενισχύουν την αξία του ακινήτου.",
                 href: "/pool-construction",
               },
             ].map((service) => (
               <Link key={service.title} href={`/${lang}${service.href}`} className="block group h-full">
-                <div className="h-full p-6 sm:p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{service.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-600 mb-4">{service.description}</p>
+                <div className="h-full p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-primary">{service.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600 mb-4 leading-relaxed">{service.description}</p>
                   <Button className="w-full" variant="outline">
                     {isEnglish ? "Learn More" : "Μάθετε περισσότερα"}
                   </Button>
@@ -256,34 +280,60 @@ export default function HomePage({ lang }: { lang: string }) {
         </div>
       </section>
 
+      {/* Calculator Promotion Section - HIGHLIGHTED */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-r from-primary to-primary-dark text-white">
+        <div className="container relative z-10 px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              {isEnglish ? "Estimate Your Renovation Cost in Minutes" : "Εκτιμήστε το Κόστος Ανακαίνισης σας σε Λεπτά"}
+            </h2>
+            <p className="text-lg sm:text-xl mb-8 text-white/90 leading-relaxed">
+              {isEnglish
+                ? "Use our cost calculator and receive a personalized estimate based on your specific project details."
+                : "Χρησιμοποιήστε τον υπολογιστή κόστους μας και λάβετε εξατομικευμένη εκτίμηση για το έργο σας."}
+            </p>
+            <Button
+              size="lg"
+              className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              asChild
+            >
+              <Link href={`/${lang}/cost-calculator`} className="flex items-center gap-2 justify-center">
+                <Calculator className="w-5 h-5" />
+                {isEnglish ? "Start Cost Calculation" : "Ξεκινήστε Υπολογισμό"}
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Renovation Cost Calculator Section */}
-      <section id="renovation-calculator" className="relative py-24 md:py-32 bg-gray-100 scroll-mt-20">
+      <section id="renovation-calculator" className="relative py-24 md:py-32 bg-gray-50 scroll-mt-20">
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-              {isEnglish ? "Estimate Your Renovation Cost" : "Εκτιμ��στε το Κόστος Ανακαίνισης"}
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
+              {isEnglish ? "Calculate Your Cost Estimate" : "Υπολογίστε την Εκτίμησή σας"}
             </h2>
-            <p className="text-xl text-gray-600 mb-8 text-justify-content">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               {isEnglish
-                ? "With our Cost Calculator, you can easily get a quick estimate for your home renovation or door and window replacement. Simply fill in details such as the size of the space, number of rooms, material (e.g., aluminum, PVC, wood), and the quality you desire (basic, mid-range, or premium). We provide you with a hypothetical price to give you a general idea of the cost – it's not the final offer, but a useful first step. If you want accurate pricing, ask us for a quote!"
-                : "Με τον Υπολογιστή Κόστους μας, μπορείς εύκολα να πάρεις μια γρήγορη εκτίμηση για την ανακαίνιση του σπιτιού σου ή την αντικατάσταση πορτών και παραθύρων. Συμπλήρωσε απλά στοιχεία όπως το μέγεθος του χώρου, τον αριθμό των δωματίων, το υλικό (π.χ. αλουμίνιο, PVC, ξύλο) και την ποιότητα που επιθυμείς (βασική, μεσαία ή premium). Σου δίνουμε μια υποθετική τιμή για να έχεις μια γενική ιδέα του κόστους – δεν είναι η τελική προσφορά, αλλά ένα χρήσιμο πρώτο βήμα. Αν θέλεις ακριβή κοστολόγηση, ζήτα μας προσφορά!"}
+                ? "Fill in your project details below to get an instant estimate. This is a preliminary calculation to help you plan your budget—contact us for a detailed quote."
+                : "Συμπληρώστε τα στοιχεία του έργου σας για να λάβετε άμεση εκτίμηση. Αυτό είναι ένας προκαταρκτικός υπολογισμός για να σας βοηθήσει να προγραμματίσετε το προϋπολογισμό σας."}
             </p>
           </div>
           <RenovationCostCalculator />
         </div>
       </section>
 
-      {/* Projects Showcase */}
-      <section className="relative py-16 sm:py-24 md:py-32 bg-gray-50">
+      {/* Projects Showcase - ENHANCED */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-white">
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-              {isEnglish ? "Recent Projects" : "Πρόσφατα Έργα"}
+              {isEnglish ? "From Old Property to Rental-Ready Investment" : "Από Παλιό Ακίνητο σε Επένδυση Ενοικίασης"}
             </h2>
             <p className="text-base sm:text-lg text-gray-600">
               {isEnglish
-                ? "Discover some of our most recent projects in Corfu"
-                : "Ανακαλύψτε μερικά από τα πιο πρόσφατα έργα μας στην Κέρκυρα"}
+                ? "See how we transform properties to maximize value and rental potential"
+                : "Δείτε πώς μετατρέπουμε ακίνητα για μέγιστη αξία και δυναμικό ενοικίασης"}
             </p>
           </div>
 
@@ -327,13 +377,13 @@ export default function HomePage({ lang }: { lang: string }) {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-1">{isEnglish ? project.titleEn : project.title}</h3>
-                  <p className="text-gray-600">{isEnglish ? project.locationEn : project.location}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-1">{isEnglish ? project.titleEn : project.title}</h3>
+                  <p className="text-sm text-gray-600">{isEnglish ? project.locationEn : project.location}</p>
                 </Link>
               </div>
             ))}
           </div>
-          <div className="text-center mt-8">
+          <div className="text-center mt-12">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
               <Link href={`/${lang}/our-projects`}>{isEnglish ? "View All Projects" : "Δείτε Όλα τα Έργα"}</Link>
             </Button>
@@ -341,8 +391,34 @@ export default function HomePage({ lang }: { lang: string }) {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="relative py-16 sm:py-24 md:py-32 bg-white">
+      {/* WhatsApp CTA Section - NEW EMPHASIS */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-r from-primary-dark via-primary to-primary-light text-white">
+        <div className="container relative z-10 px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              {isEnglish ? "Need a Quick Estimate?" : "Θέλετε Γρήγορη Εκτίμηση;"}
+            </h2>
+            <p className="text-lg sm:text-xl mb-8 text-white/90 leading-relaxed">
+              {isEnglish
+                ? "Send us photos of your property via WhatsApp and receive a fast response from our team. We're here to help you maximize your investment."
+                : "Στείλτε μας φωτογραφίες του ακινήτου σας μέσω WhatsApp και λάβετε γρήγορη απάντηση από την ομάδα μας. Είμαστε εδώ για να σας βοηθήσουμε."}
+            </p>
+            <Button
+              size="lg"
+              className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              asChild
+            >
+              <Link href={whatsappLink} target="_blank" className="flex items-center gap-2 justify-center">
+                <MessageCircle className="w-5 h-5" />
+                {isEnglish ? "Chat on WhatsApp" : "Συνομιλήστε στο WhatsApp"}
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section - KEPT */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-gray-50">
         <div className="container relative z-10 px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
@@ -350,10 +426,10 @@ export default function HomePage({ lang }: { lang: string }) {
             </h2>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
               {isEnglish
-                ? "Contact us today to discuss your construction or renovation needs in Corfu."
-                : "Επικοινωνήστε μαζί μας σήμερα για να συζητήσουμε τις κατασκευαστικές ή ανακαινιστικές ανάγκες σας στην Κέρκυρα."}
+                ? "Contact us today to discuss your renovation goals and get started on transforming your property."
+                : "Επικοινωνήστε μαζί μας σήμερα για να ξεκινήσετε τη μετατροπή του ακινήτου σας."}
             </p>
-            <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
               <Link href={`/${lang}/appointment`}>
                 {isEnglish ? "Book a Free Appointment" : "Κλείστε Δωρεάν Ραντεβού"}
               </Link>
@@ -364,3 +440,4 @@ export default function HomePage({ lang }: { lang: string }) {
     </>
   )
 }
+
