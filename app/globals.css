@@ -31,7 +31,6 @@
     @apply min-h-screen text-base;
   }
 
-  /* Add this new class */
   .text-justify-content {
     @apply text-justify;
   }
@@ -97,40 +96,4 @@
   -webkit-background-clip: text;
   color: transparent;
   background-image: linear-gradient(to right, #2B4B8C, #4A6BA8);
-}
-
-/* Responsive typography */
-@screen sm {
-  html {
-    font-size: 14px;
-  }
-}
-
-@screen md {
-  html {
-    font-size: 16px;
-  }
-}
-
-@screen lg {
-  html {
-    font-size: 18px;
-  }
-}
-
-/* Improved accessibility */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Print styles */
-@media print {
-  .no-print {
-    display: none !important;
-  }
 }
