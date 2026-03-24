@@ -117,6 +117,7 @@ function generateEmailHTML(lead: CalculatorLead): string {
     structural: 130,
     painting: 55,
   }
+  const electricalGeneralRepairCost = 2500
   const poolCostsPerM2: Record<string, Record<string, number>> = {
     none: { basic: 0, midRange: 0, premium: 0 },
     liner: { midRange: 1055, premium: 1215 },
@@ -143,7 +144,7 @@ function generateEmailHTML(lead: CalculatorLead): string {
   const bathroomCost = renovation.bathrooms * categoryModifiers.bathroom * (renovation.categories?.bathroom ? 1 : 0)
   const kitchenCost = renovation.kitchens * categoryModifiers.kitchen * (renovation.categories?.kitchen ? 1 : 0)
   const flooringCost = renovation.area * categoryModifiers.flooring * (renovation.categories?.flooring ? 1 : 0)
-  const electricalCost = renovation.rooms * categoryModifiers.electrical * (renovation.categories?.electrical ? 1 : 0)
+  const electricalCost = (renovation.rooms * categoryModifiers.electrical + (renovation.categories?.electrical ? electricalGeneralRepairCost : 0)) * (renovation.categories?.electrical ? 1 : 0)
   const structuralCost = renovation.area * categoryModifiers.structural * (renovation.categories?.structural ? 1 : 0)
   const paintingCost = renovation.area * categoryModifiers.painting * (renovation.categories?.painting ? 1 : 0)
   
@@ -294,7 +295,15 @@ function generateEmailHTML(lead: CalculatorLead): string {
                   ${renovation.categories?.electrical && renovation.rooms > 0 ? `
                   <tr>
                     <td style="color: #6c757d;">Ηλεκτρολογικά (${renovation.rooms} δωμ.):</td>
-                    <td style="color: #212929; text-align: right;">${renovation.rooms} x ${formatCost(categoryModifiers.electrical)} = ${formatCost(electricalCost)}</td>
+                    <td style="color: #212929; text-align: right;">${renovation.rooms} x ${formatCost(categoryModifiers.electrical)} = ${formatCost(renovation.rooms * categoryModifiers.electrical)}</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #6c757d; padding-left: 20px;">Γενικές Επισκευές:</td>
+                    <td style="color: #212929; text-align: right;">${formatCost(electricalGeneralRepairCost)}</td>
+                  </tr>
+                  <tr style="background-color: #fff3cd;">
+                    <td style="color: #6c757d; font-weight: 600;">Σύνολο Ηλεκτρολογικών:</td>
+                    <td style="color: #856404; text-align: right; font-weight: 600;">${formatCost(renovation.rooms * categoryModifiers.electrical + electricalGeneralRepairCost)}</td>
                   </tr>
                   ` : ''}
                   ${renovation.categories?.structural ? `
