@@ -1,11 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
 import type { CalculatorLead } from '@/lib/types/calculator-lead'
 import { generateLeadSummary, formatCost } from '@/lib/types/calculator-lead'
 
 // Email configuration from environment variables with fallbacks
 const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'faiacon@yahoo.com'
 const LEADS_FROM_EMAIL = process.env.LEADS_FROM_EMAIL || 'onboarding@resend.dev'
+
+// Dynamic import for Resend to avoid build-time initialization
+let Resend: any = null
+async function getResend() {
+  if (!Resend) {
+    try {
+      const ResendModule = await import('resend')
+      Resend = ResendModule.Resend
+    } catch (error) {
+      console.error('Failed to load Resend module:', error)
+      throw new Error('Email service unavailable')
+    }
+  }
+  return Resend
+}
 
 // Validation helpers
 function isValidEmail(email: string): boolean {
@@ -373,7 +387,8 @@ export async function POST(request: NextRequest) {
     }
     
     // Initialize Resend with API key (lazy initialization inside handler)
-    const resend = new Resend(process.env.RESEND_API_KEY)
+    const ResendClass = await getResend()
+    const resend = new ResendClass(process.env.RESEND_API_KEY)
     
     // Create lead object
     const lead: CalculatorLead = {
