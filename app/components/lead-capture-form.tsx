@@ -35,8 +35,6 @@ export function LeadCaptureForm({ isOpen, onClose, selections, isEnglish = false
   const [isSuccess, setIsSuccess] = useState(false)
   const [errors, setErrors] = useState<FormErrors>({})
 
-  console.log("[v0] LeadCaptureForm isOpen:", isOpen)
-
   // Translations
   const t = {
     title: isEnglish ? "Get Your Cost Estimate" : "Λάβετε την Εκτίμηση Κόστους",
