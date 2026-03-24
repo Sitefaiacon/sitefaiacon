@@ -173,10 +173,13 @@ export function RenovationCostCalculator() {
     if (numericArea > 125) totalCostCalc *= 0.92
 
     if (poolType !== "none" && !isNaN(poolSize)) {
-      const poolCostPerM2 = poolCostsPerM2[poolType]?.[renovationQuality as keyof typeof poolCostsPerM2.liner]
-      if (poolCostPerM2) {
-        const poolCost = (poolCostPerM2 - 100) * poolSize
-        totalCostCalc += poolCost > 0 ? poolCost : 0
+      const poolTypeCosts = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2]
+      if (poolTypeCosts && renovationQuality in poolTypeCosts) {
+        const poolCostPerM2 = poolTypeCosts[renovationQuality as keyof typeof poolTypeCosts]
+        if (poolCostPerM2) {
+          const poolCost = (poolCostPerM2 - 100) * poolSize
+          totalCostCalc += poolCost > 0 ? poolCost : 0
+        }
       }
     }
 
@@ -249,10 +252,13 @@ export function RenovationCostCalculator() {
     if (numericArea > 125) totalCostCalc *= 0.92
 
     if (poolType !== "none" && !isNaN(poolSize)) {
-      const poolCostPerM2 = poolCostsPerM2[poolType]?.[renovationQuality as keyof typeof poolCostsPerM2.liner]
-      if (poolCostPerM2) {
-        const poolCost = (poolCostPerM2 - 100) * poolSize
-        totalCostCalc += poolCost > 0 ? poolCost : 0
+      const poolTypeCosts = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2]
+      if (poolTypeCosts && renovationQuality in poolTypeCosts) {
+        const poolCostPerM2 = poolTypeCosts[renovationQuality as keyof typeof poolTypeCosts]
+        if (poolCostPerM2) {
+          const poolCost = (poolCostPerM2 - 100) * poolSize
+          totalCostCalc += poolCost > 0 ? poolCost : 0
+        }
       }
     }
 
