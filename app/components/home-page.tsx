@@ -44,10 +44,11 @@ export default function HomePage({ lang }: { lang: string }) {
           <div className="max-w-5xl mx-auto">
             <div className="text-center space-y-8">
               {/* Brand Label */}
-              <div className="animate-fade-in">
-                <p className="text-sm sm:text-base md:text-lg font-light sm:font-light text-white/80 tracking-widest drop-shadow-md">
+              <div className="animate-fade-in mb-2">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white/90 tracking-wide drop-shadow-lg uppercase">
                   {isEnglish ? "FaiaCon Technical Construction" : "ΦαιάCon Τεχνική Κατασκευαστική"}
                 </p>
+                <div className="mt-3 mx-auto w-24 sm:w-32 md:w-40 h-0.5 bg-white/40 rounded-full"></div>
               </div>
 
               {/* Main Headline */}
