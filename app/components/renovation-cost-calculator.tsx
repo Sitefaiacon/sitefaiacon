@@ -8,7 +8,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "../contexts/language-context"
-import { Bath, ChefHat, Layers, Zap, Building2, Paintbrush } from "lucide-react"
+import { Bath, ChefHat, Layers, Zap, Building2, Paintbrush, Loader2, Send } from "lucide-react"
+import { sendCalculatorEmail } from "@/app/actions/send-calculator-email"
 
 // Constants for Doors & Windows Calculator
 const materialOptions = ["aluminum", "pvc", "wood"] as const
@@ -43,6 +44,14 @@ const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
 export function RenovationCostCalculator() {
   const { isEnglish } = useLanguage()
   const [activeTab, setActiveTab] = useState("renovation")
+  const [showContactForm, setShowContactForm] = useState(false)
+
+  // Contact form state
+  const [contactName, setContactName] = useState("")
+  const [contactEmail, setContactEmail] = useState("")
+  const [contactPhone, setContactPhone] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // State for Renovation Calculator
   const [area, setArea] = useState<string>("50")
@@ -113,6 +122,7 @@ export function RenovationCostCalculator() {
     "General Renovation": "Γενική Ανακαίνιση",
     "Doors & Windows": "Πόρτες & Παράθυρα",
     "Total Estimated Cost:": "Συνολικό Εκτιμώμενο Κόστος:",
+    "Request a Quote": "Ζητήστε Προσφορά",
   }
 
   const translate = (text: string) => {
@@ -164,21 +174,21 @@ export function RenovationCostCalculator() {
     )
 
     const baseCost = selectedCategories > 1 ? numericArea * baseCostPerM2 : 0
-    let totalCost = (baseCost + categoryCost) * qualityMultipliers[renovationQuality as keyof typeof qualityMultipliers]
+    let totalCostCalc = (baseCost + categoryCost) * qualityMultipliers[renovationQuality as keyof typeof qualityMultipliers]
 
     const ageCategory = 2024 - buildingAge > 40 ? "ancient" : 2024 - buildingAge >= 20 ? "old" : "modern"
-    totalCost *= agePenalty[ageCategory as keyof typeof agePenalty]
-    if (numericArea > 125) totalCost *= 0.92
+    totalCostCalc *= agePenalty[ageCategory as keyof typeof agePenalty]
+    if (numericArea > 125) totalCostCalc *= 0.92
 
     if (poolType !== "none" && !isNaN(poolSize)) {
       const poolCost =
         (poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][renovationQuality as keyof typeof qualityMultipliers] -
           100) *
         poolSize
-      totalCost += poolCost > 0 ? poolCost : 0
+      totalCostCalc += poolCost > 0 ? poolCost : 0
     }
 
-    setRenovationCost(totalCost.toFixed(2))
+    setRenovationCost(totalCostCalc.toFixed(2))
   }
 
   const calculateWindowsCost = () => {
@@ -188,6 +198,49 @@ export function RenovationCostCalculator() {
       interiorDoors * windowCosts.interiorDoor[material][windowsQuality] +
       mainEntrance * windowCosts.mainEntrance[material][windowsQuality]
     setWindowsCost(cost.toFixed(2))
+  }
+
+  const handleSubmitQuote = async () => {
+    setIsSubmitting(true)
+    setSubmitMessage(null)
+
+    const result = await sendCalculatorEmail({
+      name: contactName,
+      email: contactEmail,
+      phone: contactPhone,
+      area,
+      bathrooms,
+      kitchens,
+      rooms,
+      buildingAge,
+      poolType,
+      poolSize,
+      categories,
+      renovationQuality,
+      renovationCost,
+      material,
+      windowsQuality,
+      windows,
+      balconyDoors,
+      interiorDoors,
+      mainEntrance,
+      windowsCost,
+      totalCost,
+      isEnglish,
+    })
+
+    setIsSubmitting(false)
+    setSubmitMessage({
+      type: result.success ? "success" : "error",
+      text: result.message,
+    })
+
+    if (result.success) {
+      setShowContactForm(false)
+      setContactName("")
+      setContactEmail("")
+      setContactPhone("")
+    }
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
@@ -427,14 +480,105 @@ export function RenovationCostCalculator() {
 
           <div className="mt-4 text-center">
             <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
-            <p className="text-2xl text-primary">€{windowsCost}</p>
+            <p className="text-2xl text-primary">{isEnglish ? `€${windowsCost}` : `${windowsCost}€`}</p>
           </div>
         </TabsContent>
       </Tabs>
 
       <div className="mt-6 pt-4 border-t border-gray-200">
         <p className="font-bold text-lg text-center">{translate("Total Estimated Cost:")}</p>
-        <p className="text-3xl text-primary text-center">€{totalCost}</p>
+        <p className="text-3xl text-primary text-center">{isEnglish ? `€${totalCost}` : `${totalCost}€`}</p>
+        
+        {!showContactForm ? (
+          <Button
+            className="w-full mt-4"
+            onClick={() => setShowContactForm(true)}
+          >
+            <Send className="w-4 h-4 mr-2" />
+            {translate("Request a Quote")}
+          </Button>
+        ) : (
+          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+            <h4 className="font-bold text-lg mb-4 text-center">
+              {isEnglish ? "Get Your Free Quote" : "Λάβετε Δωρεάν Προσφορά"}
+            </h4>
+            <p className="text-sm text-gray-600 mb-4 text-center">
+              {isEnglish 
+                ? "Fill in your details and we will contact you with a personalized quote based on your selections."
+                : "Συμπληρώστε τα στοιχεία σας και θα επικοινωνήσουμε μαζί σας με εξατομικευμένη προσφορά βάσει των επιλογών σας."}
+            </p>
+            <div className="space-y-3">
+              <div>
+                <Label htmlFor="contactName">{isEnglish ? "Name" : "Όνομα"}</Label>
+                <Input
+                  id="contactName"
+                  type="text"
+                  value={contactName}
+                  onChange={(e) => setContactName(e.target.value)}
+                  placeholder={isEnglish ? "Your name" : "Το όνομά σας"}
+                  className="w-full"
+                />
+              </div>
+              <div>
+                <Label htmlFor="contactEmail">{isEnglish ? "Email *" : "Email *"}</Label>
+                <Input
+                  id="contactEmail"
+                  type="email"
+                  value={contactEmail}
+                  onChange={(e) => setContactEmail(e.target.value)}
+                  placeholder={isEnglish ? "your@email.com" : "to@email.com"}
+                  required
+                  className="w-full"
+                />
+              </div>
+              <div>
+                <Label htmlFor="contactPhone">{isEnglish ? "Phone *" : "Τηλέφωνο *"}</Label>
+                <Input
+                  id="contactPhone"
+                  type="tel"
+                  value={contactPhone}
+                  onChange={(e) => setContactPhone(e.target.value)}
+                  placeholder={isEnglish ? "69XXXXXXXX" : "69XXXXXXXX"}
+                  required
+                  className="w-full"
+                />
+              </div>
+              <div className="flex gap-2 mt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowContactForm(false)}
+                  className="flex-1"
+                  disabled={isSubmitting}
+                >
+                  {isEnglish ? "Cancel" : "Ακύρωση"}
+                </Button>
+                <Button
+                  onClick={handleSubmitQuote}
+                  className="flex-1"
+                  disabled={isSubmitting || !contactEmail || !contactPhone}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      {isEnglish ? "Sending..." : "Αποστολή..."}
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 mr-2" />
+                      {isEnglish ? "Send Request" : "Αποστολή Αίτησης"}
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {submitMessage && (
+          <div className={`mt-4 p-4 rounded-lg ${submitMessage.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+            {submitMessage.text}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -9,7 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "../contexts/language-context"
 import Image from "next/image"
-import { CheckCircle2, Bath, UtensilsCrossed, Layers, Plug, Building, Paintbrush } from "lucide-react"
+import { CheckCircle2, Bath, UtensilsCrossed, Layers, Plug, Building, Paintbrush, Loader2, Send } from "lucide-react"
+import { sendCalculatorEmail } from "@/app/actions/send-calculator-email"
 
 // Constants for Doors & Windows Calculator
 const materialOptions = ["aluminum", "pvc", "wood"] as const
@@ -44,7 +45,15 @@ const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
 export function RenovationCostCalculator() {
   const { isEnglish } = useLanguage()
   const [activeTab, setActiveTab] = useState("renovation")
-  const [showResults, setShowResults] = useState(false) // Νέο state για να εμφανίζονται τα αποτελέσματα μόνο μετά το κλικ
+  const [showResults, setShowResults] = useState(false)
+  const [showContactForm, setShowContactForm] = useState(false)
+
+  // Contact form state
+  const [contactName, setContactName] = useState("")
+  const [contactEmail, setContactEmail] = useState("")
+  const [contactPhone, setContactPhone] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // State for Renovation Calculator
   const [area, setArea] = useState<string>("50")
@@ -179,22 +188,22 @@ export function RenovationCostCalculator() {
     )
 
     const baseCost = selectedCategories > 1 ? numericArea * baseCostPerM2 : 0
-    let totalCost = (baseCost + categoryCost) * qualityMultipliers[renovationQuality as keyof typeof qualityMultipliers]
+    let totalCostCalc = (baseCost + categoryCost) * qualityMultipliers[renovationQuality as keyof typeof qualityMultipliers]
 
     const ageCategory = 2024 - buildingAge > 40 ? "ancient" : 2024 - buildingAge >= 20 ? "old" : "modern"
-    totalCost *= agePenalty[ageCategory as keyof typeof agePenalty]
-    if (numericArea > 125) totalCost *= 0.92
+    totalCostCalc *= agePenalty[ageCategory as keyof typeof agePenalty]
+    if (numericArea > 125) totalCostCalc *= 0.92
 
     if (poolType !== "none" && !isNaN(poolSize)) {
       const poolCost =
         (poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][renovationQuality as keyof typeof qualityMultipliers] -
           100) *
         poolSize
-      totalCost += poolCost > 0 ? poolCost : 0
+      totalCostCalc += poolCost > 0 ? poolCost : 0
     }
 
-    setRenovationCost(totalCost.toFixed(2))
-    setShowResults(true) // Εμφάνιση αποτελεσμάτων μετά τον υπολογισμό
+    setRenovationCost(totalCostCalc.toFixed(2))
+    setShowResults(true)
   }
 
   const calculateWindowsCost = () => {
@@ -204,7 +213,50 @@ export function RenovationCostCalculator() {
       interiorDoors * windowCosts.interiorDoor[material][windowsQuality] +
       mainEntrance * windowCosts.mainEntrance[material][windowsQuality]
     setWindowsCost(cost.toFixed(2))
-    setShowResults(true) // Εμφάνιση αποτελεσμάτων μετά τον υπολογισμό
+    setShowResults(true)
+  }
+
+  const handleSubmitQuote = async () => {
+    setIsSubmitting(true)
+    setSubmitMessage(null)
+
+    const result = await sendCalculatorEmail({
+      name: contactName,
+      email: contactEmail,
+      phone: contactPhone,
+      area,
+      bathrooms,
+      kitchens,
+      rooms,
+      buildingAge,
+      poolType,
+      poolSize,
+      categories,
+      renovationQuality,
+      renovationCost,
+      material,
+      windowsQuality,
+      windows,
+      balconyDoors,
+      interiorDoors,
+      mainEntrance,
+      windowsCost,
+      totalCost,
+      isEnglish,
+    })
+
+    setIsSubmitting(false)
+    setSubmitMessage({
+      type: result.success ? "success" : "error",
+      text: result.message,
+    })
+
+    if (result.success) {
+      setShowContactForm(false)
+      setContactName("")
+      setContactEmail("")
+      setContactPhone("")
+    }
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
@@ -226,9 +278,9 @@ export function RenovationCostCalculator() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold text-blue-600">{translate("Renovation Cost Calculator")}</h2>
         <Image
-          src="/path-to-your-logo.png" // Αντικατέστησε με το σωστό path του λογότυπου σου
+          src="/path-to-your-logo.png"
           alt="Faiacon Logo"
-          width={100} // Ρύθμισε το μέγεθος ανάλογα
+          width={100}
           height={50}
           className="object-contain"
         />
@@ -261,7 +313,7 @@ export function RenovationCostCalculator() {
               value={area}
               onChange={(e) => {
                 setArea(e.target.value)
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
               min="1"
               className="w-full mb-2"
@@ -275,7 +327,7 @@ export function RenovationCostCalculator() {
               value={bathrooms}
               onChange={(e) => {
                 setBathrooms(Number(e.target.value))
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
               min="0"
               className="w-full mb-2"
@@ -289,7 +341,7 @@ export function RenovationCostCalculator() {
               value={kitchens}
               onChange={(e) => {
                 setKitchens(Number(e.target.value))
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
               min="0"
               className="w-full mb-2"
@@ -303,7 +355,7 @@ export function RenovationCostCalculator() {
               value={rooms}
               onChange={(e) => {
                 setRooms(Number(e.target.value))
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
               min="0"
               className="w-full mb-2"
@@ -317,7 +369,7 @@ export function RenovationCostCalculator() {
               value={buildingAge}
               onChange={(e) => {
                 setBuildingAge(Number(e.target.value))
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
               min="1900"
               max="2024"
@@ -330,7 +382,7 @@ export function RenovationCostCalculator() {
               value={poolType}
               onValueChange={(value) => {
                 setPoolType(value as "none" | "concrete" | "polyester" | "liner")
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
                 calculateRenovationCost()
               }}
             >
@@ -354,7 +406,7 @@ export function RenovationCostCalculator() {
                 value={poolSize}
                 onChange={(e) => {
                   setPoolSize(Number(e.target.value))
-                  setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                  setShowResults(false)
                 }}
                 min="1"
                 max="50"
@@ -379,7 +431,7 @@ export function RenovationCostCalculator() {
                   checked={categories[key as keyof typeof categories]}
                   onCheckedChange={(checked) => {
                     setCategories((prev) => ({ ...prev, [key]: checked === true }))
-                    setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                    setShowResults(false)
                   }}
                 />
                 <div className="flex items-center space-x-2">
@@ -395,7 +447,7 @@ export function RenovationCostCalculator() {
               value={renovationQuality}
               onValueChange={(value) => {
                 setRenovationQuality(value as "basic" | "midRange" | "premium")
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
             >
               <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white mb-2">
@@ -464,19 +516,19 @@ export function RenovationCostCalculator() {
         <TabsContent value="windows" className="space-y-4">
           {renderInput("Windows", windows, (value) => {
             setWindows(value)
-            setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+            setShowResults(false)
           })}
           {renderInput("Balcony Doors", balconyDoors, (value) => {
             setBalconyDoors(value)
-            setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+            setShowResults(false)
           })}
           {renderInput("Interior Doors", interiorDoors, (value) => {
             setInteriorDoors(value)
-            setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+            setShowResults(false)
           })}
           {renderInput("Main Entrance", mainEntrance, (value) => {
             setMainEntrance(value)
-            setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+            setShowResults(false)
           })}
 
           <div>
@@ -485,7 +537,7 @@ export function RenovationCostCalculator() {
               value={material}
               onValueChange={(value) => {
                 setMaterial(value as Material)
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
             >
               <SelectTrigger className="mb-2">
@@ -507,7 +559,7 @@ export function RenovationCostCalculator() {
               value={windowsQuality}
               onValueChange={(value) => {
                 setWindowsQuality(value as Quality)
-                setShowResults(false) // Κρύβει αποτελέσματα όταν αλλάζουν δεδομένα
+                setShowResults(false)
               }}
             >
               <SelectTrigger className="mb-2">
@@ -526,7 +578,7 @@ export function RenovationCostCalculator() {
           {showResults && windowsCost && (
             <div className="mt-4 text-center">
               <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
-              <p className="text-2xl text-blue-600">€{windowsCost}</p>
+              <p className="text-2xl text-blue-600">{isEnglish ? `€${windowsCost}` : `${windowsCost}€`}</p>
             </div>
           )}
         </TabsContent>
@@ -535,13 +587,98 @@ export function RenovationCostCalculator() {
       {showResults && totalCost && (
         <div className="mt-6 pt-4 border-t border-gray-200 text-center">
           <p className="font-bold text-lg">{translate("Total Estimated Cost:")}</p>
-          <p className="text-3xl text-blue-600">€{totalCost}</p>
-          <Button
-            className="mt-4 bg-blue-600 hover:bg-blue-700"
-            onClick={() => (window.location.href = "/el/appointment")}
-          >
-            {translate("Request a Quote")}
-          </Button>
+          <p className="text-3xl text-blue-600">{isEnglish ? `€${totalCost}` : `${totalCost}€`}</p>
+          
+          {!showContactForm ? (
+            <Button
+              className="mt-4 bg-blue-600 hover:bg-blue-700"
+              onClick={() => setShowContactForm(true)}
+            >
+              <Send className="w-4 h-4 mr-2" />
+              {translate("Request a Quote")}
+            </Button>
+          ) : (
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg text-left">
+              <h4 className="font-bold text-lg mb-4 text-center">
+                {isEnglish ? "Get Your Free Quote" : "Λάβετε Δωρεάν Προσφορά"}
+              </h4>
+              <p className="text-sm text-gray-600 mb-4 text-center">
+                {isEnglish 
+                  ? "Fill in your details and we will contact you with a personalized quote based on your selections."
+                  : "Συμπληρώστε τα στοιχεία σας και θα επικοινωνήσουμε μαζί σας με εξατομικευμένη προσφορά βάσει των επιλογών σας."}
+              </p>
+              <div className="space-y-3">
+                <div>
+                  <Label htmlFor="contactName">{isEnglish ? "Name" : "Όνομα"}</Label>
+                  <Input
+                    id="contactName"
+                    type="text"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    placeholder={isEnglish ? "Your name" : "Το όνομά σας"}
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="contactEmail">{isEnglish ? "Email *" : "Email *"}</Label>
+                  <Input
+                    id="contactEmail"
+                    type="email"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    placeholder={isEnglish ? "your@email.com" : "to@email.com"}
+                    required
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="contactPhone">{isEnglish ? "Phone *" : "Τηλέφωνο *"}</Label>
+                  <Input
+                    id="contactPhone"
+                    type="tel"
+                    value={contactPhone}
+                    onChange={(e) => setContactPhone(e.target.value)}
+                    placeholder={isEnglish ? "69XXXXXXXX" : "69XXXXXXXX"}
+                    required
+                    className="w-full"
+                  />
+                </div>
+                <div className="flex gap-2 mt-4">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowContactForm(false)}
+                    className="flex-1"
+                    disabled={isSubmitting}
+                  >
+                    {isEnglish ? "Cancel" : "Ακύρωση"}
+                  </Button>
+                  <Button
+                    onClick={handleSubmitQuote}
+                    className="flex-1 bg-blue-600 hover:bg-blue-700"
+                    disabled={isSubmitting || !contactEmail || !contactPhone}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        {isEnglish ? "Sending..." : "Αποστολή..."}
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        {isEnglish ? "Send Request" : "Αποστολή Αίτησης"}
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {submitMessage && (
+            <div className={`mt-4 p-4 rounded-lg ${submitMessage.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+              {submitMessage.text}
+            </div>
+          )}
         </div>
       )}
     </div>
