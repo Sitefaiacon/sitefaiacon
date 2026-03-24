@@ -72,9 +72,6 @@ export function RenovationCostCalculator() {
   const [mainEntrance, setMainEntrance] = useState(0)
   const [windowsCost, setWindowsCost] = useState<string>("0.00")
 
-  //New State Variable
-  const [totalCost, setTotalCost] = useState<string>("0.00")
-
   // Constants for Renovation Calculator
   const baseCostPerM2 = 415
   const qualityMultipliers = { basic: 1.0, midRange: 1.3, premium: 1.6 }
@@ -113,6 +110,7 @@ export function RenovationCostCalculator() {
     "General Renovation": "Γενική Ανακαίνιση",
     "Doors & Windows": "Πόρτες & Παράθυρα",
     "Total Estimated Cost:": "Συνολικό Εκτιμώμενο Κόστος:",
+    "Get Quote": "Λάβετε Προσφορά",
   }
 
   const translate = (text: string) => {
@@ -134,14 +132,8 @@ export function RenovationCostCalculator() {
 
   useEffect(() => {
     calculateWindowsCost()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance])
-
-  useEffect(() => {
-    const renovationCostNumber = renovationCost ? Number.parseFloat(renovationCost) : 0
-    const windowsCostNumber = windowsCost ? Number.parseFloat(windowsCost) : 0
-    const newTotalCost = (renovationCostNumber + windowsCostNumber).toFixed(2)
-    setTotalCost(newTotalCost)
-  }, [renovationCost, windowsCost])
 
   // Calculation functions
   const calculateRenovationCost = () => {
@@ -191,108 +183,127 @@ export function RenovationCostCalculator() {
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
-    <div>
-      <Label htmlFor={label}>{translate(label)}</Label>
+    <div className="space-y-1.5">
+      <Label htmlFor={label} className="text-sm font-medium text-foreground">
+        {translate(label)}
+      </Label>
       <Input
         id={label}
         type="number"
         value={value}
         onChange={(e) => onChange(Number.parseInt(e.target.value) || 0)}
         min="0"
+        className="h-10 border-border bg-background"
       />
     </div>
   )
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-primary">{translate("Renovation Cost Calculator")}</h2>
+    <div className="bg-background p-6 rounded-lg shadow-md max-w-md mx-auto border border-border">
+      <h2 className="text-2xl font-bold mb-6 text-primary">
+        {translate("Renovation Cost Calculator")}
+      </h2>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-4">
-          <TabsTrigger value="renovation">{translate("General Renovation")}</TabsTrigger>
-          <TabsTrigger value="windows">{translate("Doors & Windows")}</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 mb-6 h-10 bg-muted p-1">
+          <TabsTrigger 
+            value="renovation" 
+            className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm"
+          >
+            {translate("General Renovation")}
+          </TabsTrigger>
+          <TabsTrigger 
+            value="windows" 
+            className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm"
+          >
+            {translate("Doors & Windows")}
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="renovation" className="space-y-4">
-          <div>
-            <Label htmlFor="area">{isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}</Label>
+          <div className="space-y-1.5">
+            <Label htmlFor="area" className="text-sm font-medium text-foreground">
+              {isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}
+            </Label>
             <Input
               id="area"
               type="number"
               value={area}
-              onChange={(e) => {
-                setArea(e.target.value)
-                calculateRenovationCost()
-              }}
+              onChange={(e) => setArea(e.target.value)}
               min="1"
+              className="h-10 border-border bg-background"
             />
           </div>
-          <div>
-            <Label htmlFor="bathrooms">{isEnglish ? "Bathrooms" : "Μπάνια"}</Label>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="bathrooms" className="text-sm font-medium text-foreground">
+              {isEnglish ? "Bathrooms" : "Μπάνια"}
+            </Label>
             <Input
               id="bathrooms"
               type="number"
               value={bathrooms}
-              onChange={(e) => {
-                setBathrooms(Number(e.target.value))
-                calculateRenovationCost()
-              }}
+              onChange={(e) => setBathrooms(Number(e.target.value))}
               min="0"
+              className="h-10 border-border bg-background"
             />
           </div>
-          <div>
-            <Label htmlFor="kitchens">{isEnglish ? "Kitchens" : "Κουζίνες"}</Label>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="kitchens" className="text-sm font-medium text-foreground">
+              {isEnglish ? "Kitchens" : "Κουζίνες"}
+            </Label>
             <Input
               id="kitchens"
               type="number"
               value={kitchens}
-              onChange={(e) => {
-                setKitchens(Number(e.target.value))
-                calculateRenovationCost()
-              }}
+              onChange={(e) => setKitchens(Number(e.target.value))}
               min="0"
+              className="h-10 border-border bg-background"
             />
           </div>
-          <div>
-            <Label htmlFor="rooms">{isEnglish ? "Rooms" : "Δωμάτια"}</Label>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="rooms" className="text-sm font-medium text-foreground">
+              {isEnglish ? "Rooms" : "Δωμάτια"}
+            </Label>
             <Input
               id="rooms"
               type="number"
               value={rooms}
-              onChange={(e) => {
-                setRooms(Number(e.target.value))
-                calculateRenovationCost()
-              }}
+              onChange={(e) => setRooms(Number(e.target.value))}
               min="0"
+              className="h-10 border-border bg-background"
             />
           </div>
-          <div>
-            <Label htmlFor="buildingAge">{isEnglish ? "Building Year" : "Έτος Κατασκευής"}</Label>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="buildingAge" className="text-sm font-medium text-foreground">
+              {isEnglish ? "Building Year" : "Έτος Κατασκευής"}
+            </Label>
             <Input
               id="buildingAge"
               type="number"
               value={buildingAge}
-              onChange={(e) => {
-                setBuildingAge(Number(e.target.value))
-                calculateRenovationCost()
-              }}
+              onChange={(e) => setBuildingAge(Number(e.target.value))}
               min="1900"
               max="2024"
+              className="h-10 border-border bg-background"
             />
           </div>
-          <div className="relative z-30">
-            <Label>{isEnglish ? "Pool Type" : "Τύπος Πισίνας"}</Label>
+
+          <div className="space-y-1.5 relative z-30">
+            <Label className="text-sm font-medium text-foreground">
+              {isEnglish ? "Pool Type" : "Τύπος Πισίνας"}
+            </Label>
             <Select
               value={poolType}
-              onValueChange={(value) => {
-                setPoolType(value as "none" | "concrete" | "polyester" | "liner")
-                calculateRenovationCost()
-              }}
+              onValueChange={(value) => setPoolType(value as "none" | "concrete" | "polyester" | "liner")}
             >
-              <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white">
+              <SelectTrigger className="h-10 w-full border-border bg-background">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent position="popper" sideOffset={5} className="z-[100] bg-white">
+              <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background border-border">
                 <SelectItem value="none">{isEnglish ? "None" : "Καμία"}</SelectItem>
                 <SelectItem value="concrete">{isEnglish ? "Concrete" : "Μπετόν"}</SelectItem>
                 <SelectItem value="polyester">{isEnglish ? "Polyester" : "Πολυεστερική"}</SelectItem>
@@ -300,24 +311,28 @@ export function RenovationCostCalculator() {
               </SelectContent>
             </Select>
           </div>
+
           {poolType !== "none" && (
-            <div>
-              <Label htmlFor="poolSize">{isEnglish ? "Pool Size (m²)" : "Μέγεθος Πισίνας (τ.μ.)"}</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="poolSize" className="text-sm font-medium text-foreground">
+                {isEnglish ? "Pool Size (m²)" : "Μέγεθος Πισίνας (τ.μ.)"}
+              </Label>
               <Input
                 id="poolSize"
                 type="number"
                 value={poolSize}
-                onChange={(e) => {
-                  setPoolSize(Number(e.target.value))
-                  calculateRenovationCost()
-                }}
+                onChange={(e) => setPoolSize(Number(e.target.value))}
                 min="1"
                 max="50"
+                className="h-10 border-border bg-background"
               />
             </div>
           )}
-          <div className="relative z-10">
-            <Label>{isEnglish ? "Categories" : "Κατηγορίες"}</Label>
+
+          <div className="space-y-3 relative z-10">
+            <Label className="text-sm font-medium text-foreground">
+              {isEnglish ? "Categories" : "Κατηγορίες"}
+            </Label>
             {Object.entries(categories).map(([key, value]) => {
               const categoryIcons: Record<string, React.ReactNode> = {
                 bathroom: <Bath className="w-4 h-4 text-primary" />,
@@ -336,36 +351,36 @@ export function RenovationCostCalculator() {
                 painting: "Βαφή",
               }
               return (
-                <div key={key} className="flex items-center space-x-2 py-1">
+                <div key={key} className="flex items-center gap-3">
                   <Checkbox
                     id={key}
                     checked={value}
                     onCheckedChange={(checked) => {
                       setCategories((prev) => ({ ...prev, [key]: checked === true }))
-                      calculateRenovationCost()
                     }}
+                    className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                   />
                   {categoryIcons[key]}
-                  <Label htmlFor={key} className="cursor-pointer">
+                  <Label htmlFor={key} className="cursor-pointer text-sm text-foreground">
                     {isEnglish ? key.charAt(0).toUpperCase() + key.slice(1) : categoryLabels[key]}
                   </Label>
                 </div>
               )
             })}
           </div>
-          <div className="relative z-30">
-            <Label>{isEnglish ? "Quality" : "Ποιότητα"}</Label>
+
+          <div className="space-y-1.5 relative z-30">
+            <Label className="text-sm font-medium text-foreground">
+              {isEnglish ? "Quality" : "Ποιότητα"}
+            </Label>
             <Select
               value={renovationQuality}
-              onValueChange={(value) => {
-                setRenovationQuality(value as "basic" | "midRange" | "premium")
-                calculateRenovationCost()
-              }}
+              onValueChange={(value) => setRenovationQuality(value as "basic" | "midRange" | "premium")}
             >
-              <SelectTrigger className="w-full whitespace-nowrap overflow-hidden bg-white">
+              <SelectTrigger className="h-10 w-full border-border bg-background">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent position="popper" sideOffset={5} className="z-[100] bg-white">
+              <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background border-border">
                 {poolType !== "liner" && poolType !== "polyester" && (
                   <SelectItem value="basic">{isEnglish ? "Basic" : "Βασική"}</SelectItem>
                 )}
@@ -376,13 +391,22 @@ export function RenovationCostCalculator() {
               </SelectContent>
             </Select>
           </div>
-          <Button onClick={calculateRenovationCost} className="w-full mt-4">
-            {isEnglish ? "Calculate" : "Υπολογισμός"}
+
+          <Button 
+            onClick={calculateRenovationCost} 
+            className="w-full h-11 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+          >
+            {translate("Get Quote")}
           </Button>
+
           {renovationCost && (
-            <div className="mt-4 text-center">
-              <p className="font-bold text-lg">{isEnglish ? "Estimated Cost:" : "Εκτιμώμενο Κόστος:"}</p>
-              <p className="text-2xl text-primary">{isEnglish ? `€${renovationCost}` : `${renovationCost}€`}</p>
+            <div className="mt-4 text-center p-4 bg-muted rounded-lg">
+              <p className="font-medium text-sm text-muted-foreground">
+                {isEnglish ? "Estimated Cost:" : "Εκτιμώμενο Κόστος:"}
+              </p>
+              <p className="text-2xl font-bold text-primary mt-1">
+                {isEnglish ? `€${renovationCost}` : `${renovationCost}€`}
+              </p>
             </div>
           )}
         </TabsContent>
@@ -393,13 +417,13 @@ export function RenovationCostCalculator() {
           {renderInput("Interior Doors", interiorDoors, setInteriorDoors)}
           {renderInput("Main Entrance", mainEntrance, setMainEntrance)}
 
-          <div>
-            <Label>{translate("Material")}</Label>
+          <div className="space-y-1.5">
+            <Label className="text-sm font-medium text-foreground">{translate("Material")}</Label>
             <Select value={material} onValueChange={(value) => setMaterial(value as Material)}>
-              <SelectTrigger>
+              <SelectTrigger className="h-10 border-border bg-background">
                 <SelectValue>{isEnglish ? material.toUpperCase() : translate(material)}</SelectValue>
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background border-border">
                 {materialOptions.map((m) => (
                   <SelectItem key={m} value={m}>
                     {isEnglish ? m.toUpperCase() : translate(m)}
@@ -409,13 +433,13 @@ export function RenovationCostCalculator() {
             </Select>
           </div>
 
-          <div>
-            <Label>{translate("Quality")}</Label>
+          <div className="space-y-1.5">
+            <Label className="text-sm font-medium text-foreground">{translate("Quality")}</Label>
             <Select value={windowsQuality} onValueChange={(value) => setWindowsQuality(value as Quality)}>
-              <SelectTrigger>
+              <SelectTrigger className="h-10 border-border bg-background">
                 <SelectValue>{isEnglish ? windowsQuality.toUpperCase() : translate(windowsQuality)}</SelectValue>
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background border-border">
                 {qualityOptions.map((q) => (
                   <SelectItem key={q} value={q}>
                     {isEnglish ? q.toUpperCase() : translate(q)}
@@ -425,17 +449,19 @@ export function RenovationCostCalculator() {
             </Select>
           </div>
 
-          <div className="mt-4 text-center">
-            <p className="font-bold text-lg">{translate("Estimated Cost:")}</p>
-            <p className="text-2xl text-primary">€{windowsCost}</p>
+          <Button 
+            onClick={calculateWindowsCost} 
+            className="w-full h-11 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+          >
+            {translate("Get Quote")}
+          </Button>
+
+          <div className="mt-4 text-center p-4 bg-muted rounded-lg">
+            <p className="font-medium text-sm text-muted-foreground">{translate("Estimated Cost:")}</p>
+            <p className="text-2xl font-bold text-primary mt-1">€{windowsCost}</p>
           </div>
         </TabsContent>
       </Tabs>
-
-      <div className="mt-6 pt-4 border-t border-gray-200">
-        <p className="font-bold text-lg text-center">{translate("Total Estimated Cost:")}</p>
-        <p className="text-3xl text-primary text-center">€{totalCost}</p>
-      </div>
     </div>
   )
 }
