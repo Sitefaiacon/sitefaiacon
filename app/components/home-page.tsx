@@ -267,7 +267,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 <div className="h-full p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
                   <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-primary">{service.title}</h3>
                   <p className="text-sm sm:text-base text-gray-600 mb-4 leading-relaxed">{service.description}</p>
-                  <Button className="w-full" variant="outline">
+                  <Button className="w-full bg-primary text-white hover:bg-primary/90 transition-all duration-300" variant="default">
                     {isEnglish ? "Learn More" : "Μάθετε περισσότερα"}
                   </Button>
                 </div>
@@ -353,7 +353,7 @@ export default function HomePage({ lang }: { lang: string }) {
                   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CF%84%CE%B5%CE%BB%CE%B5%CE%B9%CF%89%CE%BC%CE%AD%CE%BD%CE%B7%20%CE%B2%CE%AF%CE%BB%CE%B1%20%CF%83%CE%B9%CE%BD%CE%B9%CE%AD%CF%82.jpg-TBv1Q93tF49zLCpwPjQIhP4OS6eJLq.jpeg",
               },
               {
-                title: "Πέτρινη Βίλα στην Κέρκυρα",
+                title: "Πέτρινη Βίλα στ��ν Κέρκυρα",
                 titleEn: "Stone Villa in Corfu",
                 location: "Κέρκυρα",
                 locationEn: "Corfu",
