@@ -20,24 +20,24 @@ type Quality = (typeof qualityOptions)[number]
 
 const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
   window: {
-    aluminum: { basic: 500, midRange: 600, premium: 700 },
-    pvc: { basic: 400, midRange: 500, premium: 600 },
-    wood: { basic: 600, midRange: 700, premium: 800 },
+    aluminum: { basic: 530, midRange: 630, premium: 730 },
+    pvc: { basic: 430, midRange: 530, premium: 630 },
+    wood: { basic: 630, midRange: 730, premium: 830 },
   },
   balconyDoor: {
-    aluminum: { basic: 900, midRange: 1000, premium: 1100 },
-    pvc: { basic: 800, midRange: 900, premium: 1000 },
-    wood: { basic: 1000, midRange: 1100, premium: 1200 },
+    aluminum: { basic: 930, midRange: 1030, premium: 1130 },
+    pvc: { basic: 830, midRange: 930, premium: 1030 },
+    wood: { basic: 1030, midRange: 1130, premium: 1230 },
   },
   interiorDoor: {
-    aluminum: { basic: 300, midRange: 400, premium: 500 },
-    pvc: { basic: 250, midRange: 350, premium: 450 },
-    wood: { basic: 400, midRange: 500, premium: 600 },
+    aluminum: { basic: 330, midRange: 430, premium: 530 },
+    pvc: { basic: 280, midRange: 380, premium: 480 },
+    wood: { basic: 430, midRange: 530, premium: 630 },
   },
   mainEntrance: {
-    aluminum: { basic: 1500, midRange: 1800, premium: 2000 },
-    pvc: { basic: 1300, midRange: 1500, premium: 1700 },
-    wood: { basic: 1800, midRange: 2000, premium: 2200 },
+    aluminum: { basic: 1530, midRange: 1830, premium: 2030 },
+    pvc: { basic: 1330, midRange: 1530, premium: 1730 },
+    wood: { basic: 1830, midRange: 2030, premium: 2230 },
   },
 }
 
@@ -75,22 +75,22 @@ export function RenovationCostCalculator() {
   const [windowsCost, setWindowsCost] = useState<string>("0.00")
 
   // Constants for Renovation Calculator
-  const baseCostPerM2 = 415
+  const baseCostPerM2 = 490
   const qualityMultipliers = { basic: 1.0, midRange: 1.3, premium: 1.6 }
   const agePenalty = { ancient: 1.25, old: 1.15, modern: 1.0 }
   const categoryModifiers = {
-    bathroom: 2500,
-    kitchen: 4000,
-    flooring: 40,
-    electrical: 500,
-    structural: 100,
-    painting: 25,
+    bathroom: 2530,
+    kitchen: 4030,
+    flooring: 70,
+    electrical: 530,
+    structural: 130,
+    painting: 55,
   }
   const poolCostsPerM2 = {
     none: { basic: 0, midRange: 0, premium: 0 },
-    liner: { midRange: 1025, premium: 1185 },
-    polyester: { premium: 1225 },
-    concrete: { basic: 1125, midRange: 1225, premium: 1325 },
+    liner: { midRange: 1055, premium: 1215 },
+    polyester: { premium: 1255 },
+    concrete: { basic: 1155, midRange: 1255, premium: 1355 },
   }
 
   // Translations
@@ -190,7 +190,12 @@ export function RenovationCostCalculator() {
     const renovationCostValue = calculateRenovationCost()
     const windowsCostValue = calculateWindowsCost()
     
-    // Prepare calculator data for the API
+    // Check if renovation has any selected categories
+    const hasRenovationSelections = Object.values(categories).some(Boolean)
+    // Check if windows has any items
+    const hasWindowsSelections = windows > 0 || balconyDoors > 0 || interiorDoors > 0 || mainEntrance > 0
+    
+    // Prepare calculator data for the API - always include both if they have selections
     const calculatorData = {
       renovation: {
         area: Number(area),
@@ -202,7 +207,8 @@ export function RenovationCostCalculator() {
         poolSize: poolType !== "none" ? poolSize : 0,
         categories,
         renovationQuality,
-        renovationCost: tab === "renovation" ? parseFloat(renovationCostValue) : 0,
+        // Include renovation cost if there are selections or if user is in renovation tab
+        renovationCost: hasRenovationSelections ? parseFloat(renovationCostValue) : 0,
       },
       windows: {
         windows,
@@ -211,11 +217,12 @@ export function RenovationCostCalculator() {
         mainEntrance,
         material,
         quality: windowsQuality,
-        windowsCost: tab === "windows" ? parseFloat(windowsCostValue) : 0,
+        // Include windows cost if there are selections or if user is in windows tab
+        windowsCost: hasWindowsSelections ? parseFloat(windowsCostValue) : 0,
       },
-      totalCost: tab === "renovation" 
-        ? parseFloat(renovationCostValue) 
-        : parseFloat(windowsCostValue),
+      // Total cost is the sum of both
+      totalCost: (hasRenovationSelections ? parseFloat(renovationCostValue) : 0) + 
+                 (hasWindowsSelections ? parseFloat(windowsCostValue) : 0),
     }
 
     setPendingCalculatorData(calculatorData)
@@ -345,7 +352,7 @@ export function RenovationCostCalculator() {
               </SelectTrigger>
               <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background border-border">
                 <SelectItem value="none">{isEnglish ? "None" : "Καμία"}</SelectItem>
-                <SelectItem value="concrete">{isEnglish ? "Concrete" : "Μπετόν"}</SelectItem>
+                <SelectItem value="concrete">{isEnglish ? "Concrete" : "Μπ��τ��ν"}</SelectItem>
                 <SelectItem value="polyester">{isEnglish ? "Polyester" : "Πολυεστερική"}</SelectItem>
                 <SelectItem value="liner">{isEnglish ? "Liner" : "Με επένδυση"}</SelectItem>
               </SelectContent>
