@@ -90,24 +90,25 @@ export function RenovationCostCalculator() {
   const [errorMessage, setErrorMessage] = useState("")
   const [calculatedRenovationCost, setCalculatedRenovationCost] = useState<string>("0.00")
 
-  // Constants for Renovation Calculator
-  const baseCostPerM2 = 490
-  const qualityMultipliers = { basic: 1.0, midRange: 1.3, premium: 1.6 }
-  const agePenalty = { ancient: 1.25, old: 1.15, modern: 1.0 }
-  const categoryModifiers = {
-    bathroom: 2530,
-    kitchen: 4030,
-    flooring: 70,
-    electrical: 530,
-    structural: 130,
-    painting: 55,
+  // Constants for Renovation Calculator - Realistic Greek market rates
+  // Full renovation rates per m² (when 4+ categories selected)
+  const fullRenovationRates = { basic: 440, midRange: 590, premium: 760 }
+  
+  // Individual category rates
+  const renovationRates = {
+    bathroom: { basic: 4200, midRange: 6200, premium: 8800 }, // per bathroom
+    kitchen: { basic: 6500, midRange: 9500, premium: 13500 }, // per kitchen
+    flooring: { basic: 28, midRange: 45, premium: 68 }, // per m²
+    electrical: { basic: 32, midRange: 48, premium: 72 }, // per m²
+    structural: { basic: 55, midRange: 90, premium: 140 }, // per m²
+    painting: { basic: 9, midRange: 13, premium: 18 }, // per m²
   }
-  const electricalGeneralRepairCost = 2500
+  
   const poolCostsPerM2 = {
     none: { basic: 0, midRange: 0, premium: 0 },
-    liner: { midRange: 1055, premium: 1215 },
-    polyester: { premium: 1255 },
-    concrete: { basic: 1155, midRange: 1255, premium: 1355 },
+    liner: { basic: 0, midRange: 700, premium: 850 },
+    polyester: { basic: 0, midRange: 0, premium: 950 },
+    concrete: { basic: 900, midRange: 1100, premium: 1350 },
   }
 
   // Translations
@@ -154,43 +155,79 @@ export function RenovationCostCalculator() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance])
 
+  // Helper functions for multipliers
+  const getAgeMultiplier = (yearBuilt: number) => {
+    const currentYear = new Date().getFullYear()
+    const buildingYears = currentYear - yearBuilt
+    if (buildingYears > 40) return 1.12
+    if (buildingYears >= 20) return 1.06
+    return 1
+  }
+
+  const getSizeMultiplier = (areaSize: number) => {
+    if (areaSize < 50) return 1.08
+    if (areaSize > 120) return 0.95
+    return 1
+  }
+
   // Calculation functions
   const calculateRenovationCost = () => {
     const numericArea = Number(area)
-    const selectedCategories = Object.values(categories).filter(Boolean).length
-    const categoryCost = Object.entries(categories).reduce(
-      (acc, [key, isSelected]) =>
-        isSelected
-          ? acc +
-            categoryModifiers[key as keyof typeof categoryModifiers] *
-              (key === "bathroom"
-                ? bathrooms
-                : key === "kitchen"
-                  ? kitchens
-                  : key === "electrical"
-                    ? rooms
-                    : numericArea) +
-            (key === "electrical" ? electricalGeneralRepairCost : 0)
-          : acc,
-      0,
-    )
+    if (!numericArea || numericArea <= 0) return "0.00"
 
-    const baseCost = selectedCategories > 1 ? numericArea * baseCostPerM2 : 0
-    let totalCost = (baseCost + categoryCost) * qualityMultipliers[renovationQuality as keyof typeof qualityMultipliers]
+    const selectedCount = Object.values(categories).filter(Boolean).length
+    const quality = renovationQuality as "basic" | "midRange" | "premium"
+    
+    let subtotal = 0
 
-    const ageCategory = 2024 - buildingAge > 40 ? "ancient" : 2024 - buildingAge >= 20 ? "old" : "modern"
-    totalCost *= agePenalty[ageCategory as keyof typeof agePenalty]
-    if (numericArea > 125) totalCost *= 0.92
+    // Check if it's a full renovation (4+ categories or specific combination)
+    const isFullRenovation =
+      selectedCount >= 4 ||
+      (categories.bathroom && categories.kitchen && categories.flooring && categories.electrical)
 
-    if (poolType !== "none" && !isNaN(poolSize)) {
-      const poolCost =
-        (poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][renovationQuality as keyof typeof qualityMultipliers] -
-          100) *
-        poolSize
-      totalCost += poolCost > 0 ? poolCost : 0
+    if (isFullRenovation) {
+      // Full renovation uses the per-m² rate
+      subtotal = numericArea * fullRenovationRates[quality]
+    } else {
+      // Partial renovation - calculate each category separately
+      if (categories.bathroom) {
+        subtotal += bathrooms * renovationRates.bathroom[quality]
+      }
+      if (categories.kitchen) {
+        subtotal += kitchens * renovationRates.kitchen[quality]
+      }
+      if (categories.flooring) {
+        subtotal += numericArea * renovationRates.flooring[quality]
+      }
+      if (categories.electrical) {
+        const electricalAreaFactor = rooms > 0 ? Math.max(1, rooms / 2) : 1
+        subtotal += numericArea * renovationRates.electrical[quality] * electricalAreaFactor
+      }
+      if (categories.structural) {
+        subtotal += numericArea * renovationRates.structural[quality]
+      }
+      if (categories.painting) {
+        subtotal += numericArea * renovationRates.painting[quality]
+      }
     }
 
-    return totalCost.toFixed(2)
+    let total = subtotal
+
+    // Apply age multiplier
+    total *= getAgeMultiplier(buildingAge)
+
+    // Apply size multiplier
+    total *= getSizeMultiplier(numericArea)
+
+    // Add pool cost if applicable
+    if (poolType !== "none" && poolSize > 0) {
+      const poolRate = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][quality] || 0
+      if (poolRate > 0) {
+        total += poolRate * poolSize
+      }
+    }
+
+    return total.toFixed(2)
   }
 
   const calculateWindowsCost = () => {
@@ -341,6 +378,108 @@ export function RenovationCostCalculator() {
     </div>
   )
 
+  // Calculate breakdown for display
+  const getBreakdown = () => {
+    const numericArea = Number(area)
+    const quality = renovationQuality as "basic" | "midRange" | "premium"
+    const breakdown: { label: string; value: number; note?: string }[] = []
+    
+    const selectedCount = Object.values(categories).filter(Boolean).length
+    const isFullRenovation =
+      selectedCount >= 4 ||
+      (categories.bathroom && categories.kitchen && categories.flooring && categories.electrical)
+
+    if (isFullRenovation) {
+      breakdown.push({
+        label: isEnglish ? "Full Renovation" : "Ολική Ανακαίνιση",
+        value: numericArea * fullRenovationRates[quality],
+        note: isEnglish ? `${numericArea}m² x ${fullRenovationRates[quality]}€/m²` : `${numericArea}τ.μ. x ${fullRenovationRates[quality]}€/τ.μ.`
+      })
+    } else {
+      if (categories.bathroom) {
+        breakdown.push({
+          label: isEnglish ? "Bathroom" : "Μπάνιο",
+          value: bathrooms * renovationRates.bathroom[quality],
+          note: `${bathrooms} x ${formatCurrency(renovationRates.bathroom[quality])}`
+        })
+      }
+      if (categories.kitchen) {
+        breakdown.push({
+          label: isEnglish ? "Kitchen" : "Κουζίνα",
+          value: kitchens * renovationRates.kitchen[quality],
+          note: `${kitchens} x ${formatCurrency(renovationRates.kitchen[quality])}`
+        })
+      }
+      if (categories.flooring) {
+        breakdown.push({
+          label: isEnglish ? "Flooring" : "Δάπεδα",
+          value: numericArea * renovationRates.flooring[quality],
+          note: isEnglish ? `${numericArea}m² x ${renovationRates.flooring[quality]}€/m²` : `${numericArea}τ.μ. x ${renovationRates.flooring[quality]}€/τ.μ.`
+        })
+      }
+      if (categories.electrical) {
+        const electricalAreaFactor = rooms > 0 ? Math.max(1, rooms / 2) : 1
+        breakdown.push({
+          label: isEnglish ? "Electrical" : "Ηλεκτρολογικά",
+          value: numericArea * renovationRates.electrical[quality] * electricalAreaFactor,
+          note: isEnglish ? `${numericArea}m² x ${renovationRates.electrical[quality]}€/m²` : `${numericArea}τ.μ. x ${renovationRates.electrical[quality]}€/τ.μ.`
+        })
+      }
+      if (categories.structural) {
+        breakdown.push({
+          label: isEnglish ? "Structural" : "Δομικά",
+          value: numericArea * renovationRates.structural[quality],
+          note: isEnglish ? `${numericArea}m² x ${renovationRates.structural[quality]}€/m²` : `${numericArea}τ.μ. x ${renovationRates.structural[quality]}€/τ.μ.`
+        })
+      }
+      if (categories.painting) {
+        breakdown.push({
+          label: isEnglish ? "Painting" : "Βαφή",
+          value: numericArea * renovationRates.painting[quality],
+          note: isEnglish ? `${numericArea}m² x ${renovationRates.painting[quality]}€/m²` : `${numericArea}τ.μ. x ${renovationRates.painting[quality]}€/τ.μ.`
+        })
+      }
+    }
+
+    // Age adjustment
+    const ageMultiplier = getAgeMultiplier(buildingAge)
+    if (ageMultiplier !== 1) {
+      const subtotal = breakdown.reduce((sum, item) => sum + item.value, 0)
+      const adjustment = subtotal * (ageMultiplier - 1)
+      breakdown.push({
+        label: isEnglish ? "Age Adjustment" : "Προσαρμογή Παλαιότητας",
+        value: adjustment,
+        note: `+${Math.round((ageMultiplier - 1) * 100)}%`
+      })
+    }
+
+    // Size adjustment
+    const sizeMultiplier = getSizeMultiplier(numericArea)
+    if (sizeMultiplier !== 1) {
+      const subtotal = breakdown.reduce((sum, item) => sum + item.value, 0)
+      const adjustment = subtotal * (sizeMultiplier - 1)
+      breakdown.push({
+        label: isEnglish ? "Size Adjustment" : "Προσαρμογή Μεγέθους",
+        value: adjustment,
+        note: sizeMultiplier < 1 ? `-${Math.round((1 - sizeMultiplier) * 100)}%` : `+${Math.round((sizeMultiplier - 1) * 100)}%`
+      })
+    }
+
+    // Pool
+    if (poolType !== "none" && poolSize > 0) {
+      const poolRate = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][quality] || 0
+      if (poolRate > 0) {
+        breakdown.push({
+          label: isEnglish ? "Pool" : "Πισίνα",
+          value: poolRate * poolSize,
+          note: isEnglish ? `${poolSize}m² x ${poolRate}€/m²` : `${poolSize}τ.μ. x ${poolRate}€/τ.μ.`
+        })
+      }
+    }
+
+    return breakdown
+  }
+
   // Results section component
   const ResultsSection = () => {
     const renovationCost = parseFloat(calculatedRenovationCost)
@@ -349,6 +488,13 @@ export function RenovationCostCalculator() {
     
     const hasRenovationSelections = Object.values(categories).some(Boolean)
     const hasWindowsSelections = windows > 0 || balconyDoors > 0 || interiorDoors > 0 || mainEntrance > 0
+    const breakdown = getBreakdown()
+
+    // Determine project type
+    const selectedCount = Object.values(categories).filter(Boolean).length
+    const isFullRenovation =
+      selectedCount >= 4 ||
+      (categories.bathroom && categories.kitchen && categories.flooring && categories.electrical)
 
     return (
       <div className="mt-6 space-y-4 animate-fade-in">
@@ -363,9 +509,16 @@ export function RenovationCostCalculator() {
 
         {hasRenovationSelections && (
           <div className="p-4 bg-muted rounded-lg border border-border">
-            <h3 className="font-semibold text-primary mb-3">
-              {isEnglish ? "General Renovation" : "Γενική Ανακαίνιση"}
-            </h3>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-semibold text-primary">
+                {isEnglish ? "General Renovation" : "Γενική Ανακαίνιση"}
+              </h3>
+              <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">
+                {isFullRenovation 
+                  ? (isEnglish ? "Full Renovation" : "Ολική Ανακαίνιση")
+                  : (isEnglish ? "Partial Renovation" : "Μερική Ανακαίνιση")}
+              </span>
+            </div>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">{isEnglish ? "Area:" : "Εμβαδόν:"}</span>
@@ -375,25 +528,27 @@ export function RenovationCostCalculator() {
                 <span className="text-muted-foreground">{isEnglish ? "Quality:" : "Ποιότητα:"}</span>
                 <span className="font-medium">{translate(renovationQuality)}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">{isEnglish ? "Categories:" : "Κατηγορίες:"}</span>
-                <span className="font-medium text-right">
-                  {Object.entries(categories)
-                    .filter(([, v]) => v)
-                    .map(([k]) => {
-                      const labels: Record<string, string> = {
-                        bathroom: isEnglish ? "Bathroom" : "Μπάνιο",
-                        kitchen: isEnglish ? "Kitchen" : "Κουζίνα",
-                        flooring: isEnglish ? "Flooring" : "Δάπεδα",
-                        electrical: isEnglish ? "Electrical" : "Ηλεκτρολογικά",
-                        structural: isEnglish ? "Structural" : "Δομικά",
-                        painting: isEnglish ? "Painting" : "Βαφή",
-                      }
-                      return labels[k]
-                    })
-                    .join(", ")}
-                </span>
+              
+              {/* Detailed Breakdown */}
+              <div className="border-t border-border pt-3 mt-3">
+                <p className="font-semibold text-foreground mb-2">
+                  {isEnglish ? "Detailed Breakdown:" : "Αναλυτική Ανάλυση:"}
+                </p>
+                <div className="space-y-2">
+                  {breakdown.map((item, index) => (
+                    <div key={index} className="flex justify-between items-start p-2 bg-background rounded">
+                      <div>
+                        <p className="font-medium text-foreground">{item.label}</p>
+                        {item.note && <p className="text-xs text-muted-foreground">{item.note}</p>}
+                      </div>
+                      <span className={`font-semibold ${item.value >= 0 ? 'text-foreground' : 'text-green-600'}`}>
+                        {item.value >= 0 ? formatCurrency(item.value) : `-${formatCurrency(Math.abs(item.value))}`}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
+              
               <div className="border-t border-border pt-2 mt-2">
                 <div className="flex justify-between text-base">
                   <span className="font-semibold">{isEnglish ? "Renovation Cost:" : "Κόστος Ανακαίνισης:"}</span>
