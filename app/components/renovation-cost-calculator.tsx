@@ -101,6 +101,7 @@ const translations: Record<string, string> = {
   premium: "Premium",
   "General Renovation": "Γενική Ανακαίνιση",
   "Doors & Windows": "Κουφώματα",
+  Pool: "Πισίνα",
   "Total Estimated Cost:": "Συνολικό Εκτιμώμενο Κόστος:",
   "Total Estimated Range:": "Συνολικό Εκτιμώμενο Εύρος:",
   "Why work with us?": "Γιατί να συνεργαστείτε μαζί μας;",
@@ -173,7 +174,7 @@ export default function RenovationCostCalculator() {
   const [showContactForm, setShowContactForm] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [contactSubmitted, setContactSubmitted] = useState(false)
-  const [submittedFromTab, setSubmittedFromTab] = useState<"renovation" | "windows" | null>(null)
+  const [submittedFromTab, setSubmittedFromTab] = useState<"renovation" | "windows" | "pool" | null>(null)
 
   // Contact form state
   const [contact, setContact] = useState<ContactInfo>({
@@ -211,6 +212,9 @@ export default function RenovationCostCalculator() {
   const [windowsCost, setWindowsCost] = useState<string | null>(null)
   const [windowsRange, setWindowsRange] = useState<EstimateRange | null>(null)
 
+  const [poolCost, setPoolCost] = useState<string | null>(null)
+  const [poolRange, setPoolRange] = useState<EstimateRange | null>(null)
+
   const [totalCost, setTotalCost] = useState<string | null>(null)
   const [totalRange, setTotalRange] = useState<EstimateRange | null>(null)
 
@@ -237,18 +241,19 @@ export default function RenovationCostCalculator() {
   useEffect(() => {
     const renovationCostNumber = renovationCost ? Number.parseFloat(renovationCost) : 0
     const windowsCostNumber = windowsCost ? Number.parseFloat(windowsCost) : 0
-    const newTotalCost = renovationCostNumber + windowsCostNumber
+    const poolCostNumber = poolCost ? Number.parseFloat(poolCost) : 0
+    const newTotalCost = renovationCostNumber + windowsCostNumber + poolCostNumber
 
     setTotalCost(newTotalCost > 0 ? newTotalCost.toFixed(2) : null)
 
-    if (renovationRange || windowsRange) {
-      const min = (renovationRange?.min || 0) + (windowsRange?.min || 0)
-      const max = (renovationRange?.max || 0) + (windowsRange?.max || 0)
+    if (renovationRange || windowsRange || poolRange) {
+      const min = (renovationRange?.min || 0) + (windowsRange?.min || 0) + (poolRange?.min || 0)
+      const max = (renovationRange?.max || 0) + (windowsRange?.max || 0) + (poolRange?.max || 0)
       setTotalRange(min > 0 || max > 0 ? { min, max } : null)
     } else {
       setTotalRange(null)
     }
-  }, [renovationCost, windowsCost, renovationRange, windowsRange])
+  }, [renovationCost, windowsCost, poolCost, renovationRange, windowsRange, poolRange])
 
   useEffect(() => {
     const cost =
@@ -322,11 +327,6 @@ export default function RenovationCostCalculator() {
 
     total = total * getAgeMultiplier(buildingAge) * getSizeMultiplier(numericArea)
 
-    if (poolType !== "none" && poolSize > 0) {
-      const poolRate = poolCostsPerM2[poolType][quality] || 0
-      total += poolRate * poolSize
-    }
-
     setRenovationCost(total.toFixed(2))
     setRenovationRange({
       min: total * 0.9,
@@ -334,8 +334,29 @@ export default function RenovationCostCalculator() {
     })
   }
 
+  const calculatePoolCost = () => {
+    if (poolType === "none" || poolSize === 0) {
+      setPoolCost(null)
+      setPoolRange(null)
+      return
+    }
+    const quality = renovationQuality
+    const poolRate = poolCostsPerM2[poolType][quality] || 0
+    const total = poolRate * poolSize
+
+    setPoolCost(total.toFixed(2))
+    setPoolRange({
+      min: total * 0.9,
+      max: total * 1.12,
+    })
+  }
+
   const handleGetQuote = () => {
     calculateRenovationCost()
+    // Also calculate pool cost if pool is selected
+    if (poolType !== "none" && poolSize > 0) {
+      calculatePoolCost()
+    }
     setSubmittedFromTab("renovation")
     setShowContactForm(true)
   }
@@ -348,7 +369,24 @@ export default function RenovationCostCalculator() {
     if (Object.values(categories).some(Boolean)) {
       calculateRenovationCost()
     }
+    // Also calculate pool cost if pool is selected
+    if (poolType !== "none" && poolSize > 0) {
+      calculatePoolCost()
+    }
     setSubmittedFromTab("windows")
+    setShowContactForm(true)
+  }
+
+  const handlePoolGetQuote = () => {
+    if (poolType === "none" || poolSize === 0) {
+      return
+    }
+    calculatePoolCost()
+    // Also calculate renovation cost if categories are selected
+    if (Object.values(categories).some(Boolean)) {
+      calculateRenovationCost()
+    }
+    setSubmittedFromTab("pool")
     setShowContactForm(true)
   }
 
@@ -421,15 +459,17 @@ export default function RenovationCostCalculator() {
     setContact({ name: "", email: "", phone: "" })
     setRenovationCost(null)
     setRenovationRange(null)
-  setCategories({
-  bathroom: false,
-  kitchen: false,
-  flooring: false,
-  electrical: false,
-  structural: false,
-  painting: false,
-  roof: false,
-  })
+    setPoolCost(null)
+    setPoolRange(null)
+    setCategories({
+      bathroom: false,
+      kitchen: false,
+      flooring: false,
+      electrical: false,
+      structural: false,
+      painting: false,
+      roof: false,
+    })
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
@@ -568,8 +608,32 @@ export default function RenovationCostCalculator() {
         </div>
       )}
 
-      {/* Show total when both renovation and windows have costs */}
-      {renovationCost && Number(renovationCost) > 0 && windowsCost && Number(windowsCost) > 0 && totalCost && totalRange && (
+      {/* Show pool cost if available */}
+      {poolCost && Number(poolCost) > 0 && (
+        <div className="p-4 bg-muted rounded-lg border border-border text-center">
+          <p className="text-sm text-muted-foreground mb-1">
+            {isEnglish ? "Pool:" : "Πισίνα:"}
+          </p>
+          <p className="text-2xl font-bold text-primary">
+            {isEnglish ? `€${Number(poolCost).toLocaleString()}` : `${Number(poolCost).toLocaleString()}€`}
+          </p>
+          {poolRange && (
+            <p className="text-sm text-muted-foreground mt-1">
+              {translate("Estimated Range:")}{" "}
+              {isEnglish
+                ? `€${poolRange.min.toLocaleString(undefined, {maximumFractionDigits: 0})} - €${poolRange.max.toLocaleString(undefined, {maximumFractionDigits: 0})}`
+                : `${poolRange.min.toLocaleString(undefined, {maximumFractionDigits: 0})}€ - ${poolRange.max.toLocaleString(undefined, {maximumFractionDigits: 0})}€`}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Show total when multiple categories have costs */}
+      {totalCost && totalRange && (
+        (renovationCost && Number(renovationCost) > 0 ? 1 : 0) + 
+        (windowsCost && Number(windowsCost) > 0 ? 1 : 0) + 
+        (poolCost && Number(poolCost) > 0 ? 1 : 0) >= 2
+      ) && (
         <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
           <p className="text-lg font-bold text-foreground">{translate("Total Estimated Cost:")}</p>
           <p className="text-3xl font-bold text-primary">
@@ -618,12 +682,15 @@ export default function RenovationCostCalculator() {
       <p className="mb-4 text-lg text-muted-foreground">{translate("Calculate your renovation cost in 1 minute!")}</p>
 
       <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); resetResults(); }} className="w-full">
-        <TabsList className="mb-4 grid w-full grid-cols-2 bg-muted">
+        <TabsList className="mb-4 grid w-full grid-cols-3 bg-muted">
           <TabsTrigger value="renovation" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
             {translate("General Renovation")}
           </TabsTrigger>
           <TabsTrigger value="windows" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
             {translate("Doors & Windows")}
+          </TabsTrigger>
+          <TabsTrigger value="pool" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            {translate("Pool")}
           </TabsTrigger>
         </TabsList>
 
@@ -712,45 +779,6 @@ export default function RenovationCostCalculator() {
                 />
               </div>
 
-              <div className="relative z-30">
-                <Label>{isEnglish ? "Pool Type" : "Τύπος Πισίνας"}</Label>
-                <Select
-                  value={poolType}
-                  onValueChange={(value) => {
-                    setPoolType(value as PoolType)
-                    resetResults()
-                  }}
-                >
-                  <SelectTrigger className="mb-2 w-full whitespace-nowrap overflow-hidden bg-background">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background">
-                    <SelectItem value="none">{translate("None")}</SelectItem>
-                    <SelectItem value="concrete">{translate("Concrete")}</SelectItem>
-                    <SelectItem value="polyester">{translate("Polyester")}</SelectItem>
-                    <SelectItem value="liner">{translate("Liner")}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {poolType !== "none" && (
-                <div>
-                  <Label htmlFor="poolSize">{isEnglish ? "Pool Size (m²)" : "Μέγεθος Πισίνας (τ.μ.)"}</Label>
-                  <Input
-                    id="poolSize"
-                    type="number"
-                    value={poolSize}
-                    onChange={(e) => {
-                      setPoolSize(Number(e.target.value) || 0)
-                      resetResults()
-                    }}
-                    min="1"
-                    max="100"
-                    className="w-full mb-2"
-                  />
-                </div>
-              )}
-
               <div className="relative z-10">
                 <Label>{translate("Categories")}</Label>
                 <div className="space-y-2 mt-2">
@@ -813,9 +841,7 @@ export default function RenovationCostCalculator() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background">
-                    {poolType !== "polyester" && (
-                      <SelectItem value="basic">{translate("Basic")}</SelectItem>
-                    )}
+                    <SelectItem value="basic">{translate("Basic")}</SelectItem>
                     <SelectItem value="premium">{translate("Premium")}</SelectItem>
                   </SelectContent>
                 </Select>
@@ -857,7 +883,6 @@ export default function RenovationCostCalculator() {
                 </p>
               </div>
 
-              <p className="text-center text-muted-foreground">{translate("Modern solutions for the ideal pool")}</p>
             </>
           )}
 
@@ -924,6 +949,93 @@ export default function RenovationCostCalculator() {
               >
                 {translate("Get Quote")}
               </Button>
+            </>
+          )}
+
+          {showContactForm && !contactSubmitted && <ContactForm />}
+          {contactSubmitted && showResults && <ResultsDisplay />}
+        </TabsContent>
+
+        <TabsContent value="pool" className="space-y-4">
+          {!showContactForm && !showResults && (
+            <>
+              <p className="leading-relaxed text-sm text-muted-foreground">
+                {isEnglish
+                  ? "Get a quote for your dream pool. We offer high-quality pool construction with various materials and finishes."
+                  : "Λάβετε προσφορά για την πισίνα των ονείρων σας. Προσφέρουμε κατασκευή πισίνας υψηλής ποιότητας με διάφορα υλικά και φινιρίσματα."}
+              </p>
+
+              <div className="relative z-30">
+                <Label>{isEnglish ? "Pool Type" : "Τύπος Πισίνας"}</Label>
+                <Select
+                  value={poolType}
+                  onValueChange={(value) => {
+                    setPoolType(value as PoolType)
+                    resetResults()
+                  }}
+                >
+                  <SelectTrigger className="mb-2 w-full whitespace-nowrap overflow-hidden bg-background">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background">
+                    <SelectItem value="none">{translate("None")}</SelectItem>
+                    <SelectItem value="concrete">{translate("Concrete")}</SelectItem>
+                    <SelectItem value="polyester">{translate("Polyester")}</SelectItem>
+                    <SelectItem value="liner">{translate("Liner")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {poolType !== "none" && (
+                <>
+                  <div>
+                    <Label htmlFor="poolSize">{isEnglish ? "Pool Size (m²)" : "Μέγεθος Πισίνας (τ.μ.)"}</Label>
+                    <Input
+                      id="poolSize"
+                      type="number"
+                      value={poolSize}
+                      onChange={(e) => {
+                        setPoolSize(Number(e.target.value) || 0)
+                        resetResults()
+                      }}
+                      min="1"
+                      max="100"
+                      className="w-full mb-2"
+                    />
+                  </div>
+
+                  <div className="relative z-20">
+                    <Label>{translate("Quality")}</Label>
+                    <Select
+                      value={renovationQuality}
+                      onValueChange={(value) => {
+                        setRenovationQuality(value as Quality)
+                        resetResults()
+                      }}
+                    >
+                      <SelectTrigger className="mb-2 w-full whitespace-nowrap overflow-hidden bg-background">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background">
+                        {poolType !== "polyester" && (
+                          <SelectItem value="basic">{translate("Basic")}</SelectItem>
+                        )}
+                        <SelectItem value="premium">{translate("Premium")}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </>
+              )}
+
+              <Button 
+                onClick={handlePoolGetQuote} 
+                disabled={poolType === "none" || poolSize === 0}
+                className="mt-4 w-full bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
+              >
+                {translate("Get Quote")}
+              </Button>
+
+              <p className="text-center text-muted-foreground">{translate("Modern solutions for the ideal pool")}</p>
             </>
           )}
 
