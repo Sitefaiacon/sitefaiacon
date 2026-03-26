@@ -821,9 +821,9 @@ export default function RenovationCostCalculator() {
                 </Select>
               </div>
 
-              <Button 
-                onClick={handleGetQuote} 
-                disabled={!Object.values(categories).some(Boolean)}
+  <Button
+                onClick={handleGetQuote}
+                disabled={!Object.values(categories).some(Boolean) && area === "0"}
                 className="mt-4 w-full bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
               >
                 {translate("Get Quote")}
