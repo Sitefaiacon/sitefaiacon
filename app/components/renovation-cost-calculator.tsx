@@ -133,7 +133,7 @@ const categoryDescriptions = {
   },
   flooring: {
     en: "Removal of old floor where required and installation of new flooring.",
-    el: "Αποξήλωση παλιού δαπέδου όπου απαιτείται και τοποθέτη��η νέου δαπέδου.",
+    el: "Αποξήλωση παλιού δαπέδου όπου απαιτείται και τοποθέτηση νέου δαπέδου.",
   },
   electrical: {
     en: "Indicative upgrade of electrical installation, panel, sockets, switches and lighting.",
