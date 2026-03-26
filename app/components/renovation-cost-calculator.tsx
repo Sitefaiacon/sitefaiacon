@@ -518,6 +518,7 @@ export default function RenovationCostCalculator() {
         </p>
       </div>
 
+      {/* Show renovation cost when submitted from renovation tab */}
       {submittedFromTab === "renovation" && renovationCost && Number(renovationCost) > 0 && (
         <div className="p-4 bg-muted rounded-lg border border-border text-center">
           <p className="text-sm text-muted-foreground mb-1">
@@ -537,7 +538,8 @@ export default function RenovationCostCalculator() {
         </div>
       )}
 
-      {submittedFromTab === "windows" && windowsCost && Number(windowsCost) > 0 && (
+      {/* Show windows cost when submitted from either tab (if windows are selected) */}
+      {windowsCost && Number(windowsCost) > 0 && (
         <div className="p-4 bg-muted rounded-lg border border-border text-center">
           <p className="text-sm text-muted-foreground mb-1">
             {isEnglish ? "Doors & Windows:" : "Πόρτες & Παράθυρα:"}
@@ -556,7 +558,8 @@ export default function RenovationCostCalculator() {
         </div>
       )}
 
-      {totalCost && totalRange && submittedFromTab === "renovation" && (renovationCost && windowsCost) && (
+      {/* Show total only when both renovation and windows have costs */}
+      {submittedFromTab === "renovation" && renovationCost && Number(renovationCost) > 0 && windowsCost && Number(windowsCost) > 0 && totalCost && totalRange && (
         <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
           <p className="text-lg font-bold text-foreground">{translate("Total Estimated Cost:")}</p>
           <p className="text-3xl font-bold text-primary">
