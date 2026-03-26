@@ -513,8 +513,8 @@ export default function RenovationCostCalculator() {
         <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
         <p className="text-green-800 text-sm">
           {isEnglish
-            ? `Thank you ${contact.name}! Here is your personalized quote.`
-            : `Ευχαριστούμε ${contact.name}! Ιδού η εξατομικευμένη προσφορά σας.`}
+            ? `Thank you! Here is your personalized quote.`
+            : `Ευχαριστούμε! Ιδού η εξατομικευμένη προσφορά σας.`}
         </p>
       </div>
 
