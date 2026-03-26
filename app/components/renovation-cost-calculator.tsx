@@ -133,7 +133,7 @@ const categoryDescriptions = {
   },
   flooring: {
     en: "Removal of old floor where required and installation of new flooring.",
-    el: "Αποξήλωση παλιού δαπέδου όπου απαιτείται και τοποθέτηση νέου δαπέδου.",
+    el: "Αποξήλωση παλιού δαπέδου όπου απαιτείται και τοποθέτη��η νέου δαπέδου.",
   },
   electrical: {
     en: "Indicative upgrade of electrical installation, panel, sockets, switches and lighting.",
@@ -588,7 +588,7 @@ export default function RenovationCostCalculator() {
 
   return (
     <div className="calculator mx-auto max-w-md rounded-lg bg-background p-6 shadow-md border border-border">
-      <div className="mb-4 flex flex-col gap-3">
+      <div className="mb-4 flex flex-col items-center gap-3">
         <Image
           src="/images/faiacon-logo.jpg"
           alt="Faiacon Logo"
@@ -596,7 +596,7 @@ export default function RenovationCostCalculator() {
           height={40}
           className="object-contain"
         />
-        <h2 className="text-2xl font-bold text-primary">{translate("Renovation Cost Calculator")}</h2>
+        <h2 className="text-2xl font-bold text-primary text-center">{translate("Renovation Cost Calculator")}</h2>
       </div>
 
       <p className="mb-4 text-lg text-muted-foreground">{translate("Calculate your renovation cost in 1 minute!")}</p>
