@@ -28,12 +28,12 @@
 
   body {
     background-image: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
-    @apply min-h-screen text-base;
+    @apply min-h-screen text-base text-center;
   }
 
-  /* Add this new class */
-  .text-justify-content {
-    @apply text-justify;
+  /* Override for elements that need left alignment */
+  input, textarea, select {
+    @apply text-left;
   }
 
   .section-primary {
