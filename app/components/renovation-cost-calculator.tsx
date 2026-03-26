@@ -588,17 +588,15 @@ export default function RenovationCostCalculator() {
 
   return (
     <div className="calculator mx-auto max-w-md rounded-lg bg-background p-6 shadow-md border border-border">
-      <div className="mb-4">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-2xl font-bold text-primary">{translate("Renovation Cost Calculator")}</h2>
-          <Image
-            src="/images/faiacon-logo.jpg"
-            alt="Faiacon Logo"
-            width={120}
-            height={40}
-            className="object-contain"
-          />
-        </div>
+      <div className="mb-4 flex flex-col gap-3">
+        <Image
+          src="/images/faiacon-logo.jpg"
+          alt="Faiacon Logo"
+          width={120}
+          height={40}
+          className="object-contain"
+        />
+        <h2 className="text-2xl font-bold text-primary">{translate("Renovation Cost Calculator")}</h2>
       </div>
 
       <p className="mb-4 text-lg text-muted-foreground">{translate("Calculate your renovation cost in 1 minute!")}</p>
