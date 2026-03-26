@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useCallback } from "react"
 import Image from "next/image"
 import {
   Bath,
@@ -216,13 +216,10 @@ export default function RenovationCostCalculator() {
   }
 
   useEffect(() => {
+    // Adjust quality based on pool type
     if (poolType === "liner" && renovationQuality === "basic") {
       setRenovationQuality("midRange")
-    }
-  }, [poolType, renovationQuality])
-
-  useEffect(() => {
-    if (poolType === "polyester" && renovationQuality !== "premium") {
+    } else if (poolType === "polyester" && renovationQuality !== "premium") {
       setRenovationQuality("premium")
     }
   }, [poolType, renovationQuality])
@@ -331,20 +328,19 @@ export default function RenovationCostCalculator() {
     })
   }
 
-  const handleGetQuote = () => {
+  const handleGetQuote = useCallback(() => {
     calculateRenovationCost()
     setShowContactForm(true)
-  }
+  }, [])
 
-  const handleWindowsGetQuote = () => {
-    // Check if at least one item is selected
+  const handleWindowsGetQuote = useCallback(() => {
     if (windows === 0 && balconyDoors === 0 && interiorDoors === 0 && mainEntrance === 0) {
       return
     }
     setShowContactForm(true)
-  }
+  }, [windows, balconyDoors, interiorDoors, mainEntrance])
 
-  const handleContactSubmit = async () => {
+  const handleContactSubmit = useCallback(async () => {
     if (!contact.name || !contact.email || !contact.phone) {
       return
     }
@@ -352,7 +348,6 @@ export default function RenovationCostCalculator() {
     setIsSubmitting(true)
 
     try {
-      // Prepare data for API
       const selectedCategories = Object.entries(categories)
         .filter(([, v]) => v)
         .map(([k]) => k)
@@ -404,9 +399,9 @@ export default function RenovationCostCalculator() {
     } finally {
       setIsSubmitting(false)
     }
-  }
+  }, [contact, categories, area, bathrooms, kitchens, rooms, buildingAge, renovationQuality, poolType, poolSize, renovationCost, windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality, windowsCost, totalCost, isEnglish])
 
-  const handleNewCalculation = () => {
+  const handleNewCalculation = useCallback(() => {
     setShowResults(false)
     setShowContactForm(false)
     setContactSubmitted(false)
@@ -421,9 +416,9 @@ export default function RenovationCostCalculator() {
       structural: false,
       painting: false,
     })
-  }
+  }, [])
 
-  const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
+  const renderInput = useCallback((label: string, value: number, onChange: (value: number) => void) => (
     <div>
       <Label htmlFor={label}>{translate(label)}</Label>
       <Input
@@ -438,7 +433,7 @@ export default function RenovationCostCalculator() {
         className="w-full mb-2"
       />
     </div>
-  )
+  ), [])
 
   // Contact Form Component
   const ContactForm = () => (
