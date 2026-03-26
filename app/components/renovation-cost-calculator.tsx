@@ -100,7 +100,7 @@ const translations: Record<string, string> = {
   basic: "Βασική",
   premium: "Premium",
   "General Renovation": "Γενική Ανακαίνιση",
-  "Doors & Windows": "Πόρτες & Παράθυρα",
+  "Doors & Windows": "Κουφώματα",
   "Total Estimated Cost:": "Συνολικό Εκτιμώμενο Κόστος:",
   "Total Estimated Range:": "Συνολικό Εκτιμώμενο Εύρος:",
   "Why work with us?": "Γιατί να συνεργαστείτε μαζί μας;",
@@ -552,7 +552,7 @@ export default function RenovationCostCalculator() {
       {windowsCost && Number(windowsCost) > 0 && (
         <div className="p-4 bg-muted rounded-lg border border-border text-center">
           <p className="text-sm text-muted-foreground mb-1">
-            {isEnglish ? "Doors & Windows:" : "Πόρτες & Παράθυρα:"}
+            {isEnglish ? "Joinery (Doors & Windows):" : "Κουφώματα:"}
           </p>
           <p className="text-2xl font-bold text-primary">
             {isEnglish ? `€${Number(windowsCost).toLocaleString()}` : `${Number(windowsCost).toLocaleString()}€`}
