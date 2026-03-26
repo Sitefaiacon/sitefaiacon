@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState, useCallback } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Image from "next/image"
 import {
   Bath,
@@ -328,19 +328,19 @@ export default function RenovationCostCalculator() {
     })
   }
 
-  const handleGetQuote = useCallback(() => {
+  const handleGetQuote = () => {
     calculateRenovationCost()
     setShowContactForm(true)
-  }, [])
+  }
 
-  const handleWindowsGetQuote = useCallback(() => {
+  const handleWindowsGetQuote = () => {
     if (windows === 0 && balconyDoors === 0 && interiorDoors === 0 && mainEntrance === 0) {
       return
     }
     setShowContactForm(true)
-  }, [windows, balconyDoors, interiorDoors, mainEntrance])
+  }
 
-  const handleContactSubmit = useCallback(async () => {
+  const handleContactSubmit = async () => {
     if (!contact.name || !contact.email || !contact.phone) {
       return
     }
@@ -399,9 +399,9 @@ export default function RenovationCostCalculator() {
     } finally {
       setIsSubmitting(false)
     }
-  }, [contact, categories, area, bathrooms, kitchens, rooms, buildingAge, renovationQuality, poolType, poolSize, renovationCost, windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality, windowsCost, totalCost, isEnglish])
+  }
 
-  const handleNewCalculation = useCallback(() => {
+  const handleNewCalculation = () => {
     setShowResults(false)
     setShowContactForm(false)
     setContactSubmitted(false)
@@ -416,9 +416,9 @@ export default function RenovationCostCalculator() {
       structural: false,
       painting: false,
     })
-  }, [])
+  }
 
-  const renderInput = useCallback((label: string, value: number, onChange: (value: number) => void) => (
+  const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
     <div>
       <Label htmlFor={label}>{translate(label)}</Label>
       <Input
@@ -433,7 +433,7 @@ export default function RenovationCostCalculator() {
         className="w-full mb-2"
       />
     </div>
-  ), [])
+  )
 
   // Contact Form Component
   const ContactForm = () => (
