@@ -7,6 +7,7 @@ import {
   Building,
   CheckCircle,
   CheckCircle2,
+  Home,
   Layers,
   Loader2,
   Paintbrush,
@@ -46,6 +47,7 @@ const renovationRates = {
   electrical: { basic: 48, premium: 72 },
   structural: { basic: 90, premium: 140 },
   painting: { basic: 13, premium: 18 },
+  roof: { basic: 155, premium: 188 },
 } as const
 
 const poolCostsPerM2: Record<PoolType, Partial<Record<Quality, number>>> = {
@@ -111,6 +113,7 @@ const translations: Record<string, string> = {
   Electrical: "Ηλεκτρολογικά",
   Structural: "Δομικά",
   Painting: "Βαφή",
+  Roof: "Στέγη",
   Categories: "Κατηγορίες",
   None: "Καμία",
   Concrete: "Μπετόν",
@@ -144,6 +147,10 @@ const categoryDescriptions = {
   painting: {
     en: "Interior painting with quality paints.",
     el: "Εσωτερική βαφή με ποιοτικά χρώματα.",
+  },
+  roof: {
+    en: "Roof repair or replacement including insulation and waterproofing.",
+    el: "Επισκευή ή αντικατάσταση στέγης με μόνωση και στεγανοποίηση.",
   },
 }
 
@@ -189,6 +196,7 @@ export default function RenovationCostCalculator() {
     electrical: false,
     structural: false,
     painting: false,
+    roof: false,
   })
   const [renovationQuality, setRenovationQuality] = useState<Quality>("basic")
   const [renovationCost, setRenovationCost] = useState<string | null>(null)
@@ -307,9 +315,10 @@ export default function RenovationCostCalculator() {
         const electricalAreaFactor = rooms > 0 ? Math.max(1, rooms / 2) : 1
         total += numericArea * renovationRates.electrical[quality] * electricalAreaFactor
       }
-      if (categories.structural) total += numericArea * renovationRates.structural[quality]
-      if (categories.painting) total += numericArea * renovationRates.painting[quality]
-    }
+  if (categories.structural) total += numericArea * renovationRates.structural[quality]
+  if (categories.painting) total += numericArea * renovationRates.painting[quality]
+  if (categories.roof) total += numericArea * renovationRates.roof[quality]
+  }
 
     total = total * getAgeMultiplier(buildingAge) * getSizeMultiplier(numericArea)
 
@@ -412,14 +421,15 @@ export default function RenovationCostCalculator() {
     setContact({ name: "", email: "", phone: "" })
     setRenovationCost(null)
     setRenovationRange(null)
-    setCategories({
-      bathroom: false,
-      kitchen: false,
-      flooring: false,
-      electrical: false,
-      structural: false,
-      painting: false,
-    })
+  setCategories({
+  bathroom: false,
+  kitchen: false,
+  flooring: false,
+  electrical: false,
+  structural: false,
+  painting: false,
+  roof: false,
+  })
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
@@ -750,8 +760,9 @@ export default function RenovationCostCalculator() {
                     { key: "flooring", icon: Layers, label: translate("Flooring") },
                     { key: "electrical", icon: Plug, label: translate("Electrical") },
                     { key: "structural", icon: Building, label: translate("Structural") },
-                    { key: "painting", icon: Paintbrush, label: translate("Painting") },
-                  ].map(({ key, icon: Icon, label }) => (
+  { key: "painting", icon: Paintbrush, label: translate("Painting") },
+  { key: "roof", icon: Home, label: translate("Roof") },
+  ].map(({ key, icon: Icon, label }) => (
                     <div 
                       key={key} 
                       className={`p-3 rounded-lg border transition-colors cursor-pointer ${
