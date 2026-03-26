@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import Image from "next/image"
 import {
   Bath,
   Building,
@@ -590,7 +591,13 @@ export default function RenovationCostCalculator() {
       <div className="mb-4">
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-2xl font-bold text-primary">{translate("Renovation Cost Calculator")}</h2>
-          <span className="text-lg font-serif font-semibold text-muted-foreground">Faiacon</span>
+          <Image
+            src="/images/faiacon-logo.jpg"
+            alt="Faiacon Logo"
+            width={120}
+            height={40}
+            className="object-contain"
+          />
         </div>
       </div>
 
