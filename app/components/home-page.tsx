@@ -2,7 +2,7 @@
 
 import { useLanguage } from "../contexts/language-context"
 import { Button } from "@/components/ui/button"
-import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CheckCircle2, Calculator, Award, Briefcase, Users, MessageCircle } from "lucide-react"
+import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CheckCircle2, Calculator, Award, Briefcase, Users, MessageCircle, Calendar } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
@@ -97,6 +97,16 @@ export default function HomePage({ lang }: { lang: string }) {
                   <Link href={whatsappLink} target="_blank" className="flex items-center gap-2">
                     <MessageCircle className="w-5 h-5" />
                     {isEnglish ? "WhatsApp Estimate" : "WhatsApp Εκτίμηση"}
+                  </Link>
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                  asChild
+                >
+                  <Link href="/appointment" className="flex items-center gap-2">
+                    <Calendar className="w-5 h-5" />
+                    {isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}
                   </Link>
                 </Button>
               </div>
