@@ -168,6 +168,7 @@ export default function RenovationCostCalculator() {
   const [showContactForm, setShowContactForm] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [contactSubmitted, setContactSubmitted] = useState(false)
+  const [submittedFromTab, setSubmittedFromTab] = useState<"renovation" | "windows" | null>(null)
 
   // Contact form state
   const [contact, setContact] = useState<ContactInfo>({
@@ -330,6 +331,7 @@ export default function RenovationCostCalculator() {
 
   const handleGetQuote = () => {
     calculateRenovationCost()
+    setSubmittedFromTab("renovation")
     setShowContactForm(true)
   }
 
@@ -337,6 +339,7 @@ export default function RenovationCostCalculator() {
     if (windows === 0 && balconyDoors === 0 && interiorDoors === 0 && mainEntrance === 0) {
       return
     }
+    setSubmittedFromTab("windows")
     setShowContactForm(true)
   }
 
@@ -405,6 +408,7 @@ export default function RenovationCostCalculator() {
     setShowResults(false)
     setShowContactForm(false)
     setContactSubmitted(false)
+    setSubmittedFromTab(null)
     setContact({ name: "", email: "", phone: "" })
     setRenovationCost(null)
     setRenovationRange(null)
@@ -514,7 +518,7 @@ export default function RenovationCostCalculator() {
         </p>
       </div>
 
-      {renovationCost && Number(renovationCost) > 0 && (
+      {submittedFromTab === "renovation" && renovationCost && Number(renovationCost) > 0 && (
         <div className="p-4 bg-muted rounded-lg border border-border text-center">
           <p className="text-sm text-muted-foreground mb-1">
             {isEnglish ? "General Renovation:" : "Γενική Ανακαίνιση:"}
@@ -533,7 +537,7 @@ export default function RenovationCostCalculator() {
         </div>
       )}
 
-      {windowsCost && Number(windowsCost) > 0 && (
+      {submittedFromTab === "windows" && windowsCost && Number(windowsCost) > 0 && (
         <div className="p-4 bg-muted rounded-lg border border-border text-center">
           <p className="text-sm text-muted-foreground mb-1">
             {isEnglish ? "Doors & Windows:" : "Πόρτες & Παράθυρα:"}
@@ -552,7 +556,7 @@ export default function RenovationCostCalculator() {
         </div>
       )}
 
-      {totalCost && totalRange && (renovationCost && windowsCost) && (
+      {totalCost && totalRange && submittedFromTab === "renovation" && (renovationCost && windowsCost) && (
         <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
           <p className="text-lg font-bold text-foreground">{translate("Total Estimated Cost:")}</p>
           <p className="text-3xl font-bold text-primary">
