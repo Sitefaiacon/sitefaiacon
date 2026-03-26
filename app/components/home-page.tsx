@@ -86,7 +86,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 >
                   <Link href={`/${lang}/cost-calculator`} className="flex items-center gap-2">
                     <Calculator className="w-5 h-5" />
-                    {isEnglish ? "Calculate Cost" : "Υπολογίστε Κόστος"}
+                    {isEnglish ? "Renovation Cost Calculator" : "Υπολογιστής Κόστους Ανακαίνισης"}
                   </Link>
                 </Button>
                 <Button
