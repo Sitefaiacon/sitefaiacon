@@ -32,49 +32,49 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "../contexts/language-context"
 
 const materialOptions = ["aluminum", "pvc", "wood"] as const
-const qualityOptions = ["basic", "midRange", "premium"] as const
+const qualityOptions = ["basic", "premium"] as const
 
 type Material = (typeof materialOptions)[number]
 type Quality = (typeof qualityOptions)[number]
 type PoolType = "none" | "liner" | "polyester" | "concrete"
 
 const renovationRates = {
-  full: { basic: 440, midRange: 590, premium: 760 },
-  bathroom: { basic: 4200, midRange: 6200, premium: 8800 },
-  kitchen: { basic: 6500, midRange: 9500, premium: 13500 },
-  flooring: { basic: 28, midRange: 45, premium: 68 },
-  electrical: { basic: 32, midRange: 48, premium: 72 },
-  structural: { basic: 55, midRange: 90, premium: 140 },
-  painting: { basic: 9, midRange: 13, premium: 18 },
+  full: { basic: 590, premium: 760 },
+  bathroom: { basic: 6200, premium: 8800 },
+  kitchen: { basic: 9500, premium: 13500 },
+  flooring: { basic: 45, premium: 68 },
+  electrical: { basic: 48, premium: 72 },
+  structural: { basic: 90, premium: 140 },
+  painting: { basic: 13, premium: 18 },
 } as const
 
 const poolCostsPerM2: Record<PoolType, Partial<Record<Quality, number>>> = {
-  none: { basic: 0, midRange: 0, premium: 0 },
-  liner: { midRange: 700, premium: 850 },
+  none: { basic: 0, premium: 0 },
+  liner: { basic: 700, premium: 850 },
   polyester: { premium: 950 },
-  concrete: { basic: 900, midRange: 1100, premium: 1350 },
+  concrete: { basic: 1100, premium: 1350 },
 }
 
 const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
   window: {
-    aluminum: { basic: 650, midRange: 850, premium: 1050 },
-    pvc: { basic: 520, midRange: 700, premium: 900 },
-    wood: { basic: 780, midRange: 980, premium: 1250 },
+    aluminum: { basic: 850, premium: 1050 },
+    pvc: { basic: 700, premium: 900 },
+    wood: { basic: 980, premium: 1250 },
   },
   balconyDoor: {
-    aluminum: { basic: 1200, midRange: 1500, premium: 1850 },
-    pvc: { basic: 1000, midRange: 1300, premium: 1600 },
-    wood: { basic: 1350, midRange: 1700, premium: 2100 },
+    aluminum: { basic: 1500, premium: 1850 },
+    pvc: { basic: 1300, premium: 1600 },
+    wood: { basic: 1700, premium: 2100 },
   },
   interiorDoor: {
-    aluminum: { basic: 420, midRange: 560, premium: 720 },
-    pvc: { basic: 320, midRange: 450, premium: 620 },
-    wood: { basic: 280, midRange: 430, premium: 650 },
+    aluminum: { basic: 560, premium: 720 },
+    pvc: { basic: 450, premium: 620 },
+    wood: { basic: 430, premium: 650 },
   },
   mainEntrance: {
-    aluminum: { basic: 1450, midRange: 1850, premium: 2350 },
-    pvc: { basic: 1250, midRange: 1650, premium: 2100 },
-    wood: { basic: 1550, midRange: 1950, premium: 2450 },
+    aluminum: { basic: 1850, premium: 2350 },
+    pvc: { basic: 1650, premium: 2100 },
+    wood: { basic: 1950, premium: 2450 },
   },
 }
 
@@ -96,7 +96,6 @@ const translations: Record<string, string> = {
   pvc: "PVC",
   wood: "Ξύλο",
   basic: "Βασική",
-  midRange: "Μεσαία",
   premium: "Premium",
   "General Renovation": "Γενική Ανακαίνιση",
   "Doors & Windows": "Πόρτες & Παράθυρα",
@@ -118,7 +117,6 @@ const translations: Record<string, string> = {
   Polyester: "Πολυεστερική",
   Liner: "Με επένδυση",
   Basic: "Βασική",
-  "Mid-Range": "Μεσαία",
 }
 
 // Category descriptions - exactly as shown in the image
@@ -217,10 +215,8 @@ export default function RenovationCostCalculator() {
   }
 
   useEffect(() => {
-    // Adjust quality based on pool type
-    if (poolType === "liner" && renovationQuality === "basic") {
-      setRenovationQuality("midRange")
-    } else if (poolType === "polyester" && renovationQuality !== "premium") {
+    // Adjust quality based on pool type - polyester requires premium
+    if (poolType === "polyester" && renovationQuality !== "premium") {
       setRenovationQuality("premium")
     }
   }, [poolType, renovationQuality])
@@ -806,11 +802,8 @@ export default function RenovationCostCalculator() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background">
-                    {poolType !== "liner" && poolType !== "polyester" && (
-                      <SelectItem value="basic">{translate("Basic")}</SelectItem>
-                    )}
                     {poolType !== "polyester" && (
-                      <SelectItem value="midRange">{translate("Mid-Range")}</SelectItem>
+                      <SelectItem value="basic">{translate("Basic")}</SelectItem>
                     )}
                     <SelectItem value="premium">{translate("Premium")}</SelectItem>
                   </SelectContent>
