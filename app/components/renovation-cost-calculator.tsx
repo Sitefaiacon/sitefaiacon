@@ -339,6 +339,10 @@ export default function RenovationCostCalculator() {
     if (windows === 0 && balconyDoors === 0 && interiorDoors === 0 && mainEntrance === 0) {
       return
     }
+    // Also calculate renovation cost if categories are selected
+    if (Object.values(categories).some(Boolean)) {
+      calculateRenovationCost()
+    }
     setSubmittedFromTab("windows")
     setShowContactForm(true)
   }
@@ -518,8 +522,8 @@ export default function RenovationCostCalculator() {
         </p>
       </div>
 
-      {/* Show renovation cost when submitted from renovation tab */}
-      {submittedFromTab === "renovation" && renovationCost && Number(renovationCost) > 0 && (
+      {/* Show renovation cost if available */}
+      {renovationCost && Number(renovationCost) > 0 && (
         <div className="p-4 bg-muted rounded-lg border border-border text-center">
           <p className="text-sm text-muted-foreground mb-1">
             {isEnglish ? "General Renovation:" : "Γενική Ανακαίνιση:"}
@@ -538,7 +542,7 @@ export default function RenovationCostCalculator() {
         </div>
       )}
 
-      {/* Show windows cost when submitted from either tab (if windows are selected) */}
+      {/* Show windows cost if available */}
       {windowsCost && Number(windowsCost) > 0 && (
         <div className="p-4 bg-muted rounded-lg border border-border text-center">
           <p className="text-sm text-muted-foreground mb-1">
@@ -558,8 +562,8 @@ export default function RenovationCostCalculator() {
         </div>
       )}
 
-      {/* Show total only when both renovation and windows have costs */}
-      {submittedFromTab === "renovation" && renovationCost && Number(renovationCost) > 0 && windowsCost && Number(windowsCost) > 0 && totalCost && totalRange && (
+      {/* Show total when both renovation and windows have costs */}
+      {renovationCost && Number(renovationCost) > 0 && windowsCost && Number(windowsCost) > 0 && totalCost && totalRange && (
         <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
           <p className="text-lg font-bold text-foreground">{translate("Total Estimated Cost:")}</p>
           <p className="text-3xl font-bold text-primary">
