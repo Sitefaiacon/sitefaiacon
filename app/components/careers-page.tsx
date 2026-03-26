@@ -217,7 +217,6 @@ export default function CareersPage() {
     if (!form.workType) e.workType = "Επιλέξτε τύπο εργασίας"
     if (!form.experienceLevel) e.experienceLevel = "Επιλέξτε επίπεδο εμπειρίας"
     if (!form.position) e.position = "Επιλέξτε θέση"
-    if (!form.previousExperience) e.previousExperience = "Υποχρεωτικό πεδίο"
     if (!form.legalToWork) e.legalToWork = "Υποχρεωτικό"
     if (!form.privacyConsent) e.privacyConsent = "Απαιτείται συγκατάθεση"
     setErrors(e)
@@ -430,7 +429,7 @@ export default function CareersPage() {
               </div>
 
               <div>
-                <Label htmlFor="previousExperience">Περιγραφή προηγούμενης εμπειρίας <span className="text-destructive">*</span></Label>
+                <Label htmlFor="previousExperience">Περιγραφή προηγούμενης εμπειρίας</Label>
                 <Textarea id="previousExperience" rows={4} value={form.previousExperience} onChange={(e) => set("previousExperience", e.target.value)} className={`${fieldClass("previousExperience")} resize-none`} placeholder="Περιγράψτε τις εργασίες που έχετε κάνει στο παρελθόν..." />
                 {errors.previousExperience && <p className="text-destructive text-xs mt-1" data-error>{errors.previousExperience}</p>}
               </div>
