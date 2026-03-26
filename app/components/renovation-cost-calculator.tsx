@@ -1,62 +1,187 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useMemo, useState } from "react"
+import Image from "next/image"
+import {
+  Bath,
+  Building,
+  CheckCircle,
+  CheckCircle2,
+  Layers,
+  Loader2,
+  Paintbrush,
+  Plug,
+  UtensilsCrossed,
+  User,
+  Mail,
+  Phone,
+} from "lucide-react"
+
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "../contexts/language-context"
-import { Bath, ChefHat, Layers, Zap, Building2, Paintbrush, Loader2, CheckCircle, AlertCircle, User, Mail, Phone } from "lucide-react"
 
-// Constants for Doors & Windows Calculator
 const materialOptions = ["aluminum", "pvc", "wood"] as const
 const qualityOptions = ["basic", "midRange", "premium"] as const
 
 type Material = (typeof materialOptions)[number]
 type Quality = (typeof qualityOptions)[number]
+type PoolType = "none" | "liner" | "polyester" | "concrete"
 
-interface ContactInfo {
+const renovationRates = {
+  full: { basic: 440, midRange: 590, premium: 760 },
+  bathroom: { basic: 4200, midRange: 6200, premium: 8800 },
+  kitchen: { basic: 6500, midRange: 9500, premium: 13500 },
+  flooring: { basic: 28, midRange: 45, premium: 68 },
+  electrical: { basic: 32, midRange: 48, premium: 72 },
+  structural: { basic: 55, midRange: 90, premium: 140 },
+  painting: { basic: 9, midRange: 13, premium: 18 },
+} as const
+
+const poolCostsPerM2: Record<PoolType, Partial<Record<Quality, number>>> = {
+  none: { basic: 0, midRange: 0, premium: 0 },
+  liner: { midRange: 700, premium: 850 },
+  polyester: { premium: 950 },
+  concrete: { basic: 900, midRange: 1100, premium: 1350 },
+}
+
+const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
+  window: {
+    aluminum: { basic: 650, midRange: 850, premium: 1050 },
+    pvc: { basic: 520, midRange: 700, premium: 900 },
+    wood: { basic: 780, midRange: 980, premium: 1250 },
+  },
+  balconyDoor: {
+    aluminum: { basic: 1200, midRange: 1500, premium: 1850 },
+    pvc: { basic: 1000, midRange: 1300, premium: 1600 },
+    wood: { basic: 1350, midRange: 1700, premium: 2100 },
+  },
+  interiorDoor: {
+    aluminum: { basic: 420, midRange: 560, premium: 720 },
+    pvc: { basic: 320, midRange: 450, premium: 620 },
+    wood: { basic: 280, midRange: 430, premium: 650 },
+  },
+  mainEntrance: {
+    aluminum: { basic: 1450, midRange: 1850, premium: 2350 },
+    pvc: { basic: 1250, midRange: 1650, premium: 2100 },
+    wood: { basic: 1550, midRange: 1950, premium: 2450 },
+  },
+}
+
+const translations: Record<string, string> = {
+  "Renovation Cost Calculator": "Υπολογιστής Κόστους Ανακαίνισης",
+  Windows: "Παράθυρα",
+  "Balcony Doors": "Μπαλκονόπορτες",
+  "Interior Doors": "Εσωτερικές Πόρτες",
+  "Main Entrance": "Κεντρική Είσοδος",
+  Material: "Υλικό",
+  Quality: "Ποιότητα",
+  "Estimated Cost:": "Εκτιμώμενο Κόστος:",
+  "Estimated Range:": "Εκτιμώμενο Εύρος:",
+  "Calculate your renovation cost in 1 minute!": "Υπολογίστε το κόστος της ανακαίνισής σας σε 1 λεπτό!",
+  "Request a Quote": "Ζητήστε Προσφορά",
+  Calculate: "Υπολογισμός",
+  "Get Quote": "Λάβετε Προσφορά",
+  aluminum: "Αλουμίνιο",
+  pvc: "PVC",
+  wood: "Ξύλο",
+  basic: "Βασική",
+  midRange: "Μεσαία",
+  premium: "Premium",
+  "General Renovation": "Γενική Ανακαίνιση",
+  "Doors & Windows": "Πόρτες & Παράθυρα",
+  "Total Estimated Cost:": "Συνολικό Εκτιμώμενο Κόστος:",
+  "Total Estimated Range:": "Συνολικό Εκτιμώμενο Εύρος:",
+  "Why work with us?": "Γιατί να συνεργαστείτε μαζί μας;",
+  "Top Quality Products & Materials": "Προϊόντα & Υλικά Κορυφαίας Ποιότητας",
+  "Let us transform your vision into reality": "Αφήστε μας να μετατρέψουμε την όρασή σας σε πραγματικότητα",
+  "Modern solutions for the ideal pool": "Σύγχρονες λύσεις για την ιδανική πισίνα",
+  Bathroom: "Μπάνιο",
+  Kitchen: "Κουζίνα",
+  Flooring: "Δάπεδα",
+  Electrical: "Ηλεκτρολογικά",
+  Structural: "Δομικά",
+  Painting: "Βαφή",
+  Categories: "Κατηγορίες",
+  None: "Καμία",
+  Concrete: "Μπετόν",
+  Polyester: "Πολυεστερική",
+  Liner: "Με επένδυση",
+  Basic: "Βασική",
+  "Mid-Range": "Μεσαία",
+}
+
+// Category descriptions - exactly as shown in the image
+const categoryDescriptions = {
+  bathroom: {
+    en: "Full bathroom renovation with basic plumbing, tiles, sanitary ware and finishing.",
+    el: "Πλήρης ανακαίνιση μπάνιου με βασικές υδραυλικές εργασίες, πλακίδια, είδη υγιεινής και φινίρισμα.",
+  },
+  kitchen: {
+    en: "Kitchen upgrade with cabinets, countertops, basic plumbing and electrical adjustments.",
+    el: "Αναβάθμιση κουζίνας με ντουλάπια, πάγκο, βασικές υδραυλικές και ηλεκτρολογικές προσαρμογές.",
+  },
+  flooring: {
+    en: "Removal of old floor where required and installation of new flooring.",
+    el: "Αποξήλωση παλιού δαπέδου όπου απαιτείται και τοποθέτηση νέου δαπέδου.",
+  },
+  electrical: {
+    en: "Indicative upgrade of electrical installation, panel, sockets, switches and lighting.",
+    el: "Ενδεικτική αναβάθμιση ηλεκτρολογικής εγκατάστασης, πίνακα, πριζών, διακοπτών και φωτισμού.",
+  },
+  structural: {
+    en: "Minor structural interventions, repairs, plastering, masonry and related works.",
+    el: "Μικρές δομικές επεμβάσεις, επισκευές, σοβάδες, τοιχοποιίες και συναφείς εργασίες.",
+  },
+  painting: {
+    en: "Interior painting with quality paints.",
+    el: "Εσωτερική βαφή με ποιοτικά χρώματα.",
+  },
+}
+
+type EstimateRange = {
+  min: number
+  max: number
+}
+
+type ContactInfo = {
   name: string
   email: string
   phone: string
 }
 
-const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
-  window: {
-    aluminum: { basic: 530, midRange: 630, premium: 730 },
-    pvc: { basic: 430, midRange: 530, premium: 630 },
-    wood: { basic: 630, midRange: 730, premium: 830 },
-  },
-  balconyDoor: {
-    aluminum: { basic: 930, midRange: 1030, premium: 1130 },
-    pvc: { basic: 830, midRange: 930, premium: 1030 },
-    wood: { basic: 1030, midRange: 1130, premium: 1230 },
-  },
-  interiorDoor: {
-    aluminum: { basic: 330, midRange: 430, premium: 530 },
-    pvc: { basic: 280, midRange: 380, premium: 480 },
-    wood: { basic: 430, midRange: 530, premium: 630 },
-  },
-  mainEntrance: {
-    aluminum: { basic: 1530, midRange: 1830, premium: 2030 },
-    pvc: { basic: 1330, midRange: 1530, premium: 1730 },
-    wood: { basic: 1830, midRange: 2030, premium: 2230 },
-  },
-}
-
-export function RenovationCostCalculator() {
+export default function RenovationCostCalculator() {
   const { isEnglish } = useLanguage()
-  const [activeTab, setActiveTab] = useState("renovation")
 
-  // State for Renovation Calculator
+  const [activeTab, setActiveTab] = useState("renovation")
+  const [showResults, setShowResults] = useState(false)
+  const [showContactForm, setShowContactForm] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [contactSubmitted, setContactSubmitted] = useState(false)
+
+  // Contact form state
+  const [contact, setContact] = useState<ContactInfo>({
+    name: "",
+    email: "",
+    phone: "",
+  })
+
   const [area, setArea] = useState<string>("50")
   const [bathrooms, setBathrooms] = useState(1)
   const [kitchens, setKitchens] = useState(1)
   const [rooms, setRooms] = useState(2)
-  const [buildingAge, setBuildingAge] = useState(2000)
-  const [poolType, setPoolType] = useState("none")
+  const [buildingAge, setBuildingAge] = useState(new Date().getFullYear() - 20)
+  const [poolType, setPoolType] = useState<PoolType>("none")
   const [poolSize, setPoolSize] = useState(18)
   const [categories, setCategories] = useState({
     bathroom: false,
@@ -66,78 +191,30 @@ export function RenovationCostCalculator() {
     structural: false,
     painting: false,
   })
-  const [renovationQuality, setRenovationQuality] = useState("basic")
+  const [renovationQuality, setRenovationQuality] = useState<Quality>("basic")
+  const [renovationCost, setRenovationCost] = useState<string | null>(null)
+  const [renovationRange, setRenovationRange] = useState<EstimateRange | null>(null)
 
-  // State for Doors & Windows Calculator
   const [material, setMaterial] = useState<Material>("aluminum")
   const [windowsQuality, setWindowsQuality] = useState<Quality>("basic")
   const [windows, setWindows] = useState(0)
   const [balconyDoors, setBalconyDoors] = useState(0)
   const [interiorDoors, setInteriorDoors] = useState(0)
   const [mainEntrance, setMainEntrance] = useState(0)
-  const [windowsCost, setWindowsCost] = useState<string>("0.00")
+  const [windowsCost, setWindowsCost] = useState<string | null>(null)
+  const [windowsRange, setWindowsRange] = useState<EstimateRange | null>(null)
 
-  // State for contact form and results
-  const [showContactForm, setShowContactForm] = useState(false)
-  const [showResults, setShowResults] = useState(false)
-  const [contact, setContact] = useState<ContactInfo>({
-    name: "",
-    email: "",
-    phone: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
-  const [errorMessage, setErrorMessage] = useState("")
-  const [calculatedRenovationCost, setCalculatedRenovationCost] = useState<string>("0.00")
+  const [totalCost, setTotalCost] = useState<string | null>(null)
+  const [totalRange, setTotalRange] = useState<EstimateRange | null>(null)
 
-  // Constants for Renovation Calculator - Realistic Greek market rates
-  // Full renovation rates per m² (when 4+ categories selected)
-  const fullRenovationRates = { basic: 440, midRange: 590, premium: 760 }
-  
-  // Individual category rates
-  const renovationRates = {
-    bathroom: { basic: 4200, midRange: 6200, premium: 8800 }, // per bathroom
-    kitchen: { basic: 6500, midRange: 9500, premium: 13500 }, // per kitchen
-    flooring: { basic: 28, midRange: 45, premium: 68 }, // per m²
-    electrical: { basic: 32, midRange: 48, premium: 72 }, // per m²
-    structural: { basic: 55, midRange: 90, premium: 140 }, // per m²
-    painting: { basic: 9, midRange: 13, premium: 18 }, // per m²
-  }
-  
-  const poolCostsPerM2 = {
-    none: { basic: 0, midRange: 0, premium: 0 },
-    liner: { basic: 0, midRange: 700, premium: 850 },
-    polyester: { basic: 0, midRange: 0, premium: 950 },
-    concrete: { basic: 900, midRange: 1100, premium: 1350 },
+  const translate = (text: string) => (isEnglish ? text : translations[text] || text)
+
+  const resetResults = () => {
+    setShowResults(false)
+    setShowContactForm(false)
+    setContactSubmitted(false)
   }
 
-  // Translations
-  const translations: Record<string, string> = {
-    "Renovation Cost Calculator": "Υπολογιστής Κόστους Ανακαίνισης",
-    Windows: "Παράθυρα",
-    "Balcony Doors": "Μπαλκονόπορτες",
-    "Interior Doors": "Εσωτερικές Πόρτες",
-    "Main Entrance": "Κεντρική Είσοδος",
-    Material: "Υλικό",
-    Quality: "Ποιότητα",
-    "Estimated Cost:": "Εκτιμώμενο Κόστος:",
-    aluminum: "Αλουμίνιο",
-    pvc: "PVC",
-    wood: "Ξύλο",
-    basic: "Βασική",
-    midRange: "Μεσαία",
-    premium: "Premium",
-    "General Renovation": "Γενική Ανακαίνιση",
-    "Doors & Windows": "Πόρτες & Παράθυρα",
-    "Total Estimated Cost:": "Συνολικό Εκτιμώμενο Κόστος:",
-    "Get Quote": "Δείτε την Προσφορά",
-  }
-
-  const translate = (text: string) => {
-    return isEnglish ? text : translations[text] || text
-  }
-
-  // Effects
   useEffect(() => {
     if (poolType === "liner" && renovationQuality === "basic") {
       setRenovationQuality("midRange")
@@ -150,811 +227,647 @@ export function RenovationCostCalculator() {
     }
   }, [poolType, renovationQuality])
 
+  const windowsDependencies = useMemo(
+    () => [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance],
+    [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance],
+  )
+
   useEffect(() => {
-    calculateWindowsCost()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [material, windowsQuality, windows, balconyDoors, interiorDoors, mainEntrance])
+    const renovationCostNumber = renovationCost ? Number.parseFloat(renovationCost) : 0
+    const windowsCostNumber = windowsCost ? Number.parseFloat(windowsCost) : 0
+    const newTotalCost = renovationCostNumber + windowsCostNumber
 
-  // Helper functions for multipliers
-  const getAgeMultiplier = (yearBuilt: number) => {
-    const currentYear = new Date().getFullYear()
-    const buildingYears = currentYear - yearBuilt
-    if (buildingYears > 40) return 1.12
-    if (buildingYears >= 20) return 1.06
-    return 1
-  }
+    setTotalCost(newTotalCost > 0 ? newTotalCost.toFixed(2) : null)
 
-  const getSizeMultiplier = (areaSize: number) => {
-    if (areaSize < 50) return 1.08
-    if (areaSize > 120) return 0.95
-    return 1
-  }
-
-  // Calculation functions
-  const calculateRenovationCost = () => {
-    const numericArea = Number(area)
-    if (!numericArea || numericArea <= 0) return "0.00"
-
-    const selectedCount = Object.values(categories).filter(Boolean).length
-    const quality = renovationQuality as "basic" | "midRange" | "premium"
-    
-    let subtotal = 0
-
-    // Check if it's a full renovation (4+ categories or specific combination)
-    const isFullRenovation =
-      selectedCount >= 4 ||
-      (categories.bathroom && categories.kitchen && categories.flooring && categories.electrical)
-
-    if (isFullRenovation) {
-      // Full renovation uses the per-m² rate
-      subtotal = numericArea * fullRenovationRates[quality]
+    if (renovationRange || windowsRange) {
+      const min = (renovationRange?.min || 0) + (windowsRange?.min || 0)
+      const max = (renovationRange?.max || 0) + (windowsRange?.max || 0)
+      setTotalRange(min > 0 || max > 0 ? { min, max } : null)
     } else {
-      // Partial renovation - calculate each category separately
-      if (categories.bathroom) {
-        subtotal += bathrooms * renovationRates.bathroom[quality]
-      }
-      if (categories.kitchen) {
-        subtotal += kitchens * renovationRates.kitchen[quality]
-      }
-      if (categories.flooring) {
-        subtotal += numericArea * renovationRates.flooring[quality]
-      }
-      if (categories.electrical) {
-        const electricalAreaFactor = rooms > 0 ? Math.max(1, rooms / 2) : 1
-        subtotal += numericArea * renovationRates.electrical[quality] * electricalAreaFactor
-      }
-      if (categories.structural) {
-        subtotal += numericArea * renovationRates.structural[quality]
-      }
-      if (categories.painting) {
-        subtotal += numericArea * renovationRates.painting[quality]
-      }
+      setTotalRange(null)
     }
+  }, [renovationCost, windowsCost, renovationRange, windowsRange])
 
-    let total = subtotal
-
-    // Apply age multiplier
-    total *= getAgeMultiplier(buildingAge)
-
-    // Apply size multiplier
-    total *= getSizeMultiplier(numericArea)
-
-    // Add pool cost if applicable
-    if (poolType !== "none" && poolSize > 0) {
-      const poolRate = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][quality] || 0
-      if (poolRate > 0) {
-        total += poolRate * poolSize
-      }
-    }
-
-    return total.toFixed(2)
-  }
-
-  const calculateWindowsCost = () => {
+  useEffect(() => {
     const cost =
       windows * windowCosts.window[material][windowsQuality] +
       balconyDoors * windowCosts.balconyDoor[material][windowsQuality] +
       interiorDoors * windowCosts.interiorDoor[material][windowsQuality] +
       mainEntrance * windowCosts.mainEntrance[material][windowsQuality]
-    setWindowsCost(cost.toFixed(2))
-    return cost.toFixed(2)
+
+    setWindowsCost(cost > 0 ? cost.toFixed(2) : null)
+
+    if (cost > 0) {
+      setWindowsRange({
+        min: cost * 0.92,
+        max: cost * 1.12,
+      })
+    } else {
+      setWindowsRange(null)
+    }
+  }, windowsDependencies)
+
+  const getAgeMultiplier = (yearBuilt: number) => {
+    const currentYear = new Date().getFullYear()
+    const buildingYears = currentYear - yearBuilt
+
+    if (buildingYears > 40) return 1.12
+    if (buildingYears >= 20) return 1.06
+    return 1.0
+  }
+
+  const getSizeMultiplier = (numericArea: number) => {
+    if (numericArea < 50) return 1.08
+    if (numericArea > 120) return 0.95
+    return 1.0
+  }
+
+  const calculateRenovationCost = () => {
+    const numericArea = Number(area)
+
+    if (!numericArea || numericArea <= 0) {
+      setRenovationCost(null)
+      setRenovationRange(null)
+      return
+    }
+
+    const selectedCount = Object.values(categories).filter(Boolean).length
+    const quality = renovationQuality
+
+    let total = 0
+
+    const isFullRenovation =
+      selectedCount >= 4 ||
+      (categories.bathroom &&
+        categories.kitchen &&
+        categories.flooring &&
+        categories.electrical)
+
+    if (isFullRenovation) {
+      total = numericArea * renovationRates.full[quality]
+    } else {
+      if (categories.bathroom) total += bathrooms * renovationRates.bathroom[quality]
+      if (categories.kitchen) total += kitchens * renovationRates.kitchen[quality]
+      if (categories.flooring) total += numericArea * renovationRates.flooring[quality]
+      if (categories.electrical) {
+        const electricalAreaFactor = rooms > 0 ? Math.max(1, rooms / 2) : 1
+        total += numericArea * renovationRates.electrical[quality] * electricalAreaFactor
+      }
+      if (categories.structural) total += numericArea * renovationRates.structural[quality]
+      if (categories.painting) total += numericArea * renovationRates.painting[quality]
+    }
+
+    total = total * getAgeMultiplier(buildingAge) * getSizeMultiplier(numericArea)
+
+    if (poolType !== "none" && poolSize > 0) {
+      const poolRate = poolCostsPerM2[poolType][quality] || 0
+      total += poolRate * poolSize
+    }
+
+    setRenovationCost(total.toFixed(2))
+    setRenovationRange({
+      min: total * 0.9,
+      max: total * 1.12,
+    })
   }
 
   const handleGetQuote = () => {
-    // Reset states and show contact form
+    calculateRenovationCost()
     setShowContactForm(true)
-    setShowResults(false)
-    setSubmitStatus("idle")
-    setErrorMessage("")
   }
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    // Validation
-    if (!contact.name.trim()) {
-      setErrorMessage(isEnglish ? "Name is required" : "Το ονοματεπώνυμο είναι υποχρεωτικό")
-      return
-    }
-    if (!contact.email.trim()) {
-      setErrorMessage(isEnglish ? "Email is required" : "Το email είναι υποχρεωτικό")
-      return
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(contact.email)) {
-      setErrorMessage(isEnglish ? "Please enter a valid email" : "Παρακαλώ εισάγετε έγκυρο email")
-      return
-    }
-    if (!contact.phone.trim()) {
-      setErrorMessage(isEnglish ? "Phone is required" : "Το τηλέφωνο είναι υποχρεωτικό")
+  const handleWindowsGetQuote = () => {
+    setShowContactForm(true)
+  }
+
+  const handleContactSubmit = async () => {
+    if (!contact.name || !contact.email || !contact.phone) {
       return
     }
 
     setIsSubmitting(true)
-    setErrorMessage("")
-
-    // Calculate costs
-    const renovationCostValue = calculateRenovationCost()
-    const windowsCostValue = calculateWindowsCost()
-    
-    // Check if renovation has any selected categories
-    const hasRenovationSelections = Object.values(categories).some(Boolean)
-    // Check if windows has any items
-    const hasWindowsSelections = windows > 0 || balconyDoors > 0 || interiorDoors > 0 || mainEntrance > 0
-    
-    // Prepare calculator data for the API
-    const calculatorData = {
-      renovation: {
-        area: Number(area),
-        bathrooms,
-        kitchens,
-        rooms,
-        buildingAge,
-        poolType,
-        poolSize: poolType !== "none" ? poolSize : 0,
-        categories,
-        renovationQuality,
-        renovationCost: hasRenovationSelections ? parseFloat(renovationCostValue) : 0,
-      },
-      windows: {
-        windows,
-        balconyDoors,
-        interiorDoors,
-        mainEntrance,
-        material,
-        quality: windowsQuality,
-        windowsCost: hasWindowsSelections ? parseFloat(windowsCostValue) : 0,
-      },
-      totalCost: (hasRenovationSelections ? parseFloat(renovationCostValue) : 0) + 
-                 (hasWindowsSelections ? parseFloat(windowsCostValue) : 0),
-    }
 
     try {
-      const response = await fetch("/api/calculator-lead", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      // Prepare data for API
+      const selectedCategories = Object.entries(categories)
+        .filter(([, v]) => v)
+        .map(([k]) => k)
+        .join(", ")
+
+      const requestData = {
+        contact: {
+          name: contact.name,
+          email: contact.email,
+          phone: contact.phone,
         },
-        body: JSON.stringify({
-          contact: {
-            name: contact.name.trim(),
-            email: contact.email.trim().toLowerCase(),
-            phone: contact.phone.trim(),
+        selections: {
+          renovation: {
+            area: Number(area),
+            bathrooms,
+            kitchens,
+            rooms,
+            buildingAge,
+            quality: renovationQuality,
+            categories: selectedCategories,
+            poolType,
+            poolSize: poolType !== "none" ? poolSize : 0,
+            renovationCost: renovationCost ? parseFloat(renovationCost) : 0,
           },
-          selections: calculatorData,
-        }),
+          windows: {
+            windows,
+            balconyDoors,
+            interiorDoors,
+            mainEntrance,
+            material,
+            quality: windowsQuality,
+            windowsCost: windowsCost ? parseFloat(windowsCost) : 0,
+          },
+          totalCost: totalCost ? parseFloat(totalCost) : (renovationCost ? parseFloat(renovationCost) : 0) + (windowsCost ? parseFloat(windowsCost) : 0),
+        },
+        language: isEnglish ? "en" : "el",
+      }
+
+      await fetch("/api/calculator-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestData),
       })
 
-      const data = await response.json()
-
-      if (response.ok && data.success) {
-        setSubmitStatus("success")
-        setCalculatedRenovationCost(renovationCostValue)
-        setShowResults(true)
-        setShowContactForm(false)
-      } else {
-        setSubmitStatus("error")
-        setErrorMessage(data.errors?.[0] || (isEnglish ? "An error occurred" : "Προέκυψε σφάλμα"))
-      }
+      setContactSubmitted(true)
+      setShowResults(true)
     } catch (error) {
-      setSubmitStatus("error")
-      setErrorMessage(isEnglish ? "Network error. Please try again." : "Σφάλμα δικτύου. Παρακαλώ δοκιμάστε ξανά.")
+      console.error("Error submitting contact:", error)
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const handleReset = () => {
-    setShowContactForm(false)
+  const handleNewCalculation = () => {
     setShowResults(false)
-    setSubmitStatus("idle")
+    setShowContactForm(false)
+    setContactSubmitted(false)
     setContact({ name: "", email: "", phone: "" })
-    setErrorMessage("")
-  }
-
-  const formatCurrency = (value: string | number) => {
-    const num = typeof value === 'string' ? parseFloat(value) : value
-    return new Intl.NumberFormat('el-GR', { 
-      style: 'currency', 
-      currency: 'EUR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(num)
+    setRenovationCost(null)
+    setRenovationRange(null)
+    setCategories({
+      bathroom: false,
+      kitchen: false,
+      flooring: false,
+      electrical: false,
+      structural: false,
+      painting: false,
+    })
   }
 
   const renderInput = (label: string, value: number, onChange: (value: number) => void) => (
-    <div className="space-y-1.5">
-      <Label htmlFor={label} className="text-sm font-medium text-foreground">
-        {translate(label)}
-      </Label>
+    <div>
+      <Label htmlFor={label}>{translate(label)}</Label>
       <Input
         id={label}
         type="number"
         value={value}
-        onChange={(e) => onChange(Number.parseInt(e.target.value) || 0)}
+        onChange={(e) => {
+          onChange(Number.parseInt(e.target.value, 10) || 0)
+          resetResults()
+        }}
         min="0"
-        className="h-10 border-border bg-background"
+        className="w-full mb-2"
       />
     </div>
   )
 
-  // Calculate breakdown for display
-  const getBreakdown = () => {
-    const numericArea = Number(area)
-    const quality = renovationQuality as "basic" | "midRange" | "premium"
-    const breakdown: { label: string; value: number; note?: string }[] = []
-    
-    const selectedCount = Object.values(categories).filter(Boolean).length
-    const isFullRenovation =
-      selectedCount >= 4 ||
-      (categories.bathroom && categories.kitchen && categories.flooring && categories.electrical)
-
-    if (isFullRenovation) {
-      breakdown.push({
-        label: isEnglish ? "Full Renovation" : "Ολική Ανακαίνιση",
-        value: numericArea * fullRenovationRates[quality],
-        note: isEnglish ? `${numericArea}m² x ${fullRenovationRates[quality]}€/m²` : `${numericArea}τ.μ. x ${fullRenovationRates[quality]}€/τ.μ.`
-      })
-    } else {
-      if (categories.bathroom) {
-        breakdown.push({
-          label: isEnglish ? "Bathroom" : "Μπάνιο",
-          value: bathrooms * renovationRates.bathroom[quality],
-          note: `${bathrooms} x ${formatCurrency(renovationRates.bathroom[quality])}`
-        })
-      }
-      if (categories.kitchen) {
-        breakdown.push({
-          label: isEnglish ? "Kitchen" : "Κουζίνα",
-          value: kitchens * renovationRates.kitchen[quality],
-          note: `${kitchens} x ${formatCurrency(renovationRates.kitchen[quality])}`
-        })
-      }
-      if (categories.flooring) {
-        breakdown.push({
-          label: isEnglish ? "Flooring" : "Δάπεδα",
-          value: numericArea * renovationRates.flooring[quality],
-          note: isEnglish ? `${numericArea}m² x ${renovationRates.flooring[quality]}€/m²` : `${numericArea}τ.μ. x ${renovationRates.flooring[quality]}€/τ.μ.`
-        })
-      }
-      if (categories.electrical) {
-        const electricalAreaFactor = rooms > 0 ? Math.max(1, rooms / 2) : 1
-        breakdown.push({
-          label: isEnglish ? "Electrical" : "Ηλεκτρολογικά",
-          value: numericArea * renovationRates.electrical[quality] * electricalAreaFactor,
-          note: isEnglish ? `${numericArea}m² x ${renovationRates.electrical[quality]}€/m²` : `${numericArea}τ.μ. x ${renovationRates.electrical[quality]}€/τ.μ.`
-        })
-      }
-      if (categories.structural) {
-        breakdown.push({
-          label: isEnglish ? "Structural" : "Δομικά",
-          value: numericArea * renovationRates.structural[quality],
-          note: isEnglish ? `${numericArea}m² x ${renovationRates.structural[quality]}€/m²` : `${numericArea}τ.μ. x ${renovationRates.structural[quality]}€/τ.μ.`
-        })
-      }
-      if (categories.painting) {
-        breakdown.push({
-          label: isEnglish ? "Painting" : "Βαφή",
-          value: numericArea * renovationRates.painting[quality],
-          note: isEnglish ? `${numericArea}m² x ${renovationRates.painting[quality]}€/m²` : `${numericArea}τ.μ. x ${renovationRates.painting[quality]}€/τ.μ.`
-        })
-      }
-    }
-
-    // Age adjustment
-    const ageMultiplier = getAgeMultiplier(buildingAge)
-    if (ageMultiplier !== 1) {
-      const subtotal = breakdown.reduce((sum, item) => sum + item.value, 0)
-      const adjustment = subtotal * (ageMultiplier - 1)
-      breakdown.push({
-        label: isEnglish ? "Age Adjustment" : "Προσαρμογή Παλαιότητας",
-        value: adjustment,
-        note: `+${Math.round((ageMultiplier - 1) * 100)}%`
-      })
-    }
-
-    // Size adjustment
-    const sizeMultiplier = getSizeMultiplier(numericArea)
-    if (sizeMultiplier !== 1) {
-      const subtotal = breakdown.reduce((sum, item) => sum + item.value, 0)
-      const adjustment = subtotal * (sizeMultiplier - 1)
-      breakdown.push({
-        label: isEnglish ? "Size Adjustment" : "Προσαρμογή Μεγέθους",
-        value: adjustment,
-        note: sizeMultiplier < 1 ? `-${Math.round((1 - sizeMultiplier) * 100)}%` : `+${Math.round((sizeMultiplier - 1) * 100)}%`
-      })
-    }
-
-    // Pool
-    if (poolType !== "none" && poolSize > 0) {
-      const poolRate = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][quality] || 0
-      if (poolRate > 0) {
-        breakdown.push({
-          label: isEnglish ? "Pool" : "Πισίνα",
-          value: poolRate * poolSize,
-          note: isEnglish ? `${poolSize}m² x ${poolRate}€/m²` : `${poolSize}τ.μ. x ${poolRate}€/τ.μ.`
-        })
-      }
-    }
-
-    return breakdown
-  }
-
-  // Results section component
-  const ResultsSection = () => {
-    const renovationCost = parseFloat(calculatedRenovationCost)
-    const windowsCostNum = parseFloat(windowsCost)
-    const totalCost = renovationCost + windowsCostNum
-    
-    const hasRenovationSelections = Object.values(categories).some(Boolean)
-    const hasWindowsSelections = windows > 0 || balconyDoors > 0 || interiorDoors > 0 || mainEntrance > 0
-    const breakdown = getBreakdown()
-
-    // Determine project type
-    const selectedCount = Object.values(categories).filter(Boolean).length
-    const isFullRenovation =
-      selectedCount >= 4 ||
-      (categories.bathroom && categories.kitchen && categories.flooring && categories.electrical)
-
-    return (
-      <div className="mt-6 space-y-4 animate-fade-in">
-        <div className="flex items-center gap-2 p-4 bg-green-50 border border-green-200 rounded-lg">
-          <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-          <p className="text-green-800 text-sm">
-            {isEnglish 
-              ? `Thank you ${contact.name}! Here is your personalized quote.`
-              : `Ευχαριστούμε ${contact.name}! Ιδού η εξατομικευμένη προσφορά σας.`}
-          </p>
-        </div>
-
-        {hasRenovationSelections && (
-          <div className="p-4 bg-muted rounded-lg border border-border">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-semibold text-primary">
-                {isEnglish ? "General Renovation" : "Γενική Ανακαίνιση"}
-              </h3>
-              <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">
-                {isFullRenovation 
-                  ? (isEnglish ? "Full Renovation" : "Ολική Ανακαίνιση")
-                  : (isEnglish ? "Partial Renovation" : "Μερική Ανακαίνιση")}
-              </span>
-            </div>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">{isEnglish ? "Area:" : "Εμβαδόν:"}</span>
-                <span className="font-medium">{area} {isEnglish ? "m²" : "τ.μ."}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">{isEnglish ? "Quality:" : "Ποιότητα:"}</span>
-                <span className="font-medium">{translate(renovationQuality)}</span>
-              </div>
-              
-              {/* Detailed Breakdown */}
-              <div className="border-t border-border pt-3 mt-3">
-                <p className="font-semibold text-foreground mb-2">
-                  {isEnglish ? "Detailed Breakdown:" : "Αναλυτική Ανάλυση:"}
-                </p>
-                <div className="space-y-2">
-                  {breakdown.map((item, index) => (
-                    <div key={index} className="flex justify-between items-start p-2 bg-background rounded">
-                      <div>
-                        <p className="font-medium text-foreground">{item.label}</p>
-                        {item.note && <p className="text-xs text-muted-foreground">{item.note}</p>}
-                      </div>
-                      <span className={`font-semibold ${item.value >= 0 ? 'text-foreground' : 'text-green-600'}`}>
-                        {item.value >= 0 ? formatCurrency(item.value) : `-${formatCurrency(Math.abs(item.value))}`}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="border-t border-border pt-2 mt-2">
-                <div className="flex justify-between text-base">
-                  <span className="font-semibold">{isEnglish ? "Renovation Cost:" : "Κόστος Ανακαίνισης:"}</span>
-                  <span className="font-bold text-primary">{formatCurrency(renovationCost)}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {hasWindowsSelections && (
-          <div className="p-4 bg-muted rounded-lg border border-border">
-            <h3 className="font-semibold text-primary mb-3">
-              {isEnglish ? "Doors & Windows" : "Πόρτες & Παράθυρα"}
-            </h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">{isEnglish ? "Material:" : "Υλικό:"}</span>
-                <span className="font-medium">{translate(material)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">{isEnglish ? "Quality:" : "Ποιότητα:"}</span>
-                <span className="font-medium">{translate(windowsQuality)}</span>
-              </div>
-              {windows > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">{isEnglish ? "Windows:" : "Παράθυρα:"}</span>
-                  <span className="font-medium">{windows}</span>
-                </div>
-              )}
-              {balconyDoors > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">{isEnglish ? "Balcony Doors:" : "Μπαλκονόπορτες:"}</span>
-                  <span className="font-medium">{balconyDoors}</span>
-                </div>
-              )}
-              {interiorDoors > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">{isEnglish ? "Interior Doors:" : "Εσωτερικές Πόρτες:"}</span>
-                  <span className="font-medium">{interiorDoors}</span>
-                </div>
-              )}
-              {mainEntrance > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">{isEnglish ? "Main Entrance:" : "Κεντρική Είσοδος:"}</span>
-                  <span className="font-medium">{mainEntrance}</span>
-                </div>
-              )}
-              <div className="border-t border-border pt-2 mt-2">
-                <div className="flex justify-between text-base">
-                  <span className="font-semibold">{isEnglish ? "Windows Cost:" : "Κόστος Κουφωμάτων:"}</span>
-                  <span className="font-bold text-primary">{formatCurrency(windowsCostNum)}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {(hasRenovationSelections || hasWindowsSelections) && (
-          <div className="p-5 bg-primary/10 rounded-lg border-2 border-primary">
-            <div className="flex justify-between items-center">
-              <span className="text-lg font-semibold text-primary">
-                {isEnglish ? "Total Estimated Cost:" : "Συνολικό Εκτιμώμενο Κόστος:"}
-              </span>
-              <span className="text-2xl font-bold text-primary">{formatCurrency(totalCost)}</span>
-            </div>
-          </div>
-        )}
-
-        <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-          <p className="text-amber-800 text-sm">
-            {isEnglish 
-              ? "This is an indicative estimate. The final cost may vary. We will contact you shortly for a detailed quote."
-              : "Η εκτίμηση είναι ενδεικτική. Το τελικό κόστος μπορεί να διαφέρει. Θα επικοινωνήσουμε μαζί σας σύντομα για αναλυτική προσφορά."}
-          </p>
-        </div>
-
-        <Button 
-          onClick={handleReset}
-          variant="outline"
-          className="w-full h-11 border-border"
-        >
-          {isEnglish ? "Calculate Again" : "Νέος Υπολογισμός"}
-        </Button>
-      </div>
-    )
-  }
-
-  // Contact form component
+  // Contact Form Component
   const ContactForm = () => (
-    <div className="mt-6 p-5 bg-muted rounded-lg border border-border animate-fade-in">
-      <h3 className="text-lg font-semibold text-primary mb-2">
-        {isEnglish ? "See Your Results" : "Δείτε τα Αποτελέσματα"}
+    <div className="mt-4 p-4 bg-muted rounded-lg border border-border">
+      <h3 className="font-semibold text-primary mb-4 text-center">
+        {isEnglish ? "Enter your details to see the results" : "Συμπληρώστε τα στοιχεία σας για να δείτε τα αποτελέσματα"}
       </h3>
-      <p className="text-sm text-muted-foreground mb-4">
-        {isEnglish 
-          ? "Enter your details to see the cost estimate for your project."
-          : "Συμπληρώστε τα στοιχεία σας για να δείτε την εκτίμηση κόστους του έργου σας."}
-      </p>
-
-      <form onSubmit={handleContactSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="contact-name" className="text-sm font-medium text-foreground flex items-center gap-2">
+      <div className="space-y-3">
+        <div>
+          <Label htmlFor="contact-name" className="flex items-center gap-2">
             <User className="w-4 h-4" />
-            {isEnglish ? "Full Name" : "Ονοματεπώνυμο"} *
+            {isEnglish ? "Full Name" : "Ονοματεπώνυμο"}
           </Label>
           <Input
             id="contact-name"
             type="text"
             value={contact.name}
-            onChange={(e) => setContact((prev) => ({ ...prev, name: e.target.value }))}
-            placeholder={isEnglish ? "John Doe" : "Γιάννης Παπαδόπουλος"}
-            className="h-11 border-border bg-background"
-            disabled={isSubmitting}
+            onChange={(e) => setContact({ ...contact, name: e.target.value })}
+            placeholder={isEnglish ? "Enter your full name" : "Εισάγετε το ονοματεπώνυμό σας"}
+            className="w-full"
           />
         </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="contact-email" className="text-sm font-medium text-foreground flex items-center gap-2">
+        <div>
+          <Label htmlFor="contact-email" className="flex items-center gap-2">
             <Mail className="w-4 h-4" />
-            Email *
+            Email
           </Label>
           <Input
             id="contact-email"
             type="email"
             value={contact.email}
-            onChange={(e) => setContact((prev) => ({ ...prev, email: e.target.value }))}
-            placeholder={isEnglish ? "john@example.com" : "giannis@example.com"}
-            className="h-11 border-border bg-background"
-            disabled={isSubmitting}
+            onChange={(e) => setContact({ ...contact, email: e.target.value })}
+            placeholder={isEnglish ? "Enter your email" : "Εισάγετε το email σας"}
+            className="w-full"
           />
         </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="contact-phone" className="text-sm font-medium text-foreground flex items-center gap-2">
+        <div>
+          <Label htmlFor="contact-phone" className="flex items-center gap-2">
             <Phone className="w-4 h-4" />
-            {isEnglish ? "Phone" : "Τηλέφωνο"} *
+            {isEnglish ? "Phone" : "Τηλέφωνο"}
           </Label>
           <Input
             id="contact-phone"
             type="tel"
             value={contact.phone}
-            onChange={(e) => setContact((prev) => ({ ...prev, phone: e.target.value }))}
-            placeholder="+30 694 123 4567"
-            className="h-11 border-border bg-background"
-            disabled={isSubmitting}
+            onChange={(e) => setContact({ ...contact, phone: e.target.value })}
+            placeholder={isEnglish ? "Enter your phone number" : "Εισάγετε το τηλέφωνό σας"}
+            className="w-full"
           />
         </div>
+        <Button
+          onClick={handleContactSubmit}
+          disabled={isSubmitting || !contact.name || !contact.email || !contact.phone}
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              {isEnglish ? "Submitting..." : "Υποβολή..."}
+            </>
+          ) : (
+            isEnglish ? "See Results" : "Δείτε τα Αποτελέσματα"
+          )}
+        </Button>
+      </div>
+    </div>
+  )
 
-        {errorMessage && (
-          <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
-            {errorMessage}
-          </div>
-        )}
+  // Results Component - Only shown after contact submission
+  const ResultsDisplay = () => (
+    <div className="mt-4 space-y-4 animate-fade-in">
+      <div className="flex items-center gap-2 p-4 bg-green-50 border border-green-200 rounded-lg">
+        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+        <p className="text-green-800 text-sm">
+          {isEnglish
+            ? `Thank you ${contact.name}! Here is your personalized quote.`
+            : `Ευχαριστούμε ${contact.name}! Ιδού η εξατομικευμένη προσφορά σας.`}
+        </p>
+      </div>
 
-        <div className="flex gap-3 pt-2">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handleReset}
-            disabled={isSubmitting}
-            className="flex-1 h-11 border-border"
-          >
-            {isEnglish ? "Back" : "Πίσω"}
-          </Button>
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="flex-1 h-11 bg-primary hover:bg-primary/90 text-primary-foreground"
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                {isEnglish ? "Loading..." : "Φόρτωση..."}
-              </>
-            ) : (
-              isEnglish ? "See Results" : "Δείτε τα Αποτελέσματα"
-            )}
-          </Button>
+      {renovationCost && Number(renovationCost) > 0 && (
+        <div className="p-4 bg-muted rounded-lg border border-border text-center">
+          <p className="text-sm text-muted-foreground mb-1">
+            {isEnglish ? "General Renovation:" : "Γενική Ανακαίνιση:"}
+          </p>
+          <p className="text-2xl font-bold text-primary">
+            {isEnglish ? `€${Number(renovationCost).toLocaleString()}` : `${Number(renovationCost).toLocaleString()}€`}
+          </p>
+          {renovationRange && (
+            <p className="text-sm text-muted-foreground mt-1">
+              {translate("Estimated Range:")}{" "}
+              {isEnglish
+                ? `€${renovationRange.min.toLocaleString(undefined, {maximumFractionDigits: 0})} - €${renovationRange.max.toLocaleString(undefined, {maximumFractionDigits: 0})}`
+                : `${renovationRange.min.toLocaleString(undefined, {maximumFractionDigits: 0})}€ - ${renovationRange.max.toLocaleString(undefined, {maximumFractionDigits: 0})}€`}
+            </p>
+          )}
         </div>
-      </form>
+      )}
+
+      {windowsCost && Number(windowsCost) > 0 && (
+        <div className="p-4 bg-muted rounded-lg border border-border text-center">
+          <p className="text-sm text-muted-foreground mb-1">
+            {isEnglish ? "Doors & Windows:" : "Πόρτες & Παράθυρα:"}
+          </p>
+          <p className="text-2xl font-bold text-primary">
+            {isEnglish ? `€${Number(windowsCost).toLocaleString()}` : `${Number(windowsCost).toLocaleString()}€`}
+          </p>
+          {windowsRange && (
+            <p className="text-sm text-muted-foreground mt-1">
+              {translate("Estimated Range:")}{" "}
+              {isEnglish
+                ? `€${windowsRange.min.toLocaleString(undefined, {maximumFractionDigits: 0})} - €${windowsRange.max.toLocaleString(undefined, {maximumFractionDigits: 0})}`
+                : `${windowsRange.min.toLocaleString(undefined, {maximumFractionDigits: 0})}€ - ${windowsRange.max.toLocaleString(undefined, {maximumFractionDigits: 0})}€`}
+            </p>
+          )}
+        </div>
+      )}
+
+      {totalCost && totalRange && (renovationCost && windowsCost) && (
+        <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 text-center">
+          <p className="text-lg font-bold text-foreground">{translate("Total Estimated Cost:")}</p>
+          <p className="text-3xl font-bold text-primary">
+            {isEnglish ? `€${Number(totalCost).toLocaleString()}` : `${Number(totalCost).toLocaleString()}€`}
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            {translate("Total Estimated Range:")}{" "}
+            {isEnglish
+              ? `€${totalRange.min.toLocaleString(undefined, {maximumFractionDigits: 0})} - €${totalRange.max.toLocaleString(undefined, {maximumFractionDigits: 0})}`
+              : `${totalRange.min.toLocaleString(undefined, {maximumFractionDigits: 0})}€ - ${totalRange.max.toLocaleString(undefined, {maximumFractionDigits: 0})}€`}
+          </p>
+        </div>
+      )}
+
+      <div className="flex gap-2">
+        <Button
+          onClick={handleNewCalculation}
+          variant="outline"
+          className="flex-1"
+        >
+          {isEnglish ? "New Calculation" : "Νέος Υπολογισμός"}
+        </Button>
+        <Button
+          onClick={() => (window.location.href = isEnglish ? "/en/appointment" : "/el/appointment")}
+          className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+        >
+          {translate("Request a Quote")}
+        </Button>
+      </div>
     </div>
   )
 
   return (
-    <div className="bg-background p-6 rounded-lg shadow-md max-w-md mx-auto border border-border">
-      <h2 className="text-2xl font-bold mb-6 text-primary">
-        {translate("Renovation Cost Calculator")}
-      </h2>
+    <div className="calculator mx-auto max-w-md rounded-lg bg-background p-6 shadow-md border border-border">
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <h2 className="text-2xl font-bold text-primary">{translate("Renovation Cost Calculator")}</h2>
+        <Image
+          src="/images/logo.png"
+          alt="Faiacon Logo"
+          width={80}
+          height={40}
+          className="object-contain"
+        />
+      </div>
 
-      {showResults ? (
-        <ResultsSection />
-      ) : showContactForm ? (
-        <ContactForm />
-      ) : (
-        <>
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6 h-10 bg-muted p-1">
-              <TabsTrigger 
-                value="renovation" 
-                className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm"
-              >
-                {translate("General Renovation")}
-              </TabsTrigger>
-              <TabsTrigger 
-                value="windows" 
-                className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm"
-              >
-                {translate("Doors & Windows")}
-              </TabsTrigger>
-            </TabsList>
+      <p className="mb-4 text-lg text-muted-foreground">{translate("Calculate your renovation cost in 1 minute!")}</p>
 
-            <TabsContent value="renovation" className="space-y-4">
-              <div className="space-y-1.5">
-                <Label htmlFor="area" className="text-sm font-medium text-foreground">
-                  {isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}
-                </Label>
+      <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); resetResults(); }} className="w-full">
+        <TabsList className="mb-4 grid w-full grid-cols-2 bg-muted">
+          <TabsTrigger value="renovation" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            {translate("General Renovation")}
+          </TabsTrigger>
+          <TabsTrigger value="windows" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            {translate("Doors & Windows")}
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="renovation" className="space-y-4">
+          {!showContactForm && !showResults && (
+            <>
+              <p className="leading-relaxed text-sm text-muted-foreground">
+                {isEnglish
+                  ? "If you dream of building or renovating your home or business space, we can guide you from concept to completion with realistic cost estimates and quality solutions."
+                  : "Αν ονειρεύεστε να χτίσετε ή να ανακαινίσετε το σπίτι ή τον επαγγελματικό σας χώρο, μπορούμε να σας καθοδηγήσουμε από τη μελέτη έως την ολοκλήρωση με ρεαλιστικές εκτιμήσεις κόστους και ποιοτικές λύσεις."}
+              </p>
+
+              <div>
+                <Label htmlFor="area">{isEnglish ? "Area (m²)" : "Εμβαδόν (τ.μ.)"}</Label>
                 <Input
                   id="area"
                   type="number"
                   value={area}
-                  onChange={(e) => setArea(e.target.value)}
+                  onChange={(e) => {
+                    setArea(e.target.value)
+                    resetResults()
+                  }}
                   min="1"
-                  className="h-10 border-border bg-background"
+                  className="w-full mb-2"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="bathrooms" className="text-sm font-medium text-foreground">
-                  {isEnglish ? "Bathrooms" : "Μπάνια"}
-                </Label>
+              <div>
+                <Label htmlFor="bathrooms">{isEnglish ? "Bathrooms" : "Μπάνια"}</Label>
                 <Input
                   id="bathrooms"
                   type="number"
                   value={bathrooms}
-                  onChange={(e) => setBathrooms(Number(e.target.value))}
+                  onChange={(e) => {
+                    setBathrooms(Number(e.target.value) || 0)
+                    resetResults()
+                  }}
                   min="0"
-                  className="h-10 border-border bg-background"
+                  className="w-full mb-2"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="kitchens" className="text-sm font-medium text-foreground">
-                  {isEnglish ? "Kitchens" : "Κουζίνες"}
-                </Label>
+              <div>
+                <Label htmlFor="kitchens">{isEnglish ? "Kitchens" : "Κουζίνες"}</Label>
                 <Input
                   id="kitchens"
                   type="number"
                   value={kitchens}
-                  onChange={(e) => setKitchens(Number(e.target.value))}
+                  onChange={(e) => {
+                    setKitchens(Number(e.target.value) || 0)
+                    resetResults()
+                  }}
                   min="0"
-                  className="h-10 border-border bg-background"
+                  className="w-full mb-2"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="rooms" className="text-sm font-medium text-foreground">
-                  {isEnglish ? "Rooms" : "Δωμάτια"}
-                </Label>
+              <div>
+                <Label htmlFor="rooms">{isEnglish ? "Rooms" : "Δωμάτια"}</Label>
                 <Input
                   id="rooms"
                   type="number"
                   value={rooms}
-                  onChange={(e) => setRooms(Number(e.target.value))}
+                  onChange={(e) => {
+                    setRooms(Number(e.target.value) || 0)
+                    resetResults()
+                  }}
                   min="0"
-                  className="h-10 border-border bg-background"
+                  className="w-full mb-2"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="buildingAge" className="text-sm font-medium text-foreground">
-                  {isEnglish ? "Building Year" : "Έτος Κατασκευής"}
-                </Label>
+              <div>
+                <Label htmlFor="buildingAge">{isEnglish ? "Building Year" : "Έτος Κατασκευής"}</Label>
                 <Input
                   id="buildingAge"
                   type="number"
                   value={buildingAge}
-                  onChange={(e) => setBuildingAge(Number(e.target.value))}
+                  onChange={(e) => {
+                    setBuildingAge(Number(e.target.value) || new Date().getFullYear())
+                    resetResults()
+                  }}
                   min="1900"
-                  max="2024"
-                  className="h-10 border-border bg-background"
+                  max={new Date().getFullYear().toString()}
+                  className="w-full mb-2"
                 />
               </div>
 
-              <div className="space-y-1.5 relative z-30">
-                <Label className="text-sm font-medium text-foreground">
-                  {isEnglish ? "Pool Type" : "Τύπος Πισίνας"}
-                </Label>
+              <div className="relative z-30">
+                <Label>{isEnglish ? "Pool Type" : "Τύπος Πισίνας"}</Label>
                 <Select
                   value={poolType}
-                  onValueChange={(value) => setPoolType(value as "none" | "concrete" | "polyester" | "liner")}
+                  onValueChange={(value) => {
+                    setPoolType(value as PoolType)
+                    resetResults()
+                  }}
                 >
-                  <SelectTrigger className="h-10 w-full border-border bg-background">
+                  <SelectTrigger className="mb-2 w-full whitespace-nowrap overflow-hidden bg-background">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background border-border">
-                    <SelectItem value="none">{isEnglish ? "None" : "Καμία"}</SelectItem>
-                    <SelectItem value="concrete">{isEnglish ? "Concrete" : "Μπετόν"}</SelectItem>
-                    <SelectItem value="polyester">{isEnglish ? "Polyester" : "Πολυεστερική"}</SelectItem>
-                    <SelectItem value="liner">{isEnglish ? "Liner" : "Με επένδυση"}</SelectItem>
+                  <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background">
+                    <SelectItem value="none">{translate("None")}</SelectItem>
+                    <SelectItem value="concrete">{translate("Concrete")}</SelectItem>
+                    <SelectItem value="polyester">{translate("Polyester")}</SelectItem>
+                    <SelectItem value="liner">{translate("Liner")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {poolType !== "none" && (
-                <div className="space-y-1.5">
-                  <Label htmlFor="poolSize" className="text-sm font-medium text-foreground">
-                    {isEnglish ? "Pool Size (m²)" : "Μέγεθος Πισίνας (τ.μ.)"}
-                  </Label>
+                <div>
+                  <Label htmlFor="poolSize">{isEnglish ? "Pool Size (m²)" : "Μέγεθος Πισίνας (τ.μ.)"}</Label>
                   <Input
                     id="poolSize"
                     type="number"
                     value={poolSize}
-                    onChange={(e) => setPoolSize(Number(e.target.value))}
+                    onChange={(e) => {
+                      setPoolSize(Number(e.target.value) || 0)
+                      resetResults()
+                    }}
                     min="1"
-                    max="50"
-                    className="h-10 border-border bg-background"
+                    max="100"
+                    className="w-full mb-2"
                   />
                 </div>
               )}
 
-              <div className="space-y-3 relative z-10">
-                <Label className="text-sm font-medium text-foreground">
-                  {isEnglish ? "Categories" : "Κατηγορίες"}
-                </Label>
-                {Object.entries(categories).map(([key, value]) => {
-                  const categoryIcons: Record<string, React.ReactNode> = {
-                    bathroom: <Bath className="w-4 h-4 text-primary" />,
-                    kitchen: <ChefHat className="w-4 h-4 text-primary" />,
-                    flooring: <Layers className="w-4 h-4 text-primary" />,
-                    electrical: <Zap className="w-4 h-4 text-primary" />,
-                    structural: <Building2 className="w-4 h-4 text-primary" />,
-                    painting: <Paintbrush className="w-4 h-4 text-primary" />,
-                  }
-                  const categoryLabels: Record<string, string> = {
-                    bathroom: "Μπάνιο",
-                    kitchen: "Κουζίνα",
-                    flooring: "Δάπεδα",
-                    electrical: "Ηλεκτρολογικά",
-                    structural: "Δομικά",
-                    painting: "Βαφή",
-                  }
-                  return (
-                    <div key={key} className="flex items-center gap-3">
-                      <Checkbox
-                        id={key}
-                        checked={value}
-                        onCheckedChange={(checked) => {
-                          setCategories((prev) => ({ ...prev, [key]: checked === true }))
-                        }}
-                        className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                      />
-                      {categoryIcons[key]}
-                      <Label htmlFor={key} className="cursor-pointer text-sm text-foreground">
-                        {isEnglish ? key.charAt(0).toUpperCase() + key.slice(1) : categoryLabels[key]}
-                      </Label>
+              <div className="relative z-10">
+                <Label>{translate("Categories")}</Label>
+                <div className="space-y-2 mt-2">
+                  {[
+                    { key: "bathroom", icon: Bath, label: translate("Bathroom") },
+                    { key: "kitchen", icon: UtensilsCrossed, label: translate("Kitchen") },
+                    { key: "flooring", icon: Layers, label: translate("Flooring") },
+                    { key: "electrical", icon: Plug, label: translate("Electrical") },
+                    { key: "structural", icon: Building, label: translate("Structural") },
+                    { key: "painting", icon: Paintbrush, label: translate("Painting") },
+                  ].map(({ key, icon: Icon, label }) => (
+                    <div 
+                      key={key} 
+                      className={`p-3 rounded-lg border transition-colors cursor-pointer ${
+                        categories[key as keyof typeof categories] 
+                          ? "border-primary bg-primary/5" 
+                          : "border-border bg-background hover:bg-muted"
+                      }`}
+                      onClick={() => {
+                        setCategories((prev) => ({ ...prev, [key]: !prev[key as keyof typeof categories] }))
+                        resetResults()
+                      }}
+                    >
+                      <div className="flex items-start space-x-3">
+                        <Checkbox
+                          id={key}
+                          checked={categories[key as keyof typeof categories]}
+                          onCheckedChange={(checked) => {
+                            setCategories((prev) => ({ ...prev, [key]: checked === true }))
+                            resetResults()
+                          }}
+                          className="mt-0.5"
+                        />
+                        <Icon className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                        <div className="flex-1">
+                          <Label htmlFor={key} className="font-medium cursor-pointer">{label}</Label>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {isEnglish 
+                              ? categoryDescriptions[key as keyof typeof categoryDescriptions].en
+                              : categoryDescriptions[key as keyof typeof categoryDescriptions].el}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  )
-                })}
+                  ))}
+                </div>
               </div>
 
-              <div className="space-y-1.5 relative z-30">
-                <Label className="text-sm font-medium text-foreground">
-                  {isEnglish ? "Quality" : "Ποιότητα"}
-                </Label>
+              <div className="relative z-30">
+                <Label>{translate("Quality")}</Label>
                 <Select
                   value={renovationQuality}
-                  onValueChange={(value) => setRenovationQuality(value as "basic" | "midRange" | "premium")}
+                  onValueChange={(value) => {
+                    setRenovationQuality(value as Quality)
+                    resetResults()
+                  }}
                 >
-                  <SelectTrigger className="h-10 w-full border-border bg-background">
+                  <SelectTrigger className="mb-2 w-full whitespace-nowrap overflow-hidden bg-background">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background border-border">
+                  <SelectContent position="popper" sideOffset={5} className="z-[100] bg-background">
                     {poolType !== "liner" && poolType !== "polyester" && (
-                      <SelectItem value="basic">{isEnglish ? "Basic" : "Βασική"}</SelectItem>
+                      <SelectItem value="basic">{translate("Basic")}</SelectItem>
                     )}
                     {poolType !== "polyester" && (
-                      <SelectItem value="midRange">{isEnglish ? "Mid-Range" : "Μεσαία"}</SelectItem>
+                      <SelectItem value="midRange">{translate("Mid-Range")}</SelectItem>
                     )}
-                    <SelectItem value="premium">{isEnglish ? "Premium" : "Premium"}</SelectItem>
+                    <SelectItem value="premium">{translate("Premium")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
-              <Button 
-                onClick={handleGetQuote}
-                className="w-full h-11 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
-              >
+              <Button onClick={handleGetQuote} className="mt-4 w-full bg-primary text-primary-foreground hover:bg-primary/90">
                 {translate("Get Quote")}
               </Button>
-            </TabsContent>
 
-            <TabsContent value="windows" className="space-y-4">
+              <div className="rounded-xl bg-muted p-6 mt-4">
+                <h3 className="mb-4 text-xl font-bold text-primary">{translate("Why work with us?")}</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">{translate("Top Quality Products & Materials")}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {isEnglish
+                          ? "We use durable materials and practical construction methods that balance quality, aesthetics, and long-term value."
+                          : "Χρησιμοποιούμε ανθεκτικά υλικά και πρακτικές κατασκευαστικές λύσεις που ισορροπούν ποιότητα, αισθητική και μακροχρόνια αξία."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-xl bg-primary/5 p-6">
+                <h3 className="mb-3 text-xl font-bold text-primary">
+                  {translate("Let us transform your vision into reality")}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {isEnglish
+                    ? "With a focus on innovation, precision, and affordability, we design and build spaces that fit your needs and style."
+                    : "Με γνώμονα την καινοτομία, την ακρίβεια και την προσιτή τιμή, σχεδιάζουμε και κατασκευάζουμε χώρους που ταιριάζουν στις ανάγκες και το στυλ σας."}
+                </p>
+              </div>
+
+              <p className="text-center text-muted-foreground">{translate("Modern solutions for the ideal pool")}</p>
+            </>
+          )}
+
+          {showContactForm && !contactSubmitted && <ContactForm />}
+          {contactSubmitted && showResults && <ResultsDisplay />}
+        </TabsContent>
+
+        <TabsContent value="windows" className="space-y-4">
+          {!showContactForm && !showResults && (
+            <>
               {renderInput("Windows", windows, setWindows)}
               {renderInput("Balcony Doors", balconyDoors, setBalconyDoors)}
               {renderInput("Interior Doors", interiorDoors, setInteriorDoors)}
               {renderInput("Main Entrance", mainEntrance, setMainEntrance)}
 
-              <div className="space-y-1.5">
-                <Label className="text-sm font-medium text-foreground">{translate("Material")}</Label>
-                <Select value={material} onValueChange={(value) => setMaterial(value as Material)}>
-                  <SelectTrigger className="h-10 border-border bg-background">
+              <div>
+                <Label>{translate("Material")}</Label>
+                <Select
+                  value={material}
+                  onValueChange={(value) => {
+                    setMaterial(value as Material)
+                    resetResults()
+                  }}
+                >
+                  <SelectTrigger className="mb-2 bg-background">
                     <SelectValue>{isEnglish ? material.toUpperCase() : translate(material)}</SelectValue>
                   </SelectTrigger>
-                  <SelectContent className="bg-background border-border">
+                  <SelectContent className="bg-background">
                     {materialOptions.map((m) => (
                       <SelectItem key={m} value={m}>
                         {isEnglish ? m.toUpperCase() : translate(m)}
@@ -964,13 +877,19 @@ export function RenovationCostCalculator() {
                 </Select>
               </div>
 
-              <div className="space-y-1.5">
-                <Label className="text-sm font-medium text-foreground">{translate("Quality")}</Label>
-                <Select value={windowsQuality} onValueChange={(value) => setWindowsQuality(value as Quality)}>
-                  <SelectTrigger className="h-10 border-border bg-background">
+              <div>
+                <Label>{translate("Quality")}</Label>
+                <Select
+                  value={windowsQuality}
+                  onValueChange={(value) => {
+                    setWindowsQuality(value as Quality)
+                    resetResults()
+                  }}
+                >
+                  <SelectTrigger className="mb-2 bg-background">
                     <SelectValue>{isEnglish ? windowsQuality.toUpperCase() : translate(windowsQuality)}</SelectValue>
                   </SelectTrigger>
-                  <SelectContent className="bg-background border-border">
+                  <SelectContent className="bg-background">
                     {qualityOptions.map((q) => (
                       <SelectItem key={q} value={q}>
                         {isEnglish ? q.toUpperCase() : translate(q)}
@@ -980,16 +899,19 @@ export function RenovationCostCalculator() {
                 </Select>
               </div>
 
-              <Button 
-                onClick={handleGetQuote}
-                className="w-full h-11 mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
-              >
+              <Button onClick={handleWindowsGetQuote} className="mt-4 w-full bg-primary text-primary-foreground hover:bg-primary/90">
                 {translate("Get Quote")}
               </Button>
-            </TabsContent>
-          </Tabs>
-        </>
-      )}
+            </>
+          )}
+
+          {showContactForm && !contactSubmitted && <ContactForm />}
+          {contactSubmitted && showResults && <ResultsDisplay />}
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
+
+// Also export as named export for backwards compatibility
+export { RenovationCostCalculator }
