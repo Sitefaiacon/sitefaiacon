@@ -16,6 +16,7 @@ const navItems = [
   { href: "/listed-houses", label: "Διατηρητέα Κτίρια", labelEn: "Listed Houses" },
   { href: "/pool-construction", label: "Κατασκευή Πισίνας", labelEn: "Pool Construction" },
   { href: "/our-projects", label: "Τα Έργα μας", labelEn: "Our Projects" },
+  { href: "/careers", label: "Αναζήτηση Προσωπικού", labelEn: "Careers" },
   { href: "/appointment", label: "Κλείστε Ραντεβού", labelEn: "Book Appointment" },
 ]
 
