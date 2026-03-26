@@ -122,7 +122,6 @@ interface FormState {
   languages: string
   startDate: string
   workDuration: string
-  expectedSalary: string
   canWorkFullTime: YesNo
   physicalWork: YesNo
   teamWork: YesNo
@@ -141,7 +140,7 @@ const initialForm: FormState = {
   workType: "", experienceLevel: "", position: "", positionOther: "",
   yearsExperience: "", previousExperience: "", workDoneTypes: [],
   hasLicense: "", hasVehicle: "", legalToWork: "",
-  languages: "", startDate: "", workDuration: "", expectedSalary: "",
+  languages: "", startDate: "", workDuration: "",
   canWorkFullTime: "", physicalWork: "", teamWork: "", customerFacing: "",
   isStudent: "", studentAvailability: "",
   cvFileName: "", comments: "", privacyConsent: false, website: "",
@@ -476,20 +475,15 @@ export default function CareersPage() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="startDate">Διαθέσιμος/η από</Label>
-                  <Input id="startDate" type="date" value={form.startDate} onChange={(e) => set("startDate", e.target.value)} className="w-full border border-input rounded-md px-3 py-2 text-sm" />
-                </div>
-                <div>
-                  <Label>Επιθυμητή διάρκεια εργασίας</Label>
-                  <NativeSelect value={form.workDuration} onChange={(v) => set("workDuration", v)} options={DURATIONS} placeholder="Επιλέξτε..." />
-                </div>
-              </div>
-
               <div>
-                <Label htmlFor="expectedSalary">Αναμενόμενες αποδοχές (προαιρετικό)</Label>
-                <Input id="expectedSalary" value={form.expectedSalary} onChange={(e) => set("expectedSalary", e.target.value)} placeholder="π.χ. 80€/ημέρα" className="w-full border border-input rounded-md px-3 py-2 text-sm" />
+                <Label htmlFor="startDate">Διαθέσιμος/η από</Label>
+                <Input id="startDate" type="date" value={form.startDate} onChange={(e) => set("startDate", e.target.value)} className="w-full border border-input rounded-md px-3 py-2 text-sm" />
               </div>
+              <div>
+                <Label>Επιθυμητή διάρκεια εργασίας</Label>
+                <NativeSelect value={form.workDuration} onChange={(v) => set("workDuration", v)} options={DURATIONS} placeholder="Επιλέξτε..." />
+              </div>
+            </div>
             </fieldset>
 
             {/* Availability & Fit */}

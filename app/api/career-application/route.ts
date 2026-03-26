@@ -50,7 +50,6 @@ export async function POST(req: NextRequest) {
     const languages = sanitize(body.languages)
     const startDate = sanitize(body.startDate)
     const workDuration = sanitize(body.workDuration)
-    const expectedSalary = sanitize(body.expectedSalary)
     const canWorkFullTime = body.canWorkFullTime === "yes" ? "Ναι" : "Όχι"
     const physicalWork = body.physicalWork === "yes" ? "Ναι" : "Όχι"
     const teamWork = body.teamWork === "yes" ? "Ναι" : "Όχι"
@@ -100,7 +99,6 @@ export async function POST(req: NextRequest) {
             <tr style="background:#fff;"><td style="padding:4px 8px; font-weight:bold;">Γλώσσες</td><td>${languages || "-"}</td></tr>
             <tr><td style="padding:4px 8px; font-weight:bold;">Διαθέσιμος από</td><td>${startDate || "-"}</td></tr>
             <tr style="background:#fff;"><td style="padding:4px 8px; font-weight:bold;">Επιθυμητή διάρκεια</td><td>${workDuration}</td></tr>
-            <tr><td style="padding:4px 8px; font-weight:bold;">Αναμενόμενες αποδοχές</td><td>${expectedSalary || "-"}</td></tr>
           </table>
 
           <h3 style="color:#1e3771; border-bottom:2px solid #1e3771; padding-bottom:6px; margin-top:20px;">Διαθεσιμότητα & Καταλληλότητα</h3>
