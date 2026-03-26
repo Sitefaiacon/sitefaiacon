@@ -344,10 +344,10 @@ function generateEmailHTML(lead: CalculatorLead): string {
               </div>
             </td>
             
-            <!-- Right Column: Πόρτες & Παράθυρα -->
+            <!-- Right Column: Κουφώματα -->
             <td style="width: 48%; vertical-align: top; padding-left: 15px; ${windows.windowsCost > 0 ? '' : 'opacity: 0.5;'}">
               <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; height: 100%;">
-                <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Πόρτες & Παράθυρα</h2>
+                <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Κουφώματα</h2>
                 ${windows.windowsCost > 0 ? `
                 <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 12px;">
                   <tr style="background-color: #e9ecef;">

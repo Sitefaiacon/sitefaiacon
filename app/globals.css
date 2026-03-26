@@ -31,9 +31,24 @@
     @apply min-h-screen text-base;
   }
 
-  /* Add this new class */
-  .text-justify-content {
+  /* Paragraphs and descriptive text with full justification */
+  p, .text-body, li, span:not(.text-center), div.description {
     @apply text-justify;
+  }
+
+  /* Override for elements that need left alignment */
+  input, textarea, select, label {
+    @apply text-left;
+  }
+  
+  /* Headings and key statements stay centered */
+  h1, h2, h3, h4, h5, h6, button, .text-center, .hero-text, .section-title, .card-title {
+    text-align: center !important;
+  }
+  
+  /* Small text elements stay as-is */
+  .text-sm, .text-xs, time, code {
+    text-align: inherit;
   }
 
   .section-primary {
