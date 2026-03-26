@@ -46,13 +46,6 @@ export function SiteHeader() {
     >
       <div className="max-w-[1800px] mx-auto px-4">
         <div className="flex items-center h-16">
-          <Link
-            href={`/${lang}`}
-            className="font-serif text-2xl font-bold text-white tracking-tight hover:text-secondary transition-colors mr-8"
-          >
-            ΦαιάCon
-          </Link>
-
           <nav className="hidden lg:flex items-center justify-center flex-1">
             {navItems.map((item) => (
               <Link
