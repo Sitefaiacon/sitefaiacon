@@ -9,12 +9,14 @@ import { useLanguage } from "../contexts/language-context"
 import { usePathname } from "next/navigation"
 
 const servicesItems = [
-  { href: "/services/hotel-construction-renovation", label: "Κατασκευή & Ανακαίνιση Ξενοδοχειακών Μονάδων", labelEn: "Hotel Construction & Renovation" },
-  { href: "/services/villa-luxury-home-construction", label: "Κατασκευή και Ανακαίνιση Βιλών", labelEn: "Villa Construction & Renovation" },
+  { href: "/services/hotel-construction-renovation", label: "Ξενοδοχειακές Μονάδες", labelEn: "Hotel Units" },
+  { href: "/services/villa-luxury-home-construction", label: "Βίλες & Πολυτελείς Κατοικίες", labelEn: "Villas & Luxury Homes" },
   { href: "/house-construction", label: "Κατασκευή Σπιτιού", labelEn: "House Construction" },
   { href: "/house-renovation", label: "Ανακαίνιση Σπιτιού", labelEn: "House Renovation" },
-  { href: "/listed-houses", label: "Διατηρητέα Κτίρια", labelEn: "Listed Houses" },
+  { href: "/listed-houses", label: "Διατηρητέα Κτίρια", labelEn: "Listed Buildings" },
   { href: "/pool-construction", label: "Κατασκευή Πισίνας", labelEn: "Pool Construction" },
+  { href: "/services/thermoprosopsi", label: "Θερμοπρόσοψη", labelEn: "Thermoprosopsi" },
+  { href: "/services/vapsimata-elaiokromatismoi", label: "Βαψίματα & Ελαιοχρωματισμοί", labelEn: "Painting & Decorating" },
 ]
 
 const navItems = [
@@ -60,8 +62,6 @@ export function SiteHeader() {
   }, [])
 
   const isServiceActive = servicesItems.some(item => pathname === `/${lang}${item.href}`)
-  
-  console.log("[v0] servicesItems count:", servicesItems.length, servicesItems.map(i => i.label))
 
   return (
     <header
