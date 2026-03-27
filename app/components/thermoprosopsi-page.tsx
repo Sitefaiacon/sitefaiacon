@@ -221,7 +221,7 @@ export default function ThermoprosopsiPage() {
             </Link>
             <span>/</span>
             <span className="text-primary font-medium">
-              {isEnglish ? "Thermoprosopsi" : "Θερμοπρόσοψη"}
+              {isEnglish ? "Insulation Wall" : "Θερμοπρόσοψη"}
             </span>
           </nav>
         </div>
@@ -233,7 +233,7 @@ export default function ThermoprosopsiPage() {
         <div className="relative z-10 container px-4 max-w-6xl mx-auto">
           <AnimatedSection className="text-center space-y-8">
             <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "Thermoprosopsi" : "Θερμοπρόσοψη"}
+              {isEnglish ? "Insulation Wall" : "Θερμοπρόσοψη"}
             </h1>
             <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg font-light">
               {isEnglish
@@ -379,7 +379,7 @@ export default function ThermoprosopsiPage() {
                 title: isEnglish ? "Specialized Execution Teams" : "Εξειδικευμένα Συνεργεία Εκτέλεσης",
                 desc: isEnglish
                   ? "Our teams have dedicated experience in thermoprosopsi application, ensuring precise workmanship at every layer of the system."
-                  : "Τα συνεργεία μας διαθέτουν εξειδικευμένη εμπειρία στην εφαρμογή θερμοπρόσοψης, διασφαλίζοντας ακριβή τεχνική σε κάθε στρώση του συστήματος.",
+                  : "Τα συνεργεία μας διαθέτουν εξειδικευμένη εμπειρία στην ��φαρμογή θερμοπρόσοψης, διασφαλίζοντας ακριβή τεχνική σε κάθε στρώση του συστήματος.",
               },
               {
                 title: isEnglish ? "Attention to Detail" : "Προσοχή στη Λεπτομέρεια",
