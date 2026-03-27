@@ -7,7 +7,7 @@ import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema } from "./components/structured-data"
+import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema, OrganizationSchema } from "./components/structured-data"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -132,6 +132,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="apple-touch-icon"
           href="/logo-faiacon.png"
         />
+        <OrganizationSchema />
         <LocalBusinessSchema />
         <WebsiteSchema />
         <RenovationCalculatorSchema />

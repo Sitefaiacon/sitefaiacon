@@ -8,8 +8,13 @@ export function LocalBusinessSchema() {
     description:
       "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, κατασκευή σπιτιού, ανακαίνιση, πισίνες, διατηρητέα κτίρια.",
     url: "https://faiacon.gr",
-    logo: "/logo-faiacon.png",
-    image: "/logo-faiacon.png",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://faiacon.gr/logo-faiacon.png",
+      width: 512,
+      height: 512
+    },
+    image: "https://faiacon.gr/logo-faiacon.png",
     telephone: "+30-26610-XXXXX",
     email: "info@faiacon.gr",
     foundingDate: "1990",
@@ -60,6 +65,40 @@ export function LocalBusinessSchema() {
       bestRating: "5",
       worstRating: "1",
     },
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
+export function OrganizationSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://faiacon.gr/#organization",
+    name: "ΦαιάCon - Τεχνική Κατασκευαστική",
+    alternateName: "FaiaCon",
+    url: "https://faiacon.gr",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://faiacon.gr/logo-faiacon.png",
+      width: 512,
+      height: 512
+    },
+    image: "https://faiacon.gr/logo-faiacon.png",
+    description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Κατασκευή, ανακαίνιση σπιτιών, βιλών, ξενοδοχείων και πισινών.",
+    telephone: "+30-26610-XXXXX",
+    email: "info@faiacon.gr",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Κέρκυρα",
+      addressRegion: "Κέρκυρα",
+      postalCode: "49100",
+      addressCountry: "GR"
+    },
+    sameAs: [
+      "https://www.facebook.com/faiacon",
+      "https://www.instagram.com/faiacon"
+    ]
   }
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
