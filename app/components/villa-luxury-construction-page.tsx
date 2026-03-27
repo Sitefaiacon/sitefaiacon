@@ -168,12 +168,12 @@ export default function VillaLuxuryConstructionPage() {
         <div className="relative z-10 container px-4 max-w-6xl mx-auto">
           <AnimatedSection className="text-center space-y-8">
             <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "Architectural Dreams Realized" : "Αρχιτεκτονικά Όνειρα Υλοποιημένα"}
+              {isEnglish ? "Luxury Villas in Corfu" : "Πολυτελείς Βίλες στην Κέρκυρα"}
             </h1>
             <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg font-light">
               {isEnglish
-                ? "Bespoke luxury villa construction combining architectural excellence, premium materials, and flawless execution to create your perfect residence in Corfu."
-                : "Εξατομικευμένη κατασκευή πολυτελών βιλών που συνδυάζει αρχιτεκτονική αριστεία, πολυτελή υλικά και άψογη εκτέλεση για τη δημιουργία της ιδανικής κατοικίας σας."}
+                ? "Complete construction and renovation of luxury villas and residences. From architectural design to final delivery, we create exceptional living spaces that combine Corfiot tradition with modern elegance."
+                : "Ολοκληρωμένη κατασκευή και ανακαίνιση πολυτελών βιλών και κατοικιών. Από τον αρχιτεκτονικό σχεδιασμό έως την τελική παράδοση, δημιουργούμε εξαιρετικούς χώρους διαβίωσης που συνδυάζουν την κερκυραϊκή παράδοση με τη σύγχρονη κομψότητα."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button
