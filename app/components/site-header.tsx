@@ -9,6 +9,8 @@ import { useLanguage } from "../contexts/language-context"
 import { usePathname } from "next/navigation"
 
 const servicesItems = [
+  { href: "/services/hotel-construction-renovation", label: "Κατασκευή & Ανακαίνιση Ξενοδοχειακών Μονάδων", labelEn: "Hotel Construction & Renovation" },
+  { href: "/services/villa-luxury-home-construction", label: "Κατασκευή Βιλών & Πολυτελών Κατοικιών", labelEn: "Villa & Luxury Home Construction" },
   { href: "/house-construction", label: "Κατασκευή Σπιτιού", labelEn: "House Construction" },
   { href: "/house-renovation", label: "Ανακαίνιση Σπιτιού", labelEn: "House Renovation" },
   { href: "/listed-houses", label: "Διατηρητέα Κτίρια", labelEn: "Listed Houses" },
@@ -58,6 +60,8 @@ export function SiteHeader() {
   }, [])
 
   const isServiceActive = servicesItems.some(item => pathname === `/${lang}${item.href}`)
+  
+  console.log("[v0] servicesItems count:", servicesItems.length, servicesItems.map(i => i.label))
 
   return (
     <header
@@ -89,7 +93,7 @@ export function SiteHeader() {
                       <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
                     </button>
                     {dropdownOpen && (
-                      <div className="absolute top-full left-0 mt-1 bg-[#1e3771] border border-white/10 rounded-md shadow-lg min-w-[220px] py-2">
+                      <div className="absolute top-full left-0 mt-1 bg-[#1e3771] border border-white/10 rounded-md shadow-lg min-w-[320px] py-2">
                         {item.items?.map((subItem) => (
                           <Link
                             key={subItem.href}
