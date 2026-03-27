@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation"
 
 const servicesItems = [
   { href: "/services/hotel-construction-renovation", label: "Κατασκευή & Ανακαίνιση Ξενοδοχειακών Μονάδων", labelEn: "Hotel Construction & Renovation" },
-  { href: "/services/villa-luxury-home-construction", label: "Κατασκευή Βιλών & Πολυτελών Κατοικιών", labelEn: "Villa & Luxury Home Construction" },
+  { href: "/services/villa-luxury-home-construction", label: "Κατασκευή και Ανακαίνιση Βιλών", labelEn: "Villa Construction & Renovation" },
   { href: "/house-construction", label: "Κατασκευή Σπιτιού", labelEn: "House Construction" },
   { href: "/house-renovation", label: "Ανακαίνιση Σπιτιού", labelEn: "House Renovation" },
   { href: "/listed-houses", label: "Διατηρητέα Κτίρια", labelEn: "Listed Houses" },
