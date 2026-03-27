@@ -1,7 +1,12 @@
+"use client"
+
+import { useState } from "react"
 import { AnimatedSection } from "../animated-section"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { ChevronDown } from "lucide-react"
 
 export function HotelFAQ({ isEnglish }: { isEnglish: boolean }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
   const faqs = [
     {
       q: isEnglish ? "Can renovations happen during operating season?" : "Μπορούν να γίνουν ανακαινίσεις κατά τη λειτουργία;",
@@ -29,14 +34,22 @@ export function HotelFAQ({ isEnglish }: { isEnglish: boolean }) {
     <AnimatedSection className="py-20 px-4 bg-slate-800/50">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">{isEnglish ? "Frequently Asked Questions" : "Συχνές Ερωτήσεις"}</h2>
-        <Accordion type="single" collapsible className="space-y-4">
+        <div className="space-y-4">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="border border-slate-600 rounded-lg px-6 data-[state=open]:bg-slate-700/50">
-              <AccordionTrigger className="hover:no-underline py-4 text-left">{faq.q}</AccordionTrigger>
-              <AccordionContent className="text-slate-300 pb-4">{faq.a}</AccordionContent>
-            </AccordionItem>
+            <div key={i} className="border border-slate-600 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-slate-700/50 transition"
+              >
+                <span className="font-medium">{faq.q}</span>
+                <ChevronDown className={`w-5 h-5 transition-transform ${openIndex === i ? "rotate-180" : ""}`} />
+              </button>
+              {openIndex === i && (
+                <div className="px-6 pb-4 text-slate-300">{faq.a}</div>
+              )}
+            </div>
           ))}
-        </Accordion>
+        </div>
       </div>
     </AnimatedSection>
   )

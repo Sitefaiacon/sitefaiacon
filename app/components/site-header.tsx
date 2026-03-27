@@ -60,8 +60,6 @@ export function SiteHeader() {
   }, [])
 
   const isServiceActive = servicesItems.some(item => pathname === `/${lang}${item.href}`)
-  
-  console.log("[v0] servicesItems count:", servicesItems.length, servicesItems.map(i => i.label))
 
   return (
     <header

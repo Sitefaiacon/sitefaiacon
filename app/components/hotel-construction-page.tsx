@@ -8,7 +8,7 @@ import { useLanguage } from "../contexts/language-context"
 const HotelHero = dynamic(() => import("./hotel-sections/hero").then(m => ({ default: m.HotelHero })), {
   loading: () => <div className="h-96 bg-gradient-to-b from-slate-900 to-slate-800" />
 })
-const HotelServices = dynamic(() => import("./hotel-sections/services").then(m => ({ default: m.HotelServices })))
+const HotelServices = dynamic(() => import("./hotel-sections/hero").then(m => ({ default: m.HotelServices })))
 const HotelIdealClients = dynamic(() => import("./hotel-sections/ideal-clients").then(m => ({ default: m.HotelIdealClients })))
 const HotelWorkStages = dynamic(() => import("./hotel-sections/work-stages").then(m => ({ default: m.HotelWorkStages })))
 const HotelFAQ = dynamic(() => import("./hotel-sections/faq").then(m => ({ default: m.HotelFAQ })))
