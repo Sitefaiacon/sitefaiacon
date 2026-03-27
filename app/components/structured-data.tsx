@@ -8,9 +8,8 @@ export function LocalBusinessSchema() {
     description:
       "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, κατασκευή σπιτιού, ανακαίνιση, πισίνες, διατηρητέα κτίρια.",
     url: "https://faiacon.gr",
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
+    logo: "/logo-faiacon.png",
+    image: "/logo-faiacon.png",
     telephone: "+30-26610-XXXXX",
     email: "info@faiacon.gr",
     foundingDate: "1990",
