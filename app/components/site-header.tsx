@@ -9,14 +9,14 @@ import { useLanguage } from "../contexts/language-context"
 import { usePathname } from "next/navigation"
 
 const servicesItems = [
-  { href: "/services/hotel-construction-renovation", label: "Ξενοδοχειακές Μονάδες", labelEn: "Hotel Units" },
-  { href: "/services/villa-luxury-home-construction", label: "Βίλες & Πολυτελείς Κατοικίες", labelEn: "Villas & Luxury Homes" },
+  { href: "/services/hotel-construction-renovation", label: "Ξενοδοχεία", labelEn: "Hotels" },
+  { href: "/services/villa-luxury-home-construction", label: "Βίλες", labelEn: "Villas" },
   { href: "/house-construction", label: "Κατασκευή Σπιτιού", labelEn: "House Construction" },
   { href: "/house-renovation", label: "Ανακαίνιση Σπιτιού", labelEn: "House Renovation" },
-  { href: "/listed-houses", label: "Διατηρητέα Κτίρια", labelEn: "Listed Buildings" },
-  { href: "/pool-construction", label: "Κατασκευή Πισίνας", labelEn: "Pool Construction" },
-  { href: "/services/thermoprosopsi", label: "Θερμοπρόσοψη", labelEn: "Thermoprosopsi" },
-  { href: "/services/vapsimata-elaiokromatismoi", label: "Βαψίματα & Ελαιοχρωματισμοί", labelEn: "Painting & Decorating" },
+  { href: "/listed-houses", label: "Διατηρητέα", labelEn: "Listed Buildings" },
+  { href: "/pool-construction", label: "Πισίνες", labelEn: "Pools" },
+  { href: "/services/thermoprosopsi", label: "Θερμοπρόσοψη", labelEn: "Insulation" },
+  { href: "/services/vapsimata-elaiokromatismoi", label: "Βαψίματα", labelEn: "Painting" },
 ]
 
 const navItems = [

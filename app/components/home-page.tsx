@@ -58,7 +58,7 @@ export default function HomePage({ lang }: { lang: string }) {
               <div className="animate-slide-up mt-4 sm:mt-6">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-lg leading-tight">
                   {isEnglish 
-                    ? "Turn Your Property in Corfu into a Profitable Investment"
+                    ? "Building Excellence in Corfu Since 1990"
                     : "Μετατρέψτε το ακίνητό σας σε πηγή εισοδήματος στην Κέρκυρα"}
                 </h1>
               </div>
@@ -66,14 +66,14 @@ export default function HomePage({ lang }: { lang: string }) {
               {/* Subheadline - Shorter & Clearer */}
               <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100 leading-relaxed">
                 {isEnglish 
-                  ? "We provide full renovation and construction services to help you maximize your property's value, rental income, or resale potential."
+                  ? "Premium construction, renovation, and property services for villas, hotels, and residential projects across Corfu."
                   : "Αναλαμβάνουμε πλήρως την ανακαίνιση ώστε το ακίνητό σας να είναι έτοιμο για Airbnb ή πώληση με υψηλή αξία."}
               </p>
 
               {/* Trust Line */}
               <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto drop-shadow-lg font-light">
                 {isEnglish 
-                  ? "Trusted local contractor with 35+ years of experience"
+                  ? "Trusted by international property owners and local clients for over three decades"
                   : "Εγκωρισμένοι τοποικοί ανάδοχοι με εμπειρία 35+ ετών"}
               </p>
 
@@ -115,25 +115,25 @@ export default function HomePage({ lang }: { lang: string }) {
                   icon: Award,
                   number: "35+",
                   label: isEnglish ? "Years of Experience" : "Έτη Εμπειρίας",
-                  description: isEnglish ? "Trusted in Corfu since 1990" : "Εμπιστευμένοι στην Κέρκυρα από το 1990",
+                  description: isEnglish ? "Established in Corfu since 1990" : "Εμπιστευμένοι στην Κέρκυρα από το 1990",
                 },
                 {
                   icon: Briefcase,
                   number: "85+",
                   label: isEnglish ? "Completed Projects" : "Ολοκληρωμένα Έργα",
-                  description: isEnglish ? "Satisfied clients across Corfu" : "Ικανοποιημένοι πελάτες σε όλη την Κέρκυρα",
+                  description: isEnglish ? "Villas, hotels, and residential" : "Ικανοποιημένοι πελάτες σε όλη την Κέρκυρα",
                 },
                 {
                   icon: Users,
                   number: "100%",
-                  label: isEnglish ? "Client Satisfaction" : "Ικανοποίηση Πελατών",
-                  description: isEnglish ? "International & local clients" : "Διεθνείς & τοπικοί πελάτες",
+                  label: isEnglish ? "Client Focus" : "Ικανοποίηση Πελατών",
+                  description: isEnglish ? "International and local clients" : "Διεθνείς & τοπικοί πελάτες",
                 },
                 {
                   icon: Building2,
                   number: "1",
-                  label: isEnglish ? "Project Manager" : "Διευθυντής Έργου",
-                  description: isEnglish ? "Full project management" : "Πλήρης διαχείριση έργων",
+                  label: isEnglish ? "Dedicated Manager" : "Διευθυντής Έργου",
+                  description: isEnglish ? "Single point of contact" : "Πλήρης διαχείριση έργων",
                 },
               ].map((item, idx) => (
                 <div key={idx} className="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:shadow-lg transition-shadow">
@@ -154,15 +154,15 @@ export default function HomePage({ lang }: { lang: string }) {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-                {isEnglish ? "Why Property Owners Trust Faiacon" : "Γιατί μας Εμπιστεύονται οι Ιδιοκτήτες Ακινήτων"}
+                {isEnglish ? "Why Property Owners Choose Faiacon" : "Γιατί μας Εμπιστεύονται οι Ιδιοκτήτες Ακινήτων"}
               </h2>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-600">{isEnglish ? "Professional Results, Trusted Expertise" : "Επαγγελματικά αποτελέσματα, εμπιστευμένη τεχνογνωσία"}</p>
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-600">{isEnglish ? "Professional Execution. Reliable Results." : "Επαγγελματικά αποτελέσματα, εμπιστευμένη τεχνογνωσία"}</p>
             </div>
 
             <div className="prose prose-lg max-w-none mb-12">
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
-                  ? "FaiaCon specializes in transforming properties into profitable investments. Whether you're looking to increase your property's market value, make it rental-ready for Airbnb, or improve its energy efficiency, our proven methods deliver results. From complete renovations to targeted upgrades, we manage every detail so your property reaches its full potential."
+                  ? "Faiacon delivers comprehensive construction and renovation services for property owners who expect quality workmanship and dependable project management. Whether you are renovating a family home, preparing a villa for rental, or upgrading a hospitality property, we bring the same level of care and professionalism to every project. Our team combines local expertise with modern construction standards to ensure lasting results."
                   : "Η FaiaCon ειδικεύεται στη μετατροπή ακινήτων σε κερδοφόρες επενδύσεις. Είτε θέλετε να αυξήσετε την αξία της ιδιοκτησίας σας, να την κάνετε έτοιμη για Airbnb, ή να βελτιώσετε την ενεργειακή της απόδοση, οι αποδεδειγμένες μέθοδοί μας παραδίδουν αποτελέσματα. Από ολοκληρωμένες ανακαινίσεις έως στοχευμένες αναβαθμίσεις, διαχειριζόμαστε κάθε λεπτομέρεια."}
               </p>
             </div>
@@ -175,10 +175,10 @@ export default function HomePage({ lang }: { lang: string }) {
                 <ul className="space-y-3 sm:space-y-4">
                   {(isEnglish
                     ? [
-                        "Results-focused: Every renovation targets maximum value increase",
-                        "Local expertise: Deep knowledge of Corfu's market and climate",
-                        "Professional project management: Transparent timelines and budgets",
-                        "Quality guarantees: Durable, energy-efficient, modern finishes",
+                        "Clear communication and regular progress updates throughout your project",
+                        "Deep knowledge of Corfu's climate, regulations, and building requirements",
+                        "Transparent pricing with detailed cost breakdowns and no hidden fees",
+                        "Quality materials and certified workmanship with proper warranties",
                       ]
                     : [
                         "Εστίαση στα αποτελέσματα: Κάθε ανακαίνιση στοχεύει στη μέγιστη αύξηση αξίας",
@@ -201,7 +201,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 </h3>
                 <p className="text-base sm:text-lg mb-6 sm:mb-8">
                   {isEnglish
-                    ? "Maximize your property's potential with complete renovation solutions. Our clients enjoy increased property values, higher rental rates, and modern, attractive homes—all managed by experienced professionals who care about your investment."
+                    ? "From initial consultation to final handover, we manage every aspect of your project. Our clients benefit from improved property values, modern finishes, energy-efficient upgrades, and spaces that are ready for use or rental."
                     : "Μεγιστοποιήστε το δυναμικό του ακινήτου σας με ολοκληρωμένες λύσεις ανακαίνισης. Οι πελάτες μας απολαμβάνουν αυξημένες αξίες ακινήτων, υψηλότερα ποσοστά ενοικίασης και σύγχρονα, ελκυστικά σπίτια."}
                 </p>
                 <div className="flex justify-center">
@@ -223,11 +223,11 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-6">
-              {isEnglish ? "Solutions for Property Owners & Investors" : "Λύσεις για Ιδιοκτήτες & Επενδυτές Ακινήτων"}
+              {isEnglish ? "Our Services" : "Λύσεις για Ιδιοκτήτες & Επενδυτές Ακινήτων"}
             </h2>
             <p className="text-base sm:text-lg text-gray-600">
               {isEnglish
-                ? "Results-focused services designed to increase property value and rental potential"
+                ? "Comprehensive construction and renovation services for residential and hospitality properties"
                 : "Υπηρεσίες εστιασμένες στα αποτελέσματα για αύξηση αξίας και δυναμικού ενοικίασης"}
             </p>
           </div>
@@ -235,30 +235,30 @@ export default function HomePage({ lang }: { lang: string }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {[
               {
-                title: isEnglish ? "Increase Property Value" : "Αύξηση Αξίας Ακινήτου",
+                title: isEnglish ? "House Renovation" : "Αύξηση Αξίας Ακινήτου",
                 description: isEnglish
-                  ? "Professional renovations that maximize market value and modernize your space."
+                  ? "Complete interior and exterior renovations that modernise your space and improve functionality."
                   : "Επαγγελματικές ανακαινίσεις που μεγιστοποιούν την αξία και εκσυγχρονίζουν το χώρο.",
                 href: "/house-renovation",
               },
               {
-                title: isEnglish ? "Airbnb & Rental Ready" : "Έτοιμο για Airbnb & Ενοικίαση",
+                title: isEnglish ? "Villa Construction" : "Έτοιμο για Airbnb & Ενοικίαση",
                 description: isEnglish
-                  ? "Transform your property into an attractive rental investment with high income potential."
+                  ? "New villa builds and luxury residences designed and constructed to the highest standards."
                   : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοικίασης με υψηλό δυναμικό εισοδήματος.",
-                href: "/house-renovation",
+                href: "/services/villa-luxury-home-construction",
               },
               {
-                title: isEnglish ? "Energy Savings & Comfort" : "Εξοικονόμηση Ενέργειας & Άνεση",
+                title: isEnglish ? "Hotel Renovation" : "Εξοικονόμηση Ενέργειας & Άνεση",
                 description: isEnglish
-                  ? "Modern thermal insulation and energy-efficient upgrades to reduce costs and improve comfort."
+                  ? "Hospitality property upgrades that enhance guest experience and operational efficiency."
                   : "Σύγχρονη θερμική μόνωση και αναβαθμίσεις για εξοικονόμηση ενέργειας και άνεση.",
-                href: "/house-renovation",
+                href: "/services/hotel-construction-renovation",
               },
               {
-                title: isEnglish ? "Add Luxury & Investment Value" : "Προσθέστε Πολυτέλεια & Αξία",
+                title: isEnglish ? "Pool Construction" : "Προσθέστε Πολυτέλεια & Αξία",
                 description: isEnglish
-                  ? "Premium pools and luxury upgrades that enhance lifestyle and property appeal."
+                  ? "Custom swimming pools designed and built to complement your property and lifestyle."
                   : "Πισίνες και πολυτελείς αναβαθμίσεις που ενισχύουν την αξία του ακινήτου.",
                 href: "/pool-construction",
               },
@@ -282,11 +282,11 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="container relative z-10 px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              {isEnglish ? "Estimate Your Renovation Cost in Minutes" : "Εκτιμήστε το Κόστος Ανακαίνισης σας σε Λεπτά"}
+              {isEnglish ? "Get a Preliminary Cost Estimate" : "Εκτιμήστε το Κόστος Ανακαίνισης σας σε Λεπτά"}
             </h2>
             <p className="text-lg sm:text-xl mb-8 text-white/90 leading-relaxed">
               {isEnglish
-                ? "Use our cost calculator and receive a personalized estimate based on your specific project details."
+                ? "Use our online calculator to get an indicative budget for your renovation project. For a detailed quote, contact us directly."
                 : "Χρησιμοποιήστε τον υπολογιστή κόστους μας και λάβετε εξατομικευμένη εκτίμηση για το έργο σας."}
             </p>
             <Button
@@ -308,11 +308,11 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
-              {isEnglish ? "Calculate Your Cost Estimate" : "Υπολογίστε την Εκτίμησή σας"}
+              {isEnglish ? "Renovation Cost Calculator" : "Υπολογίστε την Εκτίμησή σας"}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               {isEnglish
-                ? "Fill in your project details below to get an instant estimate. This is a preliminary calculation to help you plan your budget—contact us for a detailed quote."
+                ? "Enter your project details below to receive an indicative budget estimate. This calculator provides preliminary figures to help you plan. For an accurate quote tailored to your specific requirements, please contact us."
                 : "Συμπληρώστε τα στοιχεία του έργου σας για να λάβετε άμεση εκτίμηση. Αυτό είναι ένας προκαταρκτικός υπολογισμός για να σας βοηθήσει να προγραμματίσετε το προϋπολογισμό σας."}
             </p>
           </div>
@@ -325,11 +325,11 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-              {isEnglish ? "From Old Property to Rental-Ready Investment" : "Από Παλιό Ακίνητο σε Επένδυση Ενοικίασης"}
+              {isEnglish ? "Recent Projects" : "Από Παλιό Ακίνητο σε Επένδυση Ενοικίασης"}
             </h2>
             <p className="text-base sm:text-lg text-gray-600">
               {isEnglish
-                ? "See how we transform properties to maximize value and rental potential"
+                ? "A selection of completed construction and renovation works across Corfu"
                 : "Δείτε πώς μετατρέπουμε ακίνητα για μέγιστη αξία και δυναμικό ενοικίασης"}
             </p>
           </div>
