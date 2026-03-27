@@ -9,6 +9,8 @@ import { useLanguage } from "../contexts/language-context"
 import { usePathname } from "next/navigation"
 
 const servicesItems = [
+  { href: "/services/hotel-construction-renovation", label: "Κατασκευή & Ανακαίνιση Ξενοδοχειακών Μονάδων", labelEn: "Hotel Construction & Renovation" },
+  { href: "/services/villa-luxury-home-construction", label: "Κατασκευή Βιλών & Πολυτελών Κατοικιών", labelEn: "Villa & Luxury Home Construction" },
   { href: "/house-construction", label: "Κατασκευή Σπιτιού", labelEn: "House Construction" },
   { href: "/house-renovation", label: "Ανακαίνιση Σπιτιού", labelEn: "House Renovation" },
   { href: "/listed-houses", label: "Διατηρητέα Κτίρια", labelEn: "Listed Houses" },
