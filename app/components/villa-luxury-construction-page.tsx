@@ -168,7 +168,7 @@ export default function VillaLuxuryConstructionPage() {
         <div className="relative z-10 container px-4 max-w-6xl mx-auto">
           <AnimatedSection className="text-center space-y-8">
             <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "Luxury Villas in Corfu" : "Πολυτελείς Βίλες στην Κέρκυρα"}
+              {isEnglish ? "Luxury Villa Construction & Renovation" : "Κατασκευή και Ανακαίνιση Πολυτελών Βιλών"}
             </h1>
             <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg font-light">
               {isEnglish
