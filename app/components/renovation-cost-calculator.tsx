@@ -683,13 +683,15 @@ export default function RenovationCostCalculator() {
 
       <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); resetResults(); }} className="w-full">
         <TabsList className="mb-4 grid w-full grid-cols-3 bg-muted">
-          <TabsTrigger value="renovation" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-            {translate("General Renovation")}
+          <TabsTrigger value="renovation" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm px-1 sm:px-3">
+            <span className="hidden sm:inline">{translate("General Renovation")}</span>
+            <span className="sm:hidden">{isEnglish ? "Renovation" : "Ανακαίνιση"}</span>
           </TabsTrigger>
-          <TabsTrigger value="windows" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-            {translate("Doors & Windows")}
+          <TabsTrigger value="windows" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm px-1 sm:px-3">
+            <span className="hidden sm:inline">{translate("Doors & Windows")}</span>
+            <span className="sm:hidden">{isEnglish ? "Windows" : "Κουφώματα"}</span>
           </TabsTrigger>
-          <TabsTrigger value="pool" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+          <TabsTrigger value="pool" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm px-1 sm:px-3">
             {translate("Pool")}
           </TabsTrigger>
         </TabsList>
