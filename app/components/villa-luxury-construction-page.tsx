@@ -22,125 +22,125 @@ export default function VillaLuxuryConstructionPage() {
   const services = [
     {
       icon: Home,
-      title: isEnglish ? "Bespoke Villa Design & Construction" : "Εξατομικευμένος Σχεδιασμός & Κατασκευή Βιλών",
+      title: isEnglish ? "New Villa Construction" : "Εξατομικευμένος Σχεδιασμός & Κατασκευή Βιλών",
       description: isEnglish
-        ? "From architectural concept to keys in hand - tailored residential palaces that blend modern comfort with timeless elegance"
+        ? "Complete construction of new villas from foundation to finishing. We coordinate all trades and manage the entire build process."
         : "Από την αρχιτεκτονική ιδέα έως την παράδοση - εξατομικευμένες κατοικίες που συνδυάζουν σύγχρονη άνεση με αιώνια κομψότητα",
     },
     {
       icon: Diamond,
-      title: isEnglish ? "Premium Materials & Finishes" : "Πολυτελή Υλικά & Φινιρίσματα",
+      title: isEnglish ? "Quality Materials & Finishes" : "Πολυτελή Υλικά & Φινιρίσματα",
       description: isEnglish
-        ? "Curated selection of luxury materials - natural stone, premium fixtures, designer elements - combined with expert craftsmanship"
+        ? "We source quality materials suited to Corfu's climate, including natural stone, durable fixtures, and modern finishes."
         : "Επιλογή πολυτελών υλικών - φυσική πέτρα, πολυτελή όρη, σχεδιαστικά στοιχεία - σε συνδυασμό με έκπαιδευμένη τεχνογνωσία",
     },
     {
       icon: Zap,
-      title: isEnglish ? "Smart Home Integration" : "Ενσωμάτωση Έξυπνης Κατοικίας",
+      title: isEnglish ? "Modern Systems Integration" : "Ενσωμάτωση Έξυπνης Κατοικίας",
       description: isEnglish
-        ? "Modern automation systems, energy management, climate control, security, and entertainment seamlessly integrated"
+        ? "Installation of modern electrical, plumbing, heating, and cooling systems. Smart home integration available on request."
         : "Σύγχρονα συστήματα αυτοματισμού, διαχείριση ενέργειας, έλεγχος κλίματος, ασφάλεια και ψυχαγωγία ομαλά ενσωματωμένα",
     },
     {
       icon: Palette,
-      title: isEnglish ? "Architectural Vision Realization" : "Υλοποίηση της Αρχιτεκτονικής Ορατικότητας",
+      title: isEnglish ? "Interior & Exterior Design" : "Υλοποίηση της Αρχιτεκτονικής Ορατικότητας",
       description: isEnglish
-        ? "Dedicated design collaboration ensuring every detail reflects your vision - from exterior form to interior aesthetics"
+        ? "We work with architects and interior designers to ensure the finished property matches your vision and specifications."
         : "Αποσβεστική συνεργασία σχεδιασμού που διασφαλίζει ότι κάθε λεπτομέρεια αποτυπώνει την όρασή σας - από το εξωτερικό σχήμα έως τα εσωτερικά αισθητικά",
     },
     {
       icon: Mountain,
-      title: isEnglish ? "Outdoor Living Spaces" : "Εξωτερικοί Χώροι Διαμονής",
+      title: isEnglish ? "Outdoor Spaces & Pools" : "Εξωτερικοί Χώροι Διαμονής",
       description: isEnglish
-        ? "Expertly designed terraces, pools, landscaping, and gardens that seamlessly extend your living experience outdoors"
+        ? "Construction of terraces, swimming pools, driveways, and landscaping to complete your property."
         : "Έξυπνα σχεδιασμένες βεράντες, πισίνες, φυτεία και κήποι που επεκτείνουν απρόσκοπτα την εμπειρία διαμονής",
     },
     {
       icon: Leaf,
-      title: isEnglish ? "Sustainable Luxury" : "Βιώσιμη Πολυτέλεια",
+      title: isEnglish ? "Energy Efficiency" : "Βιώσιμη Πολυτέλεια",
       description: isEnglish
-        ? "High-performance energy systems, sustainable materials, and environmental responsibility without compromising on luxury"
+        ? "Thermal insulation, energy-efficient windows, solar systems, and sustainable building practices to reduce running costs."
         : "Συστήματα υψηλής απόδοσης ενέργειας, βιώσιμα υλικά και περιβαλλοντική ευθύνη χωρίς συμβιβασμό στην πολυτέλεια",
     },
   ]
 
   const workStages = [
     {
-      stage: isEnglish ? "Phase 1: Collaborative Design" : "Φάση 1: Συνεργατικός Σχεδιασμός",
+      stage: isEnglish ? "Phase 1: Consultation & Design" : "Φάση 1: Συνεργατικός Σχεδιασμός",
       description: isEnglish
-        ? "In-depth consultation to understand your vision, lifestyle, and preferences. Conceptual design, 3D renderings, and iterative refinement until perfect alignment is achieved."
+        ? "Initial site visit and consultation to understand your requirements. We review plans, discuss specifications, and provide a detailed project proposal with cost estimates."
         : "Εις βάθος συζήτηση για κατανόηση της όρασης, του τρόπου ζωής και των προτιμήσεών σας. Εννοιολογικός σχεδιασμός, τρισδιάστατες απεικονίσεις και επαναληπτική εξέλιξη.",
     },
     {
-      stage: isEnglish ? "Phase 2: Technical Planning" : "Φάση 2: Τεχνικός Σχεδιασμός",
+      stage: isEnglish ? "Phase 2: Permits & Planning" : "Φάση 2: Τεχνικός Σχεδιασμός",
       description: isEnglish
-        ? "Structural engineering, MEP (mechanical, electrical, plumbing) systems design, permit acquisition, and detailed construction documentation prepared by certified professionals."
-        : "Δομική μηχανική, σχεδιασμός MEP συστημάτων, απόκτηση αδειών και λεπτομερής κατασκευαστική τεκμηρίωση από πιστοποιημένους επαγγελματ��ες.",
+        ? "We handle building permits, coordinate with architects and engineers, and prepare detailed construction schedules. All regulatory requirements are managed on your behalf."
+        : "Δομική μηχανική, σχεδιασμός MEP συστημάτων, απόκτηση αδειών και λεπτομερής κατασκευαστική τεκμηρίωση από πιστοποιημένους επαγγελματίες.",
     },
     {
-      stage: isEnglish ? "Phase 3: Construction Excellence" : "Φάση 3: Κατασκευαστική Αριστεία",
+      stage: isEnglish ? "Phase 3: Construction" : "Φάση 3: Κατασκευαστική Αριστεία",
       description: isEnglish
-        ? "Expert execution by specialized teams - foundation, structural work, systems installation, finishes, and landscaping conducted with precision and quality oversight at every step."
+        ? "Professional execution of all construction works with regular progress updates. We coordinate all trades and maintain quality control throughout the build."
         : "Έκπαιδευμένη εκτέλεση από ειδικά συνεργεία - θεμέλιο, δομικές εργασίες, εγκαταστάσεις συστημάτων, φινιρίσματα και φυτεία με ακρίβεια.",
     },
     {
-      stage: isEnglish ? "Phase 4: Final Refinement & Handover" : "Φάση 4: Τελική Εξέλιξη & Παράδοση",
+      stage: isEnglish ? "Phase 4: Completion & Handover" : "Φάση 4: Τελική Εξέλιξη & Παράδοση",
       description: isEnglish
-        ? "Final inspections, system testing, cosmetic refinements, comprehensive walkthrough with full documentation and owner training on all systems."
+        ? "Final inspections, system testing, and snagging. We provide full documentation and a thorough handover to ensure you are satisfied with the completed property."
         : "Τελικές επιθεωρήσεις, δοκιμές συστημάτων, τελικές αισθητικές σχεδιάσεις και ολοκληρωτική εκπαίδευση σε όλα τα συστήματα.",
     },
   ]
 
   const faqItems = [
     {
-      q: isEnglish ? "How much does a luxury villa construction cost?" : "Πόσο κοστίζει η κατασκευή μιας πολυτελούς βίλας;",
+      q: isEnglish ? "What does villa construction typically cost?" : "Πόσο κοστίζει η κατασκευή μιας πολυτελούς βίλας;",
       a: isEnglish
-        ? "Costs vary significantly based on size, location, materials, and specifications. A typical luxury villa in Corfu ranges from €500,000 to €2,000,000+ depending on customization. We provide detailed budget breakdowns during the design phase."
+        ? "Costs depend on size, location, materials, and specifications. We provide detailed cost estimates after reviewing your plans and requirements. Contact us for a preliminary discussion of your project budget."
         : "Το κόστος ποικίλλει ανάλογα με το μέγεθος, την τοποθεσία, τα υλικά και τις προδιαγραφές. Μια τυπική πολυτελής βίλα στην Κέρκυρα κοστίζει από 500.000€ έως 2.000.000€+ ανάλογα με την προσαρμογή.",
     },
     {
-      q: isEnglish ? "What's the typical construction timeline?" : "Ποιο είναι το τυπικό χρονοδιάγραμμα κατασκευής;",
+      q: isEnglish ? "How long does construction take?" : "Ποιο είναι το τυπικό χρονοδιάγραμμα κατασκευής;",
       a: isEnglish
-        ? "A complete luxury villa construction typically takes 18-24 months from design completion to handover. This includes design refinement, permitting, foundation, structural work, systems installation, and finishing touches. Timeline varies with project complexity and seasonal factors."
+        ? "A typical villa construction takes 12-24 months depending on size and complexity. This includes permits, foundation, structural work, systems installation, and finishing. We provide detailed timelines during planning."
         : "Η ολοκληρωτική κατασκευή μιας πολυτελούς βίλας διαρκεί συνήθως 18-24 μήνες από την ολοκλήρωση του σχεδιασμού. Αυτό περιλαμβάνει βελτιώσεις σχεδιασμού, άδειες, θεμέλιο, δομικές εργασίες και τελικά φινιρίσματα.",
     },
     {
-      q: isEnglish ? "Can you construct on challenging terrain?" : "Μπορείτε να κατασκευάσετε σε δύσκολα εδάφη;",
+      q: isEnglish ? "Can you build on difficult terrain?" : "Μπορείτε να κατασκευάσετε σε δύσκολα εδάφη;",
       a: isEnglish
-        ? "Yes. We have extensive experience with hillside villas, coastal properties, and challenging geological conditions. Specialized foundation techniques and site engineering ensure structural integrity and optimal building performance."
+        ? "Yes. We have experience with hillside sites, coastal properties, and challenging ground conditions common in Corfu. Proper site assessment and foundation engineering are part of our standard process."
         : "Ναι. Έχουμε εκτενή εμπειρία με βίλες σε λόφους, ακτές και δύσκολες γεωλογικές συνθήκες. Ειδικές τεχνικές θεμελίωσης διασφαλίζουν δομική ακεραιότητα.",
     },
     {
-      q: isEnglish ? "Do you handle permits and regulations?" : "Διαχειρίζεστε τις άδειες και τους κανονισμούς;",
+      q: isEnglish ? "Do you handle building permits?" : "Διαχειρίζεστε τις άδειες και τους κανονισμούς;",
       a: isEnglish
-        ? "Completely. We manage all permitting, building regulations compliance, environmental assessments, and legal documentation. Our team ensures your project meets all Greek and local Corfu requirements."
+        ? "Yes. We manage the permit process, coordinate with local authorities, and ensure compliance with Greek building regulations. This is included as part of our project management service."
         : "Εντελώς. Διαχειριζόμαστε όλες τις άδειες, τη συμμόρφωση με τους κανονισμούς κτιρίου και τη νομική τεκμηρίωση. Διασφαλίζουμε τη συμμόρφωση με όλες τις ελληνικές και τοπικές απαιτήσεις.",
     },
     {
-      q: isEnglish ? "What's included in your design service?" : "Τι περιλαμβάνεται στη υπηρεσία σχεδιασμού σας;",
+      q: isEnglish ? "Can I manage the project remotely?" : "Τι περιλαμβάνεται στη υπηρεσία σχεδιασμού σας;",
       a: isEnglish
-        ? "Complete architectural design, interior concepts, landscape design, 3D visualizations, structural engineering drawings, and full construction specifications. We iterate until your vision is perfectly captured."
+        ? "Absolutely. Many of our clients are based abroad. We provide regular photo and video updates, detailed progress reports, and are available for video calls to discuss your project at any stage."
         : "Ολοκληρωτικός αρχιτεκτονικός σχεδιασμός, έσωτερικές ιδέες, σχεδιασμός τοπίου, τρισδιάστατες απεικονίσεις, αρχιτεκτονικά σχέδια και πλήρεις κατασκευαστικές προδιαγραφές.",
     },
   ]
 
   const idealClients = [
     {
-      type: isEnglish ? "Private Collectors" : "Ιδιώτες Συλλέκτες",
+      type: isEnglish ? "Private Homeowners" : "Ιδιώτες Συλλέκτες",
       description: isEnglish
-        ? "Seeking unique, bespoke residences that serve as personal sanctuaries and investment assets"
+        ? "Individuals and families building a private residence or holiday home in Corfu"
         : "Αναζητούν μοναδικές, εξατομικευμένες κατοικίες που χρησιμεύουν ως προσωπικά καταφύγια και επενδυτικά περιουσιακά στοιχεία",
     },
     {
-      type: isEnglish ? "Holiday Home Investors" : "Επενδυτές Εξοχικών Κατοικιών",
+      type: isEnglish ? "Rental Property Investors" : "Επενδυτές Εξοχικών Κατοικιών",
       description: isEnglish
-        ? "Building premium rental properties that command high occupancy rates and generate strong returns"
+        ? "Investors building or upgrading villas for short-term rental or long-term letting"
         : "Κατασκευάζουν ακριβές ενοικιαζόμενες ιδιοκτησίες που παράγουν υψηλές αποδόσεις",
     },
     {
-      type: isEnglish ? "International Property Buyers" : "Διεθνείς Αγοραστές Ιδιοκτησιών",
+      type: isEnglish ? "International Buyers" : "Διεθνείς Αγοραστές Ιδιοκτησιών",
       description: isEnglish
-        ? "Foreign investors seeking reliable, high-quality villa construction in Corfu's premier locations"
+        ? "Foreign property owners who need a reliable local contractor to manage their project"
         : "Ξένοι επενδυτές που ζητούν αξιόπιστη κατασκευή βιλών σε κορυφαίες τοποθεσίες της Κέρκυρας",
     },
   ]
@@ -168,11 +168,11 @@ export default function VillaLuxuryConstructionPage() {
         <div className="relative z-10 container px-4 max-w-6xl mx-auto">
           <AnimatedSection className="text-center space-y-8">
             <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "Luxury Villa Construction & Renovation" : "Κατασκευή και Ανακαίνιση Πολυτελών Βιλών"}
+              {isEnglish ? "Villa Construction & Renovation" : "Κατασκευή και Ανακαίνιση Πολυτελών Βιλών"}
             </h1>
             <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg font-light">
               {isEnglish
-                ? "Complete construction and renovation of luxury villas and residences. From architectural design to final delivery, we create exceptional living spaces that combine Corfiot tradition with modern elegance."
+                ? "We build and renovate private villas and luxury residences across Corfu. From initial design through to completion, our team delivers quality construction that meets international standards."
                 : "Ολοκληρωμένη κατασκευή και ανακαίνιση πολυτελών βιλών και κατοικιών. Από τον αρχιτεκτονικό σχεδιασμό έως την τελική παράδοση, δημιουργούμε εξαιρετικούς χώρους διαβίωσης που συνδυάζουν την κερκυραϊκή παράδοση με τη σύγχρονη κομψότητα."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -193,11 +193,11 @@ export default function VillaLuxuryConstructionPage() {
         <div className="container max-w-6xl mx-auto px-4">
           <AnimatedSection className="space-y-8 text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8">
-              {isEnglish ? "Your Vision, Our Expertise" : "Η Όρασή Σας, η Εμπειρία Μας"}
+              {isEnglish ? "Custom Villa Projects in Corfu" : "Η Όρασή Σας, η Εμπειρία Μας"}
             </h2>
             <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
               {isEnglish
-                ? "Building a luxury villa is a profound investment in your lifestyle. We transform architectural visions into physical reality through meticulous planning, masterful execution, and unwavering attention to detail. From hillside estates to coastal paradises, every project reflects our commitment to excellence and your personal aesthetic."
+                ? "Building or renovating a villa requires a contractor who understands both the technical requirements and the expectations of international property owners. We manage villa projects from planning and permits through to construction and finishing, ensuring professional execution at every stage. Whether you are building a new residence or upgrading an existing property, our team provides reliable project management and quality workmanship."
                 : "Η κατασκευή μιας πολυτελούς βίλας είναι μια βαθιά επένδυση στον τρόπο ζωής σας. Μετατρέπουμε αρχιτεκτονικές ορατικότητες σε φυσική πραγματικότητα μέσω προσεκτικού σχεδιασμού, δεξιοτεχνίας και αδιάλειπτης προσοχής στις λεπτομέρειες."}
             </p>
           </AnimatedSection>
@@ -300,27 +300,27 @@ export default function VillaLuxuryConstructionPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                title: isEnglish ? "Design Expertise" : "Σχεδιαστική Εμπειρία",
+                title: isEnglish ? "Local Experience" : "Σχεδιαστική Εμπειρία",
                 desc: isEnglish
-                  ? "Award-winning architectural vision combined with practical construction knowledge for homes that are both beautiful and durable"
+                  ? "Over 35 years of construction experience in Corfu. We understand local conditions, regulations, and building requirements."
                   : "Βραβευμένη αρχιτεκτονική ορατικότητα συνδυασμένη με πρακτική κατασκευαστική γνώση για κατοικίες που είναι όμορφες και ανθεκτικές",
               },
               {
-                title: isEnglish ? "Premium Quality" : "Πολυτελής Ποιότητα",
+                title: isEnglish ? "Quality Workmanship" : "Πολυτελής Ποιότητα",
                 desc: isEnglish
-                  ? "Curated selection of luxury materials and suppliers, with rigorous quality control throughout construction"
+                  ? "We work with trusted tradespeople and maintain quality standards throughout construction with regular inspections."
                   : "Επιλεγμένη επιλογή πολυτελών υλικών και προμηθευτών με αυστηρό έλεγχο ποιότητας",
               },
               {
-                title: isEnglish ? "Client Collaboration" : "Συνεργασία με Πελάτη",
+                title: isEnglish ? "Clear Communication" : "Συνεργασία με Πελάτη",
                 desc: isEnglish
-                  ? "Transparent communication and regular site visits ensure your vision remains centered throughout the entire process"
+                  ? "Regular updates, transparent pricing, and responsive communication. We keep you informed at every stage."
                   : "Διαφανής επικοινωνία και τακτικές επισκέψεις στο εργοτάξιο διασφαλίζουν ότι η όρασή σας παραμένει στο κέντρο",
               },
               {
-                title: isEnglish ? "Complete Accountability" : "Πλήρης Ευθύνη",
+                title: isEnglish ? "Full Project Management" : "Πλήρης Ευθύνη",
                 desc: isEnglish
-                  ? "We stand behind every project with warranties, comprehensive documentation, and long-term support"
+                  ? "We manage all aspects of the build including permits, contractors, materials, and scheduling."
                   : "Στεκόμαστε πίσω από κάθε έργο με εγγυήσεις, ολοκληρωμένη τεκμηρίωση και μακροπρόθεσμη υποστήριξη",
               },
             ].map((item, i) => (

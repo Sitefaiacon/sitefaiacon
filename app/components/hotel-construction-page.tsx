@@ -22,119 +22,119 @@ export default function HotelConstructionRenovationPage() {
   const services = [
     {
       icon: Building2,
-      title: isEnglish ? "Complete Hotel Renovation" : "Ολοκληρωτική Ανακαίνιση Ξενοδοχειακής Μονάδας",
+      title: isEnglish ? "Full Property Renovation" : "Ολοκληρωτική Ανακαίνιση Ξενοδοχειακής Μονάδας",
       description: isEnglish
-        ? "From concept to completion - structural upgrades, guest experience enhancement, and modern amenities integration"
+        ? "Complete renovation of hotel buildings including structural work, room upgrades, common areas, and exterior improvements."
         : "Από την ιδέα στην υλοποίηση - δομικές αναβαθμίσεις, βελτίωση της εμπειρίας του επισκέπτη και ενσωμάτωση σύγχρονων παροχών",
     },
     {
       icon: Users,
-      title: isEnglish ? "Guest Experience Upgrade" : "Αναβάθμιση Εμπειρίας Επισκέπτη",
+      title: isEnglish ? "Room & Suite Upgrades" : "Αναβάθμιση Εμπειρίας Επισκέπτη",
       description: isEnglish
-        ? "Room redesigns, premium finishes, modern amenities, and aesthetic improvements that increase guest satisfaction and occupancy rates"
+        ? "Modernisation of guest rooms and suites with new bathrooms, flooring, furniture, and improved layouts."
         : "Αναδιαμόρφωση δωματίων, πολυτελή φινιρίσματα, σύγχρονες παροχές και αισθητικές βελτιώσεις που αυξάνουν την ικανοποίηση του επισκέπτη",
     },
     {
       icon: Hammer,
-      title: isEnglish ? "Shared Spaces Renovation" : "Ανακαίνιση Κοινόχρηστων Χώρων",
+      title: isEnglish ? "Common Area Works" : "Ανακαίνιση Κοινόχρηστων Χώρων",
       description: isEnglish
-        ? "Reception areas, lobby redesign, restaurants, bars, pool areas, and exterior spaces that reflect your hotel's brand identity"
+        ? "Reception, lobby, restaurant, bar, and pool area renovations that improve guest experience and property appeal."
         : "Χώροι υποδοχής, αναδιαμόρφωση λόμπας, εστιατόρια, μπαρ, χώροι πισίνας και εξωτερικοί χώροι που αποτυπώνουν την ταυτότητα του ξενοδοχείου",
     },
     {
       icon: Lightbulb,
-      title: isEnglish ? "Energy Efficiency & Systems" : "Ενεργειακή Απόδοση & Συστήματα",
+      title: isEnglish ? "Systems & Energy Efficiency" : "Ενεργειακή Απόδοση & Συστήματα",
       description: isEnglish
-        ? "Modern HVAC systems, energy-efficient installations, water management upgrades, and sustainable solutions"
+        ? "HVAC upgrades, electrical systems, plumbing, and energy-efficient installations that reduce operating costs."
         : "Σύγχρονα συστήματα κλιματισμού, ενεργειακά αποδοτικές εγκαταστάσεις, αναβαθμίσεις διαχείρισης νερού και βιώσιμες λύσεις",
     },
     {
       icon: Calendar,
-      title: isEnglish ? "Pre-Season Delivery" : "Παράδοση Πριν την Τουριστική Περίοδο",
+      title: isEnglish ? "Off-Season Scheduling" : "Παράδοση Πριν την Τουριστική Περίοδο",
       description: isEnglish
-        ? "Meticulous project planning and efficient execution to ensure completion before peak season - no disruption to operations"
+        ? "We plan and execute works during low season to minimise disruption and ensure your property is ready for peak periods."
         : "Προσεκτικό σχεδιασμό έργου και αποδοτική εκτέλεση για ολοκλήρωση πριν την υψηλή περίοδο χωρίς διακοπή λειτουργίας",
     },
     {
       icon: Shield,
-      title: isEnglish ? "Project Reliability" : "Αξιοπιστία & Εγγύηση Έργου",
+      title: isEnglish ? "Reliable Project Delivery" : "Αξιοπιστία & Εγγύηση Έργου",
       description: isEnglish
-        ? "Certified teams, quality assurance protocols, transparent communication, and full project accountability"
+        ? "Professional project management with clear timelines, regular updates, and accountability for quality and deadlines."
         : "Πιστοποιημένα συνεργεία, πρωτόκολλα ποιοτικού ελέγχου, διαφανή επικοινωνία και πλήρη ευθύνη του έργου",
     },
   ]
 
   const workStages = [
     {
-      stage: isEnglish ? "Phase 1: Design & Planning" : "Φάση 1: Σχεδιασμός & Προγραμματισμός",
+      stage: isEnglish ? "Phase 1: Assessment & Planning" : "Φάση 1: Σχεδιασμός & Προγραμματισμός",
       description: isEnglish
-        ? "Detailed architectural design, 3D visualization, structural analysis, and timeline planning tailored to your hotel's operational schedule"
+        ? "Site assessment, scope definition, and detailed project planning. We work around your operational calendar to minimise disruption."
         : "Λεπτομερές αρχιτεκτονικό σχεδιασμό, τρισδιάστατη απεικόνιση, δομική ανάλυση και προγραμματισμό χρονοδιαγράμματος προσαρμοσμένο στο πρόγραμμα λειτουργίας",
     },
     {
       stage: isEnglish ? "Phase 2: Permits & Preparation" : "Φάση 2: Άδειες & Προετοιμασία",
       description: isEnglish
-        ? "Acquisition of all necessary permits and licenses, site preparation, material procurement, and contractor coordination"
+        ? "We handle permits, coordinate with authorities, and prepare all materials and contractor schedules before work begins."
         : "Απόκτηση όλων των απαραίτητων αδειών, προετοιμασία χώρου, προσκόμιση υλικών και συντονισμός κατασκευαστών",
     },
     {
-      stage: isEnglish ? "Phase 3: Construction & Renovation" : "Φάση 3: Κατασκευή & Ανακαίνιση",
+      stage: isEnglish ? "Phase 3: Construction" : "Φάση 3: Κατασκευή & Ανακαίνιση",
       description: isEnglish
-        ? "Professional execution of all works with regular quality inspections, minimal disruption protocols, and dedicated project management"
+        ? "Professional execution with quality control at every stage. Regular progress updates and clear communication throughout."
         : "Επαγγελματική εκτέλεση όλων των εργασιών με τακτικούς ποιοτικούς ελέγχους, πρωτόκολλα ελαχιστοποίησης διακοπών και αποσβεστική διαχείριση έργου",
     },
     {
-      stage: isEnglish ? "Phase 4: Testing & Handover" : "Φάση 4: Δοκιμές & Παράδοση",
+      stage: isEnglish ? "Phase 4: Completion & Handover" : "Φάση 4: Δοκιμές & Παράδοση",
       description: isEnglish
-        ? "Comprehensive system testing, quality verification, final inspections, staff training, and smooth transition to operation"
+        ? "Final inspections, system testing, and snagging. Full documentation and handover to ensure you are satisfied with the completed work."
         : "Ολοκληρωτικές δοκιμές συστημάτων, επαλήθευση ποιότητας, τελικές επιθεωρήσεις, κατάrtηση προσωπικού και ομαλή μετάβαση στη λειτουργία",
     },
   ]
 
   const faqItems = [
     {
-      q: isEnglish ? "How long does a hotel renovation typically take?" : "Πόσο χρόνο χρειάζεται συνήθως μια ανακαίνιση ξενοδοχείου;",
+      q: isEnglish ? "How long does a hotel renovation take?" : "Πόσο χρόνο χρειάζεται συνήθως μια ανακαίνιση ξενοδοχείου;",
       a: isEnglish
-        ? "Timeline depends on project scope. We specialize in phased renovations that allow partial hotel operation during construction. A complete 30-room renovation typically takes 4-6 months with careful planning."
+        ? "This depends on the scope of work. We can provide an estimated timeline after assessing your property. Phased renovations allow you to keep parts of the hotel operational during construction."
         : "Ο χρόνος εξαρτάται από το εύρος του έργου. Ειδικευόμαστε σε σταδιακές ανακαινίσεις που επιτρέπουν μερική λειτουργία του ξενοδοχείου κατά την κατασκευή. Μια ολοκληρωτική ανακαίνιση 30 δωματίων διαρκεί συνήθως 4-6 μήνες.",
     },
     {
-      q: isEnglish ? "Can you work during guest season?" : "Μπορείτε να εργαστείτε κατά τη διάρκεια της τουριστικής περιόδου;",
+      q: isEnglish ? "Can you work during our operating season?" : "Μπορείτε να εργαστείτε κατά τη διάρκεια της τουριστικής περιόδου;",
       a: isEnglish
-        ? "Yes. We have extensive experience with phased renovations that minimize operational disruption. Work can be scheduled for off-peak hours, and we maintain strict noise and safety protocols."
-        : "Ναι. Έχουμε εκτενή εμπειρία με σταδιακές ανακαινίσεις που ελαχιστοποιούν την διακοπή λει��ουργίας. Τα έργα μπορούν να προγραμματιστούν για ώρες χαμηλής δραστηριότητας με αυστηρά πρωτόκολλα θορύβου και ασφάλειας.",
+        ? "We prefer to schedule major works during low season. However, we can manage phased renovations during operation with appropriate planning, safety measures, and noise control."
+        : "Ναι. Έχουμε εκτενή εμπειρία με σταδιακές ανακαινίσεις που ελαχιστοποιούν την διακοπή λειτουργίας. Τα έργα μπορούν να προγραμματιστούν για ώρες χαμηλής δραστηριότητας με αυστηρά πρωτόκολλα θορύβου και ασφάλειας.",
     },
     {
-      q: isEnglish ? "What's included in your energy efficiency upgrades?" : "Τι περιλαμβάνεται στις αναβαθμίσεις ενεργειακής απόδοσης;",
+      q: isEnglish ? "What energy efficiency improvements do you offer?" : "Τι περιλαμβάνεται στις αναβαθμίσεις ενεργειακής απόδοσης;",
       a: isEnglish
-        ? "LED lighting systems, high-efficiency HVAC, smart climate control, water heating systems, insulation upgrades, and renewable energy integration where applicable. We prioritize solutions that reduce operational costs."
+        ? "We can upgrade HVAC systems, lighting, insulation, and water heating to reduce your operating costs. We assess your current systems and recommend improvements that offer the best return."
         : "Συστήματα LED φωτισμού, υψηλής απόδοσης HVAC, έξυπνο έλεγχο κλίματος, συστήματα θέρμανσης νερού, αναβαθμίσεις μόνωσης και ενσωμάτωση ανανεώσιμων πηγών ενέργειας. Προτιμούμε λύσεις που μειώνουν τα λειτουργικά κόστη.",
     },
     {
-      q: isEnglish ? "How do you ensure quality in large-scale projects?" : "Πως διασφαλίζετε την ποιότητα σε μεγάλα έργα;",
+      q: isEnglish ? "How do you ensure quality on larger projects?" : "Πως διασφαλίζετε την ποιότητα σε μεγάλα έργα;",
       a: isEnglish
-        ? "We employ certified contractors, implement daily quality inspections, maintain material testing documentation, and conduct regular client briefings. Every phase is verified before proceeding to the next."
+        ? "We maintain quality control throughout with regular inspections, documented progress, and clear accountability. You receive regular updates and can visit the site at any time."
         : "Χρησιμοποιούμε πιστοποιημένους ανάδόχους, εφαρμόζουμε καθημερινούς ελέγχους ποιότητας, διατηρούμε τεκμηρίωση δοκιμών υλικών και διεξάγουμε τακτικές ενημερώσεις προς τον πελάτη. Κάθε φάση επαληθεύεται πριν τη μετάβαση στην επόμενη.",
     },
   ]
 
   const idealClients = [
     {
-      type: isEnglish ? "Boutique Hotel Owners" : "Ιδιοκτήτες Μπουτίκ Ξενοδοχείων",
+      type: isEnglish ? "Hotel Owners" : "Ιδιοκτήτες Μπουτίκ Ξενοδοχείων",
       description: isEnglish
-        ? "Seeking distinctive renovations that enhance guest experience and justify premium pricing"
-        : "Ζητούν διακριτικές ανακαινίσεις που βελτιώνουν την εμπειρία του επισκέπτη και δικαιολογο��ν τις πρίμα τιμές",
+        ? "Independent hotel owners looking to upgrade their property and improve guest experience"
+        : "Ζητούν διακριτικές ανακαινίσεις που βελτιώνουν την εμπειρία του επισκέπτη και δικαιολογούν τις πρίμα τιμές",
     },
     {
-      type: isEnglish ? "Tourism Property Investors" : "Επενδυτές Τουριστικών Ιδιοκτησιών",
+      type: isEnglish ? "Tourism Investors" : "Επενδυτές Τουριστικών Ιδιοκτησιών",
       description: isEnglish
-        ? "Looking to increase rental yield and asset value through strategic renovations"
+        ? "Investors seeking to improve property value and rental returns through strategic upgrades"
         : "Αναζητούν αύξηση της απόδοσης ενοικίασης και της αξίας του περιουσιακού στοιχείου μέσω στρατηγικών ανακαινίσεων",
     },
     {
-      type: isEnglish ? "Resort & Holiday Complex Operators" : "Λειτουργοί Θερέτρων & Συγκροτημάτων Διακοπών",
+      type: isEnglish ? "Guesthouse & Apartment Operators" : "Λειτουργοί Θερέτρων & Συγκροτημάτων Διακοπών",
       description: isEnglish
-        ? "Managing large properties that require phased renovations while maintaining operations"
+        ? "Operators of smaller tourism accommodation seeking professional renovation services"
         : "Διαχειρίζονται μεγάλες ιδιοκτησίες που απαιτούν σταδιακές ανακαινίσεις διατηρώντας τη λειτουργία",
     },
   ]
@@ -162,11 +162,11 @@ export default function HotelConstructionRenovationPage() {
         <div className="relative z-10 container px-4 max-w-6xl mx-auto">
           <AnimatedSection className="text-center space-y-8">
             <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "Hotel Construction & Renovation" : "Κατασκευή & Ανακαίνιση Ξενοδοχείων"}
+              {isEnglish ? "Hotel & Hospitality Construction" : "Κατασκευή & Ανακαίνιση Ξενοδοχείων"}
             </h1>
             <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg font-light">
               {isEnglish
-                ? "We build new hotel units from the ground up and renovate existing properties. Complete construction services for hospitality projects in Corfu."
+                ? "We build and renovate hotels, guesthouses, and tourism accommodation across Corfu. Professional construction services designed around your operational requirements."
                 : "Κατασκευάζουμε νέες ξενοδοχειακές μονάδες από το μηδέν και ανακαινίζουμε υφιστάμενες. Ολοκληρωμένες κατασκευαστικές υπηρεσίες για τουριστικά καταλύματα στην Κέρκυρα."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -187,11 +187,11 @@ export default function HotelConstructionRenovationPage() {
         <div className="container max-w-6xl mx-auto px-4">
           <AnimatedSection className="space-y-8 text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8">
-              {isEnglish ? "Redefine Your Hotel's Future" : "Επαναορίστε το Μέλλον του Ξενοδοχείου σας"}
+              {isEnglish ? "Hospitality Construction Services" : "Επαναορίστε το Μέλλον του Ξενοδοχείου σας"}
             </h2>
             <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
               {isEnglish
-                ? "In a competitive hospitality market, property upgrades are strategic investments. We specialize in transforming hotels into premium destinations through intelligent renovations, modern amenities, and operational excellence. Our approach combines aesthetic refinement with technical precision, ensuring your property stands out and delivers measurable returns."
+                ? "Tourism properties require contractors who understand the unique demands of the hospitality sector. We deliver renovation and construction projects that improve guest experience, reduce operational costs, and can be scheduled around your season. From room upgrades to complete property renovations, we provide professional project management and reliable execution."
                 : "Σε ένα ανταγωνιστικό αγορά φιλοξενίας, οι αναβαθμίσεις ιδιοκτησιών είναι στρατηγικές επενδύσεις. Ειδικευόμαστε στη μετατροπή ξενοδοχείων σε πολυτελή προορισμούς μέσω έξυπνων ανακαινίσεων, σύγχρονων παροχών και λειτουργικής αριστείας. Η προσέγγιση μας συνδυάζει αισθητική εξέλιξη με τεχνική ακρίβεια, διασφαλίζοντας ότι η ιδιοκτησία ξεχωρίζει και παρέχει μετρήσιμες αποδόσεις."}
             </p>
           </AnimatedSection>
@@ -294,28 +294,28 @@ export default function HotelConstructionRenovationPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                title: isEnglish ? "Hospitality Expertise" : "Εμπειρία Φιλοξενίας",
+                title: isEnglish ? "Tourism Sector Experience" : "Εμπειρία Φιλοξενίας",
                 desc: isEnglish
-                  ? "Dedicated experience in hotel and resort projects across Corfu with deep understanding of guest expectations"
+                  ? "We understand the specific requirements of hospitality properties and the importance of timing and guest experience."
                   : "Αποσβεστική εμπειρία σε ξενοδοχειακά και θέρετρα έργα με βαθιά κατανόηση των προσδοκιών των επισκεπτών",
               },
               {
-                title: isEnglish ? "Operational Continuity" : "Συνέχεια Λειτουργίας",
+                title: isEnglish ? "Flexible Scheduling" : "Συνέχεια Λειτουργίας",
                 desc: isEnglish
-                  ? "Phased execution strategies that allow your property to remain operational during renovations"
+                  ? "We plan works around your operational calendar to ensure minimal disruption to your business."
                   : "Στρατηγικές σταδιακής εκτέλεσης που επιτρέπουν την ενεργή λειτουργία κατά τις ανακαινίσεις",
               },
               {
-                title: isEnglish ? "Transparent Budgeting" : "Διαφανή Προϋπολογισμός",
+                title: isEnglish ? "Transparent Pricing" : "Διαφανή Προϋπολογισμός",
                 desc: isEnglish
-                  ? "Clear cost breakdowns, no hidden fees, and professional financial management throughout the project lifecycle"
+                  ? "Detailed cost breakdowns with no hidden fees. We keep you informed of any changes that affect your budget."
                   : "Σαφής ανάλυση κόστους, χωρίς κρυμμένα έξοδα και επαγγελματική χρηματοοικονομική διαχείριση",
               },
               {
-                title: isEnglish ? "Quality Assurance" : "Διασφάλιση Ποιότητας",
+                title: isEnglish ? "Quality Standards" : "Διασφάλιση Ποιότητας",
                 desc: isEnglish
-                  ? "Certified contractors, daily inspections, material testing, and comprehensive warranties on all work"
-                  : "Πιστοποιημένοι ανάδόχοι, καθημερινές επιθεωρήσεις, δοκιμές ��λικών και ολοκληρωτικές εγγυήσεις",
+                  ? "We use trusted contractors and maintain quality control throughout with proper documentation and warranties."
+                  : "Πιστοποιημένοι ανάδόχοι, καθημερινές επιθεωρήσεις, δοκιμές υλικών και ολοκληρωτικές εγγυήσεις",
               },
             ].map((item, i) => (
               <AnimatedSection
@@ -357,11 +357,11 @@ export default function HotelConstructionRenovationPage() {
         <div className="container max-w-4xl mx-auto px-4 text-center">
           <AnimatedSection className="space-y-8">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              {isEnglish ? "Ready to Transform Your Hotel?" : "Έτοιμοι να Μετατρέψετε το Ξενοδοχείο σας;"}
+              {isEnglish ? "Discuss Your Project" : "Έτοιμοι να Μετατρέψετε το Ξενοδοχείο σας;"}
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
               {isEnglish
-                ? "Let's discuss how our expertise can maximize your property's potential and deliver measurable results"
+                ? "Contact us to discuss your hotel renovation or construction requirements. We provide free initial consultations."
                 : "Ας συζητήσουμε πώς η εμπειρία μας μπορεί να μεγιστοποιήσει το δυναμικό της ιδιοκτησίας σας"}
             </p>
   <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
