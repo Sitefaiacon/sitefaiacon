@@ -125,8 +125,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="icon"
-          href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg"
-          type="image/jpeg"
+          href="/logo-faiacon.png"
+          type="image/png"
+        />
+        <link
+          rel="apple-touch-icon"
+          href="/logo-faiacon.png"
         />
         <LocalBusinessSchema />
         <WebsiteSchema />
