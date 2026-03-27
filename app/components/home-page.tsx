@@ -77,26 +77,15 @@ export default function HomePage({ lang }: { lang: string }) {
                   : "Εγκωρισμένοι τοποικοί ανάδοχοι με εμπειρία 35+ ετών"}
               </p>
 
-              {/* CTA Buttons - Only 2 */}
+              {/* CTA Buttons - Only 1 */}
               <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up animation-delay-200">
                 <Button
                   size="lg"
                   className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
                   asChild
                 >
-                  <Link href={`/${lang}/cost-calculator`} className="flex items-center gap-2">
-                    <Calculator className="w-5 h-5" />
-                    {isEnglish ? "Renovation Cost Calculator" : "Υπολογιστής Κόστους Ανακαίνισης"}
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-                  asChild
-                >
-                  <Link href={whatsappLink} target="_blank" className="flex items-center gap-2">
-                    <MessageCircle className="w-5 h-5" />
-                    {isEnglish ? "WhatsApp Estimate" : "WhatsApp Εκτίμηση"}
+                  <Link href="/appointment" className="flex items-center gap-2">
+                    {isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}
                   </Link>
                 </Button>
               </div>
@@ -245,7 +234,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "Villa Construction" : "Έτοιμο για Airbnb & Ενοικίαση",
                 description: isEnglish
                   ? "New villa builds and luxury residences designed and constructed to the highest standards."
-                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοικίασης με υψηλό δυναμικό εισοδήματος.",
+                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοικίασης με υψηλό δυναμικό εισοδήμ��τος.",
                 href: "/services/villa-luxury-home-construction",
               },
               {
