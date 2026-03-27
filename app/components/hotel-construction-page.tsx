@@ -123,7 +123,7 @@ export default function HotelConstructionRenovationPage() {
       type: isEnglish ? "Boutique Hotel Owners" : "Ιδιοκτήτες Μπουτίκ Ξενοδοχείων",
       description: isEnglish
         ? "Seeking distinctive renovations that enhance guest experience and justify premium pricing"
-        : "Ζητούν διακριτικές ανακαινίσεις που βελτιώνουν την εμπειρία του επισκέπτη και δικαιολογούν τις πρίμα τιμές",
+        : "Ζητούν διακριτικές ανακαινίσεις που βελτιώνουν την εμπειρία του επισκέπτη και δικαιολογο��ν τις πρίμα τιμές",
     },
     {
       type: isEnglish ? "Tourism Property Investors" : "Επενδυτές Τουριστικών Ιδιοκτησιών",
@@ -175,14 +175,7 @@ export default function HotelConstructionRenovationPage() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-lg"
                 asChild
               >
-                <Link href="/appointment">{isEnglish ? "Schedule Consultation" : "Προγραμματίστε Συζήτηση"}</Link>
-              </Button>
-              <Button
-                size="lg"
-                className="bg-primary/80 text-white hover:bg-primary border-2 border-white px-8 py-6 text-lg font-semibold shadow-lg"
-                asChild
-              >
-                <Link href="/cost-calculator">{isEnglish ? "Get Cost Estimate" : "Λάβετε Εκτίμηση Κόστους"}</Link>
+                <Link href="/appointment">{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
               </Button>
             </div>
           </AnimatedSection>
@@ -371,22 +364,15 @@ export default function HotelConstructionRenovationPage() {
                 ? "Let's discuss how our expertise can maximize your property's potential and deliver measurable results"
                 : "Ας συζητήσουμε πώς η εμπειρία μας μπορεί να μεγιστοποιήσει το δυναμικό της ιδιοκτησίας σας"}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold"
-                asChild
-              >
-                <Link href="/appointment">{isEnglish ? "Schedule Consultation" : "Προγραμματίστε Συζήτηση"}</Link>
-              </Button>
-              <Button
-                size="lg"
-                className="bg-transparent text-white border-2 border-white hover:bg-white/10 px-8 py-6 text-lg font-semibold"
-                asChild
-              >
-                <Link href="/our-projects">{isEnglish ? "View Our Projects" : "Δείτε τα Έργα μας"}</Link>
-              </Button>
-            </div>
+  <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+    <Button
+      size="lg"
+      className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold"
+      asChild
+    >
+      <Link href="/appointment">{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
+    </Button>
+  </div>
           </AnimatedSection>
         </div>
       </section>

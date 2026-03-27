@@ -75,7 +75,7 @@ export default function VillaLuxuryConstructionPage() {
       stage: isEnglish ? "Phase 2: Technical Planning" : "Φάση 2: Τεχνικός Σχεδιασμός",
       description: isEnglish
         ? "Structural engineering, MEP (mechanical, electrical, plumbing) systems design, permit acquisition, and detailed construction documentation prepared by certified professionals."
-        : "Δομική μηχανική, σχεδιασμός MEP συστημάτων, απόκτηση αδειών και λεπτομερής κατασκευαστική τεκμηρίωση από πιστοποιημένους επαγγελματίες.",
+        : "Δομική μηχανική, σχεδιασμός MEP συστημάτων, απόκτηση αδειών και λεπτομερής κατασκευαστική τεκμηρίωση από πιστοποιημένους επαγγελματ��ες.",
     },
     {
       stage: isEnglish ? "Phase 3: Construction Excellence" : "Φάση 3: Κατασκευαστική Αριστεία",
@@ -181,14 +181,7 @@ export default function VillaLuxuryConstructionPage() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-lg"
                 asChild
               >
-                <Link href="/appointment">{isEnglish ? "Begin Your Design" : "Αρχίστε το Σχεδιασμό"}</Link>
-              </Button>
-              <Button
-                size="lg"
-                className="bg-primary/80 text-white hover:bg-primary border-2 border-white px-8 py-6 text-lg font-semibold shadow-lg"
-                asChild
-              >
-                <Link href="/our-projects">{isEnglish ? "Explore Our Portfolio" : "Εξερευνήστε το Χαρτοφυλάκιό μας"}</Link>
+                <Link href="/appointment">{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
               </Button>
             </div>
           </AnimatedSection>
