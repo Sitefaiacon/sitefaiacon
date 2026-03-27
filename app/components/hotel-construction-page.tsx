@@ -102,7 +102,7 @@ export default function HotelConstructionRenovationPage() {
       q: isEnglish ? "Can you work during guest season?" : "Μπορείτε να εργαστείτε κατά τη διάρκεια της τουριστικής περιόδου;",
       a: isEnglish
         ? "Yes. We have extensive experience with phased renovations that minimize operational disruption. Work can be scheduled for off-peak hours, and we maintain strict noise and safety protocols."
-        : "Ναι. Έχουμε εκτενή εμπειρία με σταδιακές ανακαινίσεις που ελαχιστοποιούν την διακοπή λειτουργίας. Τα έργα μπορούν να προγραμματιστούν για ώρες χαμηλής δραστηριότητας με αυστηρά πρωτόκολλα θορύβου και ασφάλειας.",
+        : "Ναι. Έχουμε εκτενή εμπειρία με σταδιακές ανακαινίσεις που ελαχιστοποιούν την διακοπή λει��ουργίας. Τα έργα μπορούν να προγραμματιστούν για ώρες χαμηλής δραστηριότητας με αυστηρά πρωτόκολλα θορύβου και ασφάλειας.",
     },
     {
       q: isEnglish ? "What's included in your energy efficiency upgrades?" : "Τι περιλαμβάνεται στις αναβαθμίσεις ενεργειακής απόδοσης;",
@@ -162,12 +162,12 @@ export default function HotelConstructionRenovationPage() {
         <div className="relative z-10 container px-4 max-w-6xl mx-auto">
           <AnimatedSection className="text-center space-y-8">
             <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "Exceptional Hotel Experiences Begin Here" : "Εξαιρετικές Ξενοδοχειακές Εμπειρίες Ξεκινούν Εδώ"}
+              {isEnglish ? "Hotel Construction & Renovation" : "Κατασκευή & Ανακαίνιση Ξενοδοχείων"}
             </h1>
             <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg font-light">
               {isEnglish
-                ? "Strategic renovations and construction solutions designed to elevate your hotel's competitive position, optimize guest satisfaction, and enhance operational efficiency across all properties in Corfu."
-                : "Στρατηγικές ανακαινίσεις και κατασκευαστικές λύσεις σχεδιασμένες για να ανυψώσουν τη θέση του ξενοδοχείου σας, να βελτιστοποιήσουν την ικανοποίηση των επισκεπτών και να ενισχύσουν την λειτουργική αποδοτικότητα."}
+                ? "We build new hotel units from the ground up and renovate existing properties. Complete construction services for hospitality projects in Corfu."
+                : "Κατασκευάζουμε νέες ξενοδοχειακές μονάδες από το μηδέν και ανακαινίζουμε υφιστάμενες. Ολοκληρωμένες κατασκευαστικές υπηρεσίες για τουριστικά καταλύματα στην Κέρκυρα."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button
@@ -208,7 +208,7 @@ export default function HotelConstructionRenovationPage() {
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               {isEnglish
                 ? "Comprehensive solutions tailored to the unique demands of hospitality properties"
-                : "Ολοκληρωμένες λύσεις προσαρμοσμένες στις μοναδικές απαιτήσεις των ξενοδοχειακών ιδιοκτησιών"}
+                : "Ολοκληρωμένες λύσεις προσαρμοσμένες στις ��οναδικές απαιτήσεις των ξενοδοχειακών ιδιοκτησιών"}
             </p>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-8">
@@ -315,7 +315,7 @@ export default function HotelConstructionRenovationPage() {
                 title: isEnglish ? "Quality Assurance" : "Διασφάλιση Ποιότητας",
                 desc: isEnglish
                   ? "Certified contractors, daily inspections, material testing, and comprehensive warranties on all work"
-                  : "Πιστοποιημένοι ανάδόχοι, καθημερινές επιθεωρήσεις, δοκιμές υλικών και ολοκληρωτικές εγγυήσεις",
+                  : "Πιστοποιημένοι ανάδόχοι, καθημερινές επιθεωρήσεις, δοκιμές ��λικών και ολοκληρωτικές εγγυήσεις",
               },
             ].map((item, i) => (
               <AnimatedSection
