@@ -246,17 +246,7 @@ export default function VapsimatаElaiokromatismoiPage() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-lg"
                 asChild
               >
-                <Link href="/appointment">{isEnglish ? "Contact Us" : "Επικοινωνήστε Μαζί μας"}</Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold"
-                asChild
-              >
-                <Link href="https://wa.me/306942123456" target="_blank" rel="noopener noreferrer">
-                  {isEnglish ? "WhatsApp Estimate" : "WhatsApp Εκτίμηση"}
-                </Link>
+                <Link href="/appointment">{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
               </Button>
             </div>
           </AnimatedSection>
