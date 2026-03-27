@@ -60,6 +60,8 @@ export function SiteHeader() {
   }, [])
 
   const isServiceActive = servicesItems.some(item => pathname === `/${lang}${item.href}`)
+  
+  console.log("[v0] servicesItems count:", servicesItems.length, servicesItems.map(i => i.label))
 
   return (
     <header
@@ -91,7 +93,7 @@ export function SiteHeader() {
                       <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
                     </button>
                     {dropdownOpen && (
-                      <div className="absolute top-full left-0 mt-1 bg-[#1e3771] border border-white/10 rounded-md shadow-lg min-w-[220px] py-2">
+                      <div className="absolute top-full left-0 mt-1 bg-[#1e3771] border border-white/10 rounded-md shadow-lg min-w-[320px] py-2">
                         {item.items?.map((subItem) => (
                           <Link
                             key={subItem.href}
