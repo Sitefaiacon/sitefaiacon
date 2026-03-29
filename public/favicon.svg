@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <!-- Professional blue background -->
+  <rect width="180" height="180" fill="#1e3a5f" rx="36"/>
+  
+  <!-- "F" lettermark - simplified building/structure concept -->
+  <g fill="white">
+    <!-- Vertical bar of F -->
+    <rect x="50" y="40" width="25" height="100" rx="3"/>
+    
+    <!-- Top horizontal bar -->
+    <rect x="50" y="40" width="60" height="18" rx="3"/>
+    
+    <!-- Middle horizontal bar -->
+    <rect x="50" y="75" width="50" height="16" rx="3"/>
+    
+    <!-- Accent - small architectural element -->
+    <circle cx="130" cy="55" r="8" opacity="0.9"/>
+  </g>
+</svg>
