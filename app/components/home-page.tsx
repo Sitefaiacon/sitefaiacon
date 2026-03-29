@@ -385,7 +385,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               {isEnglish
                 ? "Enter your project details below to receive an indicative budget estimate. This calculator provides preliminary figures to help you plan. For an accurate quote tailored to your specific requirements, please contact us."
-                : "Συμπληρώστε τα στοιχεία του έργου σας και λάβετε αμέσως μια εκτίμηση. Ο υπολογιστής σας δίνει βασικές ενδείξεις για το προϋπολογισμό. Για ακριβείς τιμές, επικοινωνήστε μαζί μας."}
+                : "Συμπληρώστε τα στοιχεία του έργου σας και λάβετε αμέσως μια εκτίμηση. Η εκτίμηση αυτή είναι ενδεικτική και σας βοηθά να σχηματίσετε μια πρώτη εικόνα για το κόστος του έργου. Για ακριβείς τιμές, επικοινωνήστε μαζί μας."}
             </p>
           </div>
           <RenovationCostCalculator />
