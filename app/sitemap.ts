@@ -128,12 +128,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.75,
     },
     {
-      url: `${baseUrl}/en/appointment`,
+      url: `${baseUrl}/en/renovations-corfu`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/en/projects/house-renovation-corfu`,
       lastModified: currentDate,
       changeFrequency: "monthly" as const,
-      priority: 0.65,
+      priority: 0.8,
     },
-  ]
-
-  return routes
-}
+    {
+      url: `${baseUrl}/en/projects/villa-renovation-corfu`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/en/projects/apartment-renovation-corfu`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },

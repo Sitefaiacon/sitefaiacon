@@ -1,0 +1,18 @@
+# Robots.txt for Faiacon.gr
+# Allow all pages for indexing
+
+User-agent: *
+Allow: /
+
+# Specific directives for search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://faiacon.gr/sitemap.xml
+
+# Crawl delay (optional - remove if not needed)
+# Crawl-delay: 1

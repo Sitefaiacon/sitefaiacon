@@ -3,51 +3,55 @@ import CostCalculatorPage from "../../components/cost-calculator-page"
 import type { Metadata } from "next"
 import { BreadcrumbSchema, HowToSchema, OfferCatalogSchema, ReviewSchema, PriceRangeSchema } from "../../components/structured-data"
 
-export const metadata: Metadata = {
-  title: isEnglish 
-    ? "Renovation Cost Calculator | Free Online Estimate - Faiacon"
-    : "Υπολογιστής Κόστους Ανακαίνισης | Δωρεάν Online Εκτίμηση - ΦαιάCon",
-  description: isEnglish
-    ? "Free renovation cost calculator for homes and properties in Corfu. Estimate costs for kitchens, bathrooms, flooring, and complete renovations online."
-    : "Δωρεάν υπολογιστής κόστους ανακαίνισης σπιτιού. Υπολογίστε online το κόστος για μπάνιο, κουζίνα, δάπεδα, βαφή, αλλαγή κουφωμάτων. Άμεση εκτίμηση χωρίς δεσμεύσεις.",
-  keywords: isEnglish
-    ? [
-        "renovation cost calculator",
-        "renovation estimate",
-        "renovation cost corfu",
-        "property renovation cost",
-        "home renovation calculator",
-        "villa renovation cost",
-        "renovation price estimate",
-        "online renovation calculator",
-        "free renovation estimate",
-      ]
-    : [
-        "υπολογιστής κόστους ανακαίνισης",
-        "εκτίμηση κόστους ανακαίνισης",
-        "κόστος ανακαίνισης σπιτιού",
-        "πόσο κοστίζει ανακαίνιση",
-        "τιμές ανακαίνισης",
-        "κόστος ανακαίνισης μπάνιου",
-        "κόστος ανακαίνισης κουζίνας",
-        "κόστος αλλαγής δαπέδων",
-        "κόστος βαφής σπιτιού",
-        "κόστος αλλαγής κουφωμάτων",
-        "online υπολογισμός ανακαίνισης",
-        "δωρεάν εκτίμηση ανακαίνισης",
-        "calculator ανακαίνισης",
-      ],
-  openGraph: {
-    title: isEnglish
-      ? "Renovation Cost Calculator | Free Online Estimate | Faiacon"
-      : "Υπολογιστής Κόστους Ανακαίνισης | Δωρεάν Online Εκτίμηση",
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const isEnglish = lang === "en"
+
+  return {
+    title: isEnglish 
+      ? "Renovation Cost Calculator | Free Online Estimate - Faiacon"
+      : "Υπολογιστής Κόστους Ανακαίνισης | Δωρεάν Online Εκτίμηση - ΦαιάCon",
     description: isEnglish
-      ? "Calculate renovation costs for homes and properties in Corfu. Free online estimate tool for your renovation project."
-      : "Υπολογίστε δωρεάν και online το κόστος ανακαίνισης του σπιτιού σας. Μπάνιο, κουζίνα, δάπεδα, κουφώματα.",
-    url: isEnglish ? "https://faiacon.gr/en/cost-calculator" : "https://faiacon.gr/el/cost-calculator",
-    type: "website",
-    images: [
-      {
+      ? "Free renovation cost calculator for homes and properties in Corfu. Estimate costs for kitchens, bathrooms, flooring, and complete renovations online."
+      : "Δωρεάν υπολογιστής κόστους ανακαίνισης σπιτιού. Υπολογίστε online το κόστος για μπάνιο, κουζίνα, δάπεδα, βαφή, αλλαγή κουφωμάτων. Άμεση εκτίμηση χωρίς δεσμεύσεις.",
+    keywords: isEnglish
+      ? [
+          "renovation cost calculator",
+          "renovation estimate",
+          "renovation cost corfu",
+          "property renovation cost",
+          "home renovation calculator",
+          "villa renovation cost",
+          "renovation price estimate",
+          "online renovation calculator",
+          "free renovation estimate",
+        ]
+      : [
+          "υπολογιστής κόστους ανακαίνισης",
+          "εκτίμηση κόστους ανακαίνισης",
+          "κόστος ανακαίνισης σπιτιού",
+          "πόσο κοστίζει ανακαίνιση",
+          "τιμές ανακαίνισης",
+          "κόστος ανακαίνισης μπάνιου",
+          "κόστος ανακαίνισης κουζίνας",
+          "κόστος αλλαγής δαπέδων",
+          "κόστος βαφής σπιτιού",
+          "κόστος αλλαγής κουφωμάτων",
+          "online υπολογισμός ανακαίνισης",
+          "δωρεάν εκτίμηση ανακαίνισης",
+          "calculator ανακαίνισης",
+        ],
+    openGraph: {
+      title: isEnglish
+        ? "Renovation Cost Calculator | Free Online Estimate | Faiacon"
+        : "Υπολογιστής Κόστους Ανακαίνισης | Δωρεάν Online Εκτίμηση",
+      description: isEnglish
+        ? "Calculate renovation costs for homes and properties in Corfu. Free online estimate tool for your renovation project."
+        : "Υπολογίστε δωρεάν και online το κόστος ανακαίνισης του σπιτιού σας. Μπάνιο, κουζίνα, δάπεδα, κουφώματα.",
+      url: isEnglish ? "https://faiacon.gr/en/cost-calculator" : "https://faiacon.gr/el/cost-calculator",
+      type: "website",
+      images: [
+        {
         url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
         width: 1200,
         height: 630,
