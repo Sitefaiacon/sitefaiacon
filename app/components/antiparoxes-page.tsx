@@ -88,8 +88,8 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
               Η Faiacon αναλαμβάνει συνεργασίες αντιπαροχής και αξιοποίησης οικοπέδων στην Κέρκυρα, προσφέροντας ολοκληρωμένη προσέγγιση από την αρχική τεχνική αξιολόγηση έως τον σχεδιασμό και την κατασκευή.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            {/* CTA */}
+            <div className="flex items-center justify-center pt-4">
               <Button
                 size="lg"
                 className="bg-white text-primary hover:bg-white/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -97,18 +97,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
               >
                 <Link href="#contact-form" className="flex items-center gap-2">
                   <Phone className="w-5 h-5" />
-                  Επικοινωνία για Αξιολόγηση
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300"
-                asChild
-              >
-                <Link href="#process" className="flex items-center gap-2">
-                  Δείτε τη Διαδικασία
-                  <ChevronRight className="w-5 h-5" />
+                  Κλείσε Ραντεβού
                 </Link>
               </Button>
             </div>
