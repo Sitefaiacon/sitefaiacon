@@ -94,7 +94,7 @@ export default function HomePage({ lang }: { lang: string }) {
                   className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
                   asChild
                 >
-                  <Link href={`/${lang}/contact`} className="flex items-center gap-2">
+                  <Link href={`/${lang}/appointment`} className="flex items-center gap-2">
                     <Calendar className="w-5 h-5" />
                     {isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}
                   </Link>
