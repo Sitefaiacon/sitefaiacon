@@ -249,11 +249,27 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                     ))}
                   </ul>
                 </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  )
-}
+                <div className="bg-gradient-to-br from-primary/5 to-transparent p-8 rounded-2xl border-2 border-primary/20">
+                  <h2 className="text-2xl font-bold text-primary mb-6">
+                    {isEnglish ? "Local Expertise in Corfu" : "Τοπική Εμπειρία στην Κέρκυρα"}
+                  </h2>
+                  <p className="text-gray-700 mb-4">
+                    {isEnglish
+                      ? "Since 1990, we have been helping property owners across Corfu with professional renovations, construction, and property development services. Our team understands the local context, climate, and what works best for properties in Corfu."
+                      : "Από το 1990, βοηθάμε ιδιοκτήτες ακινήτων σε ολόκληρη την Κέρκυρα με επαγγελματικές υπηρεσίες ανακαίνισης, κατασκευής και ανάπτυξης ακινήτων. Η ομάδα μας κατανοεί το τοπικό περιβάλλον, το κλίμα και τι λειτουργεί καλύτερα για ακίνητα στην Κέρκυρα."}
+                  </p>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <span className="text-primary font-bold">✓</span>
+                      <span>{isEnglish ? "35+ years serving Corfu property owners" : "35+ χρόνια υπηρεσιών προς ιδιοκτήτες ακινήτων στην Κέρκυρα"}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-primary font-bold">✓</span>
+                      <span>{isEnglish ? "Experience with villas, homes, and investment properties" : "Εμπειρία με βίλες, σπίτια και ακίνητα επενδύσεων"}</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-primary font-bold">✓</span>
+                      <span>{isEnglish ? "Support for overseas owners and remote coordination" : "Υποστήριξη ξένων ιδιοκτητών και απομακρυσμένη συντονισμό"}</span>
+                    </li>
+                  </ul>
+                </div>

@@ -358,6 +358,113 @@ export default function RenovationsCorfuPage() {
         </div>
       </section>
 
+      {/* Local Expertise & Trust Section */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-br from-primary/5 to-transparent border-t border-gray-200">
+        <div className="container relative z-10 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
+                Local Expertise in Corfu Renovations
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600">
+                35+ years of professional construction and renovation experience across Corfu properties. We understand the local context, climate, building codes, and what works for Corfu properties specifically.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-6 sm:gap-8">
+              {[
+                {
+                  number: "35+",
+                  label: "Years of Experience",
+                  detail: "Operating in Corfu since 1990"
+                },
+                {
+                  number: "500+",
+                  label: "Projects Completed",
+                  detail: "Homes, villas, and commercial properties"
+                },
+                {
+                  number: "1990",
+                  label: "Established",
+                  detail: "Local business supporting Corfu property owners"
+                },
+                {
+                  number: "Local",
+                  label: "Project Management",
+                  detail: "Direct communication, clear updates, accountability"
+                },
+              ].map((stat, idx) => (
+                <div key={idx} className="p-6 bg-white rounded-lg border border-gray-200 text-center hover:shadow-md transition-all">
+                  <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">{stat.number}</div>
+                  <div className="font-semibold text-gray-900 mb-2">{stat.label}</div>
+                  <div className="text-sm text-gray-600">{stat.detail}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12 sm:mt-16 grid md:grid-cols-2 gap-8">
+              <div className="p-8 bg-white rounded-lg border border-gray-200">
+                <h3 className="text-xl font-semibold text-primary mb-4">Understanding Corfu Properties</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary font-bold">✓</span>
+                    <span>Knowledge of Corfu's architectural styles and local building traditions</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary font-bold">✓</span>
+                    <span>Experience with Mediterranean climate challenges and solutions</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary font-bold">✓</span>
+                    <span>Local connections and trusted supply chains for quality materials</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary font-bold">✓</span>
+                    <span>Understanding of local regulations and permit processes in Corfu</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-8 bg-white rounded-lg border border-gray-200">
+                <h3 className="text-xl font-semibold text-primary mb-4">Supporting Property Owners in Corfu</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary font-bold">✓</span>
+                    <span>Direct project management with clear communication and regular updates</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary font-bold">✓</span>
+                    <span>Experience working with overseas owners and remote coordination</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary font-bold">✓</span>
+                    <span>Photo documentation and email updates for transparency</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-primary font-bold">✓</span>
+                    <span>Professional approach to budgets, timelines, and quality standards</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA for Local Service */}
+      <section className="relative py-12 sm:py-16 bg-primary/10 border-t border-gray-200">
+        <div className="container px-4 text-center">
+          <p className="text-lg text-gray-800 mb-6">
+            Planning renovations on your property in Corfu?
+          </p>
+          <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-3 text-base font-semibold" asChild>
+            <Link href={`/${lang}/cost-calculator`}>
+              Get a Free Estimate for Your Corfu Property
+            </Link>
+          </Button>
+        </div>
+      </section>
+
       {/* Related Services & Internal Links - SEO Support */}
       <section className="relative py-16 sm:py-24 md:py-32 bg-gray-50 border-t border-gray-200">
         <div className="container relative z-10 px-4">

@@ -173,7 +173,7 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
                   ? "Faiacon delivers comprehensive construction and renovation services for property owners who expect quality workmanship and dependable project management. Whether you are renovating a family home, preparing a villa for rental, or upgrading a hospitality property, we bring the same level of care and professionalism to every project. Our team combines local expertise with modern construction standards to ensure lasting results."
-                  : "Η Faiacon αναλαμβάνει ανακαινίσεις και κατασκευές με σοβαρή προσέγγιση και επαγγελματική διαχείριση. Αν θέλετε να αναβαθμίσετε το σπίτι ή το ακίνητο σας, να το προετοιμάσετε για ενοικίαση, ή να βελτιώσετε την ενεργειακή του απόδοση, αναλαμβάνουμε το έργο με την ίδια προσοχή. Γνωρίζουμε καλά την Κέρκυρα, τα κλιματικά δεδομένα της, τ��ς απαιτήσεις των κατασκευών εδώ, και είμαστε δυνατοί σε κάθε λεπτομέρεια."}
+                  : "Η Faiacon αναλαμβάνει ανακαινίσεις και κατασκευές με σοβαρή προσέγγιση και επαγγελματική διαχείριση. Αν θέλετε να αναβαθμίσετε το σπίτι ή το ακίνητο σας, να το προετοιμάσετε για ενοικίαση, ή να βελτιώσετε την ενεργειακή του απόδοση, αναλαμβάνουμε το έργο με την ίδια προσοχή. Γνωρίζουμε καλά την Κέρκυρα, τα κλιματικά δεδομένα τη��, τ��ς απαιτήσεις των κατασκευών εδώ, και είμαστε δυνατοί σε κάθε λεπτομέρεια."}
                 </p>
               </div>
 
@@ -245,7 +245,7 @@ export default function HomePage({ lang }: { lang: string }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση Ακινήτ��υ",
+                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση Ακιν��τ��υ",
                 description: isEnglish
                   ? "Professional home, villa and property renovations with local expertise and reliable project management."
                   : "Ανακαίνιση που βελτιώνει πραγματικά το σπίτι σας: σύγχρονα υλικά, σωστή κατασκευή, χώρος που λειτουργεί καλύτερα.",
@@ -381,6 +381,35 @@ export default function HomePage({ lang }: { lang: string }) {
                     </Link>
                   </Button>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Local Service Area Section - English Only */}
+      {isEnglish && (
+        <section className="relative py-12 sm:py-16 md:py-20 bg-gradient-to-r from-primary/5 to-primary/10 border-t border-gray-200">
+          <div className="container px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <p className="text-lg sm:text-xl font-semibold text-primary mb-3">
+                Serving Property Owners Across Corfu
+              </p>
+              <p className="text-base sm:text-lg text-gray-700 mb-6">
+                Since 1990, Faiacon has been helping homeowners, villa owners, investors, and overseas property owners improve their properties with professional renovations, construction, and property solutions tailored to Corfu's unique context.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                {[
+                  "Corfu Town",
+                  "Sinies", 
+                  "Potamos",
+                  "Kontokali",
+                  "Corfu Island"
+                ].map((location) => (
+                  <span key={location} className="px-4 py-2 bg-white rounded-full border border-primary/20 text-sm font-medium text-gray-700 hover:bg-primary/5 transition-colors">
+                    {location}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
