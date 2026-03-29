@@ -32,6 +32,13 @@ export const metadata: Metadata = {
   },
 }
 
+export function generateStaticParams() {
+  return [
+    { lang: "en" },
+    { lang: "el" },
+  ]
+}
+
 export default async function RenovationsCorfu({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
   
