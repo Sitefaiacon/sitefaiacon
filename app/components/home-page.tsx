@@ -166,7 +166,7 @@ export default function HomePage({ lang }: { lang: string }) {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
                 {isEnglish ? "Why Property Owners Choose Faiacon" : "Γιατί μας Εμπιστεύονται οι Ιδιοκτήτες Ακινήτων"}
               </h2>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-600">{isEnglish ? "Professional Execution. Reliable Results." : "Επαγγελματικά αποτελέσματα, εμπιστευμένη τεχνογνωσία"}</p>
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-600">{isEnglish ? "Professional Execution. Reliable Results." : "Σοβαρή δουλειά, αξιόπιστα αποτελέσματα"}</p>
             </div>
 
             <div className="prose prose-lg max-w-none mb-12">
@@ -238,7 +238,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-base sm:text-lg text-gray-600">
               {isEnglish
                 ? "Comprehensive construction and renovation services for residential and hospitality properties"
-                : "Υπηρεσίες εστιασμένες στα αποτελέσματα για αύξηση αξίας και δυναμικού ενοικίασης"}
+                : "Ανακαινίσεις, κατασκευές, και λύσεις αξιοποίησης ακινήτων που δίνουν αποτελέσματα"}
             </p>
           </div>
 
@@ -319,7 +319,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 <p className="text-base text-gray-600 mb-8">
                   {isEnglish
                     ? "If you own land or property with development potential, we can evaluate the opportunities for a meaningful collaboration together. Faiacon approaches each case with responsibility, transparency, and a focus on realistic property development."
-                    : "Αν έχετε οικόπεδο ή ακίνητο στην Κέρκυρα, μπορούμε να τα δούμε μαζί και να συζητήσουμε αν υπάρχει περίπτωση. Δεν υπόσχεται χρυσά όρια σε κάθε περίπτωση, αλλά όπου υπάρχει δυνατότητα, αναλαμβάνουμε το έργο με ευθύνη και διαφάνεια."}
+                    : "Αν έχετε οικόπεδο ή ακίνητο στην Κέρκυρα, μπορούμε να τα δούμε μαζί και να συζητήσουμε τις δυνατότητες. Αν υπάρχει περίπτωση, αναλαμβάνουμε το έργο με ευθύνη και διαφάνεια. Αν δεν υπάρχει, το λέμε ανοιχτά."}
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -354,12 +354,12 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="container relative z-10 px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              {isEnglish ? "Get a Preliminary Cost Estimate" : "Εκτιμήστε το Κόστος Ανακαίνισης σας σε Λεπτά"}
+              {isEnglish ? "Get a Preliminary Cost Estimate" : "Υπολογίστε τo Κόστος Ανακαίνισής σας"}
             </h2>
             <p className="text-lg sm:text-xl mb-8 text-white/90 leading-relaxed">
               {isEnglish
                 ? "Use our online calculator to get an indicative budget for your renovation project. For a detailed quote, contact us directly."
-                : "Χρησιμοποιήστε τον υπολογιστή κόστους μας και λάβετε εξατομικευμένη εκτίμηση για το έργο σας."}
+                : "Χρησιμοποιήστε τον υπολογιστή μας και δείτε πόσο θα κοστίσει το έργο σας. Για ακριβείς τιμές, ας μιλήσουμε."}
             </p>
             <Button
               size="lg"
@@ -385,7 +385,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               {isEnglish
                 ? "Enter your project details below to receive an indicative budget estimate. This calculator provides preliminary figures to help you plan. For an accurate quote tailored to your specific requirements, please contact us."
-                : "Συμπληρώστε τα στοιχεία του έργου σας για να λάβετε άμεση εκτίμηση. Αυτό είναι ένας προκαταρκτικός υπολογισμός για να σας βοηθήσει να προγραμματίσετε το προϋπολογισμό σας."}
+                : "Συμπληρώστε τα στοιχεία του έργου σας και λάβετε αμέσως μια εκτίμηση. Ο υπολογιστής σας δίνει βασικές ενδείξεις για το προϋπολογισμό. Για ακριβείς τιμές, επικοινωνήστε μαζί μας."}
             </p>
           </div>
           <RenovationCostCalculator />
@@ -402,7 +402,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-base sm:text-lg text-gray-600">
               {isEnglish
                 ? "A selection of completed construction and renovation works across Corfu"
-                : "Δείτε πώς μετατρέπουμε ακίνητα για μέγιστη αξία και δυναμικό ενοικίασης"}
+                : "Παραδείγματα από έργα που έχουμε ολοκληρώσει στην Κέρκυρα"}
             </p>
           </div>
 
@@ -496,7 +496,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
               {isEnglish
                 ? "Contact us today to discuss your renovation goals and get started on transforming your property."
-                : "Επικοινωνήστε μαζί μας σήμερα για να ξεκινήσετε τη μετατροπή του ακινήτου σας."}
+                : "Ας ξεκινήσουμε την κονβερσά για τo έργο σας. Επικοινωνήστε μαζί μας σήμερα."}
             </p>
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
               <Link href={`/${lang}/appointment`}>
