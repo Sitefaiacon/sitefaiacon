@@ -230,25 +230,14 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                     </li>
                   </ul>
                 </div>
-
-                <div className="bg-white p-8 rounded-2xl shadow-lg">
-                  <h2 className="text-2xl font-bold text-primary mb-6">
-                    {isEnglish ? "Why Book an Appointment" : "Γιατί να Κλείσετε Ραντεβού"}
-                  </h2>
-                  <ul className="space-y-4">
-                    {[
-                      isEnglish ? "Free initial consultation" : "Δωρεάν αρχική συμβουλευτική",
-                      isEnglish ? "Customized solutions" : "Εξατομικευμένες λύσεις",
-                      isEnglish ? "Accurate cost estimation" : "Ακριβής εκτίμηση κόστους",
-                      isEnglish ? "Professional guidance" : "Επαγγελματική καθοδήγηση",
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start">
-                        <CheckCircle className="w-6 h-6 text-primary mr-2 flex-shrink-0 mt-1" />
-                        <span className="text-gray-600 text-justify-content">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
                 <div className="bg-gradient-to-br from-primary/5 to-transparent p-8 rounded-2xl border-2 border-primary/20">
                   <h2 className="text-2xl font-bold text-primary mb-6">
                     {isEnglish ? "Local Expertise in Corfu" : "Τοπική Εμπειρία στην Κέρκυρα"}
