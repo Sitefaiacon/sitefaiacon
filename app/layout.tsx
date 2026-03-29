@@ -22,7 +22,7 @@ const playfair = Playfair_Display({
 })
 
 const oswald = Oswald({
-  subsets: ["latin", "latin-ext", "greek"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-oswald",
   display: "swap",
   weight: ["400", "500", "600", "700"],
