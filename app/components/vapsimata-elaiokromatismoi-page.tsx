@@ -45,8 +45,8 @@ export default function VapsimatаElaiokromatismoiPage() {
       icon: Paintbrush,
       title: isEnglish ? "Specialist Decorative Techniques" : "Εξειδικευμένες Διακοσμητικές Τεχνικές",
       description: isEnglish
-        ? "Application of textured renders, decorative coatings, and special-effect finishes for clients seeking a distinctive aesthetic character in their spaces."
-        : "Εφαρμογή υφαντών σοβάδων, διακοσμητικών επικαλύψεων και φινιρισμάτων ειδικών εφέ για πελάτες που αναζητούν ξεχωριστό αισθητικό χαρακτήρα στους χώρους τους.",
+        ? "Application of textured renders, decorative coatings, and special-effect finishes for clients seeking a distinctive aesthetic in their spaces."
+        : "Εφαρμογή υφαντών σοβάδων, διακοσμητικών επικαλύψεων και φινιρισμάτων ειδικών εφέ για πελάτες που αναζητούν ξεχωριστό αισθητικό χαρακτήρα.",
     },
     {
       icon: Star,
@@ -78,10 +78,10 @@ export default function VapsimatаElaiokromatismoiPage() {
         : "Ποιοτικές επικαλύψεις προστατεύουν τοίχους και όψεις από υγρασία, μούχλα, UV ακτινοβολία και περιβαλλοντικές φθορές, παρατείνοντας τη ζωή τους.",
     },
     {
-      title: isEnglish ? "Better Property Image" : "Καλύτερη Εικόνα Ακινήτου",
+      title: isEnglish ? "Better Property Image" : "Καλύτερη Εικόνα του Ακινήτου",
       desc: isEnglish
         ? "A well-painted property makes a strong first impression for guests, tenants, or buyers — directly affecting occupancy rates and perceived value."
-        : "Ένα φροντισμένο ακίνητο κάνει ισχυρή πρώτη εντύπωση σε επισκέπτες, ενοικιαστές ή αγοραστές — επηρεάζοντας άμεσα τα ποσοστά πληρότητας και την αντιληπτή αξία.",
+        : "Ένα φροντισμένο ακίνητο κάνει ισχυρή πρώτη εντύπωση σε επισκέπτες, ενοικιαστές ή αγοραστές—επηρεάζοντας άμεσα τα ποσοστά πληρότητας και την αντιληπτή αξία.",
     },
     {
       title: isEnglish ? "Refined Finish" : "Προσεγμένο Φινίρισμα",

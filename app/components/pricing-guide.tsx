@@ -69,7 +69,7 @@ export function PricingGuideComponent() {
         { icon: Award, title: "35+ Years Expert", description: "Trusted local expertise" },
       ]
     : [
-        { icon: TrendingDown, title: "Τιμές Αγοράς", description: "Τιμές που αντικατοπτρίζουν την αγορά Κέρκυρας" },
+        { icon: TrendingDown, title: "Τιμές Αγοράς", description: "Τιμές που αντικατοπτρίζουν την αγορά της Κέρκυρας" },
         { icon: Clock, title: "Ενημερωμένες", description: "Προσαρμόζονται ανά τρίμηνο" },
         { icon: Users, title: "Πραγματικά Έργα", description: "Βασισμένες σε ολοκληρωμένα έργα" },
         { icon: Award, title: "35+ Χρόνια", description: "Αξιόπιστη τοπική εξειδίκευση" },
