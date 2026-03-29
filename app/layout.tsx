@@ -10,13 +10,13 @@ import { Analytics } from "@vercel/analytics/react"
 import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema } from "./components/structured-data"
 
 const outfit = Outfit({
-  subsets: ["latin", "greek"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-outfit",
   display: "swap",
 })
 
 const playfair = Playfair_Display({
-  subsets: ["latin", "greek"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-playfair",
   display: "swap",
 })
