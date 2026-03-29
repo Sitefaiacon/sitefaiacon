@@ -238,12 +238,19 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-base sm:text-lg text-gray-600">
               {isEnglish
                 ? "Comprehensive construction and renovation services for residential and hospitality properties"
-                : "Ανακαινίσεις, κατασκευές, και λύσεις αξιοποίησης ακινήτων που δίνουν αποτελέσματα"}
+                : "Ανακαινίσ��ις, κατασκευές, και λύσεις αξιοποίησης ακινήτων που δίνουν αποτελέσματα"}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
+              {
+                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση Ακινήτου",
+                description: isEnglish
+                  ? "Professional home, villa and property renovations with local expertise and reliable project management."
+                  : "Ανακαίνιση που βελτιώνει πραγματικά το σπίτι σας: σύγχρονα υλικά, σωστή κατασκευή, χώρος που λειτουργεί καλύτερα.",
+                href: isEnglish ? "/renovations-corfu" : "/house-renovation",
+              },
               {
                 title: isEnglish ? "House Renovation" : "Αύξηση Αξίας Ακινήτου",
                 description: isEnglish
