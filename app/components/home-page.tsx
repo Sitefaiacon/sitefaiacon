@@ -173,7 +173,7 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
                   ? "Faiacon delivers comprehensive construction and renovation services for property owners who expect quality workmanship and dependable project management. Whether you are renovating a family home, preparing a villa for rental, or upgrading a hospitality property, we bring the same level of care and professionalism to every project. Our team combines local expertise with modern construction standards to ensure lasting results."
-                  : "Η FaiaCon ειδικεύεται στη μετατροπή ακινήτων σε κερδοφόρες επενδύσεις. Είτε θέλετε να αυξήσετε την αξία της ιδιοκτησίας σας, να την κάνετε έτοιμη για Airbnb, ή να βελτιώσετε την ενεργειακή της απόδοση, οι αποδεδειγμένες μέθοδοί μας παραδίδουν αποτελέσματα. Από ολοκληρωμένες ανακαινίσεις έως στοχευμένες αναβαθμίσεις, διαχειριζόμαστε κάθε λεπτομέρεια."}
+                  : "Η FaiaCon ειδικεύεται στη μετατροπή ακινήτων σε κερδοφόρες επενδύσεις. Είτε θέλετε να αυξήσετε την αξία της ιδιοκτησίας σας, να την κάνετε έτοιμη για Airbnb, ή να βελτιώσετε την ενεργειακή της απόδοση, οι αποδεδειγμένες μέθοδοί μας παραδίδουν αποτελέσματα. Από ολοκληρωμένες ανακαινίσεις έως στοχευμένες ανα��αθμίσεις, διαχειριζόμαστε κάθε λεπτομέρεια."}
               </p>
             </div>
 
@@ -491,12 +491,12 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="container relative z-10 px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-              {isEnglish ? "Ready to Start Your Project?" : "Έτοιμοι να Ξεκινήσετε τ�� Έργο σας;"}
+              {isEnglish ? "Ready to Start Your Project?" : "Έτοιμοι να Ξεκινήσετε το Έργο σας;"}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
               {isEnglish
                 ? "Contact us today to discuss your renovation goals and get started on transforming your property."
-                : "Επικοινωνήστε μαζί μας σήμερα για να ξεκινήσετε τη μετατροπή του ακ��νήτου σας."}
+                : "Επικοινωνήστε μαζί μας σήμερα για να ξεκινήσετε τη μετατροπή του ακινήτου σας."}
             </p>
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
               <Link href={`/${lang}/appointment`}>
