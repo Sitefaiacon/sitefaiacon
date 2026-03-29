@@ -43,9 +43,15 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/images/faiacon-logo-round.jpg", type: "image/jpeg", sizes: "192x192" },
     ],
     shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    apple: [
+      { url: "/images/faiacon-logo-round.jpg", sizes: "180x180", type: "image/jpeg" },
+    ],
+    other: [
+      { rel: "mask-icon", url: "/images/faiacon-logo-round.jpg" },
+    ],
   },
   manifest: "/manifest.json",
   description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, εκτίμηση κόστους κατασκευής, ανακαίνιση σπιτιού, κατασκευή πισίνας. Δωρεάν εκτίμηση - 35+ χρόνια εμπειρίας.",
@@ -132,7 +138,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/faiacon-logo-round.jpg" type="image/jpeg" sizes="192x192" />
+        <link rel="apple-touch-icon" href="/images/faiacon-logo-round.jpg" sizes="180x180" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <LocalBusinessSchema />
         <WebsiteSchema />
         <RenovationCalculatorSchema />
