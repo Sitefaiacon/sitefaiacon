@@ -10,19 +10,19 @@ import { Analytics } from "@vercel/analytics/react"
 import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema } from "./components/structured-data"
 
 const outfit = Outfit({
-  subsets: ["latin"],
+  subsets: ["latin", "greek"],
   variable: "--font-outfit",
   display: "swap",
 })
 
 const playfair = Playfair_Display({
-  subsets: ["latin"],
+  subsets: ["latin", "greek"],
   variable: "--font-playfair",
   display: "swap",
 })
 
 const oswald = Oswald({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin", "latin-ext", "greek"],
   variable: "--font-oswald",
   display: "swap",
   weight: ["400", "500", "600", "700"],
@@ -133,6 +133,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable} ${oswald.variable}`}>
       <head>
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
