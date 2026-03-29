@@ -43,26 +43,31 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
     setIsSubmitting(true)
     
     try {
-      const response = await fetch("/api/calculator-lead", {
+      const response = await fetch("/api/antiparoxes-lead", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           ...formData,
-          source: "antiparoxes",
           language: lang,
         }),
       })
       
+      const result = await response.json()
+      
       if (response.ok) {
         setSubmitStatus("success")
         setFormData({ name: "", phone: "", email: "", area: "", message: "" })
+        // Reset success message after 5 seconds
+        setTimeout(() => setSubmitStatus("idle"), 5000)
       } else {
         setSubmitStatus("error")
+        console.error("Form submission error:", result.error)
       }
-    } catch {
+    } catch (error) {
       setSubmitStatus("error")
+      console.error("Form submission failed:", error)
     } finally {
       setIsSubmitting(false)
     }
@@ -138,7 +143,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
                 Μια σοβαρή συνεργασία για τη σωστή αξιοποίηση του ακινήτου σας
               </h2>
               <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                Η αντιπαροχή αποτελεί μια σημαντική απόφαση. Για αυτό, κάθε περίπτωση εξετάζεται με υπευθυνότητα και τεχνική ακρίβεια. Αναλύουμε τις πραγματικές δυνατότητες του ακινήτου και σας προτείνουμε μια συνεργασία που έχει ουσία και ρεαλιστικές προοπτικές αξιοποίησης.
+                Η αντιπαροχή αποτελεί μια σημαντική απόφαση. Για αυτό, κάθε περίπ��ωση εξετάζεται με υπευθυνότητα και τεχνική ακρίβεια. Αναλύουμε τις πραγματικές δυνατότητες του ακινήτου και σας προτείνουμε μια συνεργασία που έχει ουσία και ρεαλιστικές προοπτικές αξιοποίησης.
               </p>
             </AnimatedSection>
           </div>
