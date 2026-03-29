@@ -87,21 +87,21 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
             <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-lg leading-relaxed">
               Η Faiacon αναλαμβάνει συνεργασίες αντιπαροχής και αξιοποίησης οικοπέδων στην Κέρκυρα, προσφέροντας ολοκληρωμένη προσέγγιση από την αρχική τεχνική αξιολόγηση έως τον σχεδιασμό και την κατασκευή.
             </p>
-
-            {/* CTA */}
-            <div className="flex items-center justify-center pt-4">
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-                asChild
-              >
-                <Link href="#contact-form" className="flex items-center gap-2">
-                  <Phone className="w-5 h-5" />
-                  Κλείσε Ραντεβού
-                </Link>
-              </Button>
-            </div>
           </AnimatedSection>
+
+          {/* CTA - Positioned between content and trust strip */}
+          <div className="flex items-center justify-center mt-8 mb-16">
+            <Button
+              size="lg"
+              className="bg-white text-primary hover:bg-white/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              asChild
+            >
+              <Link href="#contact-form" className="flex items-center gap-2">
+                <Phone className="w-5 h-5" />
+                Κλείσε Ραντεβού
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Trust Strip */}
@@ -164,7 +164,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
               {
                 icon: Building2,
                 title: "Σχεδιασμός & Οργάνωση",
-                description: "Διαμορφώνουμε ολοκληρωμένη προσέγγιση για την ανάπτυξη του έργου, με έμφαση στη λειτουργικότητα, την ποιότητα και τη σωστή διαχείριση.",
+                description: "Δια��ορφώνουμε ολοκληρωμένη προσέγγιση για την ανάπτυξη του έργου, με έμφαση στη λειτουργικότητα, την ποιότητα και τη σωστή διαχείριση.",
               },
               {
                 icon: HardHat,
