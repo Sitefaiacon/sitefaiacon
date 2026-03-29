@@ -1,3 +1,4 @@
+// Cost calculator page with bilingual metadata
 import SiteLayout from "../../components/site-layout"
 import CostCalculatorPage from "../../components/cost-calculator-page"
 import type { Metadata } from "next"

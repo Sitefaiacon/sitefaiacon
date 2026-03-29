@@ -1,5 +1,6 @@
 "use client"
 
+// Appointment booking page component
 import { useLanguage } from "../contexts/language-context"
 import { motion } from "framer-motion"
 import { Calendar, Clock, MapPin, Phone, Mail } from "lucide-react"
