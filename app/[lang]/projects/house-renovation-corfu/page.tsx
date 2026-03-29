@@ -1,7 +1,7 @@
 import { Metadata } from "next"
-import { SiteLayout } from "../../../../components/site-layout"
-import HouseRenovationCaseStudy from "../../../../components/house-renovation-project-case-study"
-import { BreadcrumbSchema } from "../../../../components/structured-data"
+import { SiteLayout } from "../../../components/site-layout"
+import HouseRenovationCaseStudy from "../../../components/house-renovation-project-case-study"
+import { BreadcrumbSchema } from "../../../components/structured-data"
 
 export const metadata: Metadata = {
   title: "House Renovation in Corfu Town - Complete Project Case Study | Faiacon",
@@ -39,16 +39,6 @@ export default async function HouseRenovationProject({ params }: { params: Promi
           { name: "House Renovation in Corfu Town", url: "https://faiacon.gr/en/projects/house-renovation-corfu" },
         ]} 
       />
-      <HouseRenovationCaseStudy lang={lang} />
-    </SiteLayout>
-  )
-}
-
-export default async function HouseRenovationProject({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params
-
-  return (
-    <SiteLayout>
       <HouseRenovationCaseStudy lang={lang} />
     </SiteLayout>
   )

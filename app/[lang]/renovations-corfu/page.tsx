@@ -25,11 +25,14 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://faiacon.gr/en/renovations-corfu",
-    languages: {
-      "en-US": "https://faiacon.gr/en/renovations-corfu",
-      "el-GR": "https://faiacon.gr/el/house-renovation",
-    },
   },
+}
+
+export function generateStaticParams() {
+  return [
+    { lang: "en" },
+    { lang: "el" },
+  ]
 }
 
 export default async function RenovationsCorfu({ params }: { params: Promise<{ lang: string }> }) {

@@ -1,7 +1,7 @@
 import { Metadata } from "next"
-import { SiteLayout } from "../../../../components/site-layout"
-import VillaRenovationCaseStudy from "../../../../components/villa-renovation-project-case-study"
-import { BreadcrumbSchema } from "../../../../components/structured-data"
+import { SiteLayout } from "../../../components/site-layout"
+import VillaRenovationCaseStudy from "../../../components/villa-renovation-project-case-study"
+import { BreadcrumbSchema } from "../../../components/structured-data"
 
 export const metadata: Metadata = {
   title: "Modern Villa Renovation in Sinies - Case Study | Faiacon",
