@@ -12,6 +12,14 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 // This is a placeholder. Replace with your actual project data.
 const projects = [
   {
+    id: 0,
+    title: "FaiaCon - Technical Construction",
+    titleEl: "ΦαιάCon - Τεχνική Κατασκευαστική",
+    location: "Corfu, Greece",
+    locationEl: "Κέρκυρα, Ελλάδα",
+    image: "/images/logo-faiacon-featured.jpg",
+  },
+  {
     id: 1,
     title: "Luxury Villa",
     titleEl: "Πολυτελής Βίλα",
