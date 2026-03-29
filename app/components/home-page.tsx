@@ -173,7 +173,7 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
                   ? "Faiacon delivers comprehensive construction and renovation services for property owners who expect quality workmanship and dependable project management. Whether you are renovating a family home, preparing a villa for rental, or upgrading a hospitality property, we bring the same level of care and professionalism to every project. Our team combines local expertise with modern construction standards to ensure lasting results."
-                  : "Η Faiacon ειδικεύεται στη μετατροπή ακινήτων σε κερδοφόρες επενδύσεις με σοβαρή τεχνική προσέγγιση και επαγγελματική διαχείριση έργου. Είτε θέλετε να αυξήσετε την αξία της ιδιοκτησίας σας, να την προετοιμάσετε για Airbnb και ενοικίαση, ή να βελτιώσετε την ενεργειακή απόδοση και την λειτουργικότητα, οι αποδεδειγμένες μέθοδοί μας παραδίδουν αποτελέσματα. Από ολοκληρωμένες ανακαινίσεις έως στοχευμένες ενεργειακές αναβαθμίσεις, διαχειριζόμαστε κάθε λεπτομέρεια με σοβαρότητα και δεξιότητα."}
+                  : "Η Faiacon αναλαμβάνει ανακαινίσεις και κατασκευές με σοβαρή προσέγγιση και επαγγελματική διαχείριση. Αν θέλετε να αναβαθμίσετε το σπίτι ή το ακίνητο σας, να το προετοιμάσετε για ενοικίαση, ή να βελτιώσετε την ενεργειακή του απόδοση, αναλαμβάνουμε το έργο με την ίδια προσοχή. Γνωρίζουμε καλά την Κέρκυρα, τα κλιματικά δεδομένα της, τις απαιτήσεις των κατασκευών εδώ, και είμαστε δυνατοί σε κάθε λεπτομέρεια."}
                 </p>
               </div>
 
@@ -191,10 +191,10 @@ export default function HomePage({ lang }: { lang: string }) {
                         "Quality materials and certified workmanship with proper warranties",
                       ]
                     : [
-                        "Εστίαση στα αποτελέσματα: Κάθε ανακαίνιση στοχεύει στη μέγιστη αύξηση αξίας",
-                        "Τοπική τεχνογνωσία: Εις βάθος γνώση της αγοράς και του κλίματος της Κέρκυρας",
-                        "Επαγγελματική διαχείριση έργων: Διαφανείς χρονοδιαγράμματα και προϋπολογισμοί",
-                        "Εγγυήσεις ποιότητας: Ανθεκτικές, ενεργειακά αποδοτικές, σύγχρονες διακοσμήσεις",
+                        "Αναλαμβάνουμε έργα που ολοκληρώνουμε προσεκτικά, με τακτικές ενημερώσεις σε κάθε φάση",
+                        "Γνωρίζουμε τις κατασκευαστικές απαιτήσεις και το κλίμα της Κέρκυρας",
+                        "Διαφανής τιμολόγηση, δεν υπάρχουν κρυφά κόστη",
+                        "Ποιοτικά υλικά και εγγυήσεις που ισχύουν πράγματι",
                       ]
                   ).map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
@@ -212,7 +212,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 <p className="text-base sm:text-lg mb-6 sm:mb-8">
                   {isEnglish
                     ? "From initial consultation to final handover, we manage every aspect of your project. Our clients benefit from improved property values, modern finishes, energy-efficient upgrades, and spaces that are ready for use or rental."
-                    : "Από την πρώτη συμβουλευτική συνάντηση μέχρι την τελική παράδοση, διαχειριζόμαστε κάθε πτυχή του έργου σας. Οι πελάτες μας απολαμβάνουν αυξημένες αξίες ακινήτων, σύγχρονες και ελκυστικές διακοσμήσεις, αναβαθμίσεις που εξοικονομούν ενέργεια, και χώρους που είναι άμεσα έτοιμοι για χρήση ή ενοικίαση."}
+                    : "Στο τέλος του έργου, έχετε ένα σπίτι ή ακίνητο που έχει αναβαθμιστεί σημαντικά. Υψηλότερη αξία, έτοιμο να νοικιαστεί, ή απλά πολύ καλύτερο να ζείτε σε αυτό. Αυτά είναι τα αποτελέσματα που μας ενδιαφέρουν."}
                 </p>
                 <div className="flex justify-center">
                   <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
@@ -248,21 +248,21 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "House Renovation" : "Αύξηση Αξίας Ακινήτου",
                 description: isEnglish
                   ? "Complete interior and exterior renovations that modernise your space and improve functionality."
-                  : "Επαγγελματικές ανακαινίσεις που μεγιστοποιούν την αξία και εκσυγχρονίζουν τον χώρο με σύγχρονες λύσεις.",
+                  : "Ανακαίνιση που βελτιώνει πραγματικά το σπίτι σας: σύγχρονα υλικά, σωστή κατασκευή, χώρος που λειτουργεί καλύτερα.",
                 href: "/house-renovation",
               },
               {
                 title: isEnglish ? "Villa Construction" : "Έτοιμο για Airbnb & Ενοικίαση",
                 description: isEnglish
                   ? "New villa builds and luxury residences designed and constructed to the highest standards."
-                  : "Μετατροπή ακινήτων σε ελκυστικές επενδύσεις ενοικίασης με υψηλό δυναμικό εισοδήματος.",
+                  : "Ανακαίνιση που κάνει το ακίνητο σας ελκυστικό στους τουρίστες και αποδοτικό οικονομικά.",
                 href: "/services/villa-luxury-home-construction",
               },
               {
                 title: isEnglish ? "Hotel Renovation" : "Ενεργειακή Αναβάθμιση & Άνεση",
                 description: isEnglish
                   ? "Hospitality property upgrades that enhance guest experience and operational efficiency."
-                  : "Σύγχρονη θερμική μόνωση και αναβαθμίσεις για εξοικονόμηση ενέργειας, άνεση και βελτίωση λειτουργικότητας.",
+                  : "Σύγχρονα συστήματα κλιματισμού, μόνωση και αναβαθμίσεις που κάνουν τον χώρο πιο ενεργειακά αποδοτικό.",
                 href: "/services/hotel-construction-renovation",
               },
               {
@@ -276,7 +276,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "Land Development" : "Αντιπαροχές & Αξιοποίηση Οικοπέδων",
                 description: isEnglish
                   ? "Property development partnerships for landowners seeking professional collaboration in Corfu."
-                  : "Συνεργασίες αξιοποίησης για ιδιοκτήτες που θέλουν να αξιοποιήσουν αποτελεσματικά οικόπεδα ή ακίνητα με επαγγελματική τεχνική προσέγγιση.",
+                  : "Αν έχετε οικόπεδο ή ακίνητο με δυνατότητα, μπορούμε να συνεργαστούμε για τη σωστή αξιοποίηση του.",
                 href: "/antiparoxes-kerkira",
               },
             ].map((service) => (
@@ -313,13 +313,13 @@ export default function HomePage({ lang }: { lang: string }) {
                 <p className="text-lg sm:text-xl text-gray-700 mb-6">
                   {isEnglish 
                     ? "We undertake land development partnerships and property exploitation in Corfu, with a serious technical approach, proper planning, and professional project management."
-                    : "Αναλαμβάνουμε συνεργασίες αντιπαροχής και αξιοποίησης ακινήτων στην Κέρκυρα με σοβαρή τεχνική προσέγγιση, σωστό σχεδιασμό και επαγγελματική διαχείριση έργου."}
+                    : "Αναλαμβάνουμε συνεργασίες αντιπαροχής και αξιοποίησης ακινήτων στην Κέρκυρα. Εξετάζουμε κάθε περίπτωση σοβαρά, σχεδιάζουμε ρεαλιστικά, και αναλαμβάνουμε το έργο με ευθύνη."}
                 </p>
                 
                 <p className="text-base text-gray-600 mb-8">
                   {isEnglish
                     ? "If you own land or property with development potential, we can evaluate the opportunities for a meaningful collaboration together. Faiacon approaches each case with responsibility, transparency, and a focus on realistic property development."
-                    : "Εάν διαθέτετε οικόπεδο ή ακίνητο με προοπτική αξιοποίησης, μπορούμε να εξετάσουμε μαζί τις δυνατότητες μιας ουσιαστικής συνεργασίας. Προσεγγίζουμε κάθε περίπτωση με υπευθυνότητα, διαφάνεια και έμφαση στη ρεαλιστική τεχνική ανάπτυξη του ακινήτου."}
+                    : "Αν έχετε οικόπεδο ή ακίνητο στην Κέρκυρα, μπορούμε να τα δούμε μαζί και να συζητήσουμε αν υπάρχει περίπτωση. Δεν υπόσχεται χρυσά όρια σε κάθε περίπτωση, αλλά όπου υπάρχει δυνατότητα, αναλαμβάνουμε το έργο με ευθύνη και διαφάνεια."}
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -425,7 +425,7 @@ export default function HomePage({ lang }: { lang: string }) {
                   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CF%84%CE%B5%CE%BB%CE%B5%CE%B9%CF%89%CE%BC%CE%AD%CE%BD%CE%B7%20%CE%B2%CE%AF%CE%BB%CE%B1%20%CF%83%CE%B9%CE%BD%CE%B9%CE%AD%CF%82.jpg-TBv1Q93tF49zLCpwPjQIhP4OS6eJLq.jpeg",
               },
               {
-                title: "Πέτρινη Βίλα στ��ν Κέρκυρα",
+                title: "Πέτρινη Βίλα στην Κέρκυρα",
                 titleEn: "Stone Villa in Corfu",
                 location: "Κέρκυρα",
                 locationEn: "Corfu",

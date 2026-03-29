@@ -52,12 +52,12 @@ const projects = [
     image: "/images/listed-building-old-town.jpg",
   },
   {
-    id: 5,
-    title: "Villa Pool Construction",
-    titleEl: "Κατασκευή Πισίνας σε Βίλα",
-    location: "Dassia, Corfu",
-    locationEl: "Δασιά, Κέρκυρα",
-    image: "/images/pool-construction-dassia.jpg",
+    id: 6,
+    title: "Stone Villa Construction",
+    titleEl: "Πέτρινη Βίλα στην Κέρκυρα",
+    location: "Corfu",
+    locationEl: "Κέρκυρα",
+    image: "/images/petrini-vila-kerkira.jpg",
   },
 ]
 

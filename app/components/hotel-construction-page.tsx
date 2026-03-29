@@ -25,42 +25,42 @@ export default function HotelConstructionRenovationPage() {
       title: isEnglish ? "Full Property Renovation" : "Ολοκληρωτική Ανακαίνιση Ξενοδοχειακής Μονάδας",
       description: isEnglish
         ? "Complete renovation of hotel buildings including structural work, room upgrades, common areas, and exterior improvements."
-        : "Από την ιδέα στην υλοποίηση - δομικές αναβαθμίσεις, βελτίωση της εμπειρίας του επισκέπτη και ενσωμάτωση σύγχρονων παροχών",
+        : "Ανακαίνιση ενός ξενοδοχείου απαιτεί σχεδιασμό και εκτέλεση. Αναλαμβάνουμε τη δομική δουλειά, τα δωμάτια, τους κοινόχρηστους χώρους, και ό,τι άλλο χρειάζεται.",
     },
     {
       icon: Users,
       title: isEnglish ? "Room & Suite Upgrades" : "Αναβάθμιση Εμπειρίας Επισκέπτη",
       description: isEnglish
         ? "Modernisation of guest rooms and suites with new bathrooms, flooring, furniture, and improved layouts."
-        : "Αναδιαμόρφωση δωματίων, πολυτελή φινιρίσματα, σύγχρονες παροχές και αισθητικές βελτιώσεις που αυξάνουν την ικανοποίηση του επισκέπτη",
+        : "Τα δωμάτια είναι το σημαντικότερο. Σύγχρονες διακοσμήσεις, λειτουργικά μπάνια, καλή λειτουργία κλιματισμού - μάθαμε τι θέλουν οι επισκέπτες.",
     },
     {
       icon: Hammer,
       title: isEnglish ? "Common Area Works" : "Ανακαίνιση Κοινόχρηστων Χώρων",
       description: isEnglish
         ? "Reception, lobby, restaurant, bar, and pool area renovations that improve guest experience and property appeal."
-        : "Χώροι υποδοχής, αναδιαμόρφωση λόμπας, εστιατόρια, μπαρ, χώροι πισίνας και εξωτερικοί χώροι που αποτυπώνουν την ταυτότητα του ξενοδοχείου",
+        : "Λόμπα, εστιατόριο, μπαρ, πισίνα - αυτοί οι χώροι σχηματίζουν την εικόνα του ξενοδοχείου. Ανακαινίζουμε τα σωστά.",
     },
     {
       icon: Lightbulb,
       title: isEnglish ? "Systems & Energy Efficiency" : "Ενεργειακή Απόδοση & Συστήματα",
       description: isEnglish
         ? "HVAC upgrades, electrical systems, plumbing, and energy-efficient installations that reduce operating costs."
-        : "Σύγχρονα συστήματα κλιματισμού, ενεργειακά αποδοτικές εγκαταστάσεις, αναβαθμίσεις διαχείρισης νερού και βιώσιμες λύσεις",
+        : "Σύγχρονα συστήματα κλιματισμού, φωτισμό LED, έλεγχος κατανάλωσης ενέργειας. Μειώνουν τα λειτουργικά κόστη, και οι επισκέπτες ευχαριστιούνται.",
     },
     {
       icon: Calendar,
       title: isEnglish ? "Off-Season Scheduling" : "Παράδοση Πριν την Τουριστική Περίοδο",
       description: isEnglish
         ? "We plan and execute works during low season to minimise disruption and ensure your property is ready for peak periods."
-        : "Προσεκτικό σχεδιασμό έργου και αποδοτική εκτέλεση για ολοκλήρωση πριν την υψηλή περίοδο χωρίς διακοπή λειτουργίας",
+        : "Ξέρουμε πόσο δύσκολο είναι να δουλεύεις όταν το ξενοδοχείο λειτουργεί. Σχεδιάζουμε τα έργα να ολοκληρωθούν πριν την υψηλή περίοδο.",
     },
     {
       icon: Shield,
       title: isEnglish ? "Reliable Project Delivery" : "Αξιοπιστία & Εγγύηση Έργου",
       description: isEnglish
         ? "Professional project management with clear timelines, regular updates, and accountability for quality and deadlines."
-        : "Πιστοποιημένα συνεργεία, πρωτόκολλα ποιοτικού ελέγχου, διαφανή επικοινωνία και πλήρη ευθύνη του έργου",
+        : "Δίνουμε λόγο για τα χρονοδιαγράμματα, και προσέχουμε ώστε δεν θα υπάρχουν εκπλήξεις. Αξιόπιστη δουλειά, έχει ουσία.",
     },
   ]
 
@@ -96,13 +96,31 @@ export default function HotelConstructionRenovationPage() {
       q: isEnglish ? "How long does a hotel renovation take?" : "Πόσο χρόνο χρειάζεται συνήθως μια ανακαίνιση ξενοδοχείου;",
       a: isEnglish
         ? "This depends on the scope of work. We can provide an estimated timeline after assessing your property. Phased renovations allow you to keep parts of the hotel operational during construction."
-        : "Ο χρόνος εξαρτάται από το εύρος του έργου. Ειδικευόμαστε σε σταδιακές ανακαινίσεις που επιτρέπουν μερική λειτουργία του ξενοδοχείου κατά την κατασκευή. Μια ολοκληρωτική ανακαίνιση 30 δωματίων διαρκεί συνήθως 4-6 μήνες.",
+        : "Εξαρτάται από το έργο. Μια μικρή ανακαίνιση δωματίων διαρκεί μερικές εβδομάδες, μια ολοκληρωτική ανακαίνιση ξενοδοχείου παίρνει περισσότερο χρόνο. Μπορούμε να την κάνουμε σταδιακά ώστε το ξενοδοχείο να λειτουργεί.",
     },
     {
       q: isEnglish ? "Can you work during our operating season?" : "Μπορείτε να εργαστείτε κατά τη διάρκεια της τουριστικής περιόδου;",
       a: isEnglish
         ? "We prefer to schedule major works during low season. However, we can manage phased renovations during operation with appropriate planning, safety measures, and noise control."
-        : "Ναι. Έχουμε εκτενή εμπειρία με σταδιακές ανακαινίσεις που ελαχιστοποιούν την διακοπή λειτουργίας. Τα έργα μπορούν να προγραμματιστούν για ώρες χαμηλής δραστηριότητας με αυστηρά πρωτόκολλα θορύβου και ασφάλειας.",
+        : "Προτιμούμε χαμηλή περίοδο. Όμως, αν το χρειάζεστε, μπορούμε να δουλέψουμε και όσο λειτουργεί το ξενοδοχείο, με προσοχή στον θόρυβο και την ασφάλεια.",
+    },
+    {
+      q: isEnglish ? "What energy efficiency improvements do you offer?" : "Τι περιλαμβάνεται στις αναβαθμίσεις ενεργειακής απόδοσης;",
+      a: isEnglish
+        ? "We can upgrade HVAC systems, lighting, insulation, and water heating to reduce your operating costs. We assess your current systems and recommend improvements that offer the best return."
+        : "Φωτισμό LED, συστήματα κλιματισμού που κάνουν δουλειά, μόνωση που κρατάει τη θερμοκρασία. Μειώνουν τα λειτουργικά κόστη πολύ. Εξετάζουμε τι έχετε και προτείνουμε τι αξίζει.",
+    },
+    {
+      q: isEnglish ? "How do you ensure quality on larger projects?" : "Πως διασφαλίζετε την ποιότητα σε μεγάλα έργα;",
+      a: isEnglish
+        ? "We maintain quality control throughout with regular inspections, documented progress, and clear accountability. You receive regular updates and can visit the site at any time."
+        : "Καθημερινοί έλεγχοι, τεκμηρίωση, συνεργεία που ξέρουν τη δουλειά. Μπορείτε να επισκεφτείτε το χώρο, και σας ενημερώνουμε τακτικά.",
+    },
+    {
+      q: isEnglish ? "Can you work during our operating season?" : "Μπορείτε να εργαστείτε κατά τη διάρκεια της τουριστικής περιόδου;",
+      a: isEnglish
+        ? "We prefer to schedule major works during low season. However, we can manage phased renovations during operation with appropriate planning, safety measures, and noise control."
+        : "Ναι. Έχουμε εκτενή εμπειρία με σταδιακές ανακαινίσεις που ελαχιστοποιούν την διακοπή λειτουργίας. Τα έργα μπορούν να προγραμμ��τιστούν για ώρες χαμηλής δραστηριότητας με αυστηρά πρωτόκολλα θορύβου και ασφάλειας.",
     },
     {
       q: isEnglish ? "What energy efficiency improvements do you offer?" : "Τι περιλαμβάνεται στις αναβαθμίσεις ενεργειακής απόδοσης;",
@@ -357,7 +375,7 @@ export default function HotelConstructionRenovationPage() {
         <div className="container max-w-4xl mx-auto px-4 text-center">
           <AnimatedSection className="space-y-8">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              {isEnglish ? "Discuss Your Project" : "Έτοιμοι να Μετατρέψετε το Ξενοδοχείο σας;"}
+              {isEnglish ? "Discuss Your Project" : "Έτοιμοι να Μετατρέψ��τε το Ξενοδοχείο σας;"}
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
               {isEnglish
