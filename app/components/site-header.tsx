@@ -17,6 +17,7 @@ const servicesItems = [
   { href: "/pool-construction", label: "Πισίνες", labelEn: "Pools" },
   { href: "/services/thermoprosopsi", label: "Θερμοπρόσοψη", labelEn: "Insulation" },
   { href: "/services/vapsimata-elaiokromatismoi", label: "Βαψίματα", labelEn: "Painting" },
+  { href: "/antiparoxes-kerkira", label: "Αντιπαροχές", labelEn: "Land Development" },
 ]
 
 const navItems = [
