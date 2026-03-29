@@ -25,10 +25,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://faiacon.gr/en/renovations-corfu",
-    languages: {
-      "en-US": "https://faiacon.gr/en/renovations-corfu",
-      "el-GR": "https://faiacon.gr/el/house-renovation",
-    },
   },
 }
 
