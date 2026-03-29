@@ -1,4 +1,7 @@
 // Types for Calculator Lead submissions
+import type { QuoteBreakdown } from "@/lib/calculator/pricing"
+
+export type { QuoteBreakdown }
 
 export interface CalculatorContact {
   name: string
@@ -45,6 +48,7 @@ export interface CalculatorSelections {
 export interface CalculatorLead {
   contact: CalculatorContact
   selections: CalculatorSelections
+  breakdown?: QuoteBreakdown   // full structured audit breakdown from shared pricing engine
   submittedAt: string
   source: string
   status: 'new' | 'contacted' | 'quoted' | 'closed'

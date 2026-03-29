@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { CalculatorLead } from '@/lib/types/calculator-lead'
-import { generateLeadSummary, formatCost } from '@/lib/types/calculator-lead'
+import type { QuoteBreakdown, RenovationBreakdown, WindowsBreakdown } from '@/lib/calculator/pricing'
+import { fmtEur, fmtNum, QUALITY_LABELS_EL, MATERIAL_LABELS_EL, POOL_TYPE_LABELS_EL } from '@/lib/calculator/pricing'
 
 // Email configuration from environment variables with fallbacks
 const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'faiacon@yahoo.com'
@@ -21,515 +22,452 @@ async function getResend() {
   return Resend
 }
 
-// Validation helpers
+// ─── Validation ───────────────────────────────────────────────────────────────
+
 function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return emailRegex.test(email)
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 function validateLeadData(data: unknown): { valid: boolean; errors: string[] } {
   const errors: string[] = []
-  
-  if (!data || typeof data !== 'object') {
-    return { valid: false, errors: ['Invalid request body'] }
-  }
-  
-  const lead = data as Partial<CalculatorLead>
-  
-  if (!lead.contact?.name?.trim()) {
-    errors.push('Το όνομα είναι υποχρεωτικό')
-  }
-  
-  if (!lead.contact?.email?.trim()) {
-    errors.push('Το email είναι υποχρεωτικό')
-  } else if (!isValidEmail(lead.contact.email)) {
-    errors.push('Μη έγκυρη μορφή email')
-  }
-  
-  if (!lead.selections) {
-    errors.push('Missing calculator selections')
-  }
-  
+  if (!data || typeof data !== 'object') return { valid: false, errors: ['Invalid request body'] }
+  const lead = data as any
+  if (!lead.contact?.name?.trim()) errors.push('Το όνομα είναι υποχρεωτικό')
+  if (!lead.contact?.email?.trim()) errors.push('Το email είναι υποχρεωτικό')
+  else if (!isValidEmail(lead.contact.email)) errors.push('Μη έγκυρη μορφή email')
+  if (!lead.selections) errors.push('Missing calculator selections')
   return { valid: errors.length === 0, errors }
 }
 
-// Generate professional HTML email
-function generateEmailHTML(lead: CalculatorLead): string {
-  const { contact, selections, submittedAt } = lead
-  const { renovation, windows, totalCost } = selections
-  
-  const submissionDate = new Date(submittedAt).toLocaleString('el-GR', {
-    dateStyle: 'full',
-    timeStyle: 'short'
-  })
-  
-  const summary = generateLeadSummary(selections, false)
-  
-  // Quality labels
-  const qualityLabels = {
-    basic: 'Βασική',
-    midRange: 'Μεσαία',
-    premium: 'Premium'
-  }
-  
-  // Material labels
-  const materialLabels = {
-    aluminum: 'Αλουμίνιο',
-    pvc: 'PVC',
-    wood: 'Ξύλο'
-  }
-  
-  // Pool type labels
-  const poolLabels = {
-    none: 'Καμία',
-    concrete: 'Μπετόν',
-    polyester: 'Πολυεστερική',
-    liner: 'Με επένδυση'
-  }
-  
-  // Selected categories
-  const selectedCategories = Object.entries(renovation.categories || {})
-    .filter(([_, value]) => value)
-    .map(([key]) => {
-      const categoryLabels: Record<string, string> = {
-        bathroom: 'Μπάνιο',
-        kitchen: 'Κουζίνα',
-        flooring: 'Δάπεδα',
-        electrical: 'Ηλεκτρολογικά',
-        structural: 'Δομικά',
-        painting: 'Βαφή',
-      }
-      return categoryLabels[key] || key
-    })
-  
-  // Check if renovation has any data (not just cost)
-  const hasRenovationData = renovation.area > 0 || selectedCategories.length > 0 || renovation.renovationCost > 0
-  
-  // Cost calculation constants (same as in calculator)
-  const baseCostPerM2 = 490
-  const qualityMultipliers: Record<string, number> = { basic: 1.0, midRange: 1.3, premium: 1.6 }
-  const agePenalty: Record<string, number> = { ancient: 1.25, old: 1.15, modern: 1.0 }
-  const categoryModifiers: Record<string, number> = {
-    bathroom: 2530,
-    kitchen: 4030,
-    flooring: 70,
-    electrical: 530,
-    structural: 130,
-    painting: 55,
-  }
-  const electricalGeneralRepairCost = 2500
-  const poolCostsPerM2: Record<string, Record<string, number>> = {
-    none: { basic: 0, midRange: 0, premium: 0 },
-    liner: { midRange: 1055, premium: 1215 },
-    polyester: { premium: 1255 },
-    concrete: { basic: 1155, midRange: 1255, premium: 1355 },
-  }
-  
-  // Calculate cost breakdown for renovation
-  const getAgeCategory = (year: number) => {
-    if (year < 1970) return 'ancient'
-    if (year < 2000) return 'old'
-    return 'modern'
-  }
-  
-  const ageCategory = getAgeCategory(renovation.buildingAge)
-  const agePenaltyLabels: Record<string, string> = { ancient: 'Πριν το 1970 (+25%)', old: '1970-2000 (+15%)', modern: 'Μετά το 2000 (0%)' }
-  
-  // Calculate individual costs
-  const baseCost = renovation.area * baseCostPerM2
-  const qualityMultiplier = qualityMultipliers[renovation.renovationQuality] || 1
-  const ageMultiplier = agePenalty[ageCategory] || 1
-  
-  // Category costs
-  const bathroomCost = renovation.bathrooms * categoryModifiers.bathroom * (renovation.categories?.bathroom ? 1 : 0)
-  const kitchenCost = renovation.kitchens * categoryModifiers.kitchen * (renovation.categories?.kitchen ? 1 : 0)
-  const flooringCost = renovation.area * categoryModifiers.flooring * (renovation.categories?.flooring ? 1 : 0)
-  const electricalCost = (renovation.rooms * categoryModifiers.electrical + (renovation.categories?.electrical ? electricalGeneralRepairCost : 0)) * (renovation.categories?.electrical ? 1 : 0)
-  const structuralCost = renovation.area * categoryModifiers.structural * (renovation.categories?.structural ? 1 : 0)
-  const paintingCost = renovation.area * categoryModifiers.painting * (renovation.categories?.painting ? 1 : 0)
-  
-  // Pool cost
-  const poolCostPerM2 = poolCostsPerM2[renovation.poolType]?.[renovation.renovationQuality] || 0
-  const poolCost = renovation.poolType !== 'none' ? (renovation.poolSize || 0) * poolCostPerM2 : 0
-  
-  // Windows costs breakdown
-  const windowCosts: Record<string, Record<string, Record<string, number>>> = {
-    window: {
-      aluminum: { basic: 530, midRange: 630, premium: 730 },
-      pvc: { basic: 430, midRange: 530, premium: 630 },
-      wood: { basic: 630, midRange: 730, premium: 830 },
-    },
-    balconyDoor: {
-      aluminum: { basic: 930, midRange: 1030, premium: 1130 },
-      pvc: { basic: 830, midRange: 930, premium: 1030 },
-      wood: { basic: 1030, midRange: 1130, premium: 1230 },
-    },
-    interiorDoor: {
-      aluminum: { basic: 330, midRange: 430, premium: 530 },
-      pvc: { basic: 280, midRange: 380, premium: 480 },
-      wood: { basic: 430, midRange: 530, premium: 630 },
-    },
-    mainEntrance: {
-      aluminum: { basic: 1530, midRange: 1830, premium: 2030 },
-      pvc: { basic: 1330, midRange: 1530, premium: 1730 },
-      wood: { basic: 1830, midRange: 2030, premium: 2230 },
-    },
-  }
-  
-  const windowUnitCost = windowCosts.window[windows.material]?.[windows.quality] || 0
-  const balconyDoorUnitCost = windowCosts.balconyDoor[windows.material]?.[windows.quality] || 0
-  const interiorDoorUnitCost = windowCosts.interiorDoor[windows.material]?.[windows.quality] || 0
-  const mainEntranceUnitCost = windowCosts.mainEntrance[windows.material]?.[windows.quality] || 0
-  
+// ─── HTML helpers ─────────────────────────────────────────────────────────────
+
+const S = {
+  // Layout
+  wrap: 'max-width:680px;margin:0 auto;font-family:\'Segoe UI\',Arial,sans-serif;background:#fff;border:1px solid #dde3ec;',
+  header: 'background:#1e3a5f;padding:28px 32px;',
+  headerH1: 'color:#fff;margin:0 0 4px 0;font-size:22px;font-weight:700;letter-spacing:-0.3px;',
+  headerSub: 'color:rgba(255,255,255,0.7);margin:0;font-size:13px;',
+  sectionWrap: 'padding:28px 32px;border-bottom:1px solid #eaecf0;',
+  sectionTitle: 'color:#1e3a5f;font-size:15px;font-weight:700;margin:0 0 16px 0;padding-bottom:8px;border-bottom:2px solid #1e3a5f;text-transform:uppercase;letter-spacing:0.5px;',
+  // Table rows
+  rowLabel: 'color:#6b7280;font-size:13px;padding:5px 10px 5px 0;vertical-align:top;width:200px;white-space:nowrap;',
+  rowValue: 'color:#111827;font-size:13px;padding:5px 0;font-weight:600;vertical-align:top;',
+  // Calc lines
+  calcLabel: 'color:#374151;font-size:13px;padding:5px 10px 5px 0;vertical-align:top;',
+  calcFormula: 'color:#6b7280;font-size:12px;padding:5px 10px 5px 0;font-family:monospace;vertical-align:top;',
+  calcResult: 'color:#1e3a5f;font-size:13px;font-weight:700;text-align:right;padding:5px 0;vertical-align:top;white-space:nowrap;',
+  // Subtotal rows
+  subtotalRow: 'background:#f3f6fb;',
+  subtotalLabel: 'color:#374151;font-size:13px;font-weight:700;padding:7px 10px 7px 0;',
+  subtotalValue: 'color:#1e3a5f;font-size:14px;font-weight:700;text-align:right;padding:7px 0;white-space:nowrap;',
+  // Multiplier rows
+  multRow: 'background:#fffbeb;',
+  multLabel: 'color:#92400e;font-size:13px;padding:5px 10px 5px 0;',
+  multValue: 'color:#92400e;font-size:13px;font-weight:700;text-align:right;padding:5px 0;white-space:nowrap;',
+  // Notes
+  note: 'color:#6b7280;font-size:12px;padding:4px 0;line-height:1.5;',
+  // Final total
+  totalWrap: 'background:#1e3a5f;padding:24px 32px;',
+  totalLabel: 'color:rgba(255,255,255,0.85);font-size:13px;margin:0 0 4px 0;',
+  totalValue: 'color:#ffffff;font-size:28px;font-weight:800;margin:0;',
+  totalRange: 'color:rgba(255,255,255,0.7);font-size:13px;margin:6px 0 0 0;',
+  // Tag
+  tagGreen: 'display:inline-block;background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;',
+  tagBlue: 'display:inline-block;background:#dbeafe;color:#1e40af;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;',
+}
+
+function row(label: string, value: string): string {
+  return `<tr><td style="${S.rowLabel}">${label}</td><td style="${S.rowValue}">${value}</td></tr>`
+}
+
+function calcRow(label: string, formula: string, result: number): string {
   return `
-<!DOCTYPE html>
-<html lang="el">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Νέο αίτημα από Calculator - Faiacon</title>
-</head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
-    <!-- Header -->
     <tr>
-      <td style="background-color: #3a5a8c; padding: 30px; text-align: center;">
-        <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Νέο Αίτημα Calculator</h1>
-        <p style="color: #ffffff; opacity: 0.9; margin: 10px 0 0 0; font-size: 14px;">Faiacon - Υπολογιστής Κόστους Ανακαίνισης</p>
-      </td>
-    </tr>
-    
-    <!-- Quick Summary -->
-    <tr>
-      <td style="padding: 25px; background-color: #f8f9fa; border-bottom: 1px solid #e9ecef;">
-        <h2 style="color: #3a5a8c; margin: 0 0 10px 0; font-size: 16px;">Γρήγορη Περίληψη</h2>
-        <p style="margin: 0; color: #495057; font-size: 14px; line-height: 1.6;">${summary}</p>
-      </td>
-    </tr>
-    
-    <!-- Contact Info -->
-    <tr>
-      <td style="padding: 25px; border-bottom: 1px solid #e9ecef;">
-        <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 18px;">Στοιχεία Επικοινωνίας</h2>
-        <table width="100%" cellpadding="5" cellspacing="0">
-          <tr>
-            <td style="color: #6c757d; font-size: 14px; width: 120px;">Όνομα:</td>
-            <td style="color: #212529; font-size: 14px; font-weight: 600;">${contact.name}</td>
-          </tr>
-          <tr>
-            <td style="color: #6c757d; font-size: 14px;">Email:</td>
-            <td style="color: #212529; font-size: 14px;">
-              <a href="mailto:${contact.email}" style="color: #3a5a8c;">${contact.email}</a>
-            </td>
-          </tr>
-          ${contact.phone ? `
-          <tr>
-            <td style="color: #6c757d; font-size: 14px;">Κινητό:</td>
-            <td style="color: #212529; font-size: 14px;">
-              <a href="tel:${contact.phone}" style="color: #3a5a8c;">${contact.phone}</a>
-            </td>
-          </tr>
-          ` : ''}
-          <tr>
-            <td style="color: #6c757d; font-size: 14px;">Ημερομηνία:</td>
-            <td style="color: #212529; font-size: 14px;">${submissionDate}</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    
-    <!-- Two Column Layout: Renovation & Windows Side by Side -->
-    ${(hasRenovationData || windows.windowsCost > 0) ? `
-    <tr>
-      <td style="padding: 25px; border-bottom: 1px solid #e9ecef;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            <!-- Left Column: Γενική Ανακαίνιση -->
-            <td style="width: 48%; vertical-align: top; padding-right: 15px; ${hasRenovationData ? '' : 'opacity: 0.5;'}">
-              <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; height: 100%;">
-                <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Γενική Ανακαίνιση</h2>
-                ${hasRenovationData ? `
-                <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 12px;">
-                  <tr style="background-color: #e9ecef;">
-                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px;">Βασικά Στοιχεία</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Εμβαδόν:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.area} τ.μ.</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Ποιότητα:</td>
-                    <td style="color: #212529; text-align: right;">${qualityLabels[renovation.renovationQuality]} (x${qualityMultiplier})</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Έτος (${renovation.buildingAge}):</td>
-                    <td style="color: #212529; text-align: right;">${agePenaltyLabels[ageCategory]}</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Βασικό κόστος:</td>
-                    <td style="color: #3a5a8c; text-align: right; font-weight: 600;">${renovation.area} x ${baseCostPerM2}€ = ${formatCost(baseCost)}</td>
-                  </tr>
-                  
-                  ${selectedCategories.length > 0 ? `
-                  <tr style="background-color: #e9ecef;">
-                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px; padding-top: 10px;">Ανάλυση Κατηγοριών</td>
-                  </tr>
-                  ${renovation.categories?.bathroom && renovation.bathrooms > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Μπάνια (${renovation.bathrooms}):</td>
-                    <td style="color: #212529; text-align: right;">${renovation.bathrooms} x ${formatCost(categoryModifiers.bathroom)} = ${formatCost(bathroomCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ${renovation.categories?.kitchen && renovation.kitchens > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Κουζίνες (${renovation.kitchens}):</td>
-                    <td style="color: #212529; text-align: right;">${renovation.kitchens} x ${formatCost(categoryModifiers.kitchen)} = ${formatCost(kitchenCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ${renovation.categories?.flooring ? `
-                  <tr>
-                    <td style="color: #6c757d;">Δάπεδα:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.area} τ.μ. x ${categoryModifiers.flooring}€ = ${formatCost(flooringCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ${renovation.categories?.electrical && renovation.rooms > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Ηλεκτρολογικά (${renovation.rooms} δωμ.):</td>
-                    <td style="color: #212929; text-align: right;">${renovation.rooms} x ${formatCost(categoryModifiers.electrical)} = ${formatCost(renovation.rooms * categoryModifiers.electrical)}</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d; padding-left: 20px;">Γενικές Επισκευές:</td>
-                    <td style="color: #212929; text-align: right;">${formatCost(electricalGeneralRepairCost)}</td>
-                  </tr>
-                  <tr style="background-color: #fff3cd;">
-                    <td style="color: #6c757d; font-weight: 600;">Σύνολο Ηλεκτρολογικών:</td>
-                    <td style="color: #856404; text-align: right; font-weight: 600;">${formatCost(renovation.rooms * categoryModifiers.electrical + electricalGeneralRepairCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ${renovation.categories?.structural ? `
-                  <tr>
-                    <td style="color: #6c757d;">Δομικά:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.area} τ.μ. x ${categoryModifiers.structural}€ = ${formatCost(structuralCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ${renovation.categories?.painting ? `
-                  <tr>
-                    <td style="color: #6c757d;">Βαφή:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.area} τ.μ. x ${categoryModifiers.painting}€ = ${formatCost(paintingCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ` : ''}
-                  
-                  ${renovation.poolType !== 'none' ? `
-                  <tr style="background-color: #e9ecef;">
-                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px; padding-top: 10px;">Πισίνα</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">${poolLabels[renovation.poolType]}:</td>
-                    <td style="color: #212529; text-align: right;">${renovation.poolSize} τ.μ. x ${formatCost(poolCostPerM2)} = ${formatCost(poolCost)}</td>
-                  </tr>
-                  ` : ''}
-                </table>
-                <div style="margin-top: 15px; padding-top: 10px; border-top: 2px solid #3a5a8c;">
-                  <p style="margin: 0; color: #6c757d; font-size: 11px;">Σύνολο x Ποιότητα (${qualityMultiplier}) x Ηλικία (${ageMultiplier})</p>
-                  <p style="margin: 5px 0 0 0; color: #3a5a8c; font-size: 22px; font-weight: 700;">${formatCost(renovation.renovationCost)}</p>
-                </div>
-                ` : `
-                <p style="color: #6c757d; font-size: 13px; text-align: center; margin: 20px 0;">Δεν επιλέχθηκε</p>
-                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #dee2e6;">
-                  <p style="margin: 0; color: #6c757d; font-size: 12px;">Κόστος Ανακαίνισης</p>
-                  <p style="margin: 5px 0 0 0; color: #6c757d; font-size: 22px; font-weight: 700;">0€</p>
-                </div>
-                `}
-              </div>
-            </td>
-            
-            <!-- Right Column: Κουφώματα -->
-            <td style="width: 48%; vertical-align: top; padding-left: 15px; ${windows.windowsCost > 0 ? '' : 'opacity: 0.5;'}">
-              <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; height: 100%;">
-                <h2 style="color: #3a5a8c; margin: 0 0 15px 0; font-size: 16px; border-bottom: 2px solid #3a5a8c; padding-bottom: 10px;">Κουφώματα</h2>
-                ${windows.windowsCost > 0 ? `
-                <table width="100%" cellpadding="4" cellspacing="0" style="font-size: 12px;">
-                  <tr style="background-color: #e9ecef;">
-                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px;">Επιλογές</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Υλικό:</td>
-                    <td style="color: #212529; text-align: right; font-weight: 600;">${materialLabels[windows.material]}</td>
-                  </tr>
-                  <tr>
-                    <td style="color: #6c757d;">Ποιότητα:</td>
-                    <td style="color: #212529; text-align: right; font-weight: 600;">${qualityLabels[windows.quality]}</td>
-                  </tr>
-                  
-                  <tr style="background-color: #e9ecef;">
-                    <td colspan="2" style="color: #495057; font-weight: 600; padding: 6px; padding-top: 10px;">Ανάλυση Κόστους</td>
-                  </tr>
-                  ${windows.windows > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Παράθυρα (${windows.windows}):</td>
-                    <td style="color: #212529; text-align: right;">${windows.windows} x ${formatCost(windowUnitCost)} = ${formatCost(windows.windows * windowUnitCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ${windows.balconyDoors > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Μπαλκονόπορτες (${windows.balconyDoors}):</td>
-                    <td style="color: #212529; text-align: right;">${windows.balconyDoors} x ${formatCost(balconyDoorUnitCost)} = ${formatCost(windows.balconyDoors * balconyDoorUnitCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ${windows.interiorDoors > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Εσωτ. Πόρτες (${windows.interiorDoors}):</td>
-                    <td style="color: #212529; text-align: right;">${windows.interiorDoors} x ${formatCost(interiorDoorUnitCost)} = ${formatCost(windows.interiorDoors * interiorDoorUnitCost)}</td>
-                  </tr>
-                  ` : ''}
-                  ${windows.mainEntrance > 0 ? `
-                  <tr>
-                    <td style="color: #6c757d;">Κεντρ. Είσοδος (${windows.mainEntrance}):</td>
-                    <td style="color: #212529; text-align: right;">${windows.mainEntrance} x ${formatCost(mainEntranceUnitCost)} = ${formatCost(windows.mainEntrance * mainEntranceUnitCost)}</td>
-                  </tr>
-                  ` : ''}
-                </table>
-                <div style="margin-top: 15px; padding-top: 10px; border-top: 2px solid #3a5a8c;">
-                  <p style="margin: 0; color: #6c757d; font-size: 11px;">Σύνολο Κουφωμάτων</p>
-                  <p style="margin: 5px 0 0 0; color: #3a5a8c; font-size: 22px; font-weight: 700;">${formatCost(windows.windowsCost)}</p>
-                </div>
-                ` : `
-                <p style="color: #6c757d; font-size: 13px; text-align: center; margin: 20px 0;">Δεν επιλέχθηκε</p>
-                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #dee2e6;">
-                  <p style="margin: 0; color: #6c757d; font-size: 12px;">Κόστος Κουφωμάτων</p>
-                  <p style="margin: 5px 0 0 0; color: #6c757d; font-size: 22px; font-weight: 700;">0€</p>
-                </div>
-                `}
-              </div>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    ` : ''}
-    
-    <!-- Total Cost -->
-    <tr>
-      <td style="padding: 25px; background-color: #3a5a8c;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            <td style="color: #ffffff; font-size: 18px; font-weight: 600;">Συνολικό Εκτιμώμενο Κόστος:</td>
-            <td style="color: #ffffff; font-size: 24px; font-weight: 700; text-align: right;">${formatCost(totalCost)}</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    
-    <!-- Footer -->
-    <tr>
-      <td style="padding: 20px; background-color: #f8f9fa; text-align: center;">
-        <p style="margin: 0; color: #6c757d; font-size: 12px;">
-          Αυτό το email δημιουργήθηκε αυτόματα από τον Υπολογιστή Κόστους Ανακαίνισης της Faiacon.
-        </p>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-  `.trim()
+      <td style="${S.calcLabel}">${label}</td>
+      <td style="${S.calcFormula}">${formula}</td>
+      <td style="${S.calcResult}">${fmtEur(result)}</td>
+    </tr>`
 }
 
-// Generate plain text email for fallback
-function generateEmailText(lead: CalculatorLead): string {
+function subtotalRow(label: string, value: number, style?: string): string {
+  return `
+    <tr style="${style ?? S.subtotalRow}">
+      <td colspan="2" style="${S.subtotalLabel}">${label}</td>
+      <td style="${S.subtotalValue}">${fmtEur(value)}</td>
+    </tr>`
+}
+
+function multRow(label: string, formula: string, result: number): string {
+  return `
+    <tr style="${S.multRow}">
+      <td style="${S.multLabel}">${label}</td>
+      <td style="${S.multLabel};font-family:monospace;">${formula}</td>
+      <td style="${S.multValue}">${fmtEur(result)}</td>
+    </tr>`
+}
+
+function sectionTitle(title: string, badge?: string): string {
+  return `<h2 style="${S.sectionTitle}">${title}${badge ? `<span style="${S.tagBlue}">${badge}</span>` : ''}</h2>`
+}
+
+// ─── Renovation breakdown section ────────────────────────────────────────────
+
+function renderRenovationSection(r: RenovationBreakdown, input: any): string {
+  const qualityLabel = QUALITY_LABELS_EL[input.renovationQuality as keyof typeof QUALITY_LABELS_EL] || input.renovationQuality
+  const poolTypeLabel = POOL_TYPE_LABELS_EL[input.poolType as keyof typeof POOL_TYPE_LABELS_EL] || input.poolType
+  const buildingAge = new Date().getFullYear() - input.buildingAge
+
+  let html = `<div style="${S.sectionWrap}">`
+  html += sectionTitle('Τμήμα 2 — Επιλογές Ανακαίνισης')
+
+  // Selections table
+  html += `<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">`
+  html += row('Εμβαδόν', `${fmtNum(input.area)} τ.μ.`)
+  html += row('Μπάνια', String(input.bathrooms))
+  html += row('Κουζίνες', String(input.kitchens))
+  html += row('Δωμάτια', String(input.rooms))
+  html += row('Έτος κατασκευής', `${input.buildingAge} (ηλικία ${buildingAge} ετών)`)
+  html += row('Επίπεδο ποιότητας', qualityLabel)
+  html += row('Κατηγορίες εργασιών', r.selectedCategories.length > 0 ? r.selectedCategories.join(', ') : '—')
+  html += row('Τύπος πισίνας', poolTypeLabel)
+  if (input.poolType !== 'none') html += row('Εμβαδόν πισίνας', `${input.poolSize} τ.μ.`)
+  if (r.isFullRenovation) {
+    html += row('Τρόπος υπολογισμού', '<span style="color:#065f46;font-weight:700;">Πλήρης ανακαίνιση (€/τ.μ.) — ενεργοποιήθηκε λόγω ≥4 κατηγοριών</span>')
+  }
+  html += `</table>`
+
+  // Calculation lines
+  html += sectionTitle('Τμήμα 3 — Ανάλυση Εργασιών &amp; Πράξεις Υπολογισμού')
+  html += `<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">`
+  html += `<thead><tr style="background:#f9fafb;border-bottom:1px solid #e5e7eb;">
+    <th style="text-align:left;padding:6px 10px 6px 0;font-size:12px;color:#6b7280;font-weight:600;">Εργασία</th>
+    <th style="text-align:left;padding:6px 10px 6px 0;font-size:12px;color:#6b7280;font-weight:600;">Τύπος</th>
+    <th style="text-align:right;padding:6px 0;font-size:12px;color:#6b7280;font-weight:600;">Ποσό</th>
+  </tr></thead><tbody>`
+
+  for (const line of r.lines) {
+    html += calcRow(line.label, line.formula, line.result)
+  }
+
+  html += subtotalRow('Υποσύνολο εργασιών (πριν τους συντελεστές)', r.subtotalBeforeMultipliers)
+
+  // Multipliers
+  if (r.ageMultiplierValue !== 1.0 || r.sizeMultiplierValue !== 1.0) {
+    html += `<tr><td colspan="3" style="padding:10px 0 4px 0;font-size:12px;color:#6b7280;font-weight:700;">Εφαρμογή Συντελεστών:</td></tr>`
+  }
+  if (r.ageMultiplierValue !== 1.0) {
+    const result = r.subtotalBeforeMultipliers * r.ageMultiplierValue
+    html += multRow(
+      `Συντελεστής ηλικίας κτιρίου: ×${r.ageMultiplierValue} (${r.ageMultiplierLabel})`,
+      `${fmtEur(r.subtotalBeforeMultipliers)} × ${r.ageMultiplierValue}`,
+      result
+    )
+  }
+  if (r.sizeMultiplierValue !== 1.0) {
+    const baseForSize = r.subtotalBeforeMultipliers * r.ageMultiplierValue
+    const result = baseForSize * r.sizeMultiplierValue
+    html += multRow(
+      `Συντελεστής εμβαδού: ×${r.sizeMultiplierValue} (${r.sizeMultiplierLabel})`,
+      `${fmtEur(baseForSize)} × ${r.sizeMultiplierValue}`,
+      result
+    )
+  }
+
+  if (r.ageMultiplierValue !== 1.0 || r.sizeMultiplierValue !== 1.0) {
+    html += subtotalRow('Υποσύνολο ανακαίνισης (μετά τους συντελεστές)', r.subtotalAfterMultipliers, 'background:#e0e7ff;')
+  }
+
+  // Pool lines
+  if (r.poolLines.length > 0) {
+    html += `<tr><td colspan="3" style="padding:12px 0 4px 0;font-size:12px;color:#6b7280;font-weight:700;">Πισίνα (ξεχωριστή εργασία — δεν επηρεάζεται από συντελεστές ανακαίνισης):</td></tr>`
+    for (const pl of r.poolLines) {
+      html += calcRow(pl.label, pl.formula, pl.result)
+    }
+    html += subtotalRow('Υποσύνολο πισίνας', r.poolSubtotal, 'background:#ecfdf5;')
+  }
+
+  // Grand total for this section
+  html += `<tr style="border-top:2px solid #1e3a5f;">
+    <td colspan="2" style="color:#1e3a5f;font-size:15px;font-weight:800;padding:12px 10px 12px 0;">Σύνολο Ανακαίνισης + Πισίνας</td>
+    <td style="color:#1e3a5f;font-size:18px;font-weight:800;text-align:right;padding:12px 0;">${fmtEur(r.total)}</td>
+  </tr>`
+  html += `<tr><td colspan="3" style="color:#6b7280;font-size:12px;padding:4px 0 8px 0;">Εύρος: ${fmtEur(r.range.min)} – ${fmtEur(r.range.max)} (±10–12%)</td></tr>`
+
+  html += `</tbody></table>`
+
+  // Notes
+  if (r.notes.length > 0) {
+    html += `<div style="margin-top:12px;padding:12px;background:#f9fafb;border-radius:6px;border-left:3px solid #1e3a5f;">`
+    html += `<p style="color:#374151;font-size:12px;font-weight:700;margin:0 0 6px 0;">Λογική Υπολογισμού:</p>`
+    for (const note of r.notes) {
+      html += `<p style="${S.note}">• ${note}</p>`
+    }
+    html += `</div>`
+  }
+
+  html += `</div>`
+  return html
+}
+
+// ─── Windows breakdown section ────────────────────────────────────────────────
+
+function renderWindowsSection(w: WindowsBreakdown, input: any): string {
+  const materialLabel = MATERIAL_LABELS_EL[input.material as keyof typeof MATERIAL_LABELS_EL] || input.material
+  const qualityLabel = QUALITY_LABELS_EL[input.quality as keyof typeof QUALITY_LABELS_EL] || input.quality
+
+  let html = `<div style="${S.sectionWrap}">`
+  html += sectionTitle('Κουφώματα')
+
+  html += `<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:16px;">`
+  html += row('Υλικό', materialLabel)
+  html += row('Ποιότητα', qualityLabel)
+  if (input.windows > 0) html += row('Παράθυρα', String(input.windows))
+  if (input.balconyDoors > 0) html += row('Μπαλκονόπορτες', String(input.balconyDoors))
+  if (input.interiorDoors > 0) html += row('Εσωτερικές πόρτες', String(input.interiorDoors))
+  if (input.mainEntrance > 0) html += row('Κεντρική είσοδος', String(input.mainEntrance))
+  html += `</table>`
+
+  html += `<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">`
+  html += `<thead><tr style="background:#f9fafb;border-bottom:1px solid #e5e7eb;">
+    <th style="text-align:left;padding:6px 10px 6px 0;font-size:12px;color:#6b7280;font-weight:600;">Εργασία</th>
+    <th style="text-align:left;padding:6px 10px 6px 0;font-size:12px;color:#6b7280;font-weight:600;">Τύπος</th>
+    <th style="text-align:right;padding:6px 0;font-size:12px;color:#6b7280;font-weight:600;">Ποσό</th>
+  </tr></thead><tbody>`
+
+  for (const line of w.lines) {
+    html += calcRow(line.label, line.formula, line.result)
+  }
+
+  html += `<tr style="border-top:2px solid #1e3a5f;">
+    <td colspan="2" style="color:#1e3a5f;font-size:15px;font-weight:800;padding:12px 10px 12px 0;">Σύνολο Κουφωμάτων</td>
+    <td style="color:#1e3a5f;font-size:18px;font-weight:800;text-align:right;padding:12px 0;">${fmtEur(w.total)}</td>
+  </tr>`
+  html += `<tr><td colspan="3" style="color:#6b7280;font-size:12px;padding:4px 0 8px 0;">Εύρος: ${fmtEur(w.range.min)} – ${fmtEur(w.range.max)} (±8–12%)</td></tr>`
+
+  html += `</tbody></table>`
+
+  if (w.notes.length > 0) {
+    html += `<div style="margin-top:12px;padding:10px;background:#f9fafb;border-radius:6px;border-left:3px solid #1e3a5f;">`
+    for (const note of w.notes) {
+      html += `<p style="${S.note}">• ${note}</p>`
+    }
+    html += `</div>`
+  }
+
+  html += `</div>`
+  return html
+}
+
+// ─── Main admin email generator ───────────────────────────────────────────────
+
+function generateEmailHTML(lead: CalculatorLead, breakdown?: QuoteBreakdown): string {
   const { contact, selections, submittedAt } = lead
-  const { renovation, windows, totalCost } = selections
-  
+
   const submissionDate = new Date(submittedAt).toLocaleString('el-GR', {
     dateStyle: 'full',
-    timeStyle: 'short'
+    timeStyle: 'short',
   })
-  
-  const summary = generateLeadSummary(selections, false)
-  
-  let text = `
-ΝΈΟ ΑΊΤΗΜΑ ΑΠΌ CALCULATOR - FAIACON
-=====================================
 
-ΓΡΉΓΟΡΗ ΠΕΡΊΛΗΨΗ
-${summary}
+  const referenceId = `CALC-${new Date(submittedAt).getTime().toString(36).toUpperCase()}`
 
-ΣΤΟΙΧΕΊΑ ΕΠΙΚΟΙΝΩΝΊΑΣ
----------------------
-Όνομα: ${contact.name}
-Email: ${contact.email}
-${contact.phone ? `Κινητό: ${contact.phone}` : ''}
-Ημερομηνία: ${submissionDate}
-`
+  // ── Section 1: Header ──
+  let html = `<!DOCTYPE html><html lang="el"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Νέα Αίτηση Προσφοράς — Faiacon</title></head>
+<body style="margin:0;padding:20px 0;background:#f0f2f5;">
+<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
+<table width="680" cellpadding="0" cellspacing="0" style="${S.wrap}">
 
-  if (renovation.renovationCost > 0) {
-    text += `
-ΓΕΝΙΚΉ ΑΝΑΚΑΊΝΙΣΗ
------------------
-Εμβαδόν: ${renovation.area} τ.μ.
-Μπάνια: ${renovation.bathrooms}
-Κουζίνες: ${renovation.kitchens}
-Δωμάτια: ${renovation.rooms}
-Έτος Κατασκευής: ${renovation.buildingAge}
-Ποιότητα: ${renovation.renovationQuality}
-Κόστος Ανακαίνισης: ${formatCost(renovation.renovationCost)}
-`
+  <!-- HEADER -->
+  <tr><td style="${S.header}">
+    <p style="${S.headerH1}">Νέα Αίτηση Προσφοράς — Faiacon</p>
+    <p style="${S.headerSub}">Αυτόματο email αναφοράς • Μόνο για εσωτερική χρήση</p>
+  </td></tr>
+
+  <!-- REFERENCE BAR -->
+  <tr><td style="padding:14px 32px;background:#f3f6fb;border-bottom:1px solid #dde3ec;">
+    <table width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td style="font-size:12px;color:#6b7280;">Αναφορά: <strong style="color:#1e3a5f;">${referenceId}</strong></td>
+      <td style="font-size:12px;color:#6b7280;text-align:right;">Υποβολή: <strong style="color:#1e3a5f;">${submissionDate}</strong></td>
+    </tr></table>
+  </td></tr>`
+
+  // ── Section 1: Στοιχεία Πελάτη ──
+  html += `<tr><td style="${S.sectionWrap}">
+    ${sectionTitle('Τμήμα 1 — Στοιχεία Πελάτη')}
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${row('Όνομα', `<a href="mailto:${contact.email}" style="color:#1e3a5f;text-decoration:none;">${contact.name}</a>`)}
+      ${row('Email', `<a href="mailto:${contact.email}" style="color:#1e3a5f;">${contact.email}</a>`)}
+      ${contact.phone ? row('Τηλέφωνο', `<a href="tel:${contact.phone}" style="color:#1e3a5f;">${contact.phone}</a>`) : ''}
+      ${row('Ημερομηνία', submissionDate)}
+      ${row('Αναγνωριστικό', referenceId)}
+    </table>
+  </td></tr>`
+
+  // ── Sections 2–4: Ανακαίνιση breakdown ──
+  if (breakdown?.renovation) {
+    html += `<tr><td>${renderRenovationSection(breakdown.renovation, selections.renovation)}</td></tr>`
+  } else if (selections.renovation.renovationCost > 0) {
+    // Fallback: no breakdown object (old submission)
+    html += `<tr><td style="${S.sectionWrap}">
+      ${sectionTitle('Τμήμα 2 — Ανακαίνιση')}
+      <table width="100%" cellpadding="0" cellspacing="0">
+        ${row('Εμβαδόν', `${selections.renovation.area} τ.μ.`)}
+        ${row('Κόστος Ανακαίνισης', fmtEur(selections.renovation.renovationCost))}
+      </table>
+    </td></tr>`
   }
 
-  if (windows.windowsCost > 0) {
-    text += `
-ΠΌΡΤΕΣ & ΠΑΡΆΘΥΡΑ
------------------
-Παράθυρα: ${windows.windows}
-Μπαλκονόπορτες: ${windows.balconyDoors}
-Εσωτερικές Πόρτες: ${windows.interiorDoors}
-Κεντρική Είσοδος: ${windows.mainEntrance}
-Υλικό: ${windows.material}
-Ποιότητα: ${windows.quality}
-Κόστος Κουφωμάτων: ${formatCost(windows.windowsCost)}
-`
+  // ── Windows section ──
+  if (breakdown?.windows) {
+    html += `<tr><td>${renderWindowsSection(breakdown.windows, selections.windows)}</td></tr>`
+  } else if (selections.windows.windowsCost > 0) {
+    html += `<tr><td style="${S.sectionWrap}">
+      ${sectionTitle('Κουφώματα')}
+      <table width="100%" cellpadding="0" cellspacing="0">
+        ${row('Κόστος Κουφωμάτων', fmtEur(selections.windows.windowsCost))}
+      </table>
+    </td></tr>`
   }
 
-  text += `
-=====================================
-ΣΥΝΟΛΙΚΌ ΕΚΤΙΜΏΜΕΝΟ ΚΌΣΤΟΣ: ${formatCost(totalCost)}
-=====================================
-`
+  // ── Section 5: Τεχνικές Παρατηρήσεις ──
+  const allNotes = [
+    ...(breakdown?.renovation?.notes ?? []),
+    ...(breakdown?.windows?.notes ?? []),
+  ]
+  if (allNotes.length > 0) {
+    html += `<tr><td style="${S.sectionWrap}">
+      ${sectionTitle('Τμήμα 4 — Τεχνικές Παρατηρήσεις')}
+      ${allNotes.map(n => `<p style="${S.note}">• ${n}</p>`).join('')}
+    </td></tr>`
+  }
 
-  return text.trim()
+  // ── Section 6: Τελικό Αποτέλεσμα ──
+  const grandTotal = breakdown?.grandTotal ?? selections.totalCost
+  const grandRange = breakdown?.grandRange
+
+  html += `<tr><td style="${S.totalWrap}">
+    <p style="${S.totalLabel}">Τμήμα 5 — Τελικό Εκτιμώμενο Κόστος</p>
+    <p style="${S.totalValue}">${fmtEur(grandTotal)}</p>`
+  if (grandRange) {
+    html += `<p style="${S.totalRange}">Εύρος εκτίμησης: ${fmtEur(grandRange.min)} – ${fmtEur(grandRange.max)}</p>`
+  }
+  html += `<p style="color:rgba(255,255,255,0.55);font-size:11px;margin:10px 0 0 0;">
+    Το παραπάνω ποσό αποτελεί αυτόματη εκτίμηση βάσει των επιλογών του χρήστη και μπορεί να διαφοροποιηθεί μετά από τεχνική αξιολόγηση επί τόπου.
+  </p>
+  </td></tr>`
+
+  // ── Footer ──
+  html += `<tr><td style="padding:16px 32px;background:#f9fafb;border-top:1px solid #eaecf0;">
+    <p style="margin:0;color:#9ca3af;font-size:11px;text-align:center;">
+      Αυτό το email δημιουργήθηκε αυτόματα από τον Υπολογιστή Κόστους Ανακαίνισης — Faiacon.gr •
+      ΜΗΝ αποστείλετε αυτό το email στον πελάτη — περιέχει εσωτερική λογική υπολογισμού.
+    </p>
+  </td></tr>`
+
+  html += `</table></td></tr></table></body></html>`
+  return html
 }
 
-// Optional: Store lead for future database integration
-// This function is designed to be easily replaced with actual database calls
+// ─── Plain text fallback ──────────────────────────────────────────────────────
+
+function generateEmailText(lead: CalculatorLead, breakdown?: QuoteBreakdown): string {
+  const { contact, selections, submittedAt } = lead
+  const date = new Date(submittedAt).toLocaleString('el-GR', { dateStyle: 'full', timeStyle: 'short' })
+  const refId = `CALC-${new Date(submittedAt).getTime().toString(36).toUpperCase()}`
+
+  let t = `ΝΕΑ ΑΙΤΗΣΗ ΠΡΟΣΦΟΡΑΣ — FAIACON (ΕΣΩΤΕΡΙΚΟ EMAIL)
+================================================
+
+Αναφορά: ${refId}
+Ημερομηνία: ${date}
+
+ΤΜΗΜΑ 1 — ΣΤΟΙΧΕΙΑ ΠΕΛΑΤΗ
+--------------------------
+Όνομα:     ${contact.name}
+Email:     ${contact.email}
+Τηλέφωνο:  ${contact.phone ?? '—'}
+`
+
+  if (breakdown?.renovation) {
+    const r = breakdown.renovation
+    t += `
+ΤΜΗΜΑ 2 — ΕΠΙΛΟΓΕΣ ΑΝΑΚΑΙΝΙΣΗΣ
+--------------------------------
+Εμβαδόν:           ${selections.renovation.area} τ.μ.
+Μπάνια:            ${selections.renovation.bathrooms}
+Κουζίνες:          ${selections.renovation.kitchens}
+Δωμάτια:           ${selections.renovation.rooms}
+Έτος κατασκευής:   ${selections.renovation.buildingAge}
+Ποιότητα:          ${QUALITY_LABELS_EL[selections.renovation.renovationQuality as keyof typeof QUALITY_LABELS_EL] ?? selections.renovation.renovationQuality}
+Κατηγορίες:        ${r.selectedCategories.join(', ') || '—'}
+Πισίνα:            ${POOL_TYPE_LABELS_EL[selections.renovation.poolType as keyof typeof POOL_TYPE_LABELS_EL] ?? selections.renovation.poolType}
+Τρόπος υπολογ.:    ${r.isFullRenovation ? 'Πλήρης ανακαίνιση (€/τ.μ.)' : 'Κατά κατηγορία'}
+
+ΤΜΗΜΑ 3 — ΑΝΑΛΥΣΗ ΠΡΑΞΕΩΝ
+--------------------------`
+    for (const line of r.lines) {
+      t += `\n${line.label}\n  Τύπος: ${line.formula}\n  Αποτέλεσμα: ${fmtEur(line.result)}`
+    }
+    t += `\n\nΥποσύνολο εργασιών (πριν τους συντελεστές): ${fmtEur(r.subtotalBeforeMultipliers)}`
+    if (r.ageMultiplierValue !== 1.0) {
+      t += `\nΣυντελεστής ηλικίας: ×${r.ageMultiplierValue} — ${r.ageMultiplierLabel}`
+    }
+    if (r.sizeMultiplierValue !== 1.0) {
+      t += `\nΣυντελεστής εμβαδού: ×${r.sizeMultiplierValue} — ${r.sizeMultiplierLabel}`
+    }
+    t += `\nΥποσύνολο ανακαίνισης (μετά τους συντελεστές): ${fmtEur(r.subtotalAfterMultipliers)}`
+    for (const pl of r.poolLines) {
+      t += `\n${pl.label}: ${pl.formula} = ${fmtEur(pl.result)}`
+    }
+    if (r.poolSubtotal > 0) {
+      t += `\nΥποσύνολο πισίνας: ${fmtEur(r.poolSubtotal)}`
+    }
+    t += `\nΣΥΝΟΛΟ ΑΝΑΚΑΙΝΙΣΗΣ + ΠΙΣΙΝΑΣ: ${fmtEur(r.total)}`
+    t += `\nΕύρος: ${fmtEur(r.range.min)} – ${fmtEur(r.range.max)}`
+  }
+
+  if (breakdown?.windows) {
+    const w = breakdown.windows
+    t += `\n\nΚΟΥΦΩΜΑΤΑ\n---------`
+    for (const line of w.lines) {
+      t += `\n${line.label}: ${line.formula} = ${fmtEur(line.result)}`
+    }
+    t += `\nΣΥΝΟΛΟ ΚΟΥΦΩΜΑΤΩΝ: ${fmtEur(w.total)}`
+    t += `\nΕύρος: ${fmtEur(w.range.min)} – ${fmtEur(w.range.max)}`
+  }
+
+  const grandTotal = breakdown?.grandTotal ?? selections.totalCost
+  const grandRange = breakdown?.grandRange
+
+  t += `\n\n================================================
+ΤΜΗΜΑ 5 — ΤΕΛΙΚΟ ΕΚΤΙΜΩΜΕΝΟ ΚΟΣΤΟΣ
+================================================
+${fmtEur(grandTotal)}`
+  if (grandRange) {
+    t += `\nΕύρος: ${fmtEur(grandRange.min)} – ${fmtEur(grandRange.max)}`
+  }
+  t += `\n\nΠΑΡΑΤΗΡΗΣΗ: Αυτόματη εκτίμηση — ενδέχεται να διαφοροποιηθεί μετά από τεχνική αξιολόγηση.
+ΕΣΩΤΕΡΙΚΟ EMAIL — ΜΗΝ ΑΠΟΣΤΕΙΛΕΤΕ ΣΤΟΝ ΠΕΛΑΤΗ.`
+
+  return t.trim()
+}
+
+// ─── Lead storage (optional) ─────────────────────────────────────────────────
+
 async function storeLead(lead: CalculatorLead): Promise<void> {
-  // TODO: Replace with actual database storage
-  // Example for Supabase:
-  // const { error } = await supabase.from('calculator_leads').insert(lead)
-  // if (error) throw error
-  
-  // Example for Neon:
-  // await sql`INSERT INTO calculator_leads (contact, selections, submitted_at, source) 
-  //           VALUES (${lead.contact}, ${lead.selections}, ${lead.submittedAt}, ${lead.source})`
-  
-  // For now, just log (in production, remove or replace)
-  console.log('[Calculator Lead]', JSON.stringify(lead, null, 2))
+  console.log('[Calculator Lead]', JSON.stringify({ contact: lead.contact, submittedAt: lead.submittedAt, grandTotal: lead.breakdown?.grandTotal ?? lead.selections.totalCost }, null, 2))
 }
+
+// ─── POST handler ─────────────────────────────────────────────────────────────
 
 export async function POST(request: NextRequest) {
   try {
-    // Parse request body
     const body = await request.json()
-    
-    // Validate input
+
     const validation = validateLeadData(body)
     if (!validation.valid) {
-      return NextResponse.json(
-        { success: false, errors: validation.errors },
-        { status: 400 }
-      )
+      return NextResponse.json({ success: false, errors: validation.errors }, { status: 400 })
     }
-    
-    // Check environment variables
+
     if (!process.env.RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not configured')
       return NextResponse.json(
@@ -537,34 +475,35 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     }
-    
-    // Initialize Resend with API key (lazy initialization inside handler)
+
     const ResendClass = await getResend()
     const resend = new ResendClass(process.env.RESEND_API_KEY)
-    
-    // Create lead object
+
+    // Build lead object — pick up breakdown if the client sent it
+    const breakdown: QuoteBreakdown | undefined = body.breakdown ?? undefined
+
     const lead: CalculatorLead = {
       contact: {
         name: body.contact.name.trim(),
         email: body.contact.email.trim().toLowerCase(),
-        phone: body.contact.phone?.trim() || undefined
+        phone: body.contact.phone?.trim() || undefined,
       },
       selections: body.selections,
+      breakdown,
       submittedAt: new Date().toISOString(),
       source: 'renovation-calculator',
-      status: 'new'
+      status: 'new',
     }
-    
-    // Send email via Resend
+
     const { data, error } = await resend.emails.send({
       from: LEADS_FROM_EMAIL,
       to: LEADS_TO_EMAIL,
-      subject: `Νέο αίτημα από calculator - Faiacon`,
-      html: generateEmailHTML(lead),
-      text: generateEmailText(lead),
-      replyTo: lead.contact.email
+      subject: `[Faiacon] Νέα Αίτηση Προσφοράς — ${lead.contact.name}`,
+      html: generateEmailHTML(lead, breakdown),
+      text: generateEmailText(lead, breakdown),
+      replyTo: lead.contact.email,
     })
-    
+
     if (error) {
       console.error('Resend error:', error)
       return NextResponse.json(
@@ -572,21 +511,19 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     }
-    
-    // Store lead for future reference (optional)
+
     try {
       await storeLead(lead)
     } catch (storeError) {
-      // Don't fail the request if storage fails
       console.error('Failed to store lead:', storeError)
     }
-    
+
     return NextResponse.json({
       success: true,
       message: 'Το αίτημά σας καταχωρήθηκε επιτυχώς.',
-      emailId: data?.id
+      emailId: data?.id,
     })
-    
+
   } catch (error) {
     console.error('Calculator lead API error:', error)
     return NextResponse.json(

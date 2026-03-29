@@ -31,54 +31,19 @@ import {
 } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "../contexts/language-context"
+import {
+  type Material,
+  type Quality,
+  type PoolType,
+  type QuoteBreakdown,
+  WINDOW_COSTS as windowCosts,
+  RENOVATION_RATES,
+  POOL_COSTS_PER_M2,
+  generateQuoteBreakdown,
+} from "@/lib/calculator/pricing"
 
 const materialOptions = ["aluminum", "pvc", "wood"] as const
 const qualityOptions = ["basic", "premium"] as const
-
-type Material = (typeof materialOptions)[number]
-type Quality = (typeof qualityOptions)[number]
-type PoolType = "none" | "liner" | "polyester" | "concrete"
-
-const renovationRates = {
-  full: { basic: 590, premium: 760 },
-  bathroom: { basic: 6200, premium: 8800 },
-  kitchen: { basic: 9500, premium: 13500 },
-  flooring: { basic: 45, premium: 68 },
-  electrical: { basic: 48, premium: 72 },
-  structural: { basic: 90, premium: 140 },
-  painting: { basic: 13, premium: 18 },
-  roof: { basic: 155, premium: 188 },
-} as const
-
-const poolCostsPerM2: Record<PoolType, Partial<Record<Quality, number>>> = {
-  none: { basic: 0, premium: 0 },
-  liner: { basic: 700, premium: 850 },
-  polyester: { premium: 950 },
-  concrete: { basic: 1100, premium: 1350 },
-}
-
-const windowCosts: Record<string, Record<Material, Record<Quality, number>>> = {
-  window: {
-    aluminum: { basic: 850, premium: 1050 },
-    pvc: { basic: 700, premium: 900 },
-    wood: { basic: 980, premium: 1250 },
-  },
-  balconyDoor: {
-    aluminum: { basic: 1500, premium: 1850 },
-    pvc: { basic: 1300, premium: 1600 },
-    wood: { basic: 1700, premium: 2100 },
-  },
-  interiorDoor: {
-    aluminum: { basic: 560, premium: 720 },
-    pvc: { basic: 450, premium: 620 },
-    wood: { basic: 430, premium: 650 },
-  },
-  mainEntrance: {
-    aluminum: { basic: 1850, premium: 2350 },
-    pvc: { basic: 1650, premium: 2100 },
-    wood: { basic: 1950, premium: 2450 },
-  },
-}
 
 const translations: Record<string, string> = {
   "Renovation Cost Calculator": "Υπολογιστής Κόστους Ανακαίνισης",
@@ -386,6 +351,28 @@ export default function RenovationCostCalculator() {
     return 1.0
   }
 
+  // Build the renovation input object from current state (used by both display and submission)
+  const buildRenovationInput = useCallback(() => ({
+    area: Number(area),
+    bathrooms,
+    kitchens,
+    rooms,
+    buildingAge,
+    quality: renovationQuality,
+    poolType,
+    poolSize,
+    categories,
+  }), [area, bathrooms, kitchens, rooms, buildingAge, renovationQuality, poolType, poolSize, categories])
+
+  const buildWindowsInput = useCallback(() => ({
+    windows,
+    balconyDoors,
+    interiorDoors,
+    mainEntrance,
+    material,
+    quality: windowsQuality,
+  }), [windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality])
+
   const calculateRenovationCost = () => {
     const numericArea = Number(area)
 
@@ -408,19 +395,19 @@ export default function RenovationCostCalculator() {
         categories.electrical)
 
     if (isFullRenovation) {
-      total = numericArea * renovationRates.full[quality]
+      total = numericArea * RENOVATION_RATES.full[quality]
     } else {
-      if (categories.bathroom) total += bathrooms * renovationRates.bathroom[quality]
-      if (categories.kitchen) total += kitchens * renovationRates.kitchen[quality]
-      if (categories.flooring) total += numericArea * renovationRates.flooring[quality]
+      if (categories.bathroom) total += bathrooms * RENOVATION_RATES.bathroom[quality]
+      if (categories.kitchen) total += kitchens * RENOVATION_RATES.kitchen[quality]
+      if (categories.flooring) total += numericArea * RENOVATION_RATES.flooring[quality]
       if (categories.electrical) {
         const electricalAreaFactor = rooms > 0 ? Math.max(1, rooms / 2) : 1
-        total += numericArea * renovationRates.electrical[quality] * electricalAreaFactor
+        total += numericArea * RENOVATION_RATES.electrical[quality] * electricalAreaFactor
       }
-  if (categories.structural) total += numericArea * renovationRates.structural[quality]
-  if (categories.painting) total += numericArea * renovationRates.painting[quality]
-  if (categories.roof) total += numericArea * renovationRates.roof[quality]
-  }
+      if (categories.structural) total += numericArea * RENOVATION_RATES.structural[quality]
+      if (categories.painting) total += numericArea * RENOVATION_RATES.painting[quality]
+      if (categories.roof) total += numericArea * RENOVATION_RATES.roof[quality]
+    }
 
     total = total * getAgeMultiplier(buildingAge) * getSizeMultiplier(numericArea)
 
@@ -438,7 +425,7 @@ export default function RenovationCostCalculator() {
       return
     }
     const quality = renovationQuality
-    const poolRate = poolCostsPerM2[poolType][quality] || 0
+    const poolRate = POOL_COSTS_PER_M2[poolType][quality] || 0
     const total = poolRate * poolSize
 
     setPoolCost(total.toFixed(2))
@@ -489,11 +476,20 @@ export default function RenovationCostCalculator() {
 
   // Stable callback — receives contact data from the isolated ContactForm component
   // so that updating contact fields never touches calculator state at all.
+  // Generates the full structured breakdown from the SHARED pricing engine so the
+  // admin email always reflects exactly what the user sees on screen.
   const handleContactSubmit = useCallback(async (contact: ContactInfo) => {
-    const selectedCategories = Object.entries(categories)
-      .filter(([, v]) => v)
-      .map(([k]) => k)
-      .join(", ")
+    const renovationInput = buildRenovationInput()
+    const windowsInput = buildWindowsInput()
+
+    const hasRenovation = Object.values(renovationInput.categories).some(Boolean)
+    const hasWindows = windows > 0 || balconyDoors > 0 || interiorDoors > 0 || mainEntrance > 0
+
+    const breakdown: QuoteBreakdown = generateQuoteBreakdown(
+      hasRenovation ? renovationInput : null,
+      hasWindows ? windowsInput : null,
+      submittedFromTab
+    )
 
     const requestData = {
       contact: {
@@ -501,35 +497,35 @@ export default function RenovationCostCalculator() {
         email: contact.email,
         phone: contact.phone,
       },
+      // Legacy selections shape kept for backwards compat
       selections: {
         renovation: {
-          area: Number(area),
-          bathrooms,
-          kitchens,
-          rooms,
-          buildingAge,
-          quality: renovationQuality,
-          categories: selectedCategories,
-          poolType,
-          poolSize: poolType !== "none" ? poolSize : 0,
-          renovationCost: renovationCost ? parseFloat(renovationCost) : 0,
+          area: renovationInput.area,
+          bathrooms: renovationInput.bathrooms,
+          kitchens: renovationInput.kitchens,
+          rooms: renovationInput.rooms,
+          buildingAge: renovationInput.buildingAge,
+          renovationQuality: renovationInput.quality,
+          categories: renovationInput.categories,
+          poolType: renovationInput.poolType,
+          poolSize: renovationInput.poolSize,
+          renovationCost: breakdown.renovation?.total ?? 0,
         },
         windows: {
-          windows,
-          balconyDoors,
-          interiorDoors,
-          mainEntrance,
-          material,
-          quality: windowsQuality,
-          windowsCost: windowsCost ? parseFloat(windowsCost) : 0,
+          windows: windowsInput.windows,
+          balconyDoors: windowsInput.balconyDoors,
+          interiorDoors: windowsInput.interiorDoors,
+          mainEntrance: windowsInput.mainEntrance,
+          material: windowsInput.material,
+          quality: windowsInput.quality,
+          windowsCost: breakdown.windows?.total ?? 0,
         },
-        totalCost:
-          totalCost
-            ? parseFloat(totalCost)
-            : (renovationCost ? parseFloat(renovationCost) : 0) +
-              (windowsCost ? parseFloat(windowsCost) : 0),
+        totalCost: breakdown.grandTotal,
       },
+      // Full structured breakdown — used exclusively for the admin audit email
+      breakdown,
       language: isEnglish ? "en" : "el",
+      submittedFromTab,
     }
 
     try {
@@ -545,7 +541,7 @@ export default function RenovationCostCalculator() {
     setContactSubmitted(true)
     setShowResults(true)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [area, bathrooms, kitchens, rooms, buildingAge, renovationQuality, categories, poolType, poolSize, renovationCost, windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality, windowsCost, totalCost, isEnglish])
+  }, [buildRenovationInput, buildWindowsInput, windows, balconyDoors, interiorDoors, mainEntrance, submittedFromTab, isEnglish])
 
   const handleNewCalculation = () => {
     setShowResults(false)
