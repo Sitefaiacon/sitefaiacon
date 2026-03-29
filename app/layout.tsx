@@ -42,10 +42,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", type: "image/x-icon" },
     ],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   manifest: "/manifest.json",
   description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, εκτίμηση κόστους κατασκευής, ανακαίνιση σπιτιού, κατασκευή πισίνας. Δωρεάν εκτίμηση - 35+ χρόνια εμπειρίας.",
@@ -92,9 +92,9 @@ export const metadata: Metadata = {
     description: "Υπολογίστε δωρεάν το κόστος ανακαίνισης του σπιτιού σας. Εκτίμηση κόστους κατασκευής, ανακαίνιση μπάνιου, κουζίνας, αλλαγή κουφωμάτων. 35+ χρόνια εμπειρίας στην Κέρκυρα.",
     images: [
       {
-        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
+        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20faiacon%20strogkilo-x2LY2BQxd4EjNhC3Hcd0hSihoCo5cs.jpg",
         width: 1200,
-        height: 630,
+        height: 1200,
         alt: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας",
       },
     ],
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ΦαιάCon - Υπολογιστής Κόστους Ανακαίνισης",
     description: "Δωρεάν εκτίμηση κόστους ανακαίνισης σπιτιού. Κατασκευές & Ανακαινίσεις στην Κέρκυρα.",
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg"],
+    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20faiacon%20strogkilo-x2LY2BQxd4EjNhC3Hcd0hSihoCo5cs.jpg"],
   },
   robots: {
     index: true,
@@ -131,8 +131,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
         <LocalBusinessSchema />
         <WebsiteSchema />
         <RenovationCalculatorSchema />
