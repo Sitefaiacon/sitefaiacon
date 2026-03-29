@@ -6,22 +6,22 @@ export function LocalBusinessSchema() {
     name: "ΦαιάCon - Τεχνική Κατασκευαστική",
     alternateName: "FaiaCon",
     description:
-      "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, κατασκευή σπιτιού, ανακαίνιση, πισίνες, διατηρητέα κτίρια.",
+      "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Ανακαίνιση σπιτιών, βιλών, κατασκευή νέων κατοικιών, πισίνες, και λύσεις ανάπτυξης ακινήτων. 35+ χρόνια εμπειρίας. Εξυπηρετούμε ιδιοκτήτες ακινήτων, επενδυτές και ξένους ιδιοκτήτες.",
     url: "https://faiacon.gr",
     logo: "/logo-faiacon.png",
     image: "/logo-faiacon.png",
-    telephone: "+30-26610-XXXXX",
-    email: "info@faiacon.gr",
+    telephone: "+30-6987797679",
+    email: "faiacon@yahoo.com",
     foundingDate: "1990",
     priceRange: "€€€",
     currenciesAccepted: "EUR",
     paymentAccepted: "Cash, Credit Card, Bank Transfer",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Κέρκυρα",
+      streetAddress: "Ποταμός",
+      postalCode: "49100",
       addressLocality: "Κέρκυρα",
       addressRegion: "Κέρκυρα",
-      postalCode: "49100",
       addressCountry: "GR",
     },
     geo: {
@@ -60,6 +60,12 @@ export function LocalBusinessSchema() {
       bestRating: "5",
       worstRating: "1",
     },
+    knowsLanguage: ["Greek", "English"],
+    serviceArea: {
+      "@type": "GeoShape",
+      description: "Corfu Island, Greece",
+    },
+    slogan: "Professional construction and renovation services in Corfu since 1990",
   }
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />

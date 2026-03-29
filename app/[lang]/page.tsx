@@ -8,10 +8,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
   return {
     title: isEnglish 
-      ? "FaiaCon - Technical Construction Company Corfu | Renovation Cost Calculator"
+      ? "FaiaCon - Construction & Renovations Corfu | Free Cost Calculator & Estimates"
       : "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Υπολογιστής Κόστους Ανακαίνισης",
     description: isEnglish
-      ? "Leading construction company in Corfu. Free renovation cost calculator, house construction, pool building, listed buildings restoration. 35+ years of experience."
+      ? "Professional construction and renovation company in Corfu. Free renovation cost calculator, house renovation, construction, pools. 35+ years local expertise. Get free estimates today."
       : "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Δωρεάν υπολογιστής κόστους ανακαίνισης, κατασκευή σπιτιού, κατασκευή πισίνας, διατηρητέα κτίρια. 35+ χρόνια εμπειρίας.",
     keywords: isEnglish
       ? [

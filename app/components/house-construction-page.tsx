@@ -235,7 +235,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 title: isEnglish ? "Energy Efficiency" : "Ενεργειακή Απόδοση",
                 description: isEnglish
                   ? "Modern design requires energy savings and sustainability. We incorporate energy-efficient solutions, from thermal insulation to renewable energy sources, to reduce your building's operating costs and contribute to a greener future."
-                  : "Ο σύγχρονος σχεδιασμός απαιτεί εξοικονόμηση ενέργειας και βιω��ιμότητα. Ενσωματώνουμε ενεργειακά αποδοτικές λύσεις, από θερμομόνωση έως ανανεώσιμες πηγές ενέργειας, για να μειώσουμε το κόστος λειτουργίας του κτιρίου σας και να συμβάλλουμε σε ένα πιο πράσινο μέλλον.",
+                  : "Ο σύγχρονος σχεδιασμός απαιτεί εξοικονόμηση ενέργειας και βιω����ιμότητα. Ενσωματώνουμε ενεργειακά αποδοτικές λύσεις, από θερμομόνωση έως ανανεώσιμες πηγές ενέργειας, για να μειώσουμε το κόστος λειτουργίας του κτιρίου σας και να συμβάλλουμε σε ένα πιο πράσινο μέλλον.",
                 href: "/services/energy-efficiency",
               },
             ].map((service, index) => (
@@ -396,6 +396,50 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
           </div>
         </div>
       </section>
+
+      {/* Related Services - SEO Support Section */}
+      {isEnglish && (
+        <section className="relative py-16 sm:py-24 md:py-32 bg-gray-50 border-t border-gray-200">
+          <div className="container relative z-10 px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
+                  Professional House & Property Renovation Services in Corfu
+                </h2>
+                <p className="text-base sm:text-lg text-gray-600">
+                  Beyond new construction, Faiacon specializes in villa renovations, home upgrades, and complete property improvements for Corfu owners and investors. Whether you're renovating an existing property or building from scratch, we bring the same professional approach and local expertise to every project.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 mt-12">
+                <div className="p-6 sm:p-8 bg-white rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold text-primary mb-4">Renovation Services in Corfu</h3>
+                  <p className="text-gray-600 mb-6">
+                    Professional villa and home renovation services. We handle interior and exterior improvements, modernization projects, and complete property upgrades tailored to your needs and budget.
+                  </p>
+                  <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/5" asChild>
+                    <Link href={`/${lang}/renovations-corfu`}>
+                      Explore Villa Renovations
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="p-6 sm:p-8 bg-white rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold text-primary mb-4">Rental-Ready Property Renovations</h3>
+                  <p className="text-gray-600 mb-6">
+                    Preparing your Corfu property for vacation rental or Airbnb? We specialize in renovations that maximize guest appeal and rental income potential with strategic upgrades.
+                  </p>
+                  <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/5" asChild>
+                    <Link href={`/${lang}/renovations-corfu`}>
+                      Learn About Rental Renovations
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Call to Action Section */}
       <section className="relative py-24 md:py-32 bg-primary text-white">

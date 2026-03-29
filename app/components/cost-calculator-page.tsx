@@ -163,6 +163,48 @@ export default function CostCalculatorPage({ lang }: { lang: string }) {
         </div>
       </section>
 
+      {/* Related Services - SEO Support for English */}
+      {lang === "en" && (
+        <section className="py-16 sm:py-24 bg-gray-50 border-t border-gray-200">
+          <div className="container px-4">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-4">
+                  Professional Renovation Services in Corfu
+                </h2>
+                <p className="text-base text-gray-700">
+                  Beyond cost estimation, Faiacon provides comprehensive renovation services for homes, villas, and properties throughout Corfu. From planning to completion, we manage your project professionally.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="p-6 bg-white rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold text-primary mb-3">Renovations in Corfu</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Complete renovation services for all property types. Interior improvements, exterior upgrades, modernization, and full property renovations.
+                  </p>
+                  <Button variant="ghost" className="text-primary p-0 h-auto font-semibold" asChild>
+                    <Link href={`/${lang}/renovations-corfu`}>
+                      Explore Renovations →
+                    </Link>
+                  </Button>
+                </div>
+                <div className="p-6 bg-white rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold text-primary mb-3">Professional Project Management</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Get expert guidance from consultation through completion. Clear communication, quality control, and transparent pricing throughout your renovation.
+                  </p>
+                  <Button variant="ghost" className="text-primary p-0 h-auto font-semibold" asChild>
+                    <Link href={`/${lang}/renovations-corfu`}>
+                      Learn Our Approach →
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CTA Section */}
       <section className="py-16 sm:py-24 bg-primary text-white">
         <div className="container px-4">
