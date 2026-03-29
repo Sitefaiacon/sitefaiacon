@@ -173,7 +173,7 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
                   ? "Faiacon delivers comprehensive construction and renovation services for property owners who expect quality workmanship and dependable project management. Whether you are renovating a family home, preparing a villa for rental, or upgrading a hospitality property, we bring the same level of care and professionalism to every project. Our team combines local expertise with modern construction standards to ensure lasting results."
-                  : "Η Faiacon αναλαμβάνει ανακαινίσεις και κατασκευές με σοβαρή προσέγγιση και επαγγελματική διαχείριση. Αν θέλετε να αναβαθμίσετε το σπίτι ή το ακίνητο σας, να το προετοιμάσετε για ενοικίαση, ή να βελτιώσετε την ενεργειακή του απόδοση, αναλαμβάνουμε το έργο με την ίδια προσοχή. Γνωρίζουμε καλά την Κέρκυρα, τα κλιματικά δεδομένα τη��, τ��ς απαιτήσεις των κατασκευών εδώ, και είμαστε δυνατοί σε κάθε λεπτομέρεια."}
+                  : "Η Faiacon αναλαμβάνει ανακαινίσεις και κατασκευές με σοβαρή προσέγγιση και επαγγελματική διαχείριση. Αν θέλετε να αναβαθμίσετε το σπίτι ή το ακίνητο σας, να το προετοιμάσετε για ενοικίαση, ή να βελτιώσετε την ενεργειακή του απόδοση, αναλαμβάνουμε το έργο με την ίδια προσοχή. Γνωρίζουμε καλά την Κέρκυρα, τα κλιματικά δεδ��μένα τη��, τ��ς απαιτήσεις των κατασκευών εδώ, και είμαστε δυνατοί σε κάθε λεπτομέρεια."}
                 </p>
               </div>
 
@@ -245,7 +245,7 @@ export default function HomePage({ lang }: { lang: string }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση Ακ��ν��τ��υ",
+                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση ��κ��ν��τ��υ",
                 description: isEnglish
                   ? "Professional home, villa and property renovations with local expertise and reliable project management."
                   : "Ανακαίνιση που βελτιώνει πραγματικά το σπίτι σας: σύγχρονα υλικά, σωστή κατασκευή, χώρος που λειτουργεί καλύτερα.",
@@ -405,7 +405,7 @@ export default function HomePage({ lang }: { lang: string }) {
                   "Potamos",
                   "Kontokali",
                   "Corfu Island",
-                  "Prosthese Kassiopi",
+                  "Kassiopi",
                   "Agios Stefanos",
                   "Sidari",
                   "Acharavi"
