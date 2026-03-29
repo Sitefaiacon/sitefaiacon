@@ -56,7 +56,7 @@ export default function HomePage({ lang }: { lang: string }) {
 
               {/* Main Headline */}
               <div className="animate-slide-up mt-4 sm:mt-6">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-lg leading-tight">
+                <h1 className={`font-bold text-white tracking-tight drop-shadow-lg leading-tight text-balance ${isEnglish ? "text-4xl sm:text-5xl md:text-6xl lg:text-7xl" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl"}`}>
                   {isEnglish 
                     ? "Building Excellence in Corfu Since 1990"
                     : "Μετατρέψτε το ακίνητό σας σε πηγή εισοδήματος στην Κέρκυρα"}
@@ -64,7 +64,7 @@ export default function HomePage({ lang }: { lang: string }) {
               </div>
 
               {/* Subheadline - Shorter & Clearer */}
-              <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100 leading-relaxed">
+              <p className={`text-white/95 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100 leading-relaxed ${isEnglish ? "text-lg sm:text-xl md:text-2xl" : "text-sm sm:text-base md:text-lg"}`}>
                 {isEnglish 
                   ? "Premium construction, renovation, and property services for villas, hotels, and residential projects across Corfu."
                   : "Αναλαμβάνουμε ανακαινίσεις, κατασκευές και λύσεις αξιοποίησης ακινήτων στην Κέρκυρα, ώστε το ακίνητό σας να αποκτήσει μεγαλύτερη αξία, καλύτερη απόδοση και σύγχρονη λειτουργικότητα."}
