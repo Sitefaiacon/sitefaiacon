@@ -173,9 +173,9 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
                   ? "Faiacon delivers comprehensive construction and renovation services for property owners who expect quality workmanship and dependable project management. Whether you are renovating a family home, preparing a villa for rental, or upgrading a hospitality property, we bring the same level of care and professionalism to every project. Our team combines local expertise with modern construction standards to ensure lasting results."
-                  : "Η FaiaCon ειδικεύεται στη μετατροπή ακινήτων σε κερδοφόρες επενδύσεις. Είτε θέλετε να αυξήσετε την αξία της ιδιοκτησίας σας, να την κάνετε έτοιμη για Airbnb, ή να βελτιώσετε την ενεργειακή της απόδοση, οι αποδεδειγμένες μέθοδοί μας παραδίδουν αποτελέσματα. Από ολοκληρωμένες ανακαινίσεις έως στοχευμένες ανα��αθμίσεις, διαχειριζόμαστε κάθε λεπτομέρεια."}
-              </p>
-            </div>
+                  : "Η Faiacon ειδικεύεται στη μετατροπή ακινήτων σε κερδοφόρες επενδύσεις με σοβαρή τεχνική προσέγγιση και επαγγελματική διαχείριση έργου. Είτε θέλετε να αυξήσετε την αξία της ιδιοκτησίας σας, να την προετοιμάσετε για Airbnb και ενοικίαση, ή να βελτιώσετε την ενεργειακή απόδοση και την λειτουργικότητα, οι αποδεδειγμένες μέθοδοί μας παραδίδουν αποτελέσματα. Από ολοκληρωμένες ανακαινίσεις έως στοχευμένες ενεργειακές αναβαθμίσεις, διαχειριζόμαστε κάθε λεπτομέρεια με σοβαρότητα και δεξιότητα."}
+                </p>
+              </div>
 
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12">
               <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 hover:shadow-xl transition-shadow">
@@ -212,7 +212,7 @@ export default function HomePage({ lang }: { lang: string }) {
                 <p className="text-base sm:text-lg mb-6 sm:mb-8">
                   {isEnglish
                     ? "From initial consultation to final handover, we manage every aspect of your project. Our clients benefit from improved property values, modern finishes, energy-efficient upgrades, and spaces that are ready for use or rental."
-                    : "Μεγιστοποιήστε το δυναμικό του ακινήτου σας με ολοκληρωμένες λύσεις ανακαίνισης. Οι πελάτες μας απολαμβάνουν αυξημένες αξίες ακινήτων, υψηλότερα ποσοστά ενοικίασης και σύγχρονα, ελκυστικά σπίτια."}
+                    : "Από την πρώτη συμβουλευτική συνάντηση μέχρι την τελική παράδοση, διαχειριζόμαστε κάθε πτυχή του έργου σας. Οι πελάτες μας απολαμβάνουν αυξημένες αξίες ακινήτων, σύγχρονες και ελκυστικές διακοσμήσεις, αναβαθμίσεις που εξοικονομούν ενέργεια, και χώρους που είναι άμεσα έτοιμοι για χρήση ή ενοικίαση."}
                 </p>
                 <div className="flex justify-center">
                   <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
@@ -248,35 +248,35 @@ export default function HomePage({ lang }: { lang: string }) {
                 title: isEnglish ? "House Renovation" : "Αύξηση Αξίας Ακινήτου",
                 description: isEnglish
                   ? "Complete interior and exterior renovations that modernise your space and improve functionality."
-                  : "Επαγγελματικές ανακαινίσεις που μεγιστοποιούν την αξία και εκσυγχρονίζουν το χώρο.",
+                  : "Επαγγελματικές ανακαινίσεις που μεγιστοποιούν την αξία και εκσυγχρονίζουν τον χώρο με σύγχρονες λύσεις.",
                 href: "/house-renovation",
               },
               {
                 title: isEnglish ? "Villa Construction" : "Έτοιμο για Airbnb & Ενοικίαση",
                 description: isEnglish
                   ? "New villa builds and luxury residences designed and constructed to the highest standards."
-                  : "Μετατρέψτε το ακίνητό σας σε ελκυστική επένδυση ενοικίασης με υψηλό δυναμικό εισοδήματος.",
+                  : "Μετατροπή ακινήτων σε ελκυστικές επενδύσεις ενοικίασης με υψηλό δυναμικό εισοδήματος.",
                 href: "/services/villa-luxury-home-construction",
               },
               {
-                title: isEnglish ? "Hotel Renovation" : "Εξοικονόμηση Ενέργειας & Άνεση",
+                title: isEnglish ? "Hotel Renovation" : "Ενεργειακή Αναβάθμιση & Άνεση",
                 description: isEnglish
                   ? "Hospitality property upgrades that enhance guest experience and operational efficiency."
-                  : "Σύγχρονη θερμική μόνωση και αναβαθμίσεις για εξοικονόμηση ενέργειας και άνεση.",
+                  : "Σύγχρονη θερμική μόνωση και αναβαθμίσεις για εξοικονόμηση ενέργειας, άνεση και βελτίωση λειτουργικότητας.",
                 href: "/services/hotel-construction-renovation",
               },
               {
                 title: isEnglish ? "Pool Construction" : "Προσθέστε Πολυτέλεια & Αξία",
                 description: isEnglish
                   ? "Custom swimming pools designed and built to complement your property and lifestyle."
-                  : "Πισίνες και πολυτελείς αναβαθμίσεις που ενισχύουν την αξία του ακινήτου.",
+                  : "Πισίνες και πολυτελείς αναβαθμίσεις που ενισχύουν την αξία και την ελκυστικότητα του ακινήτου.",
                 href: "/pool-construction",
               },
               {
                 title: isEnglish ? "Land Development" : "Αντιπαροχές & Αξιοποίηση Οικοπέδων",
                 description: isEnglish
                   ? "Property development partnerships for landowners seeking professional collaboration in Corfu."
-                  : "Συνεργασίες για ιδιοκτήτες που θέλουν να αξιοποιήσουν οικόπεδα ή ακίνητα στην Κέρκυρα με σοβαρή τεχνική και αναπτυξιακή προσέγγιση.",
+                  : "Συνεργασίες αξιοποίησης για ιδιοκτήτες που θέλουν να αξιοποιήσουν αποτελεσματικά οικόπεδα ή ακίνητα με επαγγελματική τεχνική προσέγγιση.",
                 href: "/antiparoxes-kerkira",
               },
             ].map((service) => (
@@ -307,19 +307,19 @@ export default function HomePage({ lang }: { lang: string }) {
                 </div>
                 
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
-                  {isEnglish ? "Land Development & Property Exploitation in Corfu" : "Αντιπαροχές και Αξιοποίηση Οικοπέδων στην Κέρκυρα"}
+                  {isEnglish ? "Land Development & Property Exploitation in Corfu" : "Αντιπαροχές και Αξιοποίηση Ακινήτων στην Κέρκυρα"}
                 </h2>
                 
                 <p className="text-lg sm:text-xl text-gray-700 mb-6">
                   {isEnglish 
                     ? "We undertake land development partnerships and property exploitation in Corfu, with a serious technical approach, proper planning, and professional project management."
-                    : "Αναλαμβάνουμε συνεργασίες αντιπαροχής και αξιοποίησης ακινήτων στην Κέρκυρα, με σοβαρή τεχνική προσέγγιση, σωστό σχεδιασμό και επαγγελματική διαχείριση έργου."}
+                    : "Αναλαμβάνουμε συνεργασίες αντιπαροχής και αξιοποίησης ακινήτων στην Κέρκυρα με σοβαρή τεχνική προσέγγιση, σωστό σχεδιασμό και επαγγελματική διαχείριση έργου."}
                 </p>
                 
                 <p className="text-base text-gray-600 mb-8">
                   {isEnglish
                     ? "If you own land or property with development potential, we can evaluate the opportunities for a meaningful collaboration together. Faiacon approaches each case with responsibility, transparency, and a focus on realistic property development."
-                    : "Εάν διαθέτετε οικόπεδο ή ακίνητο με προοπτική αξιοποίησης, μπορούμε να εξετάσουμε μαζί τις δυνατότητες μιας ουσιαστικής συνεργασίας. Η Faiacon προσεγγίζει κάθε περίπτωση με υπευθυνότητα, διαφάνεια και έμφαση στη ρεαλιστική ανάπτυξη του ακινήτου."}
+                    : "Εάν διαθέτετε οικόπεδο ή ακίνητο με προοπτική αξιοποίησης, μπορούμε να εξετάσουμε μαζί τις δυνατότητες μιας ουσιαστικής συνεργασίας. Προσεγγίζουμε κάθε περίπτωση με υπευθυνότητα, διαφάνεια και έμφαση στη ρεαλιστική τεχνική ανάπτυξη του ακινήτου."}
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">

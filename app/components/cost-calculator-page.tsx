@@ -118,18 +118,23 @@ export default function CostCalculatorPage({ lang }: { lang: string }) {
         </div>
       </section>
 
-      {/* Calculator Section */}
+      {/* Calculator Section - IMPROVED LEAD CAPTURE */}
       <section className="py-16 sm:py-24 bg-white">
         <div className="container px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-4">
-                {isEnglish ? "Calculate Your Renovation Cost" : "Υπολογίστε το Κόστος Ανακαίνισης"}
+                {isEnglish ? "Calculate Your Renovation Cost" : "Λάβετε μια Πρώτη Εκτίμηση"}
               </h2>
-              <p className="text-gray-600">
+              <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto mb-6">
                 {isEnglish
                   ? "Fill in the details below to get your personalized estimate"
-                  : "Συμπληρώστε τα στοιχεία παρακάτω για να λάβετε την προσωποποιημένη εκτίμησή σας"}
+                  : "Συμπληρώστε τα βασικά στοιχεία και η ομάδα μας θα εξετάσει την περίπτωσή σας, ώστε να έχετε μια πρώτη τεχνική και οικονομική εικόνα."}
+              </p>
+              <p className="text-sm sm:text-base text-gray-600 bg-blue-50 p-4 rounded-lg border border-blue-100 inline-block">
+                {isEnglish
+                  ? "Professional evaluation • No obligation • Confidential"
+                  : "Επαγγελματική αξιολόγηση • Χωρίς δεσμεύσεις • Εμπιστευτική"}
               </p>
             </div>
             <RenovationCostCalculator />
