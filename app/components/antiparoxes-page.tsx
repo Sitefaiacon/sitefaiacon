@@ -312,7 +312,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
                 Η αντιπαροχή ως μέρος της ολοκληρωμένης προσέγγισής μας
               </h2>
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-                Η Faiacon δεν περιορίζεται μόνο στην ανακαίνιση. Δραστηριοποιούμαι σε κάθε πτυχή της τεχνικής αξιοποίησης ακινήτων στην Κέρκυρα. Γι' αυτό η αντιπαροχή εντάσσεται σε μια συνολική φιλοσοφία που συνδέει τον σωστό σχεδιασμό, την κατασκευή, τις αναβαθμίσεις και τη δημιουργία πραγματικής αξίας για εσάς.
+                Η Faiacon δεν περιορίζεται μόνο στην ανακαίνιση. Δραστηριοποιούμαστε σε κάθε πτυχή της τεχνικής αξιοποίησης ακινήτων στην Κέρκυρα. Γι' αυτό η αντιπαροχή εντάσσεται σε μια συνολική φιλοσοφία που συνδέει τον σωστό σχεδιασμό, την κατασκευή, τις αναβαθμίσεις και τη δημιουργία πραγματικής αξίας για εσάς.
               </p>
             </AnimatedSection>
 
@@ -357,7 +357,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
               },
               {
                 question: "Μπορώ να επικοινωνήσω ακόμη και αν δεν ξέρω τι δυνατότητες έχει το ακίνητό μου;",
-                answer: "Ναι, φυσικά. Αυτό είναι το πρώτο βήμα. Επικοινωνήστε μαζί μας με τα βασικά στοιχεία και θα αναλύσουμε μαζί σας αν υπάρχει προοπτική.",
+                answer: "Ναι, φυσικά. Αυτό είναι το πρώτο βήμα. Επικοινωνήστε μαζί μας με τα βασικά στοιχεία και θα αναλύσουμε μαζί σας αν υπάρχει προοπτική αξιοποίησης.",
               },
               {
                 question: "Αναλαμβάνετε μόνο αντιπαροχές ή και άλλα έργα;",
@@ -388,6 +388,28 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
               </p>
             </AnimatedSection>
 
+            {/* What Happens Next Section */}
+            <AnimatedSection className="mb-10 sm:mb-12 bg-blue-50 p-6 sm:p-8 rounded-2xl border border-blue-100">
+              <h3 className="text-lg sm:text-xl font-bold text-primary mb-6">Τι ακολουθεί μετά την υποβολή</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
+                {[
+                  "Εξετάζουμε τα βασικά στοιχεία του ακινήτου σας",
+                  "Επικοινωνούμε μαζί σας για μια πρώτη συζήτηση",
+                  "Αξιολογούμε αν υπάρχει προοπτική ουσιαστικής συνεργασίας",
+                  "Προχωράμε σε επόμενο στάδιο μόνο όπου υπάρχει δυνατότητα αξιοποίησης",
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm sm:text-base text-gray-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600 italic border-l-4 border-blue-300 pl-4">
+                Η πρώτη επικοινωνία είναι ενημερωτική και απολύτως εμπιστευτική. Εξετάζουμε τις δυνατότητες του ακινήτου σας με τεχνική προσέγγιση, χωρίς πίεση.
+              </p>
+            </AnimatedSection>
+
+            {/* Helper Info - What Information to Include */}
             <AnimatedSection className="mb-8">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-6">
                 <div className="p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-100 text-center">
