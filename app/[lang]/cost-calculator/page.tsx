@@ -52,20 +52,21 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       type: "website",
       images: [
         {
-        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
-        width: 1200,
-        height: 630,
-        alt: isEnglish ? "Renovation Cost Calculator" : "Υπολογιστής Κόστους Ανακαίνισης ΦαιάCon",
-      },
-    ],
-  },
-  alternates: {
-    canonical: isEnglish ? "https://faiacon.gr/en/cost-calculator" : "https://faiacon.gr/el/cost-calculator",
-    languages: {
-      "el-GR": "https://faiacon.gr/el/cost-calculator",
-      "en-US": "https://faiacon.gr/en/cost-calculator",
+          url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
+          width: 1200,
+          height: 630,
+          alt: isEnglish ? "Renovation Cost Calculator" : "Υπολογιστής Κόστους Ανακαίνισης ΦαιάCon",
+        },
+      ],
     },
-  },
+    alternates: {
+      canonical: isEnglish ? "https://faiacon.gr/en/cost-calculator" : "https://faiacon.gr/el/cost-calculator",
+      languages: {
+        "el-GR": "https://faiacon.gr/el/cost-calculator",
+        "en-US": "https://faiacon.gr/en/cost-calculator",
+      },
+    },
+  }
 }
 
 export default async function CostCalculator({ params }: { params: Promise<{ lang: string }> }) {
