@@ -1,7 +1,7 @@
 import { Metadata } from "next"
-import { SiteLayout } from "../../../components/site-layout"
-import ApartmentRenovationCaseStudy from "../../../components/apartment-renovation-project-case-study"
-import { BreadcrumbSchema } from "../../../components/structured-data"
+import { SiteLayout } from "../../../../components/site-layout"
+import ApartmentRenovationCaseStudy from "../../../../components/apartment-renovation-project-case-study"
+import { BreadcrumbSchema } from "../../../../components/structured-data"
 
 export const metadata: Metadata = {
   title: "Apartment Building Renovation - Multi-Unit Project | Faiacon",
