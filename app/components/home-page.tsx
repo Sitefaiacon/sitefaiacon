@@ -470,7 +470,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-lg sm:text-xl mb-8 text-white/90 leading-relaxed">
               {isEnglish
                 ? "Send us photos of your property via WhatsApp and receive a fast response from our team. We're here to help you maximize your investment."
-                : "Στείλτε μας φωτογραφίες του ακινήτου σας μέσω WhatsApp και λάβετε γρή��ορη απάντηση από την ομάδα μας. Είμαστε εδώ για να σας βοηθήσουμε."}
+                : "Στείλτε μας φωτογραφίες του ακινήτου σας μέσω WhatsApp και λάβετε γρήγορη απάντηση από την ομάδα μας. Είμαστε εδώ για να σας βοηθήσουμε."}
             </p>
             <Button
               size="lg"
