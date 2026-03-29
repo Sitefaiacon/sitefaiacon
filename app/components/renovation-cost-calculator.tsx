@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useCallback, memo, useRef } from "react"
 import Image from "next/image"
 import {
   Bath,
@@ -166,22 +166,119 @@ type ContactInfo = {
   phone: string
 }
 
+// ─── Isolated Contact Form ────────────────────────────────────────────────────
+// Defined at module level so React never remounts it due to parent re-renders.
+// Receives only stable props (refs + callbacks) so memo comparison always passes
+// while the user is typing — zero re-renders from calculator state changes.
+interface ContactFormProps {
+  isEnglish: boolean
+  onSubmit: (contact: ContactInfo) => Promise<void>
+}
+
+const ContactForm = memo(function ContactForm({ isEnglish, onSubmit }: ContactFormProps) {
+  // Local state — completely isolated from the calculator state tree
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async () => {
+    if (!name || !email || !phone) return
+    setIsSubmitting(true)
+    try {
+      await onSubmit({ name, email, phone })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <div className="mt-4 p-4 bg-muted rounded-lg border border-border">
+      <h3 className="font-semibold text-primary mb-4 text-center">
+        {isEnglish
+          ? "Enter your details to see the results"
+          : "Συμπληρώστε τα στοιχεία σας για να δείτε τα αποτελέσματα"}
+      </h3>
+      <div className="space-y-3">
+        <div>
+          <Label htmlFor="calc-contact-name" className="flex items-center gap-2">
+            <User className="w-4 h-4" />
+            {isEnglish ? "Full Name" : "Ονοματεπώνυμο"}
+          </Label>
+          <Input
+            id="calc-contact-name"
+            type="text"
+            autoComplete="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder={isEnglish ? "Enter your full name" : "Εισάγετε το ονοματεπώνυμό σας"}
+            className="w-full mt-1"
+            inputMode="text"
+          />
+        </div>
+        <div>
+          <Label htmlFor="calc-contact-email" className="flex items-center gap-2">
+            <Mail className="w-4 h-4" />
+            Email
+          </Label>
+          <Input
+            id="calc-contact-email"
+            type="email"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={isEnglish ? "Enter your email" : "Εισάγετε το email σας"}
+            className="w-full mt-1"
+            inputMode="email"
+          />
+        </div>
+        <div>
+          <Label htmlFor="calc-contact-phone" className="flex items-center gap-2">
+            <Phone className="w-4 h-4" />
+            {isEnglish ? "Phone" : "Τηλέφωνο"}
+          </Label>
+          <Input
+            id="calc-contact-phone"
+            type="tel"
+            autoComplete="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder={isEnglish ? "Enter your phone number" : "Εισάγετε το τηλέφωνό σας"}
+            className="w-full mt-1"
+            inputMode="tel"
+          />
+        </div>
+        <Button
+          onClick={handleSubmit}
+          disabled={isSubmitting || !name || !email || !phone}
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              {isEnglish ? "Submitting..." : "Υποβολή..."}
+            </>
+          ) : isEnglish ? (
+            "See Results"
+          ) : (
+            "Δείτε τα Αποτελέσματα"
+          )}
+        </Button>
+      </div>
+    </div>
+  )
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 export default function RenovationCostCalculator() {
   const { isEnglish } = useLanguage()
 
   const [activeTab, setActiveTab] = useState("renovation")
   const [showResults, setShowResults] = useState(false)
   const [showContactForm, setShowContactForm] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [contactSubmitted, setContactSubmitted] = useState(false)
   const [submittedFromTab, setSubmittedFromTab] = useState<"renovation" | "windows" | "pool" | null>(null)
-
-  // Contact form state
-  const [contact, setContact] = useState<ContactInfo>({
-    name: "",
-    email: "",
-    phone: "",
-  })
 
   const [area, setArea] = useState<string>("50")
   const [bathrooms, setBathrooms] = useState(1)
@@ -390,73 +487,71 @@ export default function RenovationCostCalculator() {
     setShowContactForm(true)
   }
 
-  const handleContactSubmit = async () => {
-    if (!contact.name || !contact.email || !contact.phone) {
-      return
+  // Stable callback — receives contact data from the isolated ContactForm component
+  // so that updating contact fields never touches calculator state at all.
+  const handleContactSubmit = useCallback(async (contact: ContactInfo) => {
+    const selectedCategories = Object.entries(categories)
+      .filter(([, v]) => v)
+      .map(([k]) => k)
+      .join(", ")
+
+    const requestData = {
+      contact: {
+        name: contact.name,
+        email: contact.email,
+        phone: contact.phone,
+      },
+      selections: {
+        renovation: {
+          area: Number(area),
+          bathrooms,
+          kitchens,
+          rooms,
+          buildingAge,
+          quality: renovationQuality,
+          categories: selectedCategories,
+          poolType,
+          poolSize: poolType !== "none" ? poolSize : 0,
+          renovationCost: renovationCost ? parseFloat(renovationCost) : 0,
+        },
+        windows: {
+          windows,
+          balconyDoors,
+          interiorDoors,
+          mainEntrance,
+          material,
+          quality: windowsQuality,
+          windowsCost: windowsCost ? parseFloat(windowsCost) : 0,
+        },
+        totalCost:
+          totalCost
+            ? parseFloat(totalCost)
+            : (renovationCost ? parseFloat(renovationCost) : 0) +
+              (windowsCost ? parseFloat(windowsCost) : 0),
+      },
+      language: isEnglish ? "en" : "el",
     }
 
-    setIsSubmitting(true)
-
     try {
-      const selectedCategories = Object.entries(categories)
-        .filter(([, v]) => v)
-        .map(([k]) => k)
-        .join(", ")
-
-      const requestData = {
-        contact: {
-          name: contact.name,
-          email: contact.email,
-          phone: contact.phone,
-        },
-        selections: {
-          renovation: {
-            area: Number(area),
-            bathrooms,
-            kitchens,
-            rooms,
-            buildingAge,
-            quality: renovationQuality,
-            categories: selectedCategories,
-            poolType,
-            poolSize: poolType !== "none" ? poolSize : 0,
-            renovationCost: renovationCost ? parseFloat(renovationCost) : 0,
-          },
-          windows: {
-            windows,
-            balconyDoors,
-            interiorDoors,
-            mainEntrance,
-            material,
-            quality: windowsQuality,
-            windowsCost: windowsCost ? parseFloat(windowsCost) : 0,
-          },
-          totalCost: totalCost ? parseFloat(totalCost) : (renovationCost ? parseFloat(renovationCost) : 0) + (windowsCost ? parseFloat(windowsCost) : 0),
-        },
-        language: isEnglish ? "en" : "el",
-      }
-
       await fetch("/api/calculator-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestData),
       })
-
-      setContactSubmitted(true)
-      setShowResults(true)
     } catch (error) {
       console.error("Error submitting contact:", error)
-    } finally {
-      setIsSubmitting(false)
     }
-  }
+
+    setContactSubmitted(true)
+    setShowResults(true)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [area, bathrooms, kitchens, rooms, buildingAge, renovationQuality, categories, poolType, poolSize, renovationCost, windows, balconyDoors, interiorDoors, mainEntrance, material, windowsQuality, windowsCost, totalCost, isEnglish])
 
   const handleNewCalculation = () => {
     setShowResults(false)
     setShowContactForm(false)
     setContactSubmitted(false)
     setSubmittedFromTab(null)
-    setContact({ name: "", email: "", phone: "" })
     setRenovationCost(null)
     setRenovationRange(null)
     setPoolCost(null)
@@ -485,74 +580,8 @@ export default function RenovationCostCalculator() {
         }}
         min="0"
         className="w-full mb-2"
+        inputMode="numeric"
       />
-    </div>
-  )
-
-  // Contact Form Component
-  const ContactForm = () => (
-    <div className="mt-4 p-4 bg-muted rounded-lg border border-border">
-      <h3 className="font-semibold text-primary mb-4 text-center">
-        {isEnglish ? "Enter your details to see the results" : "Συμπληρώστε τα στοιχεία σας για να δείτε τα αποτελέσματα"}
-      </h3>
-      <div className="space-y-3">
-        <div>
-          <Label htmlFor="contact-name" className="flex items-center gap-2">
-            <User className="w-4 h-4" />
-            {isEnglish ? "Full Name" : "Ονοματεπώνυμο"}
-          </Label>
-          <Input
-            id="contact-name"
-            type="text"
-            value={contact.name}
-            onChange={(e) => setContact({ ...contact, name: e.target.value })}
-            placeholder={isEnglish ? "Enter your full name" : "Εισάγετε το ονοματεπώνυμό σας"}
-            className="w-full"
-          />
-        </div>
-        <div>
-          <Label htmlFor="contact-email" className="flex items-center gap-2">
-            <Mail className="w-4 h-4" />
-            Email
-          </Label>
-          <Input
-            id="contact-email"
-            type="email"
-            value={contact.email}
-            onChange={(e) => setContact({ ...contact, email: e.target.value })}
-            placeholder={isEnglish ? "Enter your email" : "Εισάγετε το email σας"}
-            className="w-full"
-          />
-        </div>
-        <div>
-          <Label htmlFor="contact-phone" className="flex items-center gap-2">
-            <Phone className="w-4 h-4" />
-            {isEnglish ? "Phone" : "Τηλέφωνο"}
-          </Label>
-          <Input
-            id="contact-phone"
-            type="tel"
-            value={contact.phone}
-            onChange={(e) => setContact({ ...contact, phone: e.target.value })}
-            placeholder={isEnglish ? "Enter your phone number" : "Εισάγετε το τηλέφωνό σας"}
-            className="w-full"
-          />
-        </div>
-        <Button
-          onClick={handleContactSubmit}
-          disabled={isSubmitting || !contact.name || !contact.email || !contact.phone}
-          className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              {isEnglish ? "Submitting..." : "Υποβολή..."}
-            </>
-          ) : (
-            isEnglish ? "See Results" : "Δείτε τα Αποτελέσματα"
-          )}
-        </Button>
-      </div>
     </div>
   )
 
@@ -888,7 +917,9 @@ export default function RenovationCostCalculator() {
             </>
           )}
 
-          {showContactForm && !contactSubmitted && <ContactForm />}
+          {showContactForm && !contactSubmitted && (
+            <ContactForm isEnglish={isEnglish} onSubmit={handleContactSubmit} />
+          )}
           {contactSubmitted && showResults && <ResultsDisplay />}
         </TabsContent>
 
@@ -954,7 +985,9 @@ export default function RenovationCostCalculator() {
             </>
           )}
 
-          {showContactForm && !contactSubmitted && <ContactForm />}
+          {showContactForm && !contactSubmitted && (
+            <ContactForm isEnglish={isEnglish} onSubmit={handleContactSubmit} />
+          )}
           {contactSubmitted && showResults && <ResultsDisplay />}
         </TabsContent>
 
@@ -1041,7 +1074,9 @@ export default function RenovationCostCalculator() {
             </>
           )}
 
-          {showContactForm && !contactSubmitted && <ContactForm />}
+          {showContactForm && !contactSubmitted && (
+            <ContactForm isEnglish={isEnglish} onSubmit={handleContactSubmit} />
+          )}
           {contactSubmitted && showResults && <ResultsDisplay />}
         </TabsContent>
       </Tabs>
