@@ -102,7 +102,7 @@ export default function VillaLuxuryConstructionPage() {
       q: isEnglish ? "How long does construction take?" : "Ποιο είναι το τυπικό χρονοδιάγραμμα κατασκευής;",
       a: isEnglish
         ? "A typical villa construction takes 12-24 months depending on size and complexity. This includes permits, foundation, structural work, systems installation, and finishing. We provide detailed timelines during planning."
-        : "Η ολοκληρωτική κατασκευή μιας πολυτελούς βίλας διαρκεί συνήθως 18-24 μήνες από την ολοκλήρωση του σχεδιασμού. Αυτό περιλαμβάνει βελτιώσεις σχεδιασμού, άδειες, θεμέλιο, δομικές εργασίες και τελικά φινιρίσματα.",
+        : "Η ολοκληρωτική κατασκευή μιας πολυτελούς βίλας διαρκεί συνήθως 18-24 μήνες από την ολοκλήρωση του σχεδιασμού. Αυτό περιλαμ��άνει βελτιώσεις σχεδιασμού, άδειες, θεμέλιο, δομικές εργασίες και τελικά φινιρίσματα.",
     },
     {
       q: isEnglish ? "Can you build on difficult terrain?" : "Μπορείτε να κατασκευάσετε σε δύσκολα εδάφη;",
@@ -214,7 +214,7 @@ export default function VillaLuxuryConstructionPage() {
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               {isEnglish
                 ? "Complete design and construction expertise for premium residences"
-                : "Ολοκληρωμένη εμπειρία ��χεδιασμού και κατασκευής για ακριβές κατοικίες"}
+                : "Ολοκληρωμένη εμπειρία ��χεδιασμού και κατασκευής για ακρ��βές κατοικίες"}
             </p>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-8">
@@ -357,6 +357,46 @@ export default function VillaLuxuryConstructionPage() {
           </div>
         </div>
       </section>
+
+      {/* Villa Renovation Support - SEO Section */}
+      {isEnglish && (
+        <section className="py-20 bg-white border-t border-gray-200">
+          <div className="container max-w-6xl mx-auto px-4">
+            <AnimatedSection className="mb-16 text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+                Also Offer Villa Renovations in Corfu
+              </h2>
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+                In addition to new villa construction, we specialize in renovating existing villas and properties throughout Corfu. Whether you're upgrading an inherited family home, modernizing a holiday rental, or transforming a fixer-upper, we bring the same quality and expertise.
+              </p>
+            </AnimatedSection>
+            <div className="grid md:grid-cols-2 gap-8">
+              <AnimatedSection className="bg-gradient-to-br from-primary/5 to-transparent p-8 rounded-xl border border-primary/20">
+                <h3 className="text-2xl font-bold text-primary mb-4">Existing Property Renovations</h3>
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Comprehensive renovation services for homes and villas already in use. Interior updates, exterior improvements, modernization, and structural upgrades all managed professionally with minimal disruption.
+                </p>
+                <Button className="w-full" variant="outline" asChild>
+                  <Link href="/renovations-corfu">
+                    Explore Renovation Services
+                  </Link>
+                </Button>
+              </AnimatedSection>
+              <AnimatedSection className="bg-gradient-to-br from-primary/5 to-transparent p-8 rounded-xl border border-primary/20">
+                <h3 className="text-2xl font-bold text-primary mb-4">Rental Property Renovations</h3>
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Preparing a villa for Airbnb, vacation rental, or short-term lease? We specialize in renovations that maximize guest appeal and rental income while maintaining quality and durability.
+                </p>
+                <Button className="w-full" variant="outline" asChild>
+                  <Link href="/renovations-corfu">
+                    Learn About Rental Upgrades
+                  </Link>
+                </Button>
+              </AnimatedSection>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Final CTA */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary/80">

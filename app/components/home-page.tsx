@@ -173,7 +173,7 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
                   ? "Faiacon delivers comprehensive construction and renovation services for property owners who expect quality workmanship and dependable project management. Whether you are renovating a family home, preparing a villa for rental, or upgrading a hospitality property, we bring the same level of care and professionalism to every project. Our team combines local expertise with modern construction standards to ensure lasting results."
-                  : "Η Faiacon αναλαμβάνει ανακαινίσεις και κατασκευές με σοβαρή προσέγγιση και επαγγελματική διαχείριση. Αν θέλετε να αναβαθμίσετε το σπίτι ή το ακίνητο σας, να το προετοιμάσετε για ενοικίαση, ή να βελτιώσετε την ενεργειακή του απόδοση, αναλαμβάνουμε το έργο με την ίδια προσοχή. Γνωρίζουμε καλά την Κέρκυρα, τα κλιματικά δεδομένα της, τις απαιτήσεις των κατασκευών εδώ, και είμαστε δυνατοί σε κάθε λεπτομέρεια."}
+                  : "Η Faiacon αναλαμβάνει ανακαινίσεις και κατασκευές με σοβαρή προσέγγιση και επαγγελματική διαχείριση. Αν θέλετε να αναβαθμίσετε το σπίτι ή το ακίνητο σας, να το προετοιμάσετε για ενοικίαση, ή να βελτιώσετε την ενεργειακή του απόδοση, αναλαμβάνουμε το έργο με την ίδια προσοχή. Γνωρίζουμε καλά την Κέρκυρα, τα κλιματικά δεδομένα της, τ��ς απαιτήσεις των κατασκευών εδώ, και είμαστε δυνατοί σε κάθε λεπτομέρεια."}
                 </p>
               </div>
 
@@ -245,7 +245,7 @@ export default function HomePage({ lang }: { lang: string }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση Ακινήτου",
+                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση Ακινήτ��υ",
                 description: isEnglish
                   ? "Professional home, villa and property renovations with local expertise and reliable project management."
                   : "Ανακαίνιση που βελτιώνει πραγματικά το σπίτι σας: σύγχρονα υλικά, σωστή κατασκευή, χώρος που λειτουργεί καλύτερα.",
@@ -300,6 +300,92 @@ export default function HomePage({ lang }: { lang: string }) {
           </div>
         </div>
       </section>
+
+      {/* Why Choose Faiacon for Renovations - SEO SUPPORT SECTION */}
+      {isEnglish && (
+        <section className="relative py-16 sm:py-24 md:py-32 bg-white border-t border-gray-100">
+          <div className="container relative z-10 px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12 sm:mb-16">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
+                  Why Faiacon for Renovations in Corfu
+                </h2>
+                <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                  Professional renovation services with 35+ years of local expertise. We handle everything from villa renovations to complete home upgrades across Corfu.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
+                {[
+                  {
+                    title: "Local Expertise in Corfu",
+                    description: "Established since 1990 with deep knowledge of Corfu's properties, climate, and local regulations. We understand what works for houses and villas in Corfu specifically.",
+                    icon: "🏛️"
+                  },
+                  {
+                    title: "Villa & Home Renovations",
+                    description: "Complete renovation services for all property types—from traditional Corfiot homes to modern villas. Interior, exterior, and structural work all handled in-house.",
+                    icon: "🏠"
+                  },
+                  {
+                    title: "Dedicated Project Management",
+                    description: "Single point of contact for your entire renovation project. Clear communication, regular updates, and accountability from start to finish.",
+                    icon: "📋"
+                  },
+                  {
+                    title: "Rental-Ready Renovations",
+                    description: "We specialize in preparing properties for vacation rental and Airbnb markets, maximizing property value and rental income potential.",
+                    icon: "💼"
+                  },
+                  {
+                    title: "International Client Experience",
+                    description: "Regularly work with overseas property owners. Remote coordination, email updates, photo documentation, and full transparency throughout your renovation.",
+                    icon: "🌍"
+                  },
+                  {
+                    title: "Quality That Lasts",
+                    description: "We use proven materials suited to Corfu's climate, employ skilled local craftsmen, and stand behind our work with ongoing support.",
+                    icon: "✓"
+                  },
+                ].map((item, idx) => (
+                  <div key={idx} className="p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-100 hover:shadow-lg transition-all duration-300">
+                    <div className="text-3xl sm:text-4xl mb-4">{item.icon}</div>
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-12 sm:mt-16 text-center">
+                <p className="text-base sm:text-lg text-gray-700 mb-6">
+                  Ready to start your renovation project in Corfu? Get a preliminary estimate or discuss your property with our team.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Button
+                    size="lg"
+                    className="bg-primary text-white hover:bg-primary/90 px-8 py-4 text-base font-semibold"
+                    asChild
+                  >
+                    <Link href={`/${lang}/renovations-corfu`}>
+                      Explore Renovations in Corfu
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-primary text-primary hover:bg-primary/5 px-8 py-4 text-base font-semibold"
+                    asChild
+                  >
+                    <Link href={`/${lang}/cost-calculator`}>
+                      Get Cost Estimate
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Antiparoxes Section - NEW */}
       <section className="relative py-16 sm:py-24 bg-gray-50">

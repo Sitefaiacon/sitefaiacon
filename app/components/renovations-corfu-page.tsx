@@ -358,6 +358,75 @@ export default function RenovationsCorfuPage() {
         </div>
       </section>
 
+      {/* Related Services & Internal Links - SEO Support */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-gray-50 border-t border-gray-200">
+        <div className="container relative z-10 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
+                Related Services & Property Solutions
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600">
+                Explore our complete range of construction and property improvement services in Corfu.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+              <AnimatedSection className="p-6 sm:p-8 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all">
+                <div className="text-3xl mb-4">🏗️</div>
+                <h3 className="text-lg font-semibold text-primary mb-3">New Construction</h3>
+                <p className="text-sm text-gray-600 mb-6">
+                  Professional house and villa construction services with complete project management from permits to final delivery.
+                </p>
+                <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
+                  <Link href="/house-construction">
+                    Explore Construction →
+                  </Link>
+                </Button>
+              </AnimatedSection>
+
+              <AnimatedSection className="p-6 sm:p-8 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all">
+                <div className="text-3xl mb-4">✨</div>
+                <h3 className="text-lg font-semibold text-primary mb-3">Villa & Luxury Upgrades</h3>
+                <p className="text-sm text-gray-600 mb-6">
+                  Upscale villa renovations, luxury finishes, and premium property improvements designed for discerning clients.
+                </p>
+                <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
+                  <Link href="/services/villa-luxury-home-construction">
+                    Explore Villas →
+                  </Link>
+                </Button>
+              </AnimatedSection>
+
+              <AnimatedSection className="p-6 sm:p-8 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all">
+                <div className="text-3xl mb-4">💧</div>
+                <h3 className="text-lg font-semibold text-primary mb-3">Pools & Outdoor Upgrades</h3>
+                <p className="text-sm text-gray-600 mb-6">
+                  Custom swimming pools, outdoor entertaining spaces, and premium landscape improvements for property value.
+                </p>
+                <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
+                  <Link href="/pool-construction">
+                    Explore Pools →
+                  </Link>
+                </Button>
+              </AnimatedSection>
+            </div>
+
+            <div className="mt-12 sm:mt-16 p-6 sm:p-8 bg-white rounded-lg border-2 border-primary/20">
+              <h3 className="text-lg font-semibold text-primary mb-4">Considering Property Development in Corfu?</h3>
+              <p className="text-gray-700 mb-6">
+                If you own land or have a property with development potential, we also offer professional partnerships for property exploitation and land development. Faiacon approaches each opportunity with technical expertise and transparent planning.
+              </p>
+              <Button variant="outline" className="border-primary text-primary hover:bg-primary/5" asChild>
+                <Link href="/antiparoxes-kerkira">
+                  Learn About Property Development
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="relative bg-primary text-white py-16 overflow-hidden">
         <SectionBackground />
