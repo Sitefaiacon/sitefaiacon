@@ -427,6 +427,75 @@ export default function RenovationsCorfuPage() {
         </div>
       </section>
 
+      {/* Case Studies & Examples - SEO Support */}
+      <section className="relative py-16 sm:py-24 md:py-32 bg-white border-t border-gray-200">
+        <div className="container relative z-10 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
+                Renovation Projects in Corfu
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600">
+                Explore real renovation projects we've completed, showcasing our expertise in house renovations, villa upgrades, and property improvements throughout Corfu.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12">
+              <AnimatedSection className="bg-gradient-to-br from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                <div className="p-6 sm:p-8">
+                  <div className="text-4xl mb-4">🏠</div>
+                  <h3 className="text-lg font-semibold text-primary mb-3">House Renovation in Corfu Town</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Complete interior renovation project showcasing modernization and functional design improvements in a residential property.
+                  </p>
+                  <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
+                    <Link href={`/${lang}/projects/house-renovation-corfu`}>
+                      View Project →
+                    </Link>
+                  </Button>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection className="bg-gradient-to-br from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                <div className="p-6 sm:p-8">
+                  <div className="text-4xl mb-4">✨</div>
+                  <h3 className="text-lg font-semibold text-primary mb-3">Modern Villa Renovation in Sinies</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Luxury villa renovation showcasing contemporary design, enhanced amenities, and premium finishes for upscale residential living.
+                  </p>
+                  <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
+                    <Link href={`/${lang}/projects/villa-renovation-corfu`}>
+                      View Project →
+                    </Link>
+                  </Button>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection className="bg-gradient-to-br from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-all">
+                <div className="p-6 sm:p-8">
+                  <div className="text-4xl mb-4">🏢</div>
+                  <h3 className="text-lg font-semibold text-primary mb-3">Apartment Building Renovation</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Extensive multi-unit renovation focusing on contemporary aesthetics, improved functionality, and enhanced tenant appeal.
+                  </p>
+                  <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
+                    <Link href={`/${lang}/projects/apartment-renovation-corfu`}>
+                      View Project →
+                    </Link>
+                  </Button>
+                </div>
+              </AnimatedSection>
+            </div>
+
+            <div className="text-center">
+              <p className="text-base text-gray-700">
+                These projects demonstrate our commitment to quality renovation work and professional project management across various property types and complexities in Corfu.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="relative bg-primary text-white py-16 overflow-hidden">
         <SectionBackground />

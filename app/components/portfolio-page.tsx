@@ -139,6 +139,59 @@ export default function PortfolioPage({ lang }: { lang: string }) {
         </div>
       </section>
 
+      {/* English Case Studies Section */}
+      {isEnglish && (
+        <section className="relative py-16 md:py-24 bg-gray-50 border-t border-gray-200">
+          <SectionBackground />
+          <div className="container relative z-10 px-4">
+            <div className="max-w-4xl mx-auto text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+                Detailed Renovation Case Studies
+              </h2>
+              <p className="text-lg text-gray-700">
+                Explore comprehensive case studies showcasing our renovation expertise and real project examples across Corfu.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "House Renovation in Corfu Town",
+                  description: "Complete interior modernization project with updated finishes and contemporary design.",
+                  href: "/projects/house-renovation-corfu",
+                },
+                {
+                  title: "Modern Villa Renovation in Sinies",
+                  description: "Luxury villa renovation with premium finishes and contemporary amenities.",
+                  href: "/projects/villa-renovation-corfu",
+                },
+                {
+                  title: "Apartment Building Renovation",
+                  description: "Multi-unit renovation demonstrating professional project coordination and quality consistency.",
+                  href: "/projects/apartment-renovation-corfu",
+                },
+              ].map((study, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="p-6 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all"
+                >
+                  <h3 className="text-lg font-semibold text-primary mb-3">{study.title}</h3>
+                  <p className="text-gray-700 mb-6">{study.description}</p>
+                  <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/5" asChild>
+                    <Link href={study.href}>
+                      Read Case Study →
+                    </Link>
+                  </Button>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Call to Action */}
       <section className="relative py-16 md:py-24 bg-primary text-white">
         <ArchitecturalBackground className="opacity-10" />
