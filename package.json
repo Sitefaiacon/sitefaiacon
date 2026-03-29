@@ -72,6 +72,7 @@
     "resend": "latest",
     "sass": "latest",
     "sass-embedded": "latest",
+    "sharp": "^0.34.5",
     "sonner": "latest",
     "stylus": "latest",
     "sugarss": "latest",

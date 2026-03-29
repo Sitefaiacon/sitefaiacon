@@ -40,6 +40,23 @@ export const metadata: Metadata = {
     default: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Ανακαίνιση & Κατασκευή Σπιτιού",
     template: "%s | ΦαιάCon Κέρκυρα",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/logo-faiacon.png", type: "image/png", sizes: "192x192" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/icon.svg",
+        color: "#1e3a5f",
+      },
+    ],
+  },
+  manifest: "/manifest.json",
   description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, εκτίμηση κόστους κατασκευής, ανακαίνιση σπιτιού, κατασκευή πισίνας. Δωρεάν εκτίμηση - 35+ χρόνια εμπειρίας.",
   keywords: [
     "υπολογισμός κόστους ανακαίνισης",
