@@ -67,14 +67,14 @@ export default function HomePage({ lang }: { lang: string }) {
               <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100 leading-relaxed">
                 {isEnglish 
                   ? "Premium construction, renovation, and property services for villas, hotels, and residential projects across Corfu."
-                  : "Αναλαμβάνουμε πλήρως την ανακαίνιση ώστε το ακίνητό σας να είναι έτοιμο για Airbnb ή πώληση με υψηλή αξία."}
+                  : "Αναλαμβάνουμε ανακαινίσεις, κατασκευές και λύσεις αξιοποίησης ακινήτων στην Κέρκυρα, ώστε το ακίνητό σας να αποκτήσει μεγαλύτερη αξία, καλύτερη απόδοση και σύγχρονη λειτουργικότητα."}
               </p>
 
               {/* Trust Line */}
               <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto drop-shadow-lg font-light">
                 {isEnglish 
                   ? "Trusted by international property owners and local clients for over three decades"
-                  : "Εγκωρισμένοι τοποικοί ανάδοχοι με εμπειρία 35+ ετών"}
+                  : "Τοπική τεχνική εμπειρία 35+ ετών στην Κέρκυρα"}
               </p>
 
               {/* CTA Buttons - Only 2 */}
@@ -232,7 +232,7 @@ export default function HomePage({ lang }: { lang: string }) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 title: isEnglish ? "House Renovation" : "Αύξηση Αξίας Ακινήτου",
@@ -262,6 +262,13 @@ export default function HomePage({ lang }: { lang: string }) {
                   : "Πισίνες και πολυτελείς αναβαθμίσεις που ενισχύουν την αξία του ακινήτου.",
                 href: "/pool-construction",
               },
+              {
+                title: isEnglish ? "Land Development" : "Αντιπαροχές & Αξιοποίηση Οικοπέδων",
+                description: isEnglish
+                  ? "Property development partnerships for landowners seeking professional collaboration in Corfu."
+                  : "Συνεργασίες για ιδιοκτήτες που θέλουν να αξιοποιήσουν οικόπεδα ή ακίνητα στην Κέρκυρα με σοβαρή τεχνική και αναπτυξιακή προσέγγιση.",
+                href: "/antiparoxes-kerkira",
+              },
             ].map((service) => (
               <Link key={service.title} href={`/${lang}${service.href}`} className="block group h-full">
                 <div className="h-full p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
@@ -273,6 +280,61 @@ export default function HomePage({ lang }: { lang: string }) {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Antiparoxes Section - NEW */}
+      <section className="relative py-16 sm:py-24 bg-gray-50">
+        <div className="container relative z-10 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+              <div className="p-8 sm:p-12">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                    {isEnglish ? "New Service" : "Νέα Υπηρεσία"}
+                  </span>
+                </div>
+                
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
+                  {isEnglish ? "Land Development & Property Exploitation in Corfu" : "Αντιπαροχές και Αξιοποίηση Οικοπέδων στην Κέρκυρα"}
+                </h2>
+                
+                <p className="text-lg sm:text-xl text-gray-700 mb-6">
+                  {isEnglish 
+                    ? "We undertake land development partnerships and property exploitation in Corfu, with a serious technical approach, proper planning, and professional project management."
+                    : "Αναλαμβάνουμε συνεργασίες αντιπαροχής και αξιοποίησης ακινήτων στην Κέρκυρα, με σοβαρή τεχνική προσέγγιση, σωστό σχεδιασμό και επαγγελματική διαχείριση έργου."}
+                </p>
+                
+                <p className="text-base text-gray-600 mb-8">
+                  {isEnglish
+                    ? "If you own land or property with development potential, we can evaluate the opportunities for a meaningful collaboration together. Faiacon approaches each case with responsibility, transparency, and a focus on realistic property development."
+                    : "Εάν διαθέτετε οικόπεδο ή ακίνητο με προοπτική αξιοποίησης, μπορούμε να εξετάσουμε μαζί τις δυνατότητες μιας ουσιαστικής συνεργασίας. Η Faiacon προσεγγίζει κάθε περίπτωση με υπευθυνότητα, διαφάνεια και έμφαση στη ρεαλιστική ανάπτυξη του ακινήτου."}
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button
+                    size="lg"
+                    className="bg-primary text-white hover:bg-primary/90 px-6 py-4 text-base font-semibold"
+                    asChild
+                  >
+                    <Link href={`/${lang}/antiparoxes-kerkira#contact-form`}>
+                      {isEnglish ? "Request Property Evaluation" : "Ζητήστε Αξιολόγηση Ακινήτου"}
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-primary text-primary hover:bg-primary/5 px-6 py-4 text-base font-semibold"
+                    asChild
+                  >
+                    <Link href={`/${lang}/antiparoxes-kerkira`}>
+                      {isEnglish ? "Learn More" : "Μάθετε Περισσότερα"}
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
