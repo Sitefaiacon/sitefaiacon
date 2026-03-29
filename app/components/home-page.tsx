@@ -2,7 +2,7 @@
 
 import { useLanguage } from "../contexts/language-context"
 import { Button } from "@/components/ui/button"
-import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CheckCircle2, Calculator, Award, Briefcase, Users, MessageCircle } from "lucide-react"
+import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CheckCircle2, Calculator, Award, Briefcase, Users, MessageCircle, Calendar } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
@@ -77,8 +77,8 @@ export default function HomePage({ lang }: { lang: string }) {
                   : "Τοπική τεχνική εμπειρία 35+ ετών στην Κέρκυρα"}
               </p>
 
-              {/* CTA Buttons - Only 2 */}
-              <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up animation-delay-200">
+              {/* CTA Buttons - Only 3 */}
+              <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap animate-slide-up animation-delay-200">
                 <Button
                   size="lg"
                   className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -87,6 +87,16 @@ export default function HomePage({ lang }: { lang: string }) {
                   <Link href={`/${lang}/cost-calculator`} className="flex items-center gap-2">
                     <Calculator className="w-5 h-5" />
                     {isEnglish ? "Renovation Cost Calculator" : "Υπολογιστής Κόστους Ανακαίνισης"}
+                  </Link>
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-primary text-white hover:bg-primary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                  asChild
+                >
+                  <Link href={`/${lang}/contact`} className="flex items-center gap-2">
+                    <Calendar className="w-5 h-5" />
+                    {isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}
                   </Link>
                 </Button>
                 <Button
@@ -481,12 +491,12 @@ export default function HomePage({ lang }: { lang: string }) {
         <div className="container relative z-10 px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-              {isEnglish ? "Ready to Start Your Project?" : "Έτοιμοι να Ξεκινήσετε το Έργο σας;"}
+              {isEnglish ? "Ready to Start Your Project?" : "Έτοιμοι να Ξεκινήσετε τ�� Έργο σας;"}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
               {isEnglish
                 ? "Contact us today to discuss your renovation goals and get started on transforming your property."
-                : "Επικοινωνήστε μαζί μας σήμερα για να ξεκινήσετε τη μετατροπή του ακινήτου σας."}
+                : "Επικοινωνήστε μαζί μας σήμερα για να ξεκινήσετε τη μετατροπή του ακ��νήτου σας."}
             </p>
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
               <Link href={`/${lang}/appointment`}>
