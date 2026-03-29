@@ -1,4 +1,5 @@
 import "./globals.css"
+// Next.js Google Fonts with latin subset only
 import { Outfit, Playfair_Display, Oswald } from "next/font/google"
 import type React from "react"
 import { Toaster } from "sonner"
