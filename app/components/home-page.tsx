@@ -238,14 +238,14 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-base sm:text-lg text-gray-600">
               {isEnglish
                 ? "Comprehensive construction and renovation services for residential and hospitality properties"
-                : "Ανακαινίσ��ις, κατασκευές, και λύσεις αξιοποίησης ακινήτων που δίνουν αποτελέσματα"}
+                : "Ανακα��νίσ��ις, κατασκευές, και λύσεις αξιοποίησης ακινήτων που δίνουν αποτελέσματα"}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση Ακιν��τ��υ",
+                title: isEnglish ? "Renovations in Corfu" : "Ανακαίνιση Ακ��ν��τ��υ",
                 description: isEnglish
                   ? "Professional home, villa and property renovations with local expertise and reliable project management."
                   : "Ανακαίνιση που βελτιώνει πραγματικά το σπίτι σας: σύγχρονα υλικά, σωστή κατασκευή, χώρος που λειτουργεί καλύτερα.",
@@ -404,7 +404,11 @@ export default function HomePage({ lang }: { lang: string }) {
                   "Sinies", 
                   "Potamos",
                   "Kontokali",
-                  "Corfu Island"
+                  "Corfu Island",
+                  "Prosthese Kassiopi",
+                  "Agios Stefanos",
+                  "Sidari",
+                  "Acharavi"
                 ].map((location) => (
                   <span key={location} className="px-4 py-2 bg-white rounded-full border border-primary/20 text-sm font-medium text-gray-700 hover:bg-primary/5 transition-colors">
                     {location}
