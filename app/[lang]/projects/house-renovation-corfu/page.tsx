@@ -1,7 +1,7 @@
 import { Metadata } from "next"
-import { SiteLayout } from "../../../../components/site-layout"
-import HouseRenovationCaseStudy from "../../../../components/house-renovation-project-case-study"
-import { BreadcrumbSchema } from "../../../../components/structured-data"
+import { SiteLayout } from "../../../components/site-layout"
+import HouseRenovationCaseStudy from "../../../components/house-renovation-project-case-study"
+import { BreadcrumbSchema } from "../../../components/structured-data"
 
 export const metadata: Metadata = {
   title: "House Renovation in Corfu Town - Complete Project Case Study | Faiacon",
