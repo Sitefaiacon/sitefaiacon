@@ -54,10 +54,10 @@ const projects = [
   {
     id: 6,
     title: "Stone Villa Construction",
-    titleEl: "Πέτρινη Βίλα στον Κέρκυρα",
+    titleEl: "Πέτρινη Βίλα στην Κέρκυρα",
     location: "Corfu",
     locationEl: "Κέρκυρα",
-    image: "/images/petrinI-vila-kerkira.jpg",
+    image: "/images/petrini-vila-kerkira.jpg",
   },
 ]
 
