@@ -496,7 +496,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
               {isEnglish
                 ? "Contact us today to discuss your renovation goals and get started on transforming your property."
-                : "Ας ξεκινήσουμε την κονβερσά για τo έργο σας. Επικοινωνήστε μαζί μας σήμερα."}
+                : "Ας συζητήσουμε το έργο σας. Επικοινωνήστε μαζί μας σήμερα."}
             </p>
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
               <Link href={`/${lang}/appointment`}>
