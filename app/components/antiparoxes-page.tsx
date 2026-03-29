@@ -98,7 +98,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
             >
               <Link href="#contact-form" className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
-                Κλείσε Ραντεβού
+                Ζητήστε Αξιολόγηση
               </Link>
             </Button>
           </div>
@@ -138,7 +138,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
                 Μια σοβαρή συνεργασία για τη σωστή αξιοποίηση του ακινήτου σας
               </h2>
               <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                Η αντιπαροχή αποτελεί μια σημαντική απόφαση για κάθε ιδιοκτήτη. Για αυτό εξετάζουμε κάθε περίπτωση με υπευθυνότητα, σαφή επικοινωνία και τεχνική ακρίβεια. Αξιολογούμε τις δυνατότητες του οικοπέδου ή του ακινήτου και διαμορφώνουμε μια πρόταση συνεργασίας με στόχο τη ρεαλιστική και ουσιαστική αξιοποίησή του.
+                Η αντιπαροχή αποτελεί μια σημαντική απόφαση. Για αυτό, κάθε περίπτωση εξετάζεται με υπευθυνότητα και τεχνική ακρίβεια. Αναλύουμε τις πραγματικές δυνατότητες του ακινήτου και σας προτείνουμε μια συνεργασία που έχει ουσία και ρεαλιστικές προοπτικές αξιοποίησης.
               </p>
             </AnimatedSection>
           </div>
@@ -159,22 +159,22 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
               {
                 icon: ClipboardCheck,
                 title: "Τεχνική Αξιολόγηση",
-                description: "Εξετάζουμε τα βασικά χαρακτηριστικά του ακινήτου ή του οικοπέδου και αξιολογούμε τις δυνατότητες αξιοποίησής του.",
+                description: "Εξετάζουμε με λεπτομέρεια τα χαρακτηριστικά του ακινήτου και αναλύουμε τις πραγματικές δυνατότητες αξιοποίησης στη δική σας περίπτωση.",
               },
               {
                 icon: Building2,
                 title: "Σχεδιασμός & Οργάνωση",
-                description: "Δια��ορφώνουμε ολοκληρωμένη προσέγγιση για την ανάπτυξη του έργου, με έμφαση στη λειτουργικότητα, την ποιότητα και τη σωστή διαχείριση.",
+                description: "Δημιουργούμε ολοκληρωμένη προσέγγιση με έμφαση στη λειτουργικότητα, την ποιότητα και την αποτελεσματική διαχείριση του έργου.",
               },
               {
                 icon: HardHat,
-                title: "Κατασκευή με Υπευθυνότητα",
-                description: "Αναλαμβάνουμε την υλοποίηση με επαγγελματική συνέπεια, ποιοτικά υλικά και έλεγχο σε κάθε στάδιο του έργου.",
+                title: "Κατασκευή με Ευθύνη",
+                description: "Υλοποιούμε το έργο με επαγγελματισμό, ποιοτικά υλικά και συνεχή έλεγχο σε κάθε φάση, ώστε να επιτύχουμε τα αποτελέσματα που συμφωνήσαμε.",
               },
               {
                 icon: MessageSquare,
                 title: "Συνεργασία με Διαφάνεια",
-                description: "Δίνουμε έμφαση στη σαφή επικοινωνία, στον ρεαλισμό και στη σωστή βάση συνεργασίας από την πρώτη συζήτηση.",
+                description: "Θέτουμε έμφαση στη σαφή επικοινωνία, στον ρεαλισμό και σε μια σωστή βάση συνεργασίας από την πρώτη συζήτηση.",
               },
             ].map((item, index) => (
               <AnimatedSection key={item.title}>
@@ -202,10 +202,10 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
             <AnimatedSection>
               <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
                 {[
-                  "Οικόπεδα εντός σχεδίου ή με δυνατότητα αξιοποίησης",
-                  "Παλαιά ακίνητα με προοπτική ανακατασκευής ή ανάπτυξης",
-                  "Ιδιοκτησίες σε περιοχές της Κέρκυρας με επενδυτικό ενδιαφέρον",
-                  "Περιπτώσεις όπου ο ιδιοκτήτης αναζητά συνεργασία για ανάπτυξη αντί πώλησης",
+                  "Οικόπεδα εντός σχεδίου με δυνατότητα ανάπτυξης",
+                  "Παλαιά ακίνητα που χρειάζονται αναβάθμιση ή ανακατασκευή",
+                  "Ιδιοκτησίες σε περιοχές της Κέρκυρας με ενδιαφέρον για επενδύσεις",
+                  "Περιπτώσεις που ζητάτε συνεργασία για ανάπτυξη, αντί απλής πώλησης",
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
@@ -287,10 +287,10 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
             {[
-              "Τοπική γνώση της Κέρκυρας και των ιδιαιτεροτήτων κάθε περιοχής",
-              "Εμπειρία στην κατασκευή, ανακαίνιση και τεχνική διαχείριση έργων",
-              "Πρακτική προσέγγιση με έμφαση στην ουσία και στη σωστή εκτέλεση",
-              "Σοβαρή και επαγγελματική αντιμετώπιση σε κάθε στάδιο",
+              "Βαθιά γνώση της Κέρκυρας και των ιδιαιτεροτήτων κάθε περιοχής",
+              "Εμπειρία 35+ ετών στην κατασκευή, ανακαίνιση και τεχνική διαχείριση",
+              "Πρακτική προσέγγιση με έμφαση στην ουσία και τη σωστή εκτέλεση",
+              "Επαγγελματική και σοβαρή αντιμετώπιση σε κάθε στάδιο της συνεργασίας",
             ].map((item, index) => (
               <AnimatedSection key={index}>
                 <div className="flex items-start gap-3 p-4 sm:p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
@@ -309,10 +309,10 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
           <div className="max-w-4xl mx-auto">
             <AnimatedSection className="text-center mb-10 sm:mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-6">
-                Η αντιπαροχή ως μέρος μιας ολοκληρωμένης προσέγγισης
+                Η αντιπαροχή ως μέρος της ολοκληρωμένης προσέγγισής μας
               </h2>
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-                Η Faiacon δεν δραστηριοποιείται μόνο στην ανακαίνιση, αλλά και στην ευρύτερη τεχνική αξιοποίηση ακινήτων στην Κέρκυρα. Για αυτό η αντιπαροχή εντάσσεται σε μια συνολική φιλοσοφία που συνδέει τον σωστό σχεδιασμό, την κατασκευή, την αναβάθμιση και τη δημιουργία πραγματικής αξίας για τον ιδιοκτήτη.
+                Η Faiacon δεν περιορίζεται μόνο στην ανακαίνιση. Δραστηριοποιούμαι σε κάθε πτυχή της τεχνικής αξιοποίησης ακινήτων στην Κέρκυρα. Γι' αυτό η αντιπαροχή εντάσσεται σε μια συνολική φιλοσοφία που συνδέει τον σωστό σχεδιασμό, την κατασκευή, τις αναβαθμίσεις και τη δημιουργία πραγματικής αξίας για εσάς.
               </p>
             </AnimatedSection>
 
@@ -348,20 +348,20 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
             {[
               {
-                question: "Τι είναι η αντιπαροχή;",
-                answer: "Η αντιπαροχή είναι μια μορφή συνεργασίας αξιοποίησης ακινήτου ή οικοπέδου, όπου εξετάζεται η ανάπτυξη του ακινήτου μέσα από συμφωνημένη συνεργασία μεταξύ ιδιοκτήτη και κατασκευαστικής πλευράς.",
+                question: "Τι ακριβώς είναι η αντιπαροχή;",
+                answer: "Η αντιπαροχή είναι μια μορφή συνεργασίας όπου ο ιδιοκτήτης ενός ακινήτου ή οικοπέδου συνεργάζεται με ένα κατασκευαστικό γραφείο για την ανάπτυξη του ακινήτου, αντί να το πουλήσει. Ο σκοπός είναι να δημιουργηθεί πραγματική αξία μέσω σχεδιασμού και κατασκευής.",
               },
               {
-                question: "Σε ποιες περιοχές της Κέρκυρας αναλαμβάνετε;",
-                answer: "Εξετάζουμε περιπτώσεις σε όλη την Κέρκυρα, ανάλογα με τα χαρακτηριστικά του ακινήτου και τις δυνατότητες αξιοποίησής του.",
+                question: "Σε ποιες περιοχές της Κέρκυρας δραστηριοποιείστε;",
+                answer: "Εξετάζουμε περιπτώσεις σε όλη την Κέρκυρα. Η επιλογή εξαρτάται από τα χαρακτηριστικά του ακινήτου, τη θέση του και τις δυνατότητες αξιοποίησής του.",
               },
               {
-                question: "Μπορώ να επικοινωνήσω ακόμη και αν δεν γνωρίζω τις δυνατότητες του ακινήτου μου;",
-                answer: "Ναι. Μπορούμε να ξεκινήσουμε με μια πρώτη συζήτηση και βασικά στοιχεία του ακινήτου ώστε να εξετάσουμε αν υπάρχει προοπτική αξιοποίησης.",
+                question: "Μπορώ να επικοινωνήσω ακόμη και αν δεν ξέρω τι δυνατότητες έχει το ακίνητό μου;",
+                answer: "Ναι, φυσικά. Αυτό είναι το πρώτο βήμα. Επικοινωνήστε μαζί μας με τα βασικά στοιχεία και θα αναλύσουμε μαζί σας αν υπάρχει προοπτική.",
               },
               {
-                question: "Αναλαμβάνετε μόνο αντιπαροχές ή και πλήρη κατασκευή;",
-                answer: "Η Faiacon αναλαμβάνει ανακαινίσεις, κατασκευές, ενεργειακές αναβαθμίσεις, premium επεμβάσεις και λύσεις αξιοποίησης ακινήτων στην Κέρκυρα.",
+                question: "Αναλαμβάνετε μόνο αντιπαροχές ή και άλλα έργα;",
+                answer: "Αναλαμβάνουμε ανακαινίσεις, κατασκευές, ενεργειακές αναβαθμίσεις και κάθε λύση αξιοποίησης ακινήτων. Η αντιπαροχή είναι ένα μέρος της ευρύτερης δραστηριότητάς μας.",
               },
             ].map((faq, index) => (
               <AnimatedSection key={index}>
@@ -381,19 +381,36 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
           <div className="max-w-4xl mx-auto">
             <AnimatedSection className="text-center mb-10 sm:mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
-                Έχετε οικόπεδο ή ακίνητο προς αξιοποίηση στην Κέρκυρα;
+                Ζητήστε μια πρώτη αξιολόγηση για το ακίνητό σας
               </h2>
               <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto">
-                Επικοινωνήστε μαζί μας για μια πρώτη συζήτηση σχετικά με τις δυνατότητες αντιπαροχής ή αξιοποίησης του ακινήτου σας.
+                Στείλτε μας τα βασικά στοιχεία του ακινήτου ή του οικοπέδου σας και θα επικοινωνήσουμε μαζί σας για μια πρώτη εμπιστευτική συζήτηση σχετικά με τις δυνατότητες αξιοποίησης.
               </p>
+            </AnimatedSection>
+
+            <AnimatedSection className="mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-6">
+                <div className="p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-100 text-center">
+                  <p className="text-xs sm:text-sm font-medium text-blue-900">Περιοχή ακινήτου</p>
+                </div>
+                <div className="p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-100 text-center">
+                  <p className="text-xs sm:text-sm font-medium text-blue-900">Είδος ακινήτου</p>
+                </div>
+                <div className="p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-100 text-center">
+                  <p className="text-xs sm:text-sm font-medium text-blue-900">Τετραγωνικά μέτρα</p>
+                </div>
+                <div className="p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-100 text-center">
+                  <p className="text-xs sm:text-sm font-medium text-blue-900">Σκοπός αξιοποίησης</p>
+                </div>
+              </div>
             </AnimatedSection>
 
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
               {/* Contact Form */}
               <AnimatedSection>
                 <div className="bg-gray-50 p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
-                  <p className="text-sm text-gray-600 mb-6">
-                    Στείλτε μας τα βασικά στοιχεία του ακινήτου σας και θα επικοινωνήσουμε μαζί σας για μια πρώτη συζήτηση.
+                  <p className="text-sm text-gray-600 mb-6 font-medium text-gray-700">
+                    Συμπληρώστε τα βασικά στοιχεία και θα επικοινωνήσουμε σύντομα για να συζητήσουμε τις ευκαιρίες αξιοποίησης του ακινήτου σας.
                   </p>
                   
                   {submitStatus === "success" ? (
@@ -486,7 +503,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
                         className="w-full bg-primary hover:bg-primary/90 text-white py-4"
                         disabled={isSubmitting}
                       >
-                        {isSubmitting ? "Αποστολή..." : "Αποστολή Αιτήματος"}
+                        {isSubmitting ? "Αποστολή..." : "Ζητήστε Αξιολόγηση"}
                       </Button>
                     </form>
                   )}
@@ -547,18 +564,19 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
           <div className="max-w-3xl mx-auto text-center">
             <AnimatedSection>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
-                Ξεκινήστε τη Συζήτηση Σήμερα
+                Ξεκινήστε τη Συζήτηση για τη Δική σας Ευκαιρία
               </h2>
               <p className="text-lg sm:text-xl text-white/90 mb-8">
-                Η αξιοποίηση του ακινήτου σας αρχίζει με μια απλή συζήτηση. Επικοινωνήστε μαζί μας για να εξετάσουμε τις δυνατότητες.
+                Κάθε ακίνητο έχει τις δικές του δυνατότητες. Επικοινωνήστε μαζί μας σήμερα για μια σοβαρή και εμπιστευτική συζήτηση σχετικά με τη δική σας περίπτωση.
               </p>
               <Button
                 size="lg"
                 className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
                 asChild
               >
-                <Link href={`/${lang}/appointment`}>
-                  Κλείστε Δωρεάν Ραντεβού
+                <Link href="#contact-form" className="flex items-center gap-2 justify-center">
+                  <Phone className="w-5 h-5" />
+                  Επικοινωνία για Αξιοποίηση
                 </Link>
               </Button>
             </AnimatedSection>
