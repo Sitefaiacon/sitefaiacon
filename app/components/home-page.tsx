@@ -425,7 +425,7 @@ export default function HomePage({ lang }: { lang: string }) {
                   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CF%84%CE%B5%CE%BB%CE%B5%CE%B9%CF%89%CE%BC%CE%AD%CE%BD%CE%B7%20%CE%B2%CE%AF%CE%BB%CE%B1%20%CF%83%CE%B9%CE%BD%CE%B9%CE%AD%CF%82.jpg-TBv1Q93tF49zLCpwPjQIhP4OS6eJLq.jpeg",
               },
               {
-                title: "Πέτρινη Βίλα στ��ν Κέρκυρα",
+                title: "Πέτρινη Βίλα στην Κέρκυρα",
                 titleEn: "Stone Villa in Corfu",
                 location: "Κέρκυρα",
                 locationEn: "Corfu",
