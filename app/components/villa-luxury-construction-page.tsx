@@ -22,45 +22,45 @@ export default function VillaLuxuryConstructionPage() {
   const services = [
     {
       icon: Home,
-      title: isEnglish ? "New Villa Construction" : "Εξατομικευμένος Σχεδιασμός & Κατασκευή Βιλών",
+      title: isEnglish ? "New Villa Construction" : "Κατασκευή Πολυτελούς Βίλας",
       description: isEnglish
         ? "Complete construction of new villas from foundation to finishing. We coordinate all trades and manage the entire build process."
-        : "Από την αρχιτεκτονική ιδέα έως την παράδοση - εξατομικευμένες κατοικίες που συνδυάζουν σύγχρονη άνεση με αιώνια κομψότητα",
+        : "Από το θεμέλιο έως το τελικό φινίρισμα, κατασκευάζουμε πολυτελείς βίλες που συνδυάζουν άνεση, αρχιτεκτονική ποιότητα και λειτουργικότητα.",
     },
     {
       icon: Diamond,
-      title: isEnglish ? "Quality Materials & Finishes" : "Πολυτελή Υλικά & Φινιρίσματα",
+      title: isEnglish ? "Quality Materials & Finishes" : "Ποιοτικά Υλικά & Φινιρίσματα",
       description: isEnglish
         ? "We source quality materials suited to Corfu's climate, including natural stone, durable fixtures, and modern finishes."
-        : "Επιλογή πολυτελών υλικών - φυσική πέτρα, πολυτελή όρη, σχεδιαστικά στοιχεία - σε συνδυασμό με έκπαιδευμένη τεχνογνωσία",
+        : "Επιλέγουμε υλικά που αντέχουν το κλίμα της Κέρκυρας: φυσική πέτρα, ποιοτικές εγκαταστάσεις, σύγχρονα φινιρίσματα που θα κρατήσουν χρόνια.",
     },
     {
       icon: Zap,
-      title: isEnglish ? "Modern Systems Integration" : "Ενσωμάτωση Έξυπνης Κατοικίας",
+      title: isEnglish ? "Modern Systems Integration" : "Σύγχρονα Συστήματα & Αυτοματισμοί",
       description: isEnglish
         ? "Installation of modern electrical, plumbing, heating, and cooling systems. Smart home integration available on request."
-        : "Σύγχρονα συστήματα αυτοματισμού, διαχείριση ενέργειας, έλεγχος κλίματος, ασφάλεια και ψυχαγωγία ομαλά ενσωματωμένα",
+        : "Ηλεκτρικές εγκαταστάσεις, υδραυλικά, κλιματισμό, έλεγχο θερμοκρασίας—όλα σχεδιασμένα και εγκατεστημένα σωστά.",
     },
     {
       icon: Palette,
-      title: isEnglish ? "Interior & Exterior Design" : "Υλοποίηση της Αρχιτεκτονικής Ορατικότητας",
+      title: isEnglish ? "Interior & Exterior Design" : "Σχεδιασμός Εσωτερικών & Εξωτερικών",
       description: isEnglish
         ? "We work with architects and interior designers to ensure the finished property matches your vision and specifications."
-        : "Αποσβεστική συνεργασία σχεδιασμού που διασφαλίζει ότι κάθε λεπτομέρεια αποτυπώνει την όρασή σας - από το εξωτερικό σχήμα έως τα εσωτερικά αισθητικά",
+        : "Συνεργαζόμαστε με αρχιτέκτονες και σχεδιαστές ώστε κάθε λεπτομέρεια να ανταποκρίνεται στο δικό σας όραμα.",
     },
     {
       icon: Mountain,
-      title: isEnglish ? "Outdoor Spaces & Pools" : "Εξωτερικοί Χώροι Διαμονής",
+      title: isEnglish ? "Outdoor Spaces & Pools" : "Εξωτερικοί Χώροι & Πισίνες",
       description: isEnglish
         ? "Construction of terraces, swimming pools, driveways, and landscaping to complete your property."
-        : "Έξυπνα σχεδιασμένες βεράντες, πισίνες, φυτεία και κήποι που επεκτείνουν απρόσκοπτα την εμπειρία διαμονής",
+        : "Βεράντες, πισίνες, δρόμοι προσπέλασης και φυτεία που δημιουργούν ένα τέλειο εξωτερικό χώρο διαμονής.",
     },
     {
       icon: Leaf,
-      title: isEnglish ? "Energy Efficiency" : "Βιώσιμη Πολυτέλεια",
+      title: isEnglish ? "Energy Efficiency" : "Ενεργειακή Απόδοση",
       description: isEnglish
         ? "Thermal insulation, energy-efficient windows, solar systems, and sustainable building practices to reduce running costs."
-        : "Συστήματα υψηλής απόδοσης ενέργειας, βιώσιμα υλικά και περιβαλλοντική ευθύνη χωρίς συμβιβασμό στην πολυτέλεια",
+        : "Θερμική μόνωση, ενεργειακά αποδοτικά κουφώματα, ηλιακά συστήματα—αναδοχή μέρα για μικρότερα λειτουργικά κόστη.",
     },
   ]
 
@@ -214,7 +214,7 @@ export default function VillaLuxuryConstructionPage() {
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               {isEnglish
                 ? "Complete design and construction expertise for premium residences"
-                : "Ολοκληρωμένη εμπειρία σχεδιασμού και κατασκευής για ακριβές κατοικίες"}
+                : "Ολοκληρωμένη εμπειρία ��χεδιασμού και κατασκευής για ακριβές κατοικίες"}
             </p>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-8">

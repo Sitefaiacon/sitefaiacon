@@ -66,16 +66,16 @@ export default function ThermoprosopsiPage() {
 
   const benefits = [
     {
-      title: isEnglish ? "Significant Energy Savings" : "Σημαντική Εξοικονόμηση Ενέργειας",
+      title: isEnglish ? "Significant Energy Savings" : "Μικρότερος Λογαριασμός Ρεύματος",
       desc: isEnglish
         ? "Substantial reduction in heating and cooling costs through dramatically improved thermal performance of the building envelope."
-        : "Ουσιαστική μείωση των δαπανών θέρμανσης και ψύξης μέσω δραματικά βελτιωμένης θερμικής απόδοσης του κελύφους.",
+        : "Σημαντική μείωση των δαπανών θέρμανσης και ψύξης. Εξοικονομείτε χρήματα κάθε μήνα.",
     },
     {
-      title: isEnglish ? "Improved Thermal Comfort" : "Βελτιωμένη Θερμική Άνεση",
+      title: isEnglish ? "Improved Thermal Comfort" : "Καλύτερη Άνεση στο Σπίτι",
       desc: isEnglish
         ? "Stable indoor temperatures year-round, elimination of cold walls and condensation, and a noticeably more comfortable living environment."
-        : "Σταθερές εσωτερικές θερμοκρασίες καθ' όλη τη διάρκεια του έτους, εξάλειψη κρύων τοίχων και υγρασίας, και αισθητά πιο άνετο περιβάλλον διαβίωσης.",
+        : "Σταθερή θερμοκρασία όλο το χρόνο. Δεν θα ναι κρύα τα τοιχώματα, και δεν θα έχετε προβλήματα με υγρασία.",
     },
     {
       title: isEnglish ? "Moisture & Weathering Protection" : "Προστασία από Υγρασία & Καιρικές Φθορές",
@@ -84,16 +84,16 @@ export default function ThermoprosopsiPage() {
         : "Πλήρης προστασία του δομικού κελύφους από διείσδυση υγρασίας, βροχή, άνεμο και τις μακροχρόνιες επιδράσεις του μεσογειακού κλίματος.",
     },
     {
-      title: isEnglish ? "Aesthetic Facade Upgrade" : "Αισθητική Αναβάθμιση Όψης",
+      title: isEnglish ? "Aesthetic Facade Upgrade" : "Καινούργια Εξωτερική Εμφάνιση",
       desc: isEnglish
         ? "A completely renewed exterior appearance that enhances the property's visual quality and distinguishes it in the neighbourhood."
-        : "Μια εντελώς ανανεωμένη εξωτερική εμφάνιση που αναβαθμίζει την οπτική ποιότητα του ακινήτου και το ξεχωρίζει στη γειτονιά.",
+        : "Το σπίτι ή το κτίριο σας θα φαίνεται σαν νέο από έξω. Καινούργια, καθαρή, φροντισμένη εικόνα.",
     },
     {
       title: isEnglish ? "Increased Property Value" : "Αύξηση Αξίας Ακινήτου",
       desc: isEnglish
         ? "A thermoprosopsi investment directly increases the market value and energy class of the property, strengthening its appeal for sale or rental."
-        : "Η επένδυση σε θερμοπρόσοψη αυξάνει άμεσα την εμπορική αξία και την ενεργειακή κατάταξη του ακινήτου, ενισχύοντας την ελκυστικότητά του για πώληση ή ενοικίαση.",
+        : "Ένα ακίνητο με θερμοπρόσοψη έχει υψηλότερη αξία και είναι πιο ελκυστικό για αγοραστές ή ενοικιαστές.",
     },
     {
       title: isEnglish ? "Reduction of Structural Deterioration" : "Μείωση Δομικής Φθοράς",

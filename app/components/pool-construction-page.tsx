@@ -48,29 +48,29 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
             >
               <div className="text-lg">
                 <p className="leading-relaxed text-justify-content">
-                  {isEnglish ? "Our company specializes in creating " : "Η εταιρεία μας ειδικεύεται στην δημιουργία "}
+                  {isEnglish ? "Our company specializes in creating " : "Αναλαμβάνουμε "}
                   <span className="text-primary font-bold">
-                    {isEnglish ? "customized high-tech pools" : "προσαρμοσμένων πισίνων υψηλής τεχνολογίας"}
+                    {isEnglish ? "customized high-tech pools" : "κατασκευή πισινών"}
                   </span>
                   {isEnglish
                     ? " that meet your unique requirements. Whether you desire a pool with "
-                    : ", που ανταποκρίνονται στις μοναδικές σας απαιτήσεις. Είτε επιθυμείτε πισίνα με "}
+                    : " που λειτουργούν τέλεια και κρατάνε. Απ' τον σχεδιασμό "}
                   <span className="text-primary font-bold">
-                    {isEnglish ? "liner, tile, or mosaic" : "liner, πλακάκι ή ψηφίδα"}
+                    {isEnglish ? "liner, tile, or mosaic" : "έως τη δοκιμή"}
                   </span>
-                  {isEnglish ? ", we ensure " : ", διασφαλίζουμε "}
+                  {isEnglish ? ", we ensure " : ", φροντίζουμε "}
                   <span className="text-primary font-bold">
-                    {isEnglish ? "customized solutions" : "εξατομικευμένες λύσεις"}
+                    {isEnglish ? "customized solutions" : "κάθε λεπτομέρεια"}
                   </span>
                   {isEnglish
                     ? " through specialized crews, combining "
-                    : " μέσω εξειδικευμένων συνεργείων, που συνδυάζουν "}
+                    : " με "}
                   <span className="text-primary font-bold">
-                    {isEnglish ? "aesthetic perfection" : "αισθητική τελειότητα"}
+                    {isEnglish ? "aesthetic perfection" : "τεχνική ακρίβεια"}
                   </span>
-                  {isEnglish ? " with " : " με "}
+                  {isEnglish ? " with " : " και "}
                   <span className="text-primary font-bold">
-                    {isEnglish ? "optimal functionality" : "βέλτιστη λειτουργικότητα"}
+                    {isEnglish ? "optimal functionality" : "αισθετική ποιότητα"}
                   </span>
                   .
                 </p>
