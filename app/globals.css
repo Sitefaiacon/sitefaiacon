@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* UTF-8 Greek text rendering support */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
