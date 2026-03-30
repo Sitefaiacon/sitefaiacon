@@ -130,13 +130,13 @@ export function ServiceSchema({ isEnglish = false }: { isEnglish?: boolean }) {
     {
       "@type": "Service",
       "@id": "https://faiacon.gr/#house-renovation",
-      name: isEnglish ? "House Renovation" : "Ανακαίνιση Σπιτιού",
+      name: isEnglish ? "Renovation Corfu - House Renovation Services" : "Ανακαίνιση Σπιτιού",
       description: isEnglish
-        ? "Complete house renovation services including bathroom, kitchen, flooring, and electrical work"
+        ? "Professional renovation Corfu services. Complete house renovation including bathroom remodeling, kitchen renovation, flooring installation, and electrical work in Corfu Greece. Expert renovation company with 35+ years experience."
         : "Ολοκληρωμένες υπηρεσίες ανακαίνισης σπιτιού συμπεριλαμβανομένων μπάνιου, κουζίνας, δαπέδων και ηλεκτρολογικών",
       provider: { "@id": "https://faiacon.gr/#organization" },
-      areaServed: { "@type": "Place", name: "Κέρκυρα, Ελλάδα" },
-      serviceType: "Home Renovation",
+      areaServed: { "@type": "Place", name: isEnglish ? "Corfu, Greece" : "Κέρκυρα, Ελλάδα" },
+      serviceType: isEnglish ? "Renovation Corfu" : "Home Renovation",
     },
     {
       "@type": "Service",
@@ -185,24 +185,29 @@ export function FAQSchema({ isEnglish = false }: { isEnglish?: boolean }) {
   const faqs = isEnglish
     ? [
         {
-          question: "How much does a house renovation cost in Corfu?",
+          question: "How much does renovation in Corfu cost?",
           answer:
-            "The cost of house renovation in Corfu varies depending on the scope of work. Use our free cost calculator to get an estimate. Basic renovations start from approximately €490/m², while premium renovations can cost up to €780/m².",
+            "Renovation Corfu costs vary depending on the scope of work. Use our free renovation cost calculator to get an accurate estimate. Basic renovations in Corfu start from approximately €490/m², while premium renovations can cost up to €780/m². FaiaCon provides transparent pricing for all renovation services in Corfu Greece.",
         },
         {
-          question: "How long does a typical renovation take?",
+          question: "What renovation services do you offer in Corfu?",
           answer:
-            "A typical renovation takes 2-6 months depending on the scope. Bathroom renovations take 2-3 weeks, while full house renovations can take 3-6 months.",
+            "FaiaCon offers comprehensive renovation Corfu services including: house renovation, bathroom remodeling, kitchen renovation, flooring installation, electrical work, painting, villa restoration, and listed building renovation. We are the leading renovation company in Corfu with 35+ years of experience.",
         },
         {
-          question: "Do you provide free estimates?",
+          question: "How long does a typical renovation take in Corfu?",
           answer:
-            "Yes, we provide free on-site estimates for all renovation and construction projects in Corfu. Book an appointment through our website or call us directly.",
+            "Renovation timelines in Corfu vary by project scope. Bathroom renovations take 2-3 weeks, kitchen renovations 3-4 weeks, while full house renovations in Corfu can take 3-6 months. FaiaCon ensures quality renovation work within agreed timeframes.",
         },
         {
-          question: "What areas do you serve?",
+          question: "Do you provide free renovation estimates in Corfu?",
           answer:
-            "We serve all areas of Corfu island, including Corfu Town, Kassiopi, Sidari, Paleokastritsa, and surrounding villages.",
+            "Yes, FaiaCon provides free on-site renovation estimates throughout Corfu. Book an appointment through our website or use our online renovation cost calculator for an instant estimate.",
+        },
+        {
+          question: "Which areas in Corfu do you serve for renovations?",
+          answer:
+            "We provide renovation services across all of Corfu island, including Corfu Town, Kassiopi, Sidari, Paleokastritsa, Gouvia, Dassia, Benitses, and all surrounding villages. No renovation project in Corfu is too far for FaiaCon.",
         },
       ]
     : [

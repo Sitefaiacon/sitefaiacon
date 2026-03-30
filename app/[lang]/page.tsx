@@ -8,17 +8,26 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
   return {
     title: isEnglish 
-      ? "FaiaCon - Technical Construction Company Corfu | Renovation Cost Calculator"
+      ? "Renovation Corfu | FaiaCon - House Renovation & Construction Services"
       : "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Υπολογιστής Κόστους Ανακαίνισης",
     description: isEnglish
-      ? "Leading construction company in Corfu. Free renovation cost calculator, house construction, pool building, listed buildings restoration. 35+ years of experience."
+      ? "Professional renovation Corfu services by FaiaCon. Expert house renovation, bathroom & kitchen remodeling, villa restoration in Corfu Greece. Free renovation cost calculator. 35+ years experience."
       : "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Δωρεάν υπολογιστής κόστους ανακαίνισης, κατασκευή σπιτιού, κατασκευή πισίνας, διατηρητέα κτίρια. 35+ χρόνια εμπειρίας.",
     keywords: isEnglish
       ? [
+          "renovation Corfu",
+          "renovation corfu greece",
+          "house renovation Corfu",
+          "home renovation Corfu",
+          "bathroom renovation Corfu",
+          "kitchen renovation Corfu",
+          "villa renovation Corfu",
+          "property renovation Corfu",
           "renovation cost calculator Corfu",
-          "house construction Corfu",
-          "renovation estimate",
+          "building contractor Corfu",
+          "construction company Corfu",
           "pool construction Corfu",
+          "listed building restoration Corfu",
           "FaiaCon",
         ]
       : [
@@ -31,14 +40,22 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         ],
     openGraph: {
       title: isEnglish 
-        ? "FaiaCon - Renovation Cost Calculator | Construction Corfu"
+        ? "Renovation Corfu | FaiaCon - Professional House Renovation Services"
         : "ΦαιάCon - Υπολογιστής Κόστους Ανακαίνισης | Κατασκευές Κέρκυρα",
       description: isEnglish
-        ? "Calculate your renovation cost for free. House construction, renovations, pools in Corfu."
+        ? "Expert renovation Corfu services. House renovation, bathroom remodeling, kitchen renovation, villa restoration. Free cost calculator. 35+ years experience in Corfu Greece."
         : "Υπολογίστε δωρεάν το κόστος ανακαίνισης. Κατασκευές, ανακαινίσεις, πισίνες στην Κέρκυρα.",
       url: `https://faiacon.gr/${lang}`,
       type: "website",
       locale: isEnglish ? "en_US" : "el_GR",
+      images: isEnglish ? [
+        {
+          url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
+          width: 1200,
+          height: 630,
+          alt: "Renovation Corfu - FaiaCon Construction Company",
+        },
+      ] : undefined,
     },
     alternates: {
       canonical: `https://faiacon.gr/${lang}`,
