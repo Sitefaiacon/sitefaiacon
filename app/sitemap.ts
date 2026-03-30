@@ -72,24 +72,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     },
-    // English pages
+    // English pages - optimized for "renovation corfu" SEO
     {
       url: `${baseUrl}/en`,
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/en/cost-calculator`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.93,
+      priority: 1,
     },
     {
       url: `${baseUrl}/en/house-renovation`,
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
-      priority: 0.9,
+      priority: 0.98,
+    },
+    {
+      url: `${baseUrl}/en/cost-calculator`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/en/house-construction`,

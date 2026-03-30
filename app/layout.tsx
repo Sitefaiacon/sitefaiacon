@@ -72,6 +72,8 @@ export const metadata: Metadata = {
     languages: {
       "el-GR": "https://faiacon.gr/el",
       "en-US": "https://faiacon.gr/en",
+      "en": "https://faiacon.gr/en",
+      "x-default": "https://faiacon.gr/en",
     },
   },
   openGraph: {
