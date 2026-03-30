@@ -54,26 +54,26 @@ export default function HomePage({ lang }: { lang: string }) {
                 <div className="mt-4 mx-auto w-16 sm:w-20 md:w-24 h-0.5 bg-white/30 rounded-full"></div>
               </div>
 
-              {/* Main Headline */}
+              {/* Main Headline - SEO optimized for "renovation corfu" */}
               <div className="animate-slide-up mt-4 sm:mt-6">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-lg leading-tight">
                   {isEnglish 
-                    ? "Building Excellence in Corfu Since 1990"
+                    ? "Renovation Corfu - Expert House Renovation Since 1990"
                     : "Μετατρέψτε το ακίνητό σας σε πηγή εισοδήματος στην Κέρκυρα"}
                 </h1>
               </div>
 
-              {/* Subheadline - Shorter & Clearer */}
+              {/* Subheadline - SEO optimized */}
               <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-3xl mx-auto drop-shadow-lg animate-slide-up animation-delay-100 leading-relaxed">
                 {isEnglish 
-                  ? "Premium construction, renovation, and property services for villas, hotels, and residential projects across Corfu."
+                  ? "Professional renovation in Corfu for villas, houses, and properties. Complete bathroom, kitchen, and home renovation services across Corfu island."
                   : "Αναλαμβάνουμε ανακαινίσεις, κατασκευές και λύσεις αξιοποίησης ακινήτων στην Κέρκυρα, ώστε το ακίνητό σας να αποκτήσει μεγαλύτερη αξία, καλύτερη απόδοση και σύγχρονη λειτουργικότητα."}
               </p>
 
               {/* Trust Line */}
               <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto drop-shadow-lg font-light">
                 {isEnglish 
-                  ? "Trusted by international property owners and local clients for over three decades"
+                  ? "Corfu's most trusted renovation company - serving international property owners for 35+ years"
                   : "Τοπική τεχνική εμπειρία 35+ ετών στην Κέρκυρα"}
               </p>
 

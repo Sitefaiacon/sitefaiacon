@@ -1,12 +1,105 @@
+// Dedicated schema for "renovation corfu" SEO targeting
+export function RenovationCorfuPageSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://faiacon.gr/en#renovation-corfu",
+    name: "Renovation Corfu",
+    alternateName: ["Corfu Renovation", "Renovation in Corfu", "Corfu Renovation Services"],
+    description: "Professional renovation Corfu services by FaiaCon. Leading renovation company in Corfu Greece offering house renovation, villa restoration, bathroom and kitchen remodeling. 35+ years experience in renovation projects across Corfu island.",
+    url: "https://faiacon.gr/en",
+    serviceType: ["House Renovation", "Villa Renovation", "Bathroom Renovation", "Kitchen Renovation", "Property Renovation"],
+    provider: {
+      "@type": "LocalBusiness",
+      "@id": "https://faiacon.gr/#organization",
+      name: "FaiaCon",
+      alternateName: "FaiaCon Renovation Corfu",
+      telephone: "+30-698-779-7679",
+      email: "info@faiacon.gr",
+      url: "https://faiacon.gr",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Corfu",
+        addressRegion: "Corfu",
+        postalCode: "49100",
+        addressCountry: "GR"
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 39.6243,
+        longitude: 19.9217
+      },
+      priceRange: "€€€",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        reviewCount: "127",
+        bestRating: "5"
+      }
+    },
+    areaServed: [
+      { "@type": "City", name: "Corfu Town", containedInPlace: { "@type": "Country", name: "Greece" } },
+      { "@type": "Place", name: "Kassiopi, Corfu" },
+      { "@type": "Place", name: "Sidari, Corfu" },
+      { "@type": "Place", name: "Paleokastritsa, Corfu" },
+      { "@type": "Place", name: "Gouvia, Corfu" },
+      { "@type": "Place", name: "Dassia, Corfu" },
+      { "@type": "Place", name: "Benitses, Corfu" },
+      { "@type": "Place", name: "Acharavi, Corfu" },
+      { "@type": "AdministrativeArea", name: "Corfu Island, Greece" }
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Renovation Corfu Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "House Renovation Corfu",
+            description: "Complete house renovation services in Corfu Greece"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Villa Renovation Corfu",
+            description: "Luxury villa renovation and restoration in Corfu"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Bathroom Renovation Corfu",
+            description: "Modern bathroom remodeling services in Corfu"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Kitchen Renovation Corfu",
+            description: "Custom kitchen renovation in Corfu"
+          }
+        }
+      ]
+    }
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
 export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": "https://faiacon.gr/#organization",
-    name: "ΦαιάCon - Τεχνική Κατασκευαστική",
-    alternateName: "FaiaCon",
+    name: "FaiaCon - Renovation Corfu",
+    alternateName: ["ΦαιάCon", "FaiaCon Corfu", "Renovation Corfu FaiaCon"],
     description:
-      "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, κατασκευή σπιτιού, ανακαίνιση, πισίνες, διατηρητέα κτίρια.",
+      "Leading renovation Corfu company. Professional house renovation, villa restoration, bathroom and kitchen remodeling in Corfu Greece. 35+ years experience in renovation services across Corfu island.",
     url: "https://faiacon.gr",
     logo: "/logo-faiacon.png",
     image: "/logo-faiacon.png",
@@ -70,9 +163,10 @@ export function WebsiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": "https://faiacon.gr/#website",
-    name: "ΦαιάCon",
+    name: "FaiaCon - Renovation Corfu",
+    alternateName: "ΦαιάCon",
     url: "https://faiacon.gr",
-    description: "Τεχνική Κατασκευαστική Εταιρεία Κέρκυρας - Ανακαίνιση, Κατασκευή, Πισίνες",
+    description: "Renovation Corfu - Professional house renovation, villa restoration and construction services in Corfu Greece by FaiaCon",
     publisher: {
       "@id": "https://faiacon.gr/#organization",
     },

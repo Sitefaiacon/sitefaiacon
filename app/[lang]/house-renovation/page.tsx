@@ -9,27 +9,29 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
   return {
     title: isEnglish
-      ? "Renovation Corfu | House Renovation Services & Cost Calculator"
+      ? "House Renovation Corfu | Complete Renovation Services in Corfu Greece"
       : "Ανακαίνιση Σπιτιού Κέρκυρα | Υπολογιστής Κόστους Ανακαίνισης",
     description: isEnglish
-      ? "Professional renovation Corfu services by FaiaCon. Complete house renovation, bathroom remodeling, kitchen renovation, flooring, electrical work. Free renovation cost calculator. 35+ years experience in Corfu Greece."
+      ? "Expert house renovation Corfu services. FaiaCon provides complete renovation in Corfu including bathroom, kitchen, flooring, electrical work. Best renovation company in Corfu with free cost calculator. 35+ years experience."
       : "Ανακαίνιση σπιτιού στην Κέρκυρα. Δωρεάν υπολογιστής κόστους ανακαίνισης για μπάνιο, κουζίνα, δάπεδα, ηλεκτρολογικά. Εκτίμηση κόστους online. ΦαιάCon - 35+ χρόνια εμπειρίας.",
     keywords: isEnglish
       ? [
-          "renovation Corfu",
-          "house renovation Corfu",
-          "home renovation Corfu",
-          "property renovation Corfu Greece",
-          "bathroom renovation Corfu",
-          "kitchen renovation Corfu",
-          "villa renovation Corfu",
-          "renovation cost Corfu",
-          "renovation company Corfu",
-          "building contractor Corfu",
-          "flooring installation Corfu",
-          "electrical work Corfu",
-          "painting services Corfu",
-          "FaiaCon renovation",
+          "renovation corfu",
+          "house renovation corfu",
+          "home renovation corfu",
+          "renovation in corfu",
+          "corfu renovation services",
+          "property renovation corfu greece",
+          "bathroom renovation corfu",
+          "kitchen renovation corfu",
+          "villa renovation corfu",
+          "renovation cost corfu",
+          "renovation company corfu",
+          "building contractor corfu",
+          "flooring installation corfu",
+          "electrical renovation corfu",
+          "painting services corfu",
+          "complete renovation corfu",
         ]
       : [
           "ανακαίνιση σπιτιού Κέρκυρα",
