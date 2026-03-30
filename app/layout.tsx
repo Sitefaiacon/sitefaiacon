@@ -7,7 +7,7 @@ import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema } from "./components/structured-data"
+import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema, RenovationCorfuPageSchema } from "./components/structured-data"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -42,6 +42,12 @@ export const metadata: Metadata = {
   },
   description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, εκτίμηση κόστους κατασκευής, ανακαίνιση σπιτιού, κατασκευή πισίνας. Δωρεάν εκτίμηση - 35+ χρόνια εμπειρίας.",
   keywords: [
+    "renovation corfu",
+    "renovation in corfu",
+    "corfu renovation",
+    "house renovation corfu",
+    "villa renovation corfu",
+    "property renovation corfu greece",
     "υπολογισμός κόστους ανακαίνισης",
     "εκτίμηση κόστους ανακαίνισης",
     "κόστος ανακαίνισης σπιτιού",
@@ -54,8 +60,6 @@ export const metadata: Metadata = {
     "ανακαίνιση κουζίνας κόστος",
     "κατασκευή πισίνας Κέρκυρα",
     "διατηρητέα κτίρια Κέρκυρα",
-    "θερμοπρόσοψη κόστος",
-    "αλλαγή κουφωμάτων κόστος",
     "FaiaCon",
     "ΦαιάCon"
   ],
@@ -141,6 +145,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <FAQSchema />
         <ReviewSchema />
         <OfferCatalogSchema />
+        <RenovationCorfuPageSchema />
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
         <WebVitals />
