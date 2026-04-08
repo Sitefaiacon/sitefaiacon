@@ -153,7 +153,7 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
               <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
                 {isEnglish
                   ? "Land development is a significant decision. That's why we don't rush. We examine each property carefully, openly share our assessment, and explain what can be done. When there's real potential for development, we proceed with partnerships on a clear and promising basis."
-                  : "Η αντιπαροχή είναι μια σημαντική απόφαση. Γι' αυτό δεν βιαζόμαστε. Εξετάζουμε κάθε ακίνητο προσεκτικά, λέμε ανοιχτά τι νομίζουμε και τι μπορεί να γίνει. Όταν υπάρχει πραγματική δυνατότητα αξιοποίησης, προχωράμε σε συνεργασίες με σαφή βάση και προοπτική."}
+                  : "Η αντιπαροχή είναι μια σημαντική απόφαση. Γι' αυτό δεν βιαζόμαστε. Εξετάζουμε κάθε ακίνητο προσεκτικά, λέμε ανοιχτά τι νομίζουμε και τι μπορεί να γίνει. Όταν υπάρχει πραγματική δυνατότητα αξιοποίησης, προχωράμε σε ��υνεργασίες με σαφή βάση και προοπτική."}
               </p>
             </AnimatedSection>
           </div>
@@ -647,9 +647,9 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
                         <Phone className="w-5 h-5" />
                         <span>+30 698 779 7679</span>
                       </a>
-                      <a href="mailto:faiacon@yahoo.com" className="flex items-center gap-3 text-white hover:text-white/80 transition-colors">
+                      <a href="mailto:info@faiacon.com" className="flex items-center gap-3 text-white hover:text-white/80 transition-colors">
                         <Mail className="w-5 h-5" />
-                        <span>faiacon@yahoo.com</span>
+                        <span>info@faiacon.com</span>
                       </a>
                     </div>
                     <div className="mt-6">
