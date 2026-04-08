@@ -23,7 +23,7 @@ export function Footer() {
                 </div>
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5" />
-                  <span>faiacon@yahoo.com</span>
+                  <a href="mailto:info@faiacon.com" className="text-primary hover:underline">info@faiacon.com</a>
                 </div>
                 <div className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 mt-1" />

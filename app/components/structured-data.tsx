@@ -11,7 +11,7 @@ export function LocalBusinessSchema() {
     logo: "/logo-faiacon.png",
     image: "/logo-faiacon.png",
     telephone: "+30-6987797679",
-    email: "faiacon@yahoo.com",
+    email: "info@faiacon.com",
     foundingDate: "1990",
     priceRange: "€€€",
     currenciesAccepted: "EUR",
@@ -279,7 +279,7 @@ export function ReviewSchema() {
         name: "Μαρία Κ.",
       },
       reviewBody:
-        "Εξαιρετική δουλειά στην ανακαίνιση του σπιτιού μας. Επαγγελματισμός και ποιότητα σε κάθε λεπτομέρεια.",
+        "Εξαιρετική δουλειά στην ανακαίνιση του σπιτιού μας. Επαγγελματισμός και ποιότητα σε κάθε λεπτομέρει��.",
       datePublished: "2024-12-15",
     },
     {
