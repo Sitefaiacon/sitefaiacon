@@ -37,11 +37,6 @@ export function generateStaticParams() {
 
 export default async function RenovationsCorfu({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
-  
-  // Only show for English
-  if (lang !== "en") {
-    return null
-  }
 
   return (
     <SiteLayout>
@@ -51,7 +46,7 @@ export default async function RenovationsCorfu({ params }: { params: Promise<{ l
           { name: "Renovations in Corfu", url: "https://faiacon.gr/en/renovations-corfu" },
         ]} 
       />
-      <FAQSchema isEnglish={lang === "en"} />
+      <FAQSchema isEnglish={true} />
       <RenovationsCorfuPage />
     </SiteLayout>
   )
