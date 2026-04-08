@@ -107,9 +107,9 @@ const faqs = [
   },
 ]
 
-export default function RenovationsCorfuPage() {
-  const { isEnglish } = useLanguage()
-  const [showQuoteModal, setShowQuoteModal] = useState(false)
+  export default function RenovationsCorfuPage() {
+    const { isEnglish, lang } = useLanguage()
+    const [showQuoteModal, setShowQuoteModal] = useState(false)
 
   if (!isEnglish) return null
 
