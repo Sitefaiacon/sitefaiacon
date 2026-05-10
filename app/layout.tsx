@@ -9,7 +9,6 @@ import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
 import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema } from "./components/structured-data"
-import GoogleAnalytics from "./components/google-analytics"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -156,7 +155,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <OfferCatalogSchema />
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
-        <GoogleAnalytics GA_MEASUREMENT_ID="G-Y7K0K222D9" />
         <WebVitals />
         {children}
         <Suspense fallback={null}>
