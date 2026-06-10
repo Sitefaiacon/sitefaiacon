@@ -11,14 +11,10 @@ function AnalyticsTracking({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string })
   useEffect(() => {
     const url = pathname + searchParams.toString()
 
-    // Check if consent is given (integrate with your cookie consent)
-    const hasConsent = localStorage.getItem("cookieConsent") === "all"
-
-    if (hasConsent) {
-      window.gtag("config", GA_MEASUREMENT_ID, {
-        page_path: url,
-      })
-    }
+    // Track every page view for all visitors
+    window.gtag("config", GA_MEASUREMENT_ID, {
+      page_path: url,
+    })
   }, [pathname, searchParams, GA_MEASUREMENT_ID])
 
   return null
