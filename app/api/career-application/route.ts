@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 function sanitize(val: unknown): string {
   if (typeof val !== "string") return ""
   return val.replace(/[<>]/g, "").trim().slice(0, 2000)
@@ -138,6 +136,7 @@ export async function POST(req: NextRequest) {
     `
 
     // Send to HR
+    const resend = new Resend(process.env.RESEND_API_KEY)
     const { error: hrError } = await resend.emails.send({
       from: "ΦαιάCon Careers <onboarding@resend.dev>",
       to: [hrEmail],

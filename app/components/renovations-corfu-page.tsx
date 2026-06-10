@@ -110,6 +110,7 @@ const faqs = [
 export default function RenovationsCorfuPage() {
   const { isEnglish } = useLanguage()
   const [showQuoteModal, setShowQuoteModal] = useState(false)
+  const lang = isEnglish ? "en" : "el"
 
   if (!isEnglish) return null
 
