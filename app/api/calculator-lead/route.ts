@@ -28,6 +28,44 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
+// Escape user-supplied text before interpolating into notification email HTML
+function escapeHtml(input: unknown): string {
+  return String(input ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+// Trim and hard-cap free-text fields to guard against oversized/abusive payloads
+function clean(value: unknown, maxLength: number): string {
+  return String(value ?? '').trim().slice(0, maxLength)
+}
+
+// ─── Basic in-memory rate limiting (per IP) ────────────────────────────────────
+// Note: resets on cold start and is per-instance. For strict limits use Upstash Redis.
+const RATE_LIMIT_WINDOW_MS = 60_000
+const RATE_LIMIT_MAX = 5
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>()
+
+function getClientIp(request: NextRequest): string {
+  const forwarded = request.headers.get('x-forwarded-for')
+  if (forwarded) return forwarded.split(',')[0].trim()
+  return request.headers.get('x-real-ip') || 'unknown'
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const entry = rateLimitStore.get(ip)
+  if (!entry || now > entry.resetAt) {
+    rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
+    return false
+  }
+  entry.count += 1
+  return entry.count > RATE_LIMIT_MAX
+}
+
 function validateLeadData(data: unknown): { valid: boolean; errors: string[] } {
   const errors: string[] = []
   if (!data || typeof data !== 'object') return { valid: false, errors: ['Invalid request body'] }
@@ -294,9 +332,9 @@ function generateEmailHTML(lead: CalculatorLead, breakdown?: QuoteBreakdown): st
   html += `<tr><td style="${S.sectionWrap}">
     ${sectionTitle('Τμήμα 1 — Στοιχεία Πελάτη')}
     <table width="100%" cellpadding="0" cellspacing="0">
-      ${row('Όνομα', `<a href="mailto:${contact.email}" style="color:#1e3a5f;text-decoration:none;">${contact.name}</a>`)}
-      ${row('Email', `<a href="mailto:${contact.email}" style="color:#1e3a5f;">${contact.email}</a>`)}
-      ${contact.phone ? row('Τηλέφωνο', `<a href="tel:${contact.phone}" style="color:#1e3a5f;">${contact.phone}</a>`) : ''}
+      ${row('Όνομα', `<a href="mailto:${encodeURIComponent(contact.email)}" style="color:#1e3a5f;text-decoration:none;">${escapeHtml(contact.name)}</a>`)}
+      ${row('Email', `<a href="mailto:${encodeURIComponent(contact.email)}" style="color:#1e3a5f;">${escapeHtml(contact.email)}</a>`)}
+      ${contact.phone ? row('Τηλέφωνο', `<a href="tel:${encodeURIComponent(contact.phone)}" style="color:#1e3a5f;">${escapeHtml(contact.phone)}</a>`) : ''}
       ${row('Ημερομηνία', submissionDate)}
       ${row('Αναγνωριστικό', referenceId)}
     </table>
@@ -446,7 +484,7 @@ ${fmtEur(grandTotal)}`
     t += `\nΕύρος: ${fmtEur(grandRange.min)} – ${fmtEur(grandRange.max)}`
   }
   t += `\n\nΠΑΡΑΤΗΡΗΣΗ: Αυτόματη εκτίμηση — ενδέχεται να διαφοροποιηθεί μετά από τεχνική αξιολόγηση.
-ΕΣΩΤΕΡΙΚΟ EMAIL — ΜΗΝ ΑΠΟΣΤΕΙΛΕΤΕ ΣΤΟΝ ΠΕΛΑΤΗ.`
+ΕΣΩΤΕΡΙΚΟ EMAIL — ΜΗΝ ΑΠΟΣΤΕΙΛΕΤ�� ΣΤΟΝ ΠΕΛΑΤΗ.`
 
   return t.trim()
 }
@@ -461,7 +499,21 @@ async function storeLead(lead: CalculatorLead): Promise<void> {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit per IP to mitigate spam/abuse
+    if (isRateLimited(getClientIp(request))) {
+      return NextResponse.json(
+        { success: false, errors: ['Πάρα πολλές αιτήσεις. Παρακαλώ δοκιμάστε ξανά σε λίγο.'] },
+        { status: 429 }
+      )
+    }
+
     const body = await request.json()
+
+    // Honeypot: bots fill hidden fields; humans leave them empty
+    if (typeof body?.company === 'string' && body.company.trim() !== '') {
+      // Pretend success so bots don't learn the field is a trap
+      return NextResponse.json({ success: true, message: 'Το αίτημά σας καταχωρήθηκε επιτυχώς.' })
+    }
 
     const validation = validateLeadData(body)
     if (!validation.valid) {
@@ -484,9 +536,9 @@ export async function POST(request: NextRequest) {
 
     const lead: CalculatorLead = {
       contact: {
-        name: body.contact.name.trim(),
-        email: body.contact.email.trim().toLowerCase(),
-        phone: body.contact.phone?.trim() || undefined,
+        name: clean(body.contact.name, 120),
+        email: clean(body.contact.email, 160).toLowerCase(),
+        phone: clean(body.contact.phone, 40) || undefined,
       },
       selections: body.selections,
       breakdown,

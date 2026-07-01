@@ -33,7 +33,8 @@ const oswald = Oswald({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  // No maximumScale/userScalable restriction: allow pinch-zoom for accessibility (WCAG 1.4.4)
+  themeColor: "#0f172a",
 }
 
 export const metadata: Metadata = {
@@ -124,9 +125,13 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? {
+        verification: {
+          google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+        },
+      }
+    : {}),
   category: "construction",
   generator: "v0.app",
 }
@@ -135,10 +140,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable} ${oswald.variable}`}>
       <head>
-        <meta charSet="UTF-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -159,5 +159,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  return routes
+  // Service landing pages (available in both locales)
+  const serviceSlugs = [
+    "villa-luxury-home-construction",
+    "hotel-construction-renovation",
+    "thermoprosopsi",
+    "vapsimata-elaiokromatismoi",
+  ]
+  const serviceRoutes = serviceSlugs.flatMap((slug) => [
+    {
+      url: `${baseUrl}/el/services/${slug}`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/en/services/${slug}`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+  ])
+
+  // Careers page (both locales)
+  const careersRoutes = [
+    {
+      url: `${baseUrl}/el/careers`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/en/careers`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.55,
+    },
+  ]
+
+  return [...routes, ...serviceRoutes, ...careersRoutes]
 }

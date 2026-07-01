@@ -187,8 +187,14 @@ export function ServiceSchema({ isEnglish = false }: { isEnglish?: boolean }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
-export function FAQSchema({ isEnglish = false }: { isEnglish?: boolean }) {
-  const faqs = isEnglish
+export function FAQSchema({
+  isEnglish = false,
+  items,
+}: {
+  isEnglish?: boolean
+  items?: { question: string; answer: string }[]
+}) {
+  const defaultFaqs = isEnglish
     ? [
         {
           question: "How much does a house renovation cost in Corfu?",
@@ -233,6 +239,9 @@ export function FAQSchema({ isEnglish = false }: { isEnglish?: boolean }) {
             "Εξυπηρετούμε όλες τις περιοχές της Κέρκυρας, συμπεριλαμβανομένης της Πόλης της Κέρκυρας, της Κασσιόπης, του Σιδαρίου, της Παλαιοκαστρίτσας και των γύρω χωριών.",
         },
       ]
+
+  // Prefer page-specific items when provided; otherwise fall back to the default list
+  const faqs = items && items.length > 0 ? items : defaultFaqs
 
   const schema = {
     "@context": "https://schema.org",
@@ -294,7 +303,7 @@ export function ReviewSchema() {
         name: "Γιώργος Π.",
       },
       reviewBody:
-        "Κατασκεύασαν την πισίνα μας με άψογο τρόπο. Τήρησαν το χρονοδιάγραμμα και τον προϋπολογισμό.",
+        "Κατασκεύασαν τ��ν πισίνα μας με άψογο τρόπο. Τήρησαν το χρονοδιάγραμμα και τον προϋπολογισμό.",
       datePublished: "2024-11-20",
     },
     {

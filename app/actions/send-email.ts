@@ -2,12 +2,31 @@
 
 import { Resend } from "resend"
 
+// Escape user input before interpolating into email HTML
+function escapeHtml(input: unknown): string {
+  return String(input ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+}
+
 export async function sendEmail(formData: FormData) {
   try {
-    const name = formData.get("name") as string
-    const email = formData.get("email") as string
-    const phone = formData.get("phone") as string
-    const message = formData.get("message") as string
+    const name = ((formData.get("name") as string) || "").trim().slice(0, 120)
+    const email = ((formData.get("email") as string) || "").trim().slice(0, 160)
+    const phone = ((formData.get("phone") as string) || "").trim().slice(0, 40)
+    const message = ((formData.get("message") as string) || "").trim().slice(0, 5000)
+
+    // Honeypot: hidden field only bots fill in
+    const honeypot = ((formData.get("company") as string) || "").trim()
+    if (honeypot) {
+      return {
+        success: true,
+        message: "Το μήνυμά σας στάλθηκε με επιτυχία! Θα επικοινωνήσουμε μαζί σας σύντομα.",
+      }
+    }
 
     // Input validation
     if (!email || !phone || !message) {
@@ -35,19 +54,11 @@ export async function sendEmail(formData: FormData) {
       }
     }
 
-    // Detailed console logging for debugging
-    console.log("Attempting to send email with details:", {
-      name,
-      email,
-      phone,
-      messageLength: message?.length,
-    })
-
     const resend = new Resend(process.env.RESEND_API_KEY)
     const { data, error } = await resend.emails.send({
       from: "Faiacon Website <onboarding@resend.dev>",
       to: ["faiacon@yahoo.com"],
-      reply_to: email,
+      replyTo: email,
       subject: `Νέα Φόρμα Επικοινωνίας από ${name || email}`,
       text: `
         Όνομα: ${name || "Δεν δόθηκε"}
@@ -59,12 +70,12 @@ export async function sendEmail(formData: FormData) {
       `,
       html: `
         <h2>Νέα Φόρμα Επικοινωνίας</h2>
-        <p><strong>Όνομα:</strong> ${name || "Δεν δόθηκε"}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Τηλέφωνο:</strong> ${phone}</p>
+        <p><strong>Όνομα:</strong> ${escapeHtml(name) || "Δεν δόθηκε"}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Τηλέφωνο:</strong> ${escapeHtml(phone)}</p>
         <br/>
         <p><strong>Μήνυμα:</strong></p>
-        <p>${message}</p>
+        <p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>
       `,
     })
 

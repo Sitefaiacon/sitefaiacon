@@ -22,15 +22,15 @@ interface ContactInfo {
 interface QuoteRequestModalProps {
   isOpen: boolean
   onClose: () => void
-  calculatorData: any
-  isEnglish: boolean
+  calculatorData?: any
+  isEnglish?: boolean
 }
 
 export function QuoteRequestModal({
   isOpen,
   onClose,
-  calculatorData,
-  isEnglish,
+  calculatorData = {},
+  isEnglish = false,
 }: QuoteRequestModalProps) {
   const [contact, setContact] = useState<ContactInfo>({
     name: "",
@@ -40,6 +40,8 @@ export function QuoteRequestModal({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState("")
+  // Honeypot: hidden from real users; only bots fill this in
+  const [company, setCompany] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -75,6 +77,7 @@ export function QuoteRequestModal({
             phone: contact.phone.trim() || undefined,
           },
           selections: calculatorData,
+          company, // honeypot
         }),
       })
 
@@ -133,6 +136,17 @@ export function QuoteRequestModal({
             </DialogHeader>
 
             <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+              {/* Honeypot field: visually hidden and off the accessibility tree; only bots fill it */}
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+              />
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-sm font-medium text-foreground">
                   {isEnglish ? "Full Name" : "Ονοματεπώνυμο"} *
