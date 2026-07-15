@@ -2,6 +2,7 @@ import SiteLayout from "../../../components/site-layout"
 import HotelConstructionRenovationPage from "../../../components/hotel-construction-page"
 import type { Metadata } from "next"
 import { BreadcrumbSchema } from "../../../components/structured-data"
+import { DEFAULT_SOCIAL_IMAGE, localizedAlternates, SITE_URL } from "@/lib/seo"
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
@@ -9,8 +10,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
   return {
     title: isEnglish
-      ? "Hotel Construction & Renovation in Corfu | Faiacon"
-      : "Κατασκευή & Ανακαίνιση Ξενοδοχειακών Μονάδων | ΦαιάCon",
+      ? "Hotel Construction & Renovation in Corfu"
+      : "Κατασκευή & Ανακαίνιση Ξενοδοχείων στην Κέρκυρα",
     description: isEnglish
       ? "Complete hotel construction and renovation solutions in Corfu. Specialized experience in hotel refurbishments, room upgrades and hospitality improvements."
       : "Ολοκληρωμένες ξενοδοχειακές λύσεις κατασκευής και ανακαίνισης στην Κέρκυρα. Εξειδικευμένη εμπειρία σε ανακαινίσεις ξενοδοχείων, αναβάθμιση δωματίων και βελτίωση φιλοξενίας.",
@@ -36,17 +37,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       description: isEnglish
         ? "Hotel refurbishments, room upgrades and hospitality construction in Corfu."
         : "Ανακαινίσεις ξενοδοχείων, αναβάθμιση δωματίων και ξενοδοχειακές κατασκευές στην Κέρκυρα.",
-      url: `https://faiacon.gr/${lang}/services/hotel-construction-renovation`,
+      url: `${SITE_URL}/${lang}/services/hotel-construction-renovation`,
       type: "website",
       locale: isEnglish ? "en_US" : "el_GR",
+      images: [DEFAULT_SOCIAL_IMAGE],
     },
-    alternates: {
-      canonical: `https://faiacon.gr/${lang}/services/hotel-construction-renovation`,
-      languages: {
-        "en-US": "https://faiacon.gr/en/services/hotel-construction-renovation",
-        "el-GR": "https://faiacon.gr/el/services/hotel-construction-renovation",
-      },
-    },
+    alternates: localizedAlternates(lang, "services/hotel-construction-renovation"),
   }
 }
 
@@ -58,9 +54,9 @@ export default async function HotelConstructionRoute({ params }: { params: Promi
     <SiteLayout>
       <BreadcrumbSchema 
         items={[
-          { name: isEnglish ? "Home" : "Αρχική", url: `https://faiacon.gr/${lang}` },
-          { name: isEnglish ? "Services" : "Υπηρεσίες", url: `https://faiacon.gr/${lang}` },
-          { name: isEnglish ? "Hotel Construction & Renovation" : "Κατασκευή & Ανακαίνιση Ξενοδοχείων", url: `https://faiacon.gr/${lang}/services/hotel-construction-renovation` },
+          { name: isEnglish ? "Home" : "Αρχική", url: `${SITE_URL}/${lang}` },
+          { name: isEnglish ? "Services" : "Υπηρεσίες", url: `${SITE_URL}/${lang}` },
+          { name: isEnglish ? "Hotel Construction & Renovation" : "Κατασκευή & Ανακαίνιση Ξενοδοχείων", url: `${SITE_URL}/${lang}/services/hotel-construction-renovation` },
         ]} 
       />
       <HotelConstructionRenovationPage />

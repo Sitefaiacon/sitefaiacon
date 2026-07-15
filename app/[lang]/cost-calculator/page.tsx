@@ -2,7 +2,8 @@
 import SiteLayout from "../../components/site-layout"
 import CostCalculatorPage from "../../components/cost-calculator-page"
 import type { Metadata } from "next"
-import { BreadcrumbSchema, HowToSchema, OfferCatalogSchema, ReviewSchema, PriceRangeSchema } from "../../components/structured-data"
+import { BreadcrumbSchema, HowToSchema, PriceRangeSchema } from "../../components/structured-data"
+import { localizedAlternates, SITE_URL } from "@/lib/seo"
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
@@ -10,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
   return {
     title: isEnglish 
-      ? "Renovation Cost Calculator | Free Online Estimate - Faiacon"
-      : "Υπολογιστής Κόστους Ανακαίνισης | Δωρεάν Online Εκτίμηση - ΦαιάCon",
+      ? "Renovation Cost Calculator for Corfu Properties"
+      : "Υπολογιστής Κόστους Ανακαίνισης",
     description: isEnglish
       ? "Free renovation cost calculator for homes and properties in Corfu. Estimate costs for kitchens, bathrooms, flooring, and complete renovations online."
       : "Δωρεάν υπολογιστής κόστους ανακαίνισης σπιτιού. Υπολογίστε online το κόστος για μπάνιο, κουζίνα, δάπεδα, βαφή, αλλαγή κουφωμάτων. Άμεση εκτίμηση χωρίς δεσμεύσεις.",
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       description: isEnglish
         ? "Calculate renovation costs for homes and properties in Corfu. Free online estimate tool for your renovation project."
         : "Υπολογίστε δωρεάν και online το κόστος ανακαίνισης του σπιτιού σας. Μπάνιο, κουζίνα, δάπεδα, κουφώματα.",
-      url: isEnglish ? "https://faiacon.gr/en/cost-calculator" : "https://faiacon.gr/el/cost-calculator",
+      url: `${SITE_URL}/${lang}/cost-calculator`,
       type: "website",
       images: [
         {
@@ -60,13 +61,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         },
       ],
     },
-    alternates: {
-      canonical: isEnglish ? "https://faiacon.gr/en/cost-calculator" : "https://faiacon.gr/el/cost-calculator",
-      languages: {
-        "el-GR": "https://faiacon.gr/el/cost-calculator",
-        "en-US": "https://faiacon.gr/en/cost-calculator",
-      },
-    },
+    alternates: localizedAlternates(lang, "cost-calculator"),
   }
 }
 
@@ -77,13 +72,11 @@ export default async function CostCalculator({ params }: { params: Promise<{ lan
   return (
     <SiteLayout>
       <HowToSchema isEnglish={isEnglish} />
-      <OfferCatalogSchema isEnglish={isEnglish} />
-      <ReviewSchema />
       <PriceRangeSchema />
       <BreadcrumbSchema 
         items={[
-          { name: isEnglish ? "Home" : "Αρχική", url: `https://faiacon.gr/${lang}` },
-          { name: isEnglish ? "Cost Calculator" : "Υπολογιστής Κόστους", url: `https://faiacon.gr/${lang}/cost-calculator` },
+          { name: isEnglish ? "Home" : "Αρχική", url: `${SITE_URL}/${lang}` },
+          { name: isEnglish ? "Cost Calculator" : "Υπολογιστής Κόστους", url: `${SITE_URL}/${lang}/cost-calculator` },
         ]} 
       />
       <CostCalculatorPage lang={lang} />

@@ -1,52 +1,39 @@
 import SiteLayout from "../components/site-layout"
 import HomePage from "../components/home-page"
 import type { Metadata } from "next"
+import { DEFAULT_SOCIAL_IMAGE, localizedAlternates, SITE_URL } from "@/lib/seo"
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
   const isEnglish = lang === "en"
 
   return {
-    title: isEnglish 
-      ? "FaiaCon - Construction & Renovations Corfu | Free Cost Calculator & Estimates"
-      : "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Υπολογιστής Κόστους Ανακαίνισης",
+    title: isEnglish
+      ? "Construction & Renovation Company in Corfu"
+      : "Κατασκευαστική Εταιρεία στην Κέρκυρα",
     description: isEnglish
-      ? "Professional construction and renovation company in Corfu. Free renovation cost calculator, house renovation, construction, pools. 35+ years local expertise. Get free estimates today."
-      : "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Δωρεάν υπολογιστής κόστους ανακαίνισης, κατασκευή σπιτιού, κατασκευή πισίνας, διατηρητέα κτίρια. 35+ χρόνια εμπειρίας.",
-    keywords: isEnglish
-      ? [
-          "renovation cost calculator Corfu",
-          "house construction Corfu",
-          "renovation estimate",
-          "pool construction Corfu",
-          "FaiaCon",
-        ]
-      : [
-          "υπολογιστής κόστους ανακαίνισης",
-          "εκτίμηση κόστους ανακαίνισης",
-          "κατασκευή σπιτιού Κέρκυρα",
-          "ανακαίνιση σπιτιού Κέρκυρα",
-          "κατασκευή πισίνας Κέρκυρα",
-          "ΦαιάCon",
-        ],
+      ? "Construction and renovation company in Corfu for homes, villas, hotels and pools. Local project management and free initial consultation."
+      : "Κατασκευές και ανακαινίσεις στην Κέρκυρα για σπίτια, βίλες, ξενοδοχεία και πισίνες. Τοπική εμπειρία από το 1990 και δωρεάν αρχική εκτίμηση.",
     openGraph: {
-      title: isEnglish 
-        ? "FaiaCon - Renovation Cost Calculator | Construction Corfu"
-        : "ΦαιάCon - Υπολογιστής Κόστους Ανακαίνισης | Κατασκευές Κέρκυρα",
+      title: isEnglish
+        ? "Faiacon | Construction & Renovations in Corfu"
+        : "ΦαιάCon | Κατασκευές & Ανακαινίσεις στην Κέρκυρα",
       description: isEnglish
-        ? "Calculate your renovation cost for free. House construction, renovations, pools in Corfu."
-        : "Υπολογίστε δωρεάν το κόστος ανακαίνισης. Κατασκευές, ανακαινίσεις, πισίνες στην Κέρκυρα.",
-      url: `https://faiacon.gr/${lang}`,
+        ? "Construction, renovation and property services across Corfu."
+        : "Κατασκευές, ανακαινίσεις και αξιοποίηση ακινήτων σε όλη την Κέρκυρα.",
+      url: `${SITE_URL}/${lang}`,
       type: "website",
       locale: isEnglish ? "en_US" : "el_GR",
+      images: [
+        {
+          ...DEFAULT_SOCIAL_IMAGE,
+          alt: isEnglish
+            ? "Stone villa project in Corfu by Faiacon"
+            : DEFAULT_SOCIAL_IMAGE.alt,
+        },
+      ],
     },
-    alternates: {
-      canonical: `https://faiacon.gr/${lang}`,
-      languages: {
-        "el-GR": "https://faiacon.gr/el",
-        "en-US": "https://faiacon.gr/en",
-      },
-    },
+    alternates: localizedAlternates(lang),
   }
 }
 

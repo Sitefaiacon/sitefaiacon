@@ -2,32 +2,30 @@ import SiteLayout from "../../components/site-layout"
 import PoolConstructionPage from "../../components/pool-construction-page"
 import type { Metadata } from "next"
 import { BreadcrumbSchema } from "../../components/structured-data"
+import { DEFAULT_SOCIAL_IMAGE, localizedAlternates, SITE_URL } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Κατασκευή Πισίνας Κέρκυρα | Πισίνες Μπετόν & Liner - ΦαιάCon",
-  description: "Κατασκευή πισίνας στην Κέρκυρα. Πισίνες μπετόν, liner, πολυεστερικές. Σύγχρονα συστήματα χωρίς χημικά. Υπολογισμός κόστους πισίνας. Δωρεάν εκτίμηση.",
-  keywords: [
-    "κατασκευή πισίνας Κέρκυρα",
-    "κόστος πισίνας",
-    "πισίνα μπετόν Κέρκυρα",
-    "πισίνα liner",
-    "πισίνα πολυεστερική",
-    "κατασκευή πισίνας τιμή",
-    "πισίνες Κέρκυρα",
-  ],
-  openGraph: {
-    title: "Κατασκευή Πισίνας Κέρκυρα - ΦαιάCon",
-    description: "Κατασκευή πολυτελών πισινών στην Κέρκυρα. Μπετόν, liner, πολυεστερικές. Σύγχρονα συστήματα.",
-    url: "https://faiacon.gr/el/pool-construction",
-    type: "website",
-  },
-  alternates: {
-    canonical: "https://faiacon.gr/el/pool-construction",
-    languages: {
-      "el-GR": "https://faiacon.gr/el/pool-construction",
-      "en-US": "https://faiacon.gr/en/pool-construction",
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const isEnglish = lang === "en"
+
+  const title = isEnglish ? "Swimming Pool Construction in Corfu" : "Κατασκευή Πισίνας στην Κέρκυρα"
+  const description = isEnglish
+    ? "Swimming pool design and construction in Corfu, including concrete and liner pools, filtration, salt electrolysis and equipment installation."
+    : "Μελέτη και κατασκευή πισίνας στην Κέρκυρα: πισίνες μπετόν και liner, φίλτρανση, ηλεκτρόλυση άλατος και πλήρης εγκατάσταση εξοπλισμού."
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | ΦαιάCon`,
+      description,
+      url: `${SITE_URL}/${lang}/pool-construction`,
+      type: "website",
+      locale: isEnglish ? "en_US" : "el_GR",
+      images: [DEFAULT_SOCIAL_IMAGE],
     },
-  },
+    alternates: localizedAlternates(lang, "pool-construction"),
+  }
 }
 
 export default async function PoolConstruction({ params }: { params: Promise<{ lang: string }> }) {
@@ -38,8 +36,8 @@ export default async function PoolConstruction({ params }: { params: Promise<{ l
     <SiteLayout>
       <BreadcrumbSchema 
         items={[
-          { name: isEnglish ? "Home" : "Αρχική", url: `https://faiacon.gr/${lang}` },
-          { name: isEnglish ? "Pool Construction" : "Κατασκευή Πισίνας", url: `https://faiacon.gr/${lang}/pool-construction` },
+          { name: isEnglish ? "Home" : "Αρχική", url: `${SITE_URL}/${lang}` },
+          { name: isEnglish ? "Pool Construction" : "Κατασκευή Πισίνας", url: `${SITE_URL}/${lang}/pool-construction` },
         ]} 
       />
       <PoolConstructionPage lang={lang} />

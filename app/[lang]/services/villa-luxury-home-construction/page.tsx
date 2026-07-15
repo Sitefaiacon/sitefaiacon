@@ -2,6 +2,7 @@ import SiteLayout from "../../../components/site-layout"
 import VillaLuxuryConstructionPage from "../../../components/villa-luxury-construction-page"
 import type { Metadata } from "next"
 import { BreadcrumbSchema } from "../../../components/structured-data"
+import { DEFAULT_SOCIAL_IMAGE, localizedAlternates, SITE_URL } from "@/lib/seo"
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
@@ -9,8 +10,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
   return {
     title: isEnglish
-      ? "Villa & Luxury Home Construction Corfu | Premium Building Services | Faiacon"
-      : "Κατασκευή Βιλών & Πολυτελών Κατοικιών | ΦαιάCon",
+      ? "Villa & Luxury Home Construction in Corfu"
+      : "Κατασκευή Βιλών & Πολυτελών Κατοικιών στην Κέρκυρα",
     description: isEnglish
       ? "Professional villa and luxury home construction in Corfu. Custom-designed residences with architectural excellence, premium materials, and flawless execution from concept to completion."
       : "Εξατομικευμένη κατασκευή πολυτελών βιλών στην Κέρκυρα. Αρχιτεκτονική αριστεία, πολυτελή υλικά και άψογη εκτέλεση από την ιδέα έως την παράδοση.",
@@ -38,17 +39,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       description: isEnglish
         ? "Professional villa construction with architectural excellence and premium finishes in Corfu."
         : "Εξατομικευμένη κατασκευή πολυτελών βιλών στην Κέρκυρα με αρχιτεκτονική αριστεία.",
-      url: `https://faiacon.gr/${lang}/services/villa-luxury-home-construction`,
+      url: `${SITE_URL}/${lang}/services/villa-luxury-home-construction`,
       type: "website",
       locale: isEnglish ? "en_US" : "el_GR",
+      images: [DEFAULT_SOCIAL_IMAGE],
     },
-    alternates: {
-      canonical: `https://faiacon.gr/${lang}/services/villa-luxury-home-construction`,
-      languages: {
-        "en-US": "https://faiacon.gr/en/services/villa-luxury-home-construction",
-        "el-GR": "https://faiacon.gr/el/services/villa-luxury-home-construction",
-      },
-    },
+    alternates: localizedAlternates(lang, "services/villa-luxury-home-construction"),
   }
 }
 
@@ -60,9 +56,9 @@ export default async function VillaLuxuryConstructionRoute({ params }: { params:
     <SiteLayout>
       <BreadcrumbSchema 
         items={[
-          { name: isEnglish ? "Home" : "Αρχική", url: `https://faiacon.gr/${lang}` },
-          { name: isEnglish ? "Services" : "Υπηρεσίες", url: `https://faiacon.gr/${lang}` },
-          { name: isEnglish ? "Villa & Luxury Home Construction" : "Κατασκευή Βιλών & Πολυτελών Κατοικιών", url: `https://faiacon.gr/${lang}/services/villa-luxury-home-construction` },
+          { name: isEnglish ? "Home" : "Αρχική", url: `${SITE_URL}/${lang}` },
+          { name: isEnglish ? "Services" : "Υπηρεσίες", url: `${SITE_URL}/${lang}` },
+          { name: isEnglish ? "Villa & Luxury Home Construction" : "Κατασκευή Βιλών & Πολυτελών Κατοικιών", url: `${SITE_URL}/${lang}/services/villa-luxury-home-construction` },
         ]} 
       />
       <VillaLuxuryConstructionPage />

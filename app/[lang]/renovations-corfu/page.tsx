@@ -2,9 +2,11 @@ import SiteLayout from "../../components/site-layout"
 import RenovationsCorfuPage from "../../components/renovations-corfu-page"
 import type { Metadata } from "next"
 import { BreadcrumbSchema, FAQSchema } from "../../components/structured-data"
+import { notFound } from "next/navigation"
+import { SITE_URL } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: "Renovations Corfu | Villa, Home & Property Renovations in Corfu | Faiacon",
+  title: "Villa, Home & Property Renovations in Corfu",
   description: "Faiacon provides villa, home and property renovations in Corfu, Greece. Renovation services for owners, investors and holiday rental properties with local expertise and professional project management.",
   keywords: [
     "renovations corfu",
@@ -19,20 +21,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Renovations Corfu | Villa, Home & Property Renovations | Faiacon",
     description: "Professional renovations for homes, villas and investment properties in Corfu with 35+ years of local expertise.",
-    url: "https://faiacon.gr/en/renovations-corfu",
+    url: `${SITE_URL}/en/renovations-corfu`,
     type: "website",
     locale: "en_US",
   },
   alternates: {
-    canonical: "https://faiacon.gr/en/renovations-corfu",
+    canonical: `${SITE_URL}/en/renovations-corfu`,
   },
 }
 
 export function generateStaticParams() {
-  return [
-    { lang: "en" },
-    { lang: "el" },
-  ]
+  return [{ lang: "en" }]
 }
 
 export default async function RenovationsCorfu({ params }: { params: Promise<{ lang: string }> }) {
@@ -40,7 +39,7 @@ export default async function RenovationsCorfu({ params }: { params: Promise<{ l
   
   // Only show for English
   if (lang !== "en") {
-    return null
+    notFound()
   }
 
   const faqItems = [
@@ -74,8 +73,8 @@ export default async function RenovationsCorfu({ params }: { params: Promise<{ l
     <SiteLayout>
       <BreadcrumbSchema 
         items={[
-          { name: "Home", url: "https://faiacon.gr/en" },
-          { name: "Renovations in Corfu", url: "https://faiacon.gr/en/renovations-corfu" },
+          { name: "Home", url: `${SITE_URL}/en` },
+          { name: "Renovations in Corfu", url: `${SITE_URL}/en/renovations-corfu` },
         ]} 
       />
       <FAQSchema items={faqItems} />

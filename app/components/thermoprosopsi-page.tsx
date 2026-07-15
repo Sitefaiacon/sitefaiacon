@@ -379,7 +379,7 @@ export default function ThermoprosopsiPage() {
                 title: isEnglish ? "Specialized Execution Teams" : "Εξειδικευμένα Συνεργεία Εκτέλεσης",
                 desc: isEnglish
                   ? "Our teams have dedicated experience in thermoprosopsi application, ensuring precise workmanship at every layer of the system."
-                  : "Τα συνεργεία μας διαθέτουν εξειδικευμένη εμπειρία στην ��φαρμογή θερμοπρόσοψης, διασφαλίζοντας ακριβή τεχνική σε κάθε στρώση του συστήματος.",
+                  : "Τα συνεργεία μας διαθέτουν εξειδικευμένη εμπειρία στην εφαρμογή θερμοπρόσοψης, με προσοχή σε κάθε στρώση του συστήματος.",
               },
               {
                 title: isEnglish ? "Attention to Detail" : "Προσοχή στη Λεπτομέρεια",

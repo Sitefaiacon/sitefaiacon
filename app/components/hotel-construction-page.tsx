@@ -87,7 +87,7 @@ export default function HotelConstructionRenovationPage() {
       stage: isEnglish ? "Phase 4: Completion & Handover" : "Φάση 4: Δοκιμές & Παράδοση",
       description: isEnglish
         ? "Final inspections, system testing, and snagging. Full documentation and handover to ensure you are satisfied with the completed work."
-        : "Ολοκληρωτικές δοκιμές συστημάτων, επαλήθευση ποιότητας, τελικές επιθεωρήσεις, κατάrtηση προσωπικού και ομαλή μετάβαση στη λειτουργία",
+        : "Ολοκληρωμένες δοκιμές συστημάτων, επαλήθευση ποιότητας, τελικές επιθεωρήσεις, εκπαίδευση προσωπικού και ομαλή μετάβαση στη λειτουργία",
     },
   ]
 
@@ -120,7 +120,7 @@ export default function HotelConstructionRenovationPage() {
       q: isEnglish ? "Can you work during our operating season?" : "Μπορείτε να εργαστείτε κατά τη διάρκεια της τουριστικής περιόδου;",
       a: isEnglish
         ? "We prefer to schedule major works during low season. However, we can manage phased renovations during operation with appropriate planning, safety measures, and noise control."
-        : "Ναι. Έχουμε εκτενή εμπειρία με σταδιακές ανακαινίσεις που ελαχιστοποιούν την διακοπή λειτουργίας. Τα έργα μπορούν να προγραμμ��τιστούν για ώρες χαμηλής δραστηριότητας με αυστηρά πρωτόκολλα θορύβου και ασφάλειας.",
+        : "Ναι. Έχουμε εκτενή εμπειρία σε σταδιακές ανακαινίσεις που περιορίζουν τη διακοπή λειτουργίας. Τα έργα μπορούν να προγραμματιστούν σε ώρες χαμηλής δραστηριότητας, με αυστηρά πρωτόκολλα θορύβου και ασφάλειας.",
     },
     {
       q: isEnglish ? "What energy efficiency improvements do you offer?" : "Τι περιλαμβάνεται στις αναβαθμίσεις ενεργειακής απόδοσης;",
@@ -226,7 +226,7 @@ export default function HotelConstructionRenovationPage() {
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               {isEnglish
                 ? "Comprehensive solutions tailored to the unique demands of hospitality properties"
-                : "Ολοκληρωμένες λύσεις προσαρμοσμένες στις ��οναδικές απαιτήσεις των ξενοδοχειακών ιδιοκτησιών"}
+                : "Ολοκληρωμένες λύσεις προσαρμοσμένες στις μοναδικές απαιτήσεις των ξενοδοχειακών ιδιοκτησιών"}
             </p>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-8">
@@ -375,7 +375,7 @@ export default function HotelConstructionRenovationPage() {
         <div className="container max-w-4xl mx-auto px-4 text-center">
           <AnimatedSection className="space-y-8">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              {isEnglish ? "Discuss Your Project" : "Έτοιμοι να Μετατρέψ��τε το Ξενοδοχείο σας;"}
+              {isEnglish ? "Discuss Your Project" : "Έτοιμοι να Αναβαθμίσετε το Ξενοδοχείο σας;"}
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
               {isEnglish

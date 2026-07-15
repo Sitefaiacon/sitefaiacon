@@ -26,7 +26,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
             className="text-center space-y-6"
           >
             <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "House Construction" : "Κατασκευή Σπιτιού"}
+              {isEnglish ? "House Construction in Corfu" : "Κατασκευή Σπιτιού στην Κέρκυρα"}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-lg">
               {isEnglish
@@ -235,7 +235,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 title: isEnglish ? "Energy Efficiency" : "Ενεργειακή Απόδοση",
                 description: isEnglish
                   ? "Modern design requires energy savings and sustainability. We incorporate energy-efficient solutions, from thermal insulation to renewable energy sources, to reduce your building's operating costs and contribute to a greener future."
-                  : "Ο σύγχρονος σχεδιασμός απαιτεί εξοικονόμηση ενέργειας και βιω����ιμότητα. Ενσωματώνουμε ενεργειακά αποδοτικές λύσεις, από θερμομόνωση έως ανανεώσιμες πηγές ενέργειας, για να μειώσουμε το κόστος λειτουργίας του κτιρίου σας και να συμβάλλουμε σε ένα πιο πράσινο μέλλον.",
+                  : "Ο σύγχρονος σχεδιασμός απαιτεί εξοικονόμηση ενέργειας και βιωσιμότητα. Ενσωματώνουμε ενεργειακά αποδοτικές λύσεις, από θερμομόνωση έως ανανεώσιμες πηγές ενέργειας, ώστε να μειώνεται το κόστος λειτουργίας του κτιρίου.",
                 href: "/services/energy-efficiency",
               },
             ].map((service, index) => (
@@ -319,7 +319,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 className="border-white text-white hover:bg-white hover:text-primary-dark"
                 asChild
               >
-                <Link href={`/${lang}/portfolio`}>
+                <Link href={`/${lang}/our-projects`}>
                   {isEnglish ? "View Our Portfolio" : "Δείτε το Χαρτοφυλάκιό μας"}
                 </Link>
               </Button>
@@ -345,7 +345,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
             <p className="text-lg text-gray-600 text-justify-content">
               {isEnglish
                 ? "Take a look at some of our most recent house construction projects we've completed"
-                : "Ρίξτε μια ματιά σε μερικά από τα πιο πρόσφατα έργα κατασκευής ��πιτιών που έχουμε ολοκληρώσει"}
+                : "Δείτε μερικά από τα πιο πρόσφατα έργα κατασκευής κατοικιών που έχουμε ολοκληρώσει"}
             </p>
           </motion.div>
 

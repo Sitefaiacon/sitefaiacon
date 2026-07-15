@@ -8,8 +8,9 @@ import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema, FAQSchema, ReviewSchema, OfferCatalogSchema } from "./components/structured-data"
+import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema } from "./components/structured-data"
 import GoogleAnalytics from "./components/google-analytics"
+import { DEFAULT_SOCIAL_IMAGE, SITE_URL } from "@/lib/seo"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -38,10 +39,10 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://faiacon.gr"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας | Ανακαίνιση & Κατασκευή Σπιτιού",
-    template: "%s | ΦαιάCon Κέρκυρα",
+    default: "ΦαιάCon | Κατασκευές & Ανακαινίσεις στην Κέρκυρα",
+    template: "%s | ΦαιάCon",
   },
   icons: {
     icon: [
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/manifest.json",
-  description: "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, εκτίμηση κόστους κατασκευής, ανακαίνιση σπιτιού, κατασκευή πισίνας. Δωρεάν εκτίμηση - 35+ χρόνια εμπειρίας.",
+  description: "Κατασκευές και ανακαινίσεις στην Κέρκυρα για κατοικίες, βίλες και ξενοδοχεία. Τοπική εμπειρία από το 1990 και δωρεάν αρχική εκτίμηση έργου.",
   keywords: [
     "υπολογισμός κόστους ανακαίνισης",
     "εκτίμηση κόστους ανακαίνισης",
@@ -76,7 +77,7 @@ export const metadata: Metadata = {
     "FaiaCon",
     "ΦαιάCon"
   ],
-  authors: [{ name: "ΦαιάCon", url: "https://faiacon.gr" }],
+  authors: [{ name: "ΦαιάCon", url: SITE_URL }],
   creator: "ΦαιάCon",
   publisher: "ΦαιάCon",
   formatDetection: {
@@ -84,35 +85,21 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  alternates: {
-    canonical: "https://faiacon.gr",
-    languages: {
-      "el-GR": "https://faiacon.gr/el",
-      "en-US": "https://faiacon.gr/en",
-    },
-  },
   openGraph: {
     type: "website",
     locale: "el_GR",
     alternateLocale: "en_US",
-    url: "https://faiacon.gr",
-    siteName: "ΦαιάCon - Τεχνική Κατασκευαστική",
-    title: "ΦαιάCon - Υπολογιστής Κόστους Ανακαίνισης | Κατασκευές Κέρκυρα",
-    description: "Υπολογίστε δωρεάν το κόστος ανακαίνισης του σπιτιού σας. Εκτίμηση κόστους κατασκευής, ανακαίνιση μπάνιου, κουζίνας, αλλαγή κουφωμάτων. 35+ χρόνια εμπειρίας στην Κέρκυρα.",
-    images: [
-      {
-        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20faiacon%20strogkilo-x2LY2BQxd4EjNhC3Hcd0hSihoCo5cs.jpg",
-        width: 1200,
-        height: 1200,
-        alt: "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας",
-      },
-    ],
+    url: `${SITE_URL}/el`,
+    siteName: "ΦαιάCon",
+    title: "ΦαιάCon | Κατασκευές & Ανακαινίσεις στην Κέρκυρα",
+    description: "Κατασκευές και ανακαινίσεις στην Κέρκυρα για κατοικίες, βίλες, ξενοδοχεία και πισίνες.",
+    images: [DEFAULT_SOCIAL_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ΦαιάCon - Υπολογιστής Κόστους Ανακαίνισης",
-    description: "Δωρεάν εκτίμηση κόστους ανακαίνισης σπιτιού. Κατασκευές & Ανακαινίσεις στην Κέρκυρα.",
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20faiacon%20strogkilo-x2LY2BQxd4EjNhC3Hcd0hSihoCo5cs.jpg"],
+    title: "ΦαιάCon | Κατασκευές & Ανακαινίσεις στην Κέρκυρα",
+    description: "Τοπική τεχνική εμπειρία στην Κέρκυρα από το 1990.",
+    images: [DEFAULT_SOCIAL_IMAGE.url],
   },
   robots: {
     index: true,
@@ -152,9 +139,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WebsiteSchema />
         <RenovationCalculatorSchema />
         <ServiceSchema />
-        <FAQSchema />
-        <ReviewSchema />
-        <OfferCatalogSchema />
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
         <GoogleAnalytics GA_MEASUREMENT_ID="G-Y7K0K222D9" />
