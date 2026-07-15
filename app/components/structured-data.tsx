@@ -1,15 +1,17 @@
+import { SITE_URL } from "@/lib/seo"
+
 export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://faiacon.gr/#organization",
+    "@id": `${SITE_URL}/#organization`,
     name: "ΦαιάCon - Τεχνική Κατασκευαστική",
     alternateName: "FaiaCon",
     description:
       "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Ανακαίνιση σπιτιών, βιλών, κατασκευή νέων κατοικιών, πισίνες, και λύσεις ανάπτυξης ακινήτων. 35+ χρόνια εμπειρίας. Εξυπηρετούμε ιδιοκτήτες ακινήτων, επενδυτές και ξένους ιδιοκτήτες.",
-    url: "https://faiacon.gr",
-    logo: "/logo-faiacon.png",
-    image: "/logo-faiacon.png",
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo-faiacon.png`,
+    image: `${SITE_URL}/images/petrinI-vila-kerkira.jpg`,
     telephone: "+30-6987797679",
     email: "faiacon@yahoo.com",
     foundingDate: "1990",
@@ -41,25 +43,12 @@ export function LocalBusinessSchema() {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         opens: "08:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "14:00",
+        closes: "20:00",
       },
     ],
     sameAs: ["https://www.facebook.com/faiacon", "https://www.instagram.com/faiacon"],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "127",
-      bestRating: "5",
-      worstRating: "1",
-    },
     knowsLanguage: ["Greek", "English"],
     serviceArea: {
       "@type": "GeoShape",
@@ -75,22 +64,14 @@ export function WebsiteSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://faiacon.gr/#website",
+    "@id": `${SITE_URL}/#website`,
     name: "ΦαιάCon",
-    url: "https://faiacon.gr",
+    url: SITE_URL,
     description: "Τεχνική Κατασκευαστική Εταιρεία Κέρκυρας - Ανακαίνιση, Κατασκευή, Πισίνες",
     publisher: {
-      "@id": "https://faiacon.gr/#organization",
+      "@id": `${SITE_URL}/#organization`,
     },
     inLanguage: ["el-GR", "en-US"],
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: "https://faiacon.gr/search?q={search_term_string}",
-      },
-      "query-input": "required name=search_term_string",
-    },
   }
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
@@ -100,12 +81,12 @@ export function RenovationCalculatorSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "@id": "https://faiacon.gr/#renovation-calculator",
+    "@id": `${SITE_URL}/el/cost-calculator#calculator`,
     name: "Υπολογιστής Κόστους Ανακαίνισης",
     alternateName: "Renovation Cost Calculator",
     description:
       "Δωρεάν online υπολογιστής για εκτίμηση κόστους ανακαίνισης σπιτιού. Υπολογίστε το κόστος για μπάνιο, κουζίνα, δάπεδα, ηλεκτρολογικά, βαφή και αλλαγή κουφωμάτων.",
-    url: "https://faiacon.gr/#renovation-calculator",
+    url: `${SITE_URL}/el/cost-calculator`,
     applicationCategory: "UtilityApplication",
     operatingSystem: "All",
     offers: {
@@ -115,7 +96,7 @@ export function RenovationCalculatorSchema() {
       availability: "https://schema.org/InStock",
     },
     provider: {
-      "@id": "https://faiacon.gr/#organization",
+      "@id": `${SITE_URL}/#organization`,
     },
     featureList: [
       "Υπολογισμός κόστους ανακαίνισης μπάνιου",
@@ -135,45 +116,45 @@ export function ServiceSchema({ isEnglish = false }: { isEnglish?: boolean }) {
   const services = [
     {
       "@type": "Service",
-      "@id": "https://faiacon.gr/#house-renovation",
+      "@id": `${SITE_URL}/el/house-renovation#service`,
       name: isEnglish ? "House Renovation" : "Ανακαίνιση Σπιτιού",
       description: isEnglish
         ? "Complete house renovation services including bathroom, kitchen, flooring, and electrical work"
         : "Ολοκληρωμένες υπηρεσίες ανακαίνισης σπιτιού συμπεριλαμβανομένων μπάνιου, κουζίνας, δαπέδων και ηλεκτρολογικών",
-      provider: { "@id": "https://faiacon.gr/#organization" },
+      provider: { "@id": `${SITE_URL}/#organization` },
       areaServed: { "@type": "Place", name: "Κέρκυρα, Ελλάδα" },
       serviceType: "Home Renovation",
     },
     {
       "@type": "Service",
-      "@id": "https://faiacon.gr/#house-construction",
+      "@id": `${SITE_URL}/el/house-construction#service`,
       name: isEnglish ? "House Construction" : "Κατασκευή Σπιτιού",
       description: isEnglish
         ? "New house construction with modern techniques and materials"
         : "Κατασκευή νέου σπιτιού με σύγχρονες τεχνικές και υλικά",
-      provider: { "@id": "https://faiacon.gr/#organization" },
+      provider: { "@id": `${SITE_URL}/#organization` },
       areaServed: { "@type": "Place", name: "Κέρκυρα, Ελλάδα" },
       serviceType: "House Construction",
     },
     {
       "@type": "Service",
-      "@id": "https://faiacon.gr/#pool-construction",
+      "@id": `${SITE_URL}/el/pool-construction#service`,
       name: isEnglish ? "Pool Construction" : "Κατασκευή Πισίνας",
       description: isEnglish
-        ? "Luxury pool construction with modern chemical-free systems"
-        : "Κατασκευή πολυτελών πισινών με σύγχρονα συστήματα χωρίς χημικά",
-      provider: { "@id": "https://faiacon.gr/#organization" },
+        ? "Pool construction with modern filtration and salt electrolysis options"
+        : "Κατασκευή πισινών με σύγχρονα συστήματα φίλτρανσης και επιλογές ηλεκτρόλυσης άλατος",
+      provider: { "@id": `${SITE_URL}/#organization` },
       areaServed: { "@type": "Place", name: "Κέρκυρα, Ελλάδα" },
       serviceType: "Pool Construction",
     },
     {
       "@type": "Service",
-      "@id": "https://faiacon.gr/#listed-buildings",
+      "@id": `${SITE_URL}/el/listed-houses#service`,
       name: isEnglish ? "Listed Buildings Restoration" : "Αναστήλωση Διατηρητέων Κτιρίων",
       description: isEnglish
         ? "Specialized restoration of listed and heritage buildings"
         : "Εξειδικευμένη αποκατάσταση διατηρητέων και ιστορικών κτιρίων",
-      provider: { "@id": "https://faiacon.gr/#organization" },
+      provider: { "@id": `${SITE_URL}/#organization` },
       areaServed: { "@type": "Place", name: "Κέρκυρα, Ελλάδα" },
       serviceType: "Building Restoration",
     },
@@ -187,8 +168,14 @@ export function ServiceSchema({ isEnglish = false }: { isEnglish?: boolean }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
-export function FAQSchema({ isEnglish = false }: { isEnglish?: boolean }) {
-  const faqs = isEnglish
+export function FAQSchema({
+  isEnglish = false,
+  items,
+}: {
+  isEnglish?: boolean
+  items?: { question: string; answer: string }[]
+}) {
+  const defaultFaqs = isEnglish
     ? [
         {
           question: "How much does a house renovation cost in Corfu?",
@@ -233,6 +220,9 @@ export function FAQSchema({ isEnglish = false }: { isEnglish?: boolean }) {
             "Εξυπηρετούμε όλες τις περιοχές της Κέρκυρας, συμπεριλαμβανομένης της Πόλης της Κέρκυρας, της Κασσιόπης, του Σιδαρίου, της Παλαιοκαστρίτσας και των γύρω χωριών.",
         },
       ]
+
+  // Prefer page-specific items when provided; otherwise fall back to the default list
+  const faqs = items && items.length > 0 ? items : defaultFaqs
 
   const schema = {
     "@context": "https://schema.org",
@@ -317,7 +307,7 @@ export function ReviewSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://faiacon.gr/#reviews",
+    "@id": `${SITE_URL}/#reviews`,
     name: "ΦαιάCon",
     review: reviews,
   }
@@ -329,7 +319,7 @@ export function PriceRangeSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "PriceSpecification",
-    "@id": "https://faiacon.gr/#pricing",
+    "@id": `${SITE_URL}/el/cost-calculator#pricing`,
     priceCurrency: "EUR",
     eligibleRegion: {
       "@type": "Place",
@@ -428,8 +418,8 @@ export function VideoSchema() {
     thumbnailUrl:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Faiacon.jpg-kaZkybyRpwiqgDDvjzsFwyihnKWtWi.jpeg",
     uploadDate: "2024-01-01",
-    contentUrl: "https://faiacon.gr/videos/calculator-tutorial",
-    embedUrl: "https://faiacon.gr/videos/calculator-tutorial/embed",
+    contentUrl: `${SITE_URL}/videos/calculator-tutorial`,
+    embedUrl: `${SITE_URL}/videos/calculator-tutorial/embed`,
   }
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />

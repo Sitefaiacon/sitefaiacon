@@ -252,28 +252,28 @@ export default function HomePage({ lang }: { lang: string }) {
                 href: isEnglish ? "/renovations-corfu" : "/house-renovation",
               },
               {
-                title: isEnglish ? "House Renovation" : "Αύξηση Αξίας Ακινήτου",
+                title: isEnglish ? "House Construction" : "Κατασκευή Σπιτιού",
                 description: isEnglish
-                  ? "Complete interior and exterior renovations that modernise your space and improve functionality."
-                  : "Ανακαίνιση που βελτιώνει πραγματικά το σπίτι σας: σύγχρονα υλικά, σωστή κατασκευή, χώρος που λειτουργεί καλύτερα.",
-                href: "/house-renovation",
+                  ? "New homes built with local project management, modern methods and materials selected for Corfu's conditions."
+                  : "Νέα κατοικία με σωστή οργάνωση έργου, σύγχρονες μεθόδους και υλικά κατάλληλα για τις συνθήκες της Κέρκυρας.",
+                href: "/house-construction",
               },
               {
-                title: isEnglish ? "Villa Construction" : "Έτοιμο για Airbnb & Ενοικίαση",
+                title: isEnglish ? "Villa Construction" : "Κατασκευή Βίλας",
                 description: isEnglish
                   ? "New villa builds and luxury residences designed and constructed to the highest standards."
-                  : "Ανακαίνιση που κάνει το ακίνητο σας ελκυστικό στους τουρίστες και αποδοτικό οικονομικά.",
+                  : "Κατασκευή βίλας και πολυτελούς κατοικίας με ολοκληρωμένο σχεδιασμό και διαχείριση του έργου.",
                 href: "/services/villa-luxury-home-construction",
               },
               {
-                title: isEnglish ? "Hotel Renovation" : "Ενεργειακή Αναβάθμιση & Άνεση",
+                title: isEnglish ? "Thermal Insulation" : "Θερμοπρόσοψη & Ενεργειακή Αναβάθμιση",
                 description: isEnglish
-                  ? "Hospitality property upgrades that enhance guest experience and operational efficiency."
-                  : "Σύγχρονα συστήματα κλιματισμού, μόνωση και αναβαθμίσεις που κάνουν τον χώρο πιο ενεργειακά αποδοτικό.",
-                href: "/services/hotel-construction-renovation",
+                  ? "External thermal insulation and energy upgrades for homes, villas and hospitality properties."
+                  : "Εξωτερική θερμομόνωση και ενεργειακή αναβάθμιση για κατοικίες, βίλες και τουριστικά ακίνητα.",
+                href: "/services/thermoprosopsi",
               },
               {
-                title: isEnglish ? "Pool Construction" : "Προσθέστε Πολυτέλεια & Αξία",
+                title: isEnglish ? "Pool Construction" : "Κατασκευή Πισίνας",
                 description: isEnglish
                   ? "Custom swimming pools designed and built to complement your property and lifestyle."
                   : "Πισίνες και πολυτελείς αναβαθμίσεις που ενισχύουν την αξία και την ελκυστικότητα του ακινήτου.",

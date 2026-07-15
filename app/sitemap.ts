@@ -1,163 +1,59 @@
-import { MetadataRoute } from "next"
+import type { MetadataRoute } from "next"
+import { SITE_URL } from "@/lib/seo"
+
+const localizedPaths = [
+  "",
+  "/cost-calculator",
+  "/house-renovation",
+  "/house-construction",
+  "/listed-houses",
+  "/pool-construction",
+  "/antiparoxes-kerkira",
+  "/our-projects",
+  "/appointment",
+  "/careers",
+  "/services/villa-luxury-home-construction",
+  "/services/hotel-construction-renovation",
+  "/services/thermoprosopsi",
+  "/services/vapsimata-elaiokromatismoi",
+]
+
+const englishOnlyPaths = [
+  "/renovations-corfu",
+  "/projects/house-renovation-corfu",
+  "/projects/villa-renovation-corfu",
+  "/projects/apartment-renovation-corfu",
+]
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://faiacon.gr"
-  const currentDate = new Date().toISOString()
+  const localizedRoutes: MetadataRoute.Sitemap = localizedPaths.flatMap((path) => {
+    const languages = {
+      "el-GR": `${SITE_URL}/el${path}`,
+      "en-US": `${SITE_URL}/en${path}`,
+      "x-default": `${SITE_URL}/el${path}`,
+    }
 
-  const routes = [
-    {
-      url: baseUrl,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 1,
-    },
-    // Greek pages
-    {
-      url: `${baseUrl}/el`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/el/cost-calculator`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.98,
-    },
-    {
-      url: `${baseUrl}/el/house-renovation`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/el/house-construction`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/el/listed-houses`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/el/pool-construction`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/el/antiparoxes-kerkira`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/el/our-projects`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/el/portfolio`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/el/appointment`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    // English pages
-    {
-      url: `${baseUrl}/en`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/en/cost-calculator`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.93,
-    },
-    {
-      url: `${baseUrl}/en/house-renovation`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/en/house-construction`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/en/listed-houses`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/pool-construction`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/antiparoxes-kerkira`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/en/our-projects`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.75,
-    },
-    {
-      url: `${baseUrl}/en/portfolio`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.75,
-    },
-    {
-      url: `${baseUrl}/en/renovations-corfu`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/en/projects/house-renovation-corfu`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/projects/villa-renovation-corfu`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/projects/apartment-renovation-corfu`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/appointment`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-  ]
+    return [
+      {
+        url: `${SITE_URL}/el${path}`,
+        changeFrequency: path === "" ? "weekly" : "monthly",
+        priority: path === "" ? 1 : 0.8,
+        alternates: { languages },
+      },
+      {
+        url: `${SITE_URL}/en${path}`,
+        changeFrequency: path === "" ? "weekly" : "monthly",
+        priority: path === "" ? 0.9 : 0.75,
+        alternates: { languages },
+      },
+    ]
+  })
 
-  return routes
+  const englishRoutes: MetadataRoute.Sitemap = englishOnlyPaths.map((path) => ({
+    url: `${SITE_URL}/en${path}`,
+    changeFrequency: "monthly",
+    priority: path === "/renovations-corfu" ? 0.85 : 0.7,
+  }))
+
+  return [...localizedRoutes, ...englishRoutes]
 }

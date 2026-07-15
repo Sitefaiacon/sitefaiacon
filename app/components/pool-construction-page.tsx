@@ -24,12 +24,12 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
             className="text-center space-y-6"
           >
             <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "Pool Construction with Full Equipment" : "Κατασκευή Πισίνων με Πλήρη Εξοπλισμό"}
+              {isEnglish ? "Swimming Pool Construction in Corfu" : "Κατασκευή Πισίνας στην Κέρκυρα"}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-lg">
               {isEnglish
-                ? "Professional Precision & Guaranteed Quality Result"
-                : "Επαγγελματική Ακρίβεια & Εγγύηση Ποιοτικού Αποτελέσματος"}
+                ? "Design, equipment installation and technical support"
+                : "Μελέτη, εγκατάσταση εξοπλισμού και τεχνική υποστήριξη"}
             </p>
           </motion.div>
         </div>
@@ -186,26 +186,26 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
             {[
               {
                 icon: Waves,
-                title: isEnglish ? "Chemical-Free Filtration & Cleaning" : "Φιλτράρισμα & Καθαρισμός χωρίς Χημικά",
+                title: isEnglish ? "Salt Electrolysis & Filtration" : "Ηλεκτρόλυση Άλατος & Φίλτρανση",
                 description: isEnglish
-                  ? "Our pools feature advanced electrolysis systems that ensure impeccable water quality without the need for chemical use. The electrolysis process produces natural disinfectant, keeping the water clean and safe without chemical residues. This means less maintenance, no unpleasant odors and skin or eye irritations, offering a superior swimming experience."
-                  : "Οι πισίνες μας διαθέτουν προηγμένα συστήματα ηλεκτρόλυσης που εξασφαλίζουν άψογη ποιότητα νερού χωρίς την ανάγκη χρήσης χημικών. Η διαδικασία της ηλεκτρόλυσης παράγει φυσικό απολυμαντικό, διατηρώντας το νερό καθαρό και ασφαλές χωρίς υπολείμματα χημικών ουσιών. Αυτό σημαίνει λιγότερη συντήρηση, χωρίς δυσάρεστες οσμές και ερεθισμούς στο δέρμα και τα μάτια, προσφέροντας μια ανώτερη εμπειρία κολύμβησης.",
+                  ? "Salt electrolysis produces a controlled level of disinfectant from the salt in the water. Combined with correctly sized filtration and regular water testing, it can simplify routine care and reduce manual chemical handling."
+                  : "Η ηλεκτρόλυση άλατος παράγει ελεγχόμενη ποσότητα απολυμαντικού από το αλάτι του νερού. Σε συνδυασμό με σωστά διαστασιολογημένη φίλτρανση και τακτικούς ελέγχους νερού, απλοποιεί τη συντήρηση και μειώνει τη χειροκίνητη διαχείριση χημικών.",
               },
               {
                 icon: ThermometerSun,
                 title: isEnglish
-                  ? "Economical & Efficient Heating & Air Conditioning"
-                  : "Θέρμανση & Κλιματισμός με Οικονομία & Απόδοση",
+                  ? "Efficient Pool Heating"
+                  : "Αποδοτική Θέρμανση Πισίνας",
                 description: isEnglish
-                  ? "Our innovative heating and air conditioning systems for pools maintain the water temperature constant and ideal, regardless of the season. We use energy-efficient solutions which, combined with the electrolysis method, contribute to reducing operational costs, as there is no need to purchase and use chemical disinfectants. Additionally, our technologies minimize heat loss, saving energy and money."
-                  : "Τα καινοτόμα συστήματα θέρμανσης και κλιματισμού των πισινών μας διατηρούν τη θερμοκρασία του νερού σταθερή και ιδανική, ανεξαρτήτως εποχής. Χρησιμοποιούμε ενεργειακά αποδοτικές λύσεις, οι οποίες σε συνδυασμό με τη μέθοδο ηλεκτρόλυσης συμβάλλουν στη μείωση του λειτουργικού κόστους, καθώς δεν απαιτείται αγορά και χρήση χημικών απολυμαντικών. Επιπλέον, οι τεχνολογίες μας ελαχιστοποιούν τις απώλειες θερμότητας, εξοικονομώντας ενέργεια και χρήματα.",
+                  ? "Where required, we design pool heating with efficient heat pumps, suitable controls and covers that limit heat loss. The final system is selected according to pool size, use and desired season."
+                  : "Όπου απαιτείται, σχεδιάζουμε τη θέρμανση της πισίνας με αποδοτικές αντλίες θερμότητας, κατάλληλους αυτοματισμούς και καλύμματα που περιορίζουν τις απώλειες. Η τελική λύση επιλέγεται ανάλογα με το μέγεθος, τη χρήση και την επιθυμητή περίοδο λειτουργίας.",
               },
               {
                 icon: Shield,
-                title: isEnglish ? "Safety Without Harmful Chemicals" : "Ασφάλεια χωρίς Επιβλαβείς Χημικές Ουσίες",
+                title: isEnglish ? "Safety Equipment & Controlled Dosing" : "Εξοπλισμός Ασφαλείας & Ελεγχόμενη Δοσολογία",
                 description: isEnglish
-                  ? "Our pools are equipped with advanced safety systems that protect both swimmers and the installation. The avoidance of chemical substances eliminates the risk of accidents from their improper use, reduces equipment corrosion, and ensures an absolutely safe environment for children and adults. Additionally, the use of anti-slip materials and safety covers provides maximum protection."
-                  : "Οι πισίνες μας είναι εξοπλισμένες με προηγμένα συστήματα ασφάλειας, που προστατεύουν τόσο τους λουόμενους όσο και την εγκατάσταση. Η αποφυγή χημικών ουσιών εξαλείφει τον κίνδυνο ατυχημάτων από ακατάλληλη χρήση τους, μειώνει τη διάβρωση του εξοπλισμού και εξασφαλίζει ένα απόλυτα ασφαλές περιβάλλον για παιδιά και ενήλικες. Επιπλέον, η χρήση αντιολισθητικών υλικών και καλυμμάτων ασφαλείας παρέχει μέγιστη προστασία.",
+                  ? "We can combine controlled dosing with anti-slip finishes, safety covers and suitable access solutions. Every pool still requires responsible supervision, regular testing and maintenance according to the installed equipment."
+                  : "Συνδυάζουμε την ελεγχόμενη δοσολογία με αντιολισθητικά τελειώματα, καλύμματα ασφαλείας και κατάλληλες λύσεις πρόσβασης. Κάθε πισίνα εξακολουθεί να χρειάζεται υπεύθυνη επίβλεψη, τακτικούς ελέγχους και συντήρηση σύμφωνα με τον εξοπλισμό της.",
               },
               {
                 icon: Timer,
@@ -247,27 +247,27 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {isEnglish ? "Chemical-Free Pools – The Ultimate Solution" : "Πισίνες Χωρίς Χημικά – Η Απόλυτη Λύση"}
+                {isEnglish ? "Salt Electrolysis for Simpler Water Care" : "Ηλεκτρόλυση Άλατος για Απλούστερη Συντήρηση"}
               </h2>
               <p className="text-lg text-white/80 mb-8 text-justify-content">
                 {isEnglish
-                  ? "No more chemicals! Our pools operate with electrolysis, providing crystal-clear water without dangerous chemical additives. This means:"
-                  : "Τέλος στα χημικά! Οι πισίνες μας λειτουργούν με ηλεκτρόλυση, παρέχοντας κρυστάλλινο νερό χωρίς επικίνδυνα χημικά πρόσθετα. Αυτό σημαίνει:"}
+                  ? "Salt electrolysis is not chemical-free: it generates disinfectant from salt in a controlled way. When correctly designed and maintained, the system offers:"
+                  : "Η ηλεκτρόλυση άλατος δεν σημαίνει πισίνα χωρίς χημική απολύμανση: παράγει απολυμαντικό από το αλάτι με ελεγχόμενο τρόπο. Με σωστό σχεδιασμό και συντήρηση προσφέρει:"}
               </p>
               <ul className="text-left space-y-4">
                 {[
                   isEnglish
-                    ? "Less maintenance – No need for constant addition and monitoring of chemicals."
-                    : "Λιγότερη συντήρηση – Δεν απαιτείται συνεχής προσθήκη και έλεγχος χημικών.",
+                    ? "Simpler routine care with automated disinfectant production."
+                    : "Απλούστερη καθημερινή φροντίδα με αυτοματοποιημένη παραγωγή απολυμαντικού.",
                   isEnglish
-                    ? "Absolute safety – No chemical irritations or unwanted reactions."
-                    : "Απόλυτη ασφάλεια – Χωρίς χημικούς ερεθισμούς ή ανεπιθύμητες αντιδράσεις.",
+                    ? "More stable water treatment when measurements remain within the correct range."
+                    : "Σταθερότερη επεξεργασία νερού όταν οι μετρήσεις διατηρούνται στα σωστά όρια.",
                   isEnglish
-                    ? "Cost reduction – No need to purchase chemical products."
-                    : "Μείωση κόστους – Χωρίς ανάγκη αγοράς χημικών προϊόντων.",
+                    ? "Reduced need for manual disinfectant additions, depending on water conditions and use."
+                    : "Μικρότερη ανάγκη χειροκίνητης προσθήκης απολυμαντικού, ανάλογα με το νερό και τη χρήση.",
                   isEnglish
-                    ? "Environmentally friendly – No burden on water reserves and the ecosystem."
-                    : "Φιλικότητα προς το περιβάλλον – Καμία επιβάρυνση στα αποθέματα νερού και στο οικοσύστημα.",
+                    ? "Compatibility with automated monitoring and remote system control."
+                    : "Δυνατότητα αυτοματοποιημένης παρακολούθησης και απομακρυσμένου ελέγχου του συστήματος.",
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
                     <CheckCircle2 className="w-6 h-6 text-accent mr-2 flex-shrink-0 mt-1" />

@@ -16,8 +16,9 @@ export function ProjectCard({ title, location, image, priority = false, hideText
           src={image}
           alt={title}
           fill
-          priority={true}
-          loading="eager"
+          // Only above-the-fold cards should be prioritized; the rest lazy-load (better LCP)
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
           onError={(e) => {

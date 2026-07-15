@@ -1,14 +1,15 @@
 import SiteLayout from "../../components/site-layout"
 import AntiparoxesPage from "../../components/antiparoxes-page"
 import type { Metadata } from "next"
+import { DEFAULT_SOCIAL_IMAGE, localizedAlternates, SITE_URL } from "@/lib/seo"
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
   const isEnglish = lang === "en"
 
   const title = isEnglish
-    ? "Land Development Corfu | Property Exploitation | Faiacon"
-    : "Αντιπαροχές στην Κέρκυρα | Αξιοποίηση Οικοπέδων & Ακινήτων | Faiacon"
+    ? "Land Development & Property Partnerships in Corfu"
+    : "Αντιπαροχές & Αξιοποίηση Ακινήτων στην Κέρκυρα"
 
   const description = isEnglish
     ? "We undertake land development partnerships and property exploitation in Corfu with professional technical support, design and construction."
@@ -36,18 +37,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     openGraph: {
       title,
       description,
-      url: `https://faiacon.gr/${lang}/antiparoxes-kerkira`,
+      url: `${SITE_URL}/${lang}/antiparoxes-kerkira`,
       type: "website",
       locale: isEnglish ? "en_US" : "el_GR",
       siteName: "Faiacon",
+      images: [DEFAULT_SOCIAL_IMAGE],
     },
-    alternates: {
-      canonical: `https://faiacon.gr/${lang}/antiparoxes-kerkira`,
-      languages: {
-        "el-GR": "https://faiacon.gr/el/antiparoxes-kerkira",
-        "en-US": "https://faiacon.gr/en/antiparoxes-kerkira",
-      },
-    },
+    alternates: localizedAlternates(lang, "antiparoxes-kerkira"),
     robots: {
       index: true,
       follow: true,

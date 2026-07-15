@@ -17,6 +17,7 @@ export function LanguageProvider({ children, initialLang }: { children: ReactNod
   useEffect(() => {
     const langFromPath = pathname.startsWith("/en") ? "en" : "el"
     setIsEnglish(langFromPath === "en")
+    document.documentElement.lang = langFromPath
   }, [pathname])
 
   return <LanguageContext.Provider value={{ isEnglish }}>{children}</LanguageContext.Provider>

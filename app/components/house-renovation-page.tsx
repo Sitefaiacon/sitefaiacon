@@ -38,12 +38,12 @@ export default function HouseRenovationPage({ lang }: { lang: string }) {
         <div className="relative z-10 container px-4">
           <AnimatedSection className="text-center space-y-6">
             <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight drop-shadow-lg">
-              {isEnglish ? "House Renovation" : "Ανακαίνιση Σπιτιού"}
+              {isEnglish ? "House Renovation in Corfu" : "Ανακαίνιση Σπιτιού στην Κέρκυρα"}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-lg">
               {isEnglish
-                ? "Comprehensive Construction & Renovation Services - Guaranteed Quality & Durability"
-                : "Ολοκληρωμένες Κατασκευαστικές & Ανακαινιστικές Υπηρεσίες – Εγγυημένη Ποιότητα & Αντοχή"}
+                ? "Complete interior, exterior and structural renovation services"
+                : "Ολοκληρωμένες εσωτερικές, εξωτερικές και δομικές εργασίες"}
             </p>
           </AnimatedSection>
         </div>
@@ -214,7 +214,7 @@ export default function HouseRenovationPage({ lang }: { lang: string }) {
                 title: isEnglish ? "Roof Repair" : "Επισκευή Στέγης",
                 description: isEnglish
                   ? "The roof is one of the most important elements of a building, as it protects the interior from weather conditions and wear. We undertake roof repair and maintenance, using top-quality waterproofing and insulation materials, ensuring long-term durability and safety."
-                  : "Η στέγη είναι από τα πιο σημαντικά στοιχεία ενός κτιρίου, καθώς προστατεύει το εσωτερικό από καιρικές συνθήκες και φθορές. Αναλαμβάνουμε την επισκευή και συντήρηση στεγών, χρησιμοποιώντας κορυφαία υλικά στεγανοποίησης και μόνωσης, εξασφαλίζοντας μ��κροχρόνια ανθεκτικότητα και ασφάλεια.",
+                  : "Η στέγη είναι από τα πιο σημαντικά στοιχεία ενός κτιρίου, καθώς προστατεύει το εσωτερικό από καιρικές συνθήκες και φθορές. Αναλαμβάνουμε επισκευή και συντήρηση στεγών με κατάλληλα υλικά στεγανοποίησης και μόνωσης, για μακροχρόνια ανθεκτικότητα και ασφάλεια.",
               },
               {
                 icon: Thermometer,
@@ -228,7 +228,7 @@ export default function HouseRenovationPage({ lang }: { lang: string }) {
                 title: isEnglish ? "Stone Building" : "Χτίσιμο Πέτρας",
                 description: isEnglish
                   ? "Natural stone cladding adds aesthetic value, durability, and unique character to your building. We undertake professional stone building on facades, walls, and other surfaces, using traditional and modern installation techniques."
-                  : "Η επένδυση με φυσική πέτρα προσθέτει αισθητική αξία, ανθεκτικότητα και μοναδικό χαρακτήρα στο κτίριό σας. Αναλαμβάνουμε επαγγελματικό χτίσιμο πέτρας σε προσόψ��ις, μάντρες και άλλες επιφάνειες, χρησιμοποιώντας παραδοσιακές και σύγχρονες τεχνικές τοποθέτησης.",
+                  : "Η επένδυση με φυσική πέτρα προσθέτει αισθητική αξία, ανθεκτικότητα και μοναδικό χαρακτήρα στο κτίριό σας. Αναλαμβάνουμε κατασκευές πέτρας σε προσόψεις, μάντρες και άλλες επιφάνειες, με παραδοσιακές και σύγχρονες τεχνικές τοποθέτησης.",
               },
               {
                 icon: Road,

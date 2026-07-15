@@ -2,35 +2,30 @@ import SiteLayout from "../../components/site-layout"
 import HouseRenovationPage from "../../components/house-renovation-page"
 import type { Metadata } from "next"
 import { HowToSchema, BreadcrumbSchema } from "../../components/structured-data"
+import { DEFAULT_SOCIAL_IMAGE, localizedAlternates, SITE_URL } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Ανακαίνιση Σπιτιού Κέρκυρα | Υπολογιστής Κόστους Ανακαίνισης",
-  description: "Ανακαίνιση σπιτιού στην Κέρκυρα. Δωρεάν υπολογιστής κόστους ανακαίνισης για μπάνιο, κουζίνα, δάπεδα, ηλεκτρολογικά. Εκτίμηση κόστους online. ΦαιάCon - 35+ χρόνια εμπειρίας.",
-  keywords: [
-    "ανακαίνιση σπιτιού Κέρκυρα",
-    "κόστος ανακαίνισης σπιτιού",
-    "υπολογισμός κόστους ανακαίνισης",
-    "ανακαίνιση μπάνιου Κέρκυρα",
-    "ανακαίνιση κουζίνας Κέρκυρα",
-    "θερμοπρόσοψη Κέρκυρα",
-    "αλλαγή δαπέδων κόστος",
-    "ηλεκτρολογικές εργασίες κόστος",
-    "βαφή σπιτιού Κέρκυρα",
-    "εκτίμηση ανακαίνισης online",
-  ],
-  openGraph: {
-    title: "Ανακαίνιση Σπιτιού Κέρκυρα | Υπολογιστής Κόστους - ΦαιάCon",
-    description: "Υπολογίστε δωρεάν το κόστος ανακαίνισης του σπιτιού σας. Μπάνιο, κουζίνα, δάπεδα, θερμοπρόσοψη. Άμεση εκτίμηση online.",
-    url: "https://faiacon.gr/el/house-renovation",
-    type: "website",
-  },
-  alternates: {
-    canonical: "https://faiacon.gr/el/house-renovation",
-    languages: {
-      "el-GR": "https://faiacon.gr/el/house-renovation",
-      "en-US": "https://faiacon.gr/en/house-renovation",
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const isEnglish = lang === "en"
+
+  const title = isEnglish ? "House Renovation in Corfu" : "Ανακαίνιση Σπιτιού στην Κέρκυρα"
+  const description = isEnglish
+    ? "Complete house and villa renovations in Corfu, including kitchens, bathrooms, roofs, insulation and exterior work. Request a free initial estimate."
+    : "Ολική ανακαίνιση σπιτιού και βίλας στην Κέρκυρα: κουζίνα, μπάνιο, στέγη, μόνωση και εξωτερικές εργασίες. Ζητήστε δωρεάν αρχική εκτίμηση."
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | ΦαιάCon`,
+      description,
+      url: `${SITE_URL}/${lang}/house-renovation`,
+      type: "website",
+      locale: isEnglish ? "en_US" : "el_GR",
+      images: [DEFAULT_SOCIAL_IMAGE],
     },
-  },
+    alternates: localizedAlternates(lang, "house-renovation"),
+  }
 }
 
 export default async function HouseRenovation({ params }: { params: Promise<{ lang: string }> }) {
@@ -42,8 +37,8 @@ export default async function HouseRenovation({ params }: { params: Promise<{ la
       <HowToSchema isEnglish={isEnglish} />
       <BreadcrumbSchema 
         items={[
-          { name: isEnglish ? "Home" : "Αρχική", url: `https://faiacon.gr/${lang}` },
-          { name: isEnglish ? "House Renovation" : "Ανακαίνιση Σπιτιού", url: `https://faiacon.gr/${lang}/house-renovation` },
+          { name: isEnglish ? "Home" : "Αρχική", url: `${SITE_URL}/${lang}` },
+          { name: isEnglish ? "House Renovation" : "Ανακαίνιση Σπιτιού", url: `${SITE_URL}/${lang}/house-renovation` },
         ]} 
       />
       <HouseRenovationPage lang={lang} />

@@ -12,7 +12,7 @@ User-agent: Bingbot
 Allow: /
 
 # Sitemap location
-Sitemap: https://faiacon.gr/sitemap.xml
+Sitemap: https://www.faiacon.gr/sitemap.xml
 
 # Crawl delay (optional - remove if not needed)
 # Crawl-delay: 1

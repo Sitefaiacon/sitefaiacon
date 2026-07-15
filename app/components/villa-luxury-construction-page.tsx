@@ -102,7 +102,7 @@ export default function VillaLuxuryConstructionPage() {
       q: isEnglish ? "How long does construction take?" : "Ποιο είναι το τυπικό χρονοδιάγραμμα κατασκευής;",
       a: isEnglish
         ? "A typical villa construction takes 12-24 months depending on size and complexity. This includes permits, foundation, structural work, systems installation, and finishing. We provide detailed timelines during planning."
-        : "Η ολοκληρωτική κατασκευή μιας πολυτελούς βίλας διαρκεί συνήθως 18-24 μήνες από την ολοκλήρωση του σχεδιασμού. Αυτό περιλαμ��άνει βελτιώσεις σχεδιασμού, άδειες, θεμέλιο, δομικές εργασίες και τελικά φινιρίσματα.",
+        : "Η κατασκευή μιας πολυτελούς βίλας διαρκεί συνήθως 18-24 μήνες από την ολοκλήρωση του σχεδιασμού. Το διάστημα περιλαμβάνει τις άδειες, τη θεμελίωση, τις δομικές εργασίες, τις εγκαταστάσεις και τα τελικά φινιρίσματα.",
     },
     {
       q: isEnglish ? "Can you build on difficult terrain?" : "Μπορείτε να κατασκευάσετε σε δύσκολα εδάφη;",
@@ -120,7 +120,7 @@ export default function VillaLuxuryConstructionPage() {
       q: isEnglish ? "Can I manage the project remotely?" : "Τι περιλαμβάνεται στη υπηρεσία σχεδιασμού σας;",
       a: isEnglish
         ? "Absolutely. Many of our clients are based abroad. We provide regular photo and video updates, detailed progress reports, and are available for video calls to discuss your project at any stage."
-        : "Ολοκληρωτικός αρχιτεκτονικός σχεδιασμός, έσωτερικές ιδέες, σχεδιασμός τοπίου, τρισδιάστατες απεικονίσεις, αρχιτεκτονικά σχέδια και πλήρεις κατασκευαστικές προδιαγραφές.",
+        : "Ολοκληρωμένος αρχιτεκτονικός σχεδιασμός, εσωτερική διαμόρφωση, σχεδιασμός τοπίου, τρισδιάστατες απεικονίσεις και πλήρεις κατασκευαστικές προδιαγραφές.",
     },
   ]
 
@@ -141,7 +141,7 @@ export default function VillaLuxuryConstructionPage() {
       type: isEnglish ? "International Buyers" : "Διεθνείς Αγοραστές Ιδιοκτησιών",
       description: isEnglish
         ? "Foreign property owners who need a reliable local contractor to manage their project"
-        : "Ξένοι επενδυτές που ζητούν αξιόπιστη κατασκευή βιλών σε κορυφαίες τοποθεσίες της Κέρκυρας",
+        : "Ιδιοκτήτες και επενδυτές που αναζητούν αξιόπιστη κατασκευή βίλας στην Κέρκυρα",
     },
   ]
 
@@ -214,7 +214,7 @@ export default function VillaLuxuryConstructionPage() {
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               {isEnglish
                 ? "Complete design and construction expertise for premium residences"
-                : "Ολοκληρωμένη εμπειρία ��χεδιασμού και κατασκευής για ακρ��βές κατοικίες"}
+                : "Ολοκληρωμένος σχεδιασμός και κατασκευή για κατοικίες υψηλών προδιαγραφών"}
             </p>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-8">
