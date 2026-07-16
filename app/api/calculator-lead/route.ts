@@ -24,8 +24,30 @@ async function getResend() {
 
 // ─── Validation ───────────────────────────────────────────────────────────────
 
-function isValidEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+const BLOCKED_EMAIL_DOMAINS = new Set([
+  'example.com',
+  'test.com',
+  'mailinator.com',
+  'tempmail.com',
+  '10minutemail.com',
+  'guerrillamail.com',
+])
+
+function isValidEmail(value: string): boolean {
+  const email = value.trim().toLowerCase()
+  const [local, domain] = email.split('@')
+  if (!local || !domain || email.split('@').length !== 2 || local.length > 64 || email.length > 160) return false
+  if (!/^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+$/i.test(local)) return false
+  if (!/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/i.test(domain)) return false
+  return !BLOCKED_EMAIL_DOMAINS.has(domain)
+}
+
+function normalizeInternationalPhone(value: string): string | null {
+  let phone = value.trim().replace(/[\s().-]/g, '')
+  if (phone.startsWith('00')) phone = `+${phone.slice(2)}`
+  if (/^\+\d{8,15}$/.test(phone)) return phone
+  if (/^(?:2\d{9}|69\d{8})$/.test(phone)) return `+30${phone}`
+  return null
 }
 
 // Escape user-supplied text before interpolating into notification email HTML
@@ -71,8 +93,11 @@ function validateLeadData(data: unknown): { valid: boolean; errors: string[] } {
   if (!data || typeof data !== 'object') return { valid: false, errors: ['Invalid request body'] }
   const lead = data as any
   if (!lead.contact?.name?.trim()) errors.push('Το όνομα είναι υποχρεωτικό')
-  if (!lead.contact?.email?.trim()) errors.push('Το email είναι υποχρεωτικό')
-  else if (!isValidEmail(lead.contact.email)) errors.push('Μη έγκυρη μορφή email')
+  const email = String(lead.contact?.email ?? '').trim().toLowerCase()
+  if (!email) errors.push('Το email είναι υποχρεωτικό')
+  else if (!isValidEmail(email)) errors.push('Χρησιμοποιήστε έγκυρο email που δεν είναι προσωρινό')
+  if (!lead.contact?.phone?.trim()) errors.push('Το τηλέφωνο είναι υποχρεωτικό')
+  else if (!normalizeInternationalPhone(String(lead.contact.phone))) errors.push('Χρησιμοποιήστε έγκυρο τηλέφωνο με κωδικό χώρας')
   if (!lead.selections) errors.push('Missing calculator selections')
   return { valid: errors.length === 0, errors }
 }
@@ -538,7 +563,7 @@ export async function POST(request: NextRequest) {
       contact: {
         name: clean(body.contact.name, 120),
         email: clean(body.contact.email, 160).toLowerCase(),
-        phone: clean(body.contact.phone, 40) || undefined,
+        phone: normalizeInternationalPhone(clean(body.contact.phone, 40)) || undefined,
       },
       selections: body.selections,
       breakdown,

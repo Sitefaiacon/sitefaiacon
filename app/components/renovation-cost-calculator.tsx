@@ -131,6 +131,70 @@ type ContactInfo = {
   phone: string
 }
 
+const BLOCKED_EMAIL_DOMAINS = new Set([
+  "example.com",
+  "test.com",
+  "mailinator.com",
+  "tempmail.com",
+  "10minutemail.com",
+  "guerrillamail.com",
+])
+
+const PHONE_COUNTRIES = [
+  { code: "GR", dialCode: "+30", label: "Ελλάδα (+30)", labelEn: "Greece (+30)", example: "694 123 4567" },
+  { code: "CY", dialCode: "+357", label: "Κύπρος (+357)", labelEn: "Cyprus (+357)", example: "96 123456" },
+  { code: "GB", dialCode: "+44", label: "Ηνωμένο Βασίλειο (+44)", labelEn: "United Kingdom (+44)", example: "20 1234 5678" },
+  { code: "IE", dialCode: "+353", label: "Ιρλανδία (+353)", labelEn: "Ireland (+353)", example: "85 123 4567" },
+  { code: "DE", dialCode: "+49", label: "Γερμανία (+49)", labelEn: "Germany (+49)", example: "151 23456789" },
+  { code: "AT", dialCode: "+43", label: "Αυστρία (+43)", labelEn: "Austria (+43)", example: "664 1234567" },
+  { code: "CH", dialCode: "+41", label: "Ελβετία (+41)", labelEn: "Switzerland (+41)", example: "79 123 45 67" },
+  { code: "IT", dialCode: "+39", label: "Ιταλία (+39)", labelEn: "Italy (+39)", example: "312 345 6789" },
+  { code: "FR", dialCode: "+33", label: "Γαλλία (+33)", labelEn: "France (+33)", example: "6 12 34 56 78" },
+  { code: "ES", dialCode: "+34", label: "Ισπανία (+34)", labelEn: "Spain (+34)", example: "612 345 678" },
+  { code: "PT", dialCode: "+351", label: "Πορτογαλία (+351)", labelEn: "Portugal (+351)", example: "912 345 678" },
+  { code: "NL", dialCode: "+31", label: "Ολλανδία (+31)", labelEn: "Netherlands (+31)", example: "6 12345678" },
+  { code: "BE", dialCode: "+32", label: "Βέλγιο (+32)", labelEn: "Belgium (+32)", example: "470 12 34 56" },
+  { code: "LU", dialCode: "+352", label: "Λουξεμβούργο (+352)", labelEn: "Luxembourg (+352)", example: "621 123 456" },
+  { code: "DK", dialCode: "+45", label: "Δανία (+45)", labelEn: "Denmark (+45)", example: "20 12 34 56" },
+  { code: "SE", dialCode: "+46", label: "Σουηδία (+46)", labelEn: "Sweden (+46)", example: "70 123 45 67" },
+  { code: "NO", dialCode: "+47", label: "Νορβηγία (+47)", labelEn: "Norway (+47)", example: "412 34 567" },
+  { code: "FI", dialCode: "+358", label: "Φινλανδία (+358)", labelEn: "Finland (+358)", example: "40 123 4567" },
+  { code: "PL", dialCode: "+48", label: "Πολωνία (+48)", labelEn: "Poland (+48)", example: "512 345 678" },
+  { code: "CZ", dialCode: "+420", label: "Τσεχία (+420)", labelEn: "Czechia (+420)", example: "601 123 456" },
+  { code: "RO", dialCode: "+40", label: "Ρουμανία (+40)", labelEn: "Romania (+40)", example: "721 234 567" },
+  { code: "BG", dialCode: "+359", label: "Βουλγαρία (+359)", labelEn: "Bulgaria (+359)", example: "87 123 4567" },
+  { code: "RS", dialCode: "+381", label: "Σερβία (+381)", labelEn: "Serbia (+381)", example: "64 1234567" },
+  { code: "MK", dialCode: "+389", label: "Βόρεια Μακεδονία (+389)", labelEn: "North Macedonia (+389)", example: "70 123 456" },
+  { code: "AL", dialCode: "+355", label: "Αλβανία (+355)", labelEn: "Albania (+355)", example: "69 123 4567" },
+  { code: "TR", dialCode: "+90", label: "Τουρκία (+90)", labelEn: "Türkiye (+90)", example: "532 123 4567" },
+  { code: "AE", dialCode: "+971", label: "ΗΑΕ (+971)", labelEn: "United Arab Emirates (+971)", example: "50 123 4567" },
+  { code: "SA", dialCode: "+966", label: "Σαουδική Αραβία (+966)", labelEn: "Saudi Arabia (+966)", example: "50 123 4567" },
+  { code: "AU", dialCode: "+61", label: "Αυστραλία (+61)", labelEn: "Australia (+61)", example: "412 345 678" },
+  { code: "NZ", dialCode: "+64", label: "Νέα Ζηλανδία (+64)", labelEn: "New Zealand (+64)", example: "21 123 4567" },
+  { code: "ZA", dialCode: "+27", label: "Νότια Αφρική (+27)", labelEn: "South Africa (+27)", example: "82 123 4567" },
+  { code: "US", dialCode: "+1", label: "ΗΠΑ / Καναδάς (+1)", labelEn: "USA / Canada (+1)", example: "202 555 0123" },
+]
+
+function isPlausibleEmail(value: string) {
+  const email = value.trim().toLowerCase()
+  const [local, domain] = email.split("@")
+  if (!local || !domain || email.split("@").length !== 2 || local.length > 64 || email.length > 160) return false
+  if (!/^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+$/i.test(local)) return false
+  if (!/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/i.test(domain)) return false
+  return !BLOCKED_EMAIL_DOMAINS.has(domain)
+}
+
+function normalizeInternationalPhone(value: string, countryDialCode = "+30"): string | null {
+  let phone = value.trim().replace(/[\s().-]/g, "")
+  if (phone.startsWith("00")) phone = `+${phone.slice(2)}`
+
+  if (/^\+\d{8,15}$/.test(phone)) return phone
+  if (!/^\d{6,14}$/.test(phone)) return null
+
+  const normalized = `${countryDialCode}${phone}`
+  return /^\+\d{8,15}$/.test(normalized) ? normalized : null
+}
+
 // ─── Isolated Contact Form ────────────────────────────────────────────────────
 // Defined at module level so React never remounts it due to parent re-renders.
 // Receives only stable props (refs + callbacks) so memo comparison always passes
@@ -145,13 +209,34 @@ const ContactForm = memo(function ContactForm({ isEnglish, onSubmit }: ContactFo
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
+  const [phoneCountry, setPhoneCountry] = useState("GR")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formError, setFormError] = useState("")
 
   const handleSubmit = async () => {
-    if (!name || !email || !phone) return
+    const normalizedEmail = email.trim().toLowerCase()
+    const selectedCountry = PHONE_COUNTRIES.find((country) => country.code === phoneCountry) ?? PHONE_COUNTRIES[0]
+    const normalizedPhone = normalizeInternationalPhone(phone, selectedCountry.dialCode)
+
+    if (!name.trim() || !normalizedEmail || !phone.trim()) {
+      setFormError(isEnglish ? "Please complete all contact fields." : "Συμπληρώστε όλα τα στοιχεία επικοινωνίας.")
+      return
+    }
+    if (!isPlausibleEmail(normalizedEmail)) {
+      setFormError(isEnglish ? "Please enter a valid, non-temporary email address." : "Εισάγετε ένα έγκυρο email που δεν είναι προσωρινό.")
+      return
+    }
+    if (!normalizedPhone) {
+      setFormError(isEnglish ? "Use a valid phone number for the selected country." : "Χρησιμοποιήστε έγκυρο τηλέφωνο για τη χώρα που επιλέξατε.")
+      return
+    }
+
+    setFormError("")
     setIsSubmitting(true)
     try {
-      await onSubmit({ name, email, phone })
+      await onSubmit({ name: name.trim(), email: normalizedEmail, phone: normalizedPhone })
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : (isEnglish ? "We could not submit your request. Please try again." : "Δεν ήταν δυνατή η υποβολή. Δοκιμάστε ξανά."))
     } finally {
       setIsSubmitting(false)
     }
@@ -191,7 +276,7 @@ const ContactForm = memo(function ContactForm({ isEnglish, onSubmit }: ContactFo
             type="email"
             autoComplete="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => { setEmail(e.target.value); setFormError("") }}
             placeholder={isEnglish ? "Enter your email" : "Εισάγετε το email σας"}
             className="w-full mt-1"
             inputMode="email"
@@ -202,17 +287,38 @@ const ContactForm = memo(function ContactForm({ isEnglish, onSubmit }: ContactFo
             <Phone className="w-4 h-4" />
             {isEnglish ? "Phone" : "Τηλέφωνο"}
           </Label>
-          <Input
-            id="calc-contact-phone"
-            type="tel"
-            autoComplete="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder={isEnglish ? "Enter your phone number" : "Εισάγετε το τηλέφωνό σας"}
-            className="w-full mt-1"
-            inputMode="tel"
-          />
+          <div className="mt-1 grid grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] gap-2">
+            <Select value={phoneCountry} onValueChange={(value) => { setPhoneCountry(value); setFormError("") }}>
+              <SelectTrigger
+                id="calc-contact-country"
+                aria-label={isEnglish ? "Phone country" : "Χώρα τηλεφώνου"}
+                className="border-slate-300 bg-white text-slate-900 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="z-[100] border-slate-300 bg-white text-slate-900 opacity-100 shadow-lg dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100">
+                {PHONE_COUNTRIES.map((country) => (
+                  <SelectItem key={country.code} value={country.code} className="focus:bg-slate-100 focus:text-slate-900 dark:focus:bg-slate-800 dark:focus:text-slate-100">
+                    {isEnglish ? country.labelEn : country.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Input
+              id="calc-contact-phone"
+              type="tel"
+              autoComplete="tel-national"
+              value={phone}
+              onChange={(e) => { setPhone(e.target.value); setFormError("") }}
+              placeholder={(PHONE_COUNTRIES.find((country) => country.code === phoneCountry) ?? PHONE_COUNTRIES[0]).example}
+              inputMode="tel"
+            />
+          </div>
+          <p className="mt-1 text-xs text-muted-foreground">
+            {isEnglish ? "Choose your country, then enter your local phone number. International format is also accepted." : "Επιλέξτε χώρα και γράψτε τον τοπικό αριθμό. Δεκτός και αριθμός σε διεθνή μορφή."}
+          </p>
         </div>
+        {formError && <p role="alert" className="text-sm text-destructive">{formError}</p>}
         <Button
           onClick={handleSubmit}
           disabled={isSubmitting || !name || !email || !phone}
@@ -529,13 +635,18 @@ export default function RenovationCostCalculator() {
     }
 
     try {
-      await fetch("/api/calculator-lead", {
+      const response = await fetch("/api/calculator-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestData),
       })
+      const result = await response.json().catch(() => null)
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.errors?.[0] || (isEnglish ? "We could not submit your request. Please try again." : "Δεν ήταν δυνατή η υποβολή. Δοκιμάστε ξανά."))
+      }
     } catch (error) {
       console.error("Error submitting contact:", error)
+      throw error
     }
 
     setContactSubmitted(true)
