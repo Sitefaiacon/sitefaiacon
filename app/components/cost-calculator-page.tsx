@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 const RenovationCostCalculator = dynamic(
-  () => import("./renovation-cost-calculator").then((mod) => mod.RenovationCostCalculator),
+  () => import("./renovation-cost-calculator"),
   {
     loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-xl" />,
     ssr: false,
