@@ -13,6 +13,126 @@ import { ProjectCard } from "./project-card"
 
 const projects = [
   {
+    id: 31,
+    title: "Στατική ενίσχυση και ανακαίνιση κατοικίας — εργοτάξιο",
+    titleEn: "Structural Renovation — Work in Progress",
+    description: "Εργασίες στατικής ενίσχυσης και αναδιαμόρφωσης κατοικίας",
+    descriptionEn: "Structural reinforcement and renovation works on a residence",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/structural-renovation-before-01.jpg",
+  },
+  {
+    id: 32,
+    title: "Στατική ενίσχυση και ανακαίνιση κατοικίας — φέρων οργανισμός",
+    titleEn: "Structural Renovation — Reinforcement Works",
+    description: "Ενίσχυση φέροντος οργανισμού και νέων ανοιγμάτων",
+    descriptionEn: "Structural reinforcement and new opening works",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/structural-renovation-before-02.jpg",
+  },
+  {
+    id: 33,
+    title: "Στατική ενίσχυση και ανακαίνιση κατοικίας — λεπτομέρεια εργασιών",
+    titleEn: "Structural Renovation — Detail Works",
+    description: "Εργασίες ενίσχυσης σε υφιστάμενη κατοικία",
+    descriptionEn: "Reinforcement works on an existing residence",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/structural-renovation-before-03.jpg",
+  },
+  {
+    id: 34,
+    title: "Στατική ενίσχυση και ανακαίνιση κατοικίας — κατασκευή",
+    titleEn: "Structural Renovation — Construction Stage",
+    description: "Εργασίες κατασκευής και ενίσχυσης",
+    descriptionEn: "Construction and reinforcement works",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/structural-renovation-before-04.jpg",
+  },
+  {
+    id: 35,
+    title: "Ανακαίνιση παραδοσιακής κατοικίας — ολοκλήρωση",
+    titleEn: "Traditional House Renovation — Completed",
+    description: "Ολοκληρωμένη εξωτερική ανακαίνιση κατοικίας",
+    descriptionEn: "Completed exterior renovation of a traditional residence",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/traditional-house-renovation-after-01.jpg",
+  },
+  {
+    id: 36,
+    title: "Ανακαίνιση παραδοσιακής κατοικίας — τελικό αποτέλεσμα",
+    titleEn: "Traditional House Renovation — Final Result",
+    description: "Τελική εικόνα ανακαινισμένης κατοικίας",
+    descriptionEn: "Final view of the renovated residence",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/traditional-house-renovation-after-02.jpg",
+  },
+  {
+    id: 37,
+    title: "Νέες κατοικίες — θεμελίωση",
+    titleEn: "New Residences — Foundation Works",
+    description: "Προετοιμασία και οπλισμός θεμελίωσης",
+    descriptionEn: "Foundation preparation and reinforcement",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/new-residences-foundations-01.jpg",
+  },
+  {
+    id: 38,
+    title: "Νέες κατοικίες — προετοιμασία οικοπέδου",
+    titleEn: "New Residences — Site Preparation",
+    description: "Διαμόρφωση χώρου και αρχικές εργασίες",
+    descriptionEn: "Site formation and initial construction works",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/new-residences-site-preparation-01.jpg",
+  },
+  {
+    id: 39,
+    title: "Νέες κατοικίες — εργασίες θεμελίωσης",
+    titleEn: "New Residences — Foundation Construction",
+    description: "Εξέλιξη κατασκευής θεμελίωσης",
+    descriptionEn: "Foundation construction in progress",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/new-residences-foundations-02.jpg",
+  },
+  {
+    id: 40,
+    title: "Νέες κατοικίες — αεροφωτογραφία εργοταξίου",
+    titleEn: "New Residences — Aerial Site View",
+    description: "Αεροφωτογραφία αρχικού σταδίου έργου",
+    descriptionEn: "Aerial view of the project at its initial stage",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/new-residences-aerial-site-01.jpg",
+  },
+  {
+    id: 41,
+    title: "Νέες κατοικίες — αεροφωτογραφία θεμελίωσης",
+    titleEn: "New Residences — Aerial Foundation View",
+    description: "Αεροφωτογραφία οπλισμού θεμελίωσης",
+    descriptionEn: "Aerial view of foundation reinforcement",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/new-residences-aerial-foundations-01.jpg",
+  },
+  {
+    id: 42,
+    title: "Νέες κατοικίες — αεροφωτογραφία εξέλιξης",
+    titleEn: "New Residences — Aerial Progress View",
+    description: "Αεροφωτογραφία εξέλιξης εργασιών θεμελίωσης",
+    descriptionEn: "Aerial view of foundation work progress",
+    location: "Κέρκυρα",
+    locationEn: "Corfu",
+    image: "/images/projects/2026/new-residences-aerial-foundations-02.jpg",
+  },
+  {
     id: 1,
     title: "Ανακαίνιση Σπιτιού Κέρκυρα",
     titleEn: "House Renovation Corfu",
@@ -359,14 +479,20 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                 <Dialog>
                   <DialogTrigger asChild>
                     <div onClick={() => setSelectedProject(project)}>
-                      <ProjectCard title="" location="" image={project.image} priority={index < 6} hideText={true} />
+                      <ProjectCard
+                        title={isEnglish ? project.titleEn : project.title}
+                        location=""
+                        image={project.image}
+                        priority={index < 6}
+                        hideText={true}
+                      />
                     </div>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
                     <div className="relative aspect-video w-full overflow-hidden">
                       <Image
                         src={project.image}
-                        alt=""
+                        alt={isEnglish ? project.titleEn : project.title}
                         fill
                         className="object-cover"
                         onError={(e) => {
