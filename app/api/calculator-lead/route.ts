@@ -573,7 +573,7 @@ export async function POST(request: NextRequest) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: LEADS_FROM_EMAIL,
+      from: `Faiacon <${LEADS_FROM_EMAIL}>`,
       to: LEADS_TO_EMAIL,
       subject: `[Faiacon] Νέα Αίτηση Προσφοράς — ${lead.contact.name}`,
       html: generateEmailHTML(lead, breakdown),

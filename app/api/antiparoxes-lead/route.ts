@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     // Send email via Resend
     const { data, error } = await resend.emails.send({
-      from: LEADS_FROM_EMAIL,
+      from: `Faiacon <${LEADS_FROM_EMAIL}>`,
       to: [LEADS_TO_EMAIL],
       replyTo: email,
       subject: `Νέα Αίτηση Αντιπαροχής από ${name}`,
