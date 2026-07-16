@@ -160,7 +160,7 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                   </Link>
                 </Button>
 
-                <Button className="w-full border border-primary text-primary hover:bg-primary/5 text-base font-semibold py-6" asChild>
+                <Button className="w-full bg-primary text-base font-semibold text-white hover:bg-primary/90 py-6" asChild>
                   <Link href="mailto:faiacon@yahoo.com">
                     {isEnglish ? "Send Email" : "Στείλτε Email"}
                   </Link>
