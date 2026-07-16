@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
     const cvFileName = sanitize(body.cvFileName)
     const comments = sanitize(body.comments)
 
-    const hrEmail = process.env.HR_RECEIVER_EMAIL || "faiacon@yahoo.com"
+    const hrEmail = process.env.HR_RECEIVER_EMAIL || "info@faiacon.gr"
 
     const hrHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; color: #222;">
@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
     const { error: hrError } = await resend.emails.send({
       from: "ΦαιάCon Careers <onboarding@resend.dev>",
       to: [hrEmail],
-      reply_to: email,
+      replyTo: email,
       subject: `Νέα Αίτηση Εργασίας - ${name}`,
       html: hrHtml,
     })
