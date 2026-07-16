@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'info@faiacon.gr'
+const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'faiacon@yahoo.com'
 const LEADS_FROM_EMAIL = process.env.LEADS_FROM_EMAIL || 'onboarding@resend.dev'
 
 export async function POST(req: NextRequest) {

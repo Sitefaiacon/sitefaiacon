@@ -64,7 +64,7 @@ export default async function AntiparoxesKerkiraPage({ params }: { params: Promi
       "@type": "LocalBusiness",
       "name": "Faiacon - Τεχνική Κατασκευαστική",
       "telephone": "+30 698 779 7679",
-      "email": "info@faiacon.gr",
+      "email": "faiacon@yahoo.com",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Κέρκυρα",
