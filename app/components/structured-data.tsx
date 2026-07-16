@@ -13,7 +13,7 @@ export function LocalBusinessSchema() {
     logo: `${SITE_URL}/logo-faiacon.png`,
     image: `${SITE_URL}/images/petrinI-vila-kerkira.jpg`,
     telephone: "+30-6987797679",
-    email: "info@faiacon.gr",
+    email: "faiacon@yahoo.com",
     foundingDate: "1990",
     priceRange: "€€€",
     currenciesAccepted: "EUR",

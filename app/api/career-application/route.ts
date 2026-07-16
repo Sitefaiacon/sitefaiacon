@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
     const cvFileName = sanitize(body.cvFileName)
     const comments = sanitize(body.comments)
 
-    const hrEmail = process.env.HR_RECEIVER_EMAIL || "info@faiacon.gr"
+    const hrEmail = process.env.HR_RECEIVER_EMAIL || "faiacon@yahoo.com"
 
     const hrHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; color: #222;">
