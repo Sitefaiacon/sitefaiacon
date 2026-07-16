@@ -2,14 +2,30 @@
 
 // Appointment booking page component
 import { useLanguage } from "../contexts/language-context"
+import { useState, useTransition, type FormEvent } from "react"
 import { motion } from "framer-motion"
 import { Calendar, Clock, MapPin, Phone, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArchitecturalBackground } from "./architectural-background"
+import { sendEmail } from "../actions/send-email"
 
 export default function AppointmentPage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
+  const [isPending, startTransition] = useTransition()
+  const [formMessage, setFormMessage] = useState<{ success: boolean; text: string } | null>(null)
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const form = event.currentTarget
+    setFormMessage(null)
+
+    startTransition(async () => {
+      const result = await sendEmail(new FormData(form))
+      setFormMessage({ success: result.success, text: result.message })
+      if (result.success) form.reset()
+    })
+  }
 
   return (
     <>
@@ -67,7 +83,7 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                     <div>
                       <h3 className="font-semibold text-gray-900">{isEnglish ? "Email" : "Email"}</h3>
                       <Button variant="link" className="p-0 h-auto text-primary" asChild>
-                        <Link href="mailto:faiacon@yahoo.com">faiacon@yahoo.com</Link>
+                        <Link href="mailto:info@faiacon.gr">info@faiacon.gr</Link>
                       </Button>
                     </div>
                   </div>
@@ -161,10 +177,91 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                 </Button>
 
                 <Button className="w-full bg-primary text-base font-semibold text-white hover:bg-primary/90 py-6" asChild>
-                  <Link href="mailto:faiacon@yahoo.com">
+                  <Link href="mailto:info@faiacon.gr">
                     {isEnglish ? "Send Email" : "Στείλτε Email"}
                   </Link>
                 </Button>
+
+                <form onSubmit={handleSubmit} className="mt-6 space-y-4 border-t border-gray-200 pt-6" noValidate>
+                  <p className="text-sm font-semibold text-gray-900">
+                    {isEnglish ? "Or send us your appointment request here" : "Ή στείλτε εδώ το αίτημα για το ραντεβού σας"}
+                  </p>
+
+                  <div>
+                    <label htmlFor="appointment-name" className="mb-1.5 block text-sm font-medium text-gray-900">
+                      {isEnglish ? "Full name" : "Ονοματεπώνυμο"}
+                    </label>
+                    <input
+                      id="appointment-name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      className="w-full rounded-md border border-gray-300 bg-white px-3 py-2.5 text-gray-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="appointment-email" className="mb-1.5 block text-sm font-medium text-gray-900">Email</label>
+                    <input
+                      id="appointment-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      placeholder={isEnglish ? "name@example.com" : "onoma@example.com"}
+                      className="w-full rounded-md border border-gray-300 bg-white px-3 py-2.5 text-gray-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="appointment-phone" className="mb-1.5 block text-sm font-medium text-gray-900">
+                      {isEnglish ? "Greek mobile phone" : "Κινητό τηλέφωνο"}
+                    </label>
+                    <input
+                      id="appointment-phone"
+                      name="phone"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      required
+                      pattern="69[0-9]{8}"
+                      title={isEnglish ? "Use a Greek mobile number, e.g. 6987797679" : "Γράψτε ελληνικό κινητό, π.χ. 6987797679"}
+                      placeholder="6987797679"
+                      className="w-full rounded-md border border-gray-300 bg-white px-3 py-2.5 text-gray-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="appointment-message" className="mb-1.5 block text-sm font-medium text-gray-900">
+                      {isEnglish ? "Project and preferred time" : "Έργο και ώρα που σας εξυπηρετεί"}
+                    </label>
+                    <textarea
+                      id="appointment-message"
+                      name="message"
+                      rows={4}
+                      required
+                      placeholder={isEnglish ? "Tell us about your project and when we can contact you." : "Γράψτε για το έργο σας και πότε μπορούμε να επικοινωνήσουμε."}
+                      className="w-full resize-y rounded-md border border-gray-300 bg-white px-3 py-2.5 text-gray-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
+
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="appointment-company">Company</label>
+                    <input id="appointment-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+                  </div>
+
+                  <Button type="submit" disabled={isPending} className="w-full bg-primary py-6 text-base font-semibold text-white hover:bg-primary/90">
+                    {isPending
+                      ? (isEnglish ? "Sending..." : "Αποστολή...")
+                      : (isEnglish ? "Request an appointment" : "Ζητήστε ραντεβού")}
+                  </Button>
+
+                  {formMessage && (
+                    <p role="status" className={`rounded-md px-3 py-2 text-sm ${formMessage.success ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"}`}>
+                      {formMessage.text}
+                    </p>
+                  )}
+                </form>
 
                 <p className="text-center text-xs text-gray-500 mt-4">
                   {isEnglish

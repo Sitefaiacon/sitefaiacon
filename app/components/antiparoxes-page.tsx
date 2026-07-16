@@ -647,9 +647,9 @@ export default function AntiparoxesPage({ lang }: { lang: string }) {
                         <Phone className="w-5 h-5" />
                         <span>+30 698 779 7679</span>
                       </a>
-                      <a href="mailto:faiacon@yahoo.com" className="flex items-center gap-3 text-white hover:text-white/80 transition-colors">
+                      <a href="mailto:info@faiacon.gr" className="flex items-center gap-3 text-white hover:text-white/80 transition-colors">
                         <Mail className="w-5 h-5" />
-                        <span>faiacon@yahoo.com</span>
+                        <span>info@faiacon.gr</span>
                       </a>
                     </div>
                     <div className="mt-6">
