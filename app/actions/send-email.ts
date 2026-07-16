@@ -2,6 +2,8 @@
 
 import { Resend } from "resend"
 
+const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || "info@faiacon.gr"
+
 // Escape user input before interpolating into email HTML
 function escapeHtml(input: unknown): string {
   return String(input ?? "")
@@ -57,7 +59,7 @@ export async function sendEmail(formData: FormData) {
     const resend = new Resend(process.env.RESEND_API_KEY)
     const { data, error } = await resend.emails.send({
       from: "Faiacon Website <onboarding@resend.dev>",
-      to: ["faiacon@yahoo.com"],
+      to: [LEADS_TO_EMAIL],
       replyTo: email,
       subject: `Νέα Φόρμα Επικοινωνίας από ${name || email}`,
       text: `

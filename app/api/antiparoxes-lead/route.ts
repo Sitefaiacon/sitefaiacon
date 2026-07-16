@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'faiacon@yahoo.com'
+const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'info@faiacon.gr'
 const LEADS_FROM_EMAIL = process.env.LEADS_FROM_EMAIL || 'onboarding@resend.dev'
 
 export async function POST(req: NextRequest) {
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     const { data, error } = await resend.emails.send({
       from: LEADS_FROM_EMAIL,
       to: [LEADS_TO_EMAIL],
-      reply_to: email,
+      replyTo: email,
       subject: `Νέα Αίτηση Αντιπαροχής από ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px;">
