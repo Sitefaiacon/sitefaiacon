@@ -4,7 +4,7 @@ import type { QuoteBreakdown, RenovationBreakdown, WindowsBreakdown } from '@/li
 import { fmtEur, fmtNum, QUALITY_LABELS_EL, MATERIAL_LABELS_EL, POOL_TYPE_LABELS_EL } from '@/lib/calculator/pricing'
 
 // Email configuration from environment variables with fallbacks
-const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'faiacon@yahoo.com'
+const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'info@faiacon.gr'
 const LEADS_FROM_EMAIL = process.env.LEADS_FROM_EMAIL || 'onboarding@resend.dev'
 
 // Dynamic import for Resend to avoid build-time initialization

@@ -67,7 +67,7 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                     <div>
                       <h3 className="font-semibold text-gray-900">{isEnglish ? "Email" : "Email"}</h3>
                       <Button variant="link" className="p-0 h-auto text-primary" asChild>
-                        <Link href="mailto:faiacon@yahoo.com">faiacon@yahoo.com</Link>
+                        <Link href="mailto:info@faiacon.gr">info@faiacon.gr</Link>
                       </Button>
                     </div>
                   </div>
@@ -161,7 +161,7 @@ export default function AppointmentPage({ lang }: { lang: string }) {
                 </Button>
 
                 <Button className="w-full border border-primary text-primary hover:bg-primary/5 text-base font-semibold py-6" asChild>
-                  <Link href="mailto:faiacon@yahoo.com">
+                  <Link href="mailto:info@faiacon.gr">
                     {isEnglish ? "Send Email" : "Στείλτε Email"}
                   </Link>
                 </Button>
