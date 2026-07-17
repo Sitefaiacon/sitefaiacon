@@ -79,7 +79,7 @@ export function SiteHeader() {
             ΦαιάCon
           </Link>
 
-          <nav className="hidden lg:flex items-center justify-center flex-1">
+          <nav className="hidden flex-1 items-center justify-center xl:flex">
             {navItems.map((item, index) => {
               if (item.type === "dropdown") {
                 return (
@@ -130,7 +130,7 @@ export function SiteHeader() {
             <LanguageSwitcher />
           </div>
 
-          <div className="lg:hidden ml-auto">
+          <div className="ml-auto xl:hidden">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-white" aria-label="Άνοιγμα μενού">
