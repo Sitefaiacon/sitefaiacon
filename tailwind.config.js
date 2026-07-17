@@ -46,8 +46,8 @@ module.exports = {
         "gradient-secondary": "linear-gradient(to bottom, #E8EDF7, #FFFFFF)",
       },
       fontFamily: {
-        sans: ["var(--font-outfit)"],
-        serif: ["var(--font-playfair)"],
+        sans: ["var(--font-sans)"],
+        serif: ["var(--font-serif)"],
         logo: ["var(--font-oswald)"],
       },
     },

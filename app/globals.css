@@ -34,12 +34,11 @@
 
   body {
     background-image: linear-gradient(to bottom, #E8EDF7, #FFFFFF);
-    @apply min-h-screen text-base;
+    @apply min-h-screen text-base font-sans text-left;
   }
 
-  /* Paragraphs and descriptive text with full justification */
-  p, .text-body, li, span:not(.text-center), div.description {
-    @apply text-justify;
+  p, .text-body, li, div.description {
+    @apply text-left;
   }
 
   /* Override for elements that need left alignment */
@@ -47,9 +46,12 @@
     @apply text-left;
   }
   
-  /* Headings and key statements stay centered */
-  h1, h2, h3, h4, h5, h6, button, .text-center, .hero-text, .section-title, .card-title {
-    text-align: center !important;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+
+  .text-center, .hero-text, .section-title, .card-title {
+    text-align: center;
   }
   
   /* Small text elements stay as-is */

@@ -504,6 +504,13 @@ function getProjectCategory(project: (typeof projects)[number]): Exclude<Project
   return "technical"
 }
 
+function isProjectInProgress(project: (typeof projects)[number]) {
+  const text = `${project.titleEn} ${project.descriptionEn}`.toLowerCase()
+  return ["progress", "foundation", "site preparation", "construction stage", "before", "works"].some((term) =>
+    text.includes(term),
+  )
+}
+
 export default function OurProjectsPage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>("all")
@@ -604,6 +611,15 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                         location={isEnglish ? project.locationEn : project.location}
                         image={project.image}
                         priority={index < 6}
+                        badge={
+                          isProjectInProgress(project)
+                            ? isEnglish
+                              ? "In progress"
+                              : "Σε εξέλιξη"
+                            : isEnglish
+                              ? "Completed"
+                              : "Ολοκληρωμένο"
+                        }
                       />
                     </button>
                   </DialogTrigger>
@@ -613,6 +629,7 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                         src={project.image}
                         alt={isEnglish ? project.titleEn : project.title}
                         fill
+                        quality={88}
                         sizes="(max-width: 900px) 100vw, 900px"
                         className="object-contain"
                         onError={(e) => {

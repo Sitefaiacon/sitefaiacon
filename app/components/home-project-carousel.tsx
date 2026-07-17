@@ -80,6 +80,7 @@ export function HomeProjectCarousel({ isEnglish, lang }: HomeProjectCarouselProp
               alt={isEnglish ? project.titleEn : project.title}
               fill
               priority={index === 0}
+              quality={85}
               sizes="(max-width: 768px) 100vw, 1200px"
               className={`object-cover transition-opacity duration-700 ${
                 index === activeIndex ? "opacity-100" : "pointer-events-none opacity-0"
