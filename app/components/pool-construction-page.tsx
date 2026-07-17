@@ -89,8 +89,8 @@ export default function PoolConstructionPage({ lang }: { lang: string }) {
                       </h4>
                       <p className="text-justify-content">
                         {isEnglish
-                          ? "We use materials of guaranteed durability (certified by European standards), offering long-term performance and safety."
-                          : "Χρησιμοποιούμε εγγυημένης ανθεκτικότητας υλικά (πιστοποιημένα με ευρωπαϊκά πρότυπα), που προσφέρουν μακροχρόνια απόδοση και ασφάλεια."}
+                          ? "We use durable materials certified to applicable European standards for long-term performance and safety."
+                          : "Χρησιμοποιούμε ανθεκτικά υλικά, πιστοποιημένα σύμφωνα με τα ισχύοντα ευρωπαϊκά πρότυπα, για μακροχρόνια απόδοση και ασφάλεια."}
                       </p>
                     </div>
                   </div>

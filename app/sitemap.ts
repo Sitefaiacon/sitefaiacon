@@ -10,6 +10,7 @@ const localizedPaths = [
   "/pool-construction",
   "/antiparoxes-kerkira",
   "/our-projects",
+  "/projects/kassiopi-villas",
   "/appointment",
   "/careers",
   "/services/villa-luxury-home-construction",

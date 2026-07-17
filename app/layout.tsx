@@ -8,7 +8,8 @@ import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema } from "./components/structured-data"
+import { LocalBusinessSchema, WebsiteSchema } from "./components/structured-data"
+import { HtmlLanguageSync } from "./components/html-language-sync"
 import GoogleAnalytics from "./components/google-analytics"
 import { DEFAULT_SOCIAL_IMAGE, SITE_URL } from "@/lib/seo"
 
@@ -139,10 +140,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="shortcut icon" href="/favicon.ico" />
         <LocalBusinessSchema />
         <WebsiteSchema />
-        <RenovationCalculatorSchema />
-        <ServiceSchema />
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
+        <HtmlLanguageSync />
         <GoogleAnalytics GA_MEASUREMENT_ID="G-Y7K0K222D9" />
         <WebVitals />
         {children}

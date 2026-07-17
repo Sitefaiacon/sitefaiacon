@@ -173,7 +173,7 @@ export default function HomePage({ lang }: { lang: string }) {
             <div className="prose prose-lg max-w-none mb-12">
               <p className="lead text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 text-justify">
                 {isEnglish
-                  ? "Faiacon delivers comprehensive construction and renovation services for property owners who expect quality workmanship and dependable project management. Whether you are renovating a family home, preparing a villa for rental, or upgrading a hospitality property, we bring the same level of care and professionalism to every project. Our team combines local expertise with modern construction standards to ensure lasting results."
+                  ? "Faiacon manages construction and renovation projects in Corfu for owners who live locally or abroad. From a family home or holiday villa to a rental or hospitality property, you have an English-speaking point of contact, clear coordination and documented progress from the first site visit to handover."
                   : "Η Faiacon αναλαμβάνει ανακαινίσεις και κατασκευές με σοβαρή προσέγγιση και επαγγελματική διαχείριση. Αν θέλετε να αναβαθμίσετε το σπίτι ή το ακίνητο σας, να το προετοιμάσετε για ενοικίαση, ή να βελτιώσετε την ενεργειακή του απόδοση, αναλαμβάνουμε το έργο με την ίδια προσοχή. Γνωρίζουμε καλά την Κέρκυρα, τα κλιματικά δεδομένα της, τις απαιτήσεις των κατασκευών εδώ, και είμαστε δυνατοί σε κάθε λεπτομέρεια."}
                 </p>
               </div>
@@ -186,10 +186,10 @@ export default function HomePage({ lang }: { lang: string }) {
                 <ul className="space-y-3 sm:space-y-4">
                   {(isEnglish
                     ? [
-                        "Clear communication and regular progress updates throughout your project",
-                        "Deep knowledge of Corfu's climate, regulations, and building requirements",
-                        "Transparent pricing with detailed cost breakdowns and no hidden fees",
-                        "Quality materials and certified workmanship with proper warranties",
+                        "One English-speaking contact for your project in Corfu",
+                        "Remote coordination with scheduled photo and video progress updates",
+                        "Coordination with local engineers and consultants for permits and approvals",
+                        "Itemised quotations, agreed changes and clear cost updates",
                       ]
                     : [
                         "Αναλαμβάνουμε έργα που ολοκληρώνουμε προσεκτικά, με τακτικές ενημερώσεις σε κάθε φάση",

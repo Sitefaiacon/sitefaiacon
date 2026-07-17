@@ -134,7 +134,7 @@ export default function HotelConstructionRenovationPage() {
         ? "We maintain quality control throughout with regular inspections, documented progress, and clear accountability. You receive regular updates and can visit the site at any time."
         : "Χρησιμοποιούμε πιστοποιημένους ανάδόχους, εφαρμόζουμε καθημερινούς ελέγχους ποιότητας, διατηρούμε τεκμηρίωση δοκιμών υλικών και διεξάγουμε τακτικές ενημερώσεις προς τον πελάτη. Κάθε φάση επαληθεύεται πριν τη μετάβαση στην επόμενη.",
     },
-  ]
+  ].filter((item, index, items) => items.findIndex((candidate) => candidate.q === item.q) === index)
 
   const idealClients = [
     {
@@ -332,8 +332,8 @@ export default function HotelConstructionRenovationPage() {
               {
                 title: isEnglish ? "Quality Standards" : "Διασφάλιση Ποιότητας",
                 desc: isEnglish
-                  ? "We use trusted contractors and maintain quality control throughout with proper documentation and warranties."
-                  : "Πιστοποιημένοι ανάδόχοι, καθημερινές επιθεωρήσεις, δοκιμές υλικών και ολοκληρωτικές εγγυήσεις",
+                  ? "We use trusted contractors and maintain quality control through documented inspections and material checks."
+                  : "Πιστοποιημένοι ανάδοχοι, τακτικές επιθεωρήσεις και τεκμηριωμένοι έλεγχοι υλικών",
               },
             ].map((item, i) => (
               <AnimatedSection

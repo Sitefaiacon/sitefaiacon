@@ -13,6 +13,7 @@ const featuredProjects = [
     location: "Κασσιόπη, Κέρκυρα",
     locationEn: "Kassiopi, Corfu",
     image: "/images/projects/2026/completed-villa-kassiopi-rectangular-pool-01.jpg",
+    href: "/projects/kassiopi-villas",
   },
   {
     title: "Ολοκληρωμένη βίλα με καμπύλη πισίνα",
@@ -20,6 +21,7 @@ const featuredProjects = [
     location: "Κασσιόπη, Κέρκυρα",
     locationEn: "Kassiopi, Corfu",
     image: "/images/projects/2026/completed-villa-kassiopi-curved-pool-01.jpg",
+    href: "/projects/kassiopi-villas",
   },
   {
     title: "Ολοκληρωμένη βίλα στις Σινιές",
@@ -28,6 +30,7 @@ const featuredProjects = [
     locationEn: "Sinies, Corfu",
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CF%84%CE%B5%CE%BB%CE%B5%CE%B9%CF%89%CE%BC%CE%AD%CE%BD%CE%B7%20%CE%B2%CE%AF%CE%BB%CE%B1%20%CF%83%CE%B9%CE%BD%CE%B9%CE%AD%CF%82.jpg-TBv1Q93tF49zLCpwPjQIhP4OS6eJLq.jpeg",
+    href: "/our-projects",
   },
   {
     title: "Πέτρινη βίλα στην Κέρκυρα",
@@ -36,6 +39,7 @@ const featuredProjects = [
     locationEn: "Corfu",
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CE%B2%CE%AF%CE%BB%CE%B1%20%CE%9A%CE%AD%CF%81%CE%BA%CF%85%CF%81%CE%B1%20%CE%BC%CE%B5%20%CF%80%CE%AD%CF%84%CF%81%CE%B1.jpg-V8vJzvqnbHFzOkARSboB0oYyKvYB9m.jpeg",
+    href: "/our-projects",
   },
 ]
 
@@ -137,7 +141,11 @@ export function HomeProjectCarousel({ isEnglish, lang }: HomeProjectCarouselProp
           ))}
         </div>
         <Button className="ml-2 bg-primary text-white hover:bg-primary/90" asChild>
-          <Link href={`/${lang}/our-projects`}>{isEnglish ? "View all projects" : "Δείτε όλα τα έργα"}</Link>
+          <Link href={`/${lang}${activeProject.href}`}>
+            {activeProject.href === "/projects/kassiopi-villas"
+              ? isEnglish ? "View this project" : "Δείτε το έργο"
+              : isEnglish ? "View all projects" : "Δείτε όλα τα έργα"}
+          </Link>
         </Button>
       </div>
     </div>
