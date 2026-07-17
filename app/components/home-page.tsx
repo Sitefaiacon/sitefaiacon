@@ -6,6 +6,7 @@ import { Building2, Home, PenToolIcon as Tool, PocketIcon as Pool, CheckCircle2,
 import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import { HomeProjectCarousel } from "./home-project-carousel"
 
 // Lazy load heavy components
 const RenovationCostCalculator = dynamic(() => import("./renovation-cost-calculator").then(mod => mod.RenovationCostCalculator), {
@@ -532,57 +533,7 @@ export default function HomePage({ lang }: { lang: string }) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Ανακαίνιση Σπιτιού",
-                titleEn: "House Renovation",
-                location: "Πόλη της Κέρκυρας",
-                locationEn: "Corfu Town",
-                image:
-                  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CE%B1%CE%BD%CE%B1%CE%BA%CE%B1%CE%AF%CE%BD%CE%B9%CF%83%CE%B7%20%CF%83%CF%80%CE%B9%CF%84%CE%B9%CE%BF%CF%8D.jpg-4JrG4DNSdtesYOXXiWMwkTb0QcGVvE.jpeg",
-              },
-              {
-                title: "Ολοκληρωμένη Βίλα στις Σινιές",
-                titleEn: "Completed Villa in Sinies",
-                location: "Σινιές, Κέρκυρα",
-                locationEn: "Sinies, Corfu",
-                image:
-                  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CF%84%CE%B5%CE%BB%CE%B5%CE%B9%CF%89%CE%BC%CE%AD%CE%BD%CE%B7%20%CE%B2%CE%AF%CE%BB%CE%B1%20%CF%83%CE%B9%CE%BD%CE%B9%CE%AD%CF%82.jpg-TBv1Q93tF49zLCpwPjQIhP4OS6eJLq.jpeg",
-              },
-              {
-                title: "Πέτρινη Βίλα στην Κέρκυρα",
-                titleEn: "Stone Villa in Corfu",
-                location: "Κέρκυρα",
-                locationEn: "Corfu",
-                image:
-                  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%CE%B2%CE%AF%CE%BB%CE%B1%20%CE%9A%CE%AD%CF%81%CE%BA%CF%85%CF%81%CE%B1%20%CE%BC%CE%B5%20%CF%80%CE%AD%CF%84%CF%81%CE%B1.jpg-V8vJzvqnbHFzOkARSboB0oYyKvYB9m.jpeg",
-              },
-            ].map((project) => (
-              <div key={project.title} className="group cursor-pointer">
-                <Link href={`/${lang}/our-projects`}>
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                    <Image
-                      src={project.image}
-                      alt={isEnglish ? project.titleEn : project.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-1">{isEnglish ? project.titleEn : project.title}</h3>
-                  <p className="text-sm text-gray-600">{isEnglish ? project.locationEn : project.location}</p>
-                </Link>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white" asChild>
-              <Link href={`/${lang}/our-projects`}>{isEnglish ? "View All Projects" : "Δείτε Όλα τα Έργα"}</Link>
-            </Button>
-          </div>
+          <HomeProjectCarousel isEnglish={isEnglish} lang={lang} />
         </div>
       </section>
 

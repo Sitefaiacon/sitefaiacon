@@ -29,8 +29,8 @@ export function ProjectCard({ title, location, image, priority = false, hideText
       </div>
       {!hideText && (
         <div className="p-4">
-          <h3 className="text-lg font-semibold line-clamp-2">{title}</h3>
-          <p className="text-sm text-gray-500 mt-1">{location}</p>
+          <h3 className="line-clamp-2 !text-left text-lg font-semibold">{title}</h3>
+          <p className="mt-1 !text-left text-sm text-gray-500">{location}</p>
         </div>
       )}
     </div>
