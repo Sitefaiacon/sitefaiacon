@@ -483,6 +483,9 @@ const projects = [
 
 type ProjectCategory = "all" | "villas" | "renovations" | "new-builds" | "technical"
 
+// Hidden from the public portfolio at the owner's request.
+const hiddenProjectIds = new Set([20, 46])
+
 const categoryLabels: Array<{ id: ProjectCategory; el: string; en: string }> = [
   { id: "all", el: "Όλα", en: "All" },
   { id: "villas", el: "Βίλες", en: "Villas" },
@@ -514,10 +517,11 @@ function isProjectInProgress(project: (typeof projects)[number]) {
 export default function OurProjectsPage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>("all")
+  const publishedProjects = projects.filter((project) => !hiddenProjectIds.has(project.id))
   const visibleProjects =
     selectedCategory === "all"
-      ? projects
-      : projects.filter((project) => getProjectCategory(project) === selectedCategory)
+      ? publishedProjects
+      : publishedProjects.filter((project) => getProjectCategory(project) === selectedCategory)
 
   return (
     <>
