@@ -9,11 +9,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
   return {
     title: isEnglish
-      ? "Book a Free Consultation in Corfu"
-      : "Κλείστε Δωρεάν Ραντεβού στην Κέρκυρα",
+      ? "Book a Property Survey & Written Quotation in Corfu"
+      : "Αυτοψία Ακινήτου και Γραπτή Προσφορά στην Κέρκυρα",
     description: isEnglish
-      ? "Book a free consultation with Faiacon to discuss your property renovation, construction, or improvement needs in Corfu. Local expertise, professional guidance."
-      : "Κλείστε ένα δωρεάν ραντεβού με την ΦαιάCon για να συζητήσετε τα έργα ανακαίνισης ή κατασκευής του ακινήτου σας στην Κέρκυρα.",
+      ? "Book and pay online for a Faiacon property survey and written construction or renovation quotation in Corfu."
+      : "Κλείστε και πληρώστε online αυτοψία ακινήτου και σύνταξη γραπτής προσφοράς από τη ΦαιάCon στην Κέρκυρα.",
     openGraph: {
       title: isEnglish
         ? "Book Your Free Consultation | Faiacon Corfu"

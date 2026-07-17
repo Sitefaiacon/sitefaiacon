@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArchitecturalBackground } from "./architectural-background"
 import { sendEmail } from "../actions/send-email"
+import { PaidSiteVisit } from "./paid-site-visit"
 
 export default function AppointmentPage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
@@ -44,12 +45,14 @@ export default function AppointmentPage({ lang }: { lang: string }) {
             </h1>
             <p className="text-xl text-white/90">
               {isEnglish
-                ? "Free consultation with our renovation experts. Discuss your project and get professional guidance."
-                : "Δωρεάν συμβουλευτική με τους ειδικούς μας. Συζητήστε το έργο σας και λάβετε επαγγελματικές συμβουλές."}
+                ? "Book an on-site property survey and receive a written quotation for the work discussed."
+                : "Κλείστε αυτοψία στο ακίνητό σας και λάβετε γραπτή οικονομική προσφορά για τις εργασίες που θα συζητηθούν."}
             </p>
           </motion.div>
         </div>
       </section>
+
+      <PaidSiteVisit isEnglish={isEnglish} />
 
       {/* Contact Information Section */}
       <section className="relative py-16 sm:py-24 bg-white border-t">
@@ -265,8 +268,8 @@ export default function AppointmentPage({ lang }: { lang: string }) {
 
                 <p className="text-center text-xs text-gray-500 mt-4">
                   {isEnglish
-                    ? "Free consultation. No obligation."
-                    : "Δωρεάν συμβουλευτική. Χωρίς δεσμεύσεις."}
+                    ? "You can also contact us by phone before booking."
+                    : "Μπορείτε επίσης να επικοινωνήσετε τηλεφωνικά πριν από την κράτηση."}
                 </p>
               </motion.div>
             </div>
@@ -285,10 +288,10 @@ export default function AppointmentPage({ lang }: { lang: string }) {
             <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
-                  title: isEnglish ? "Free Assessment" : "Δωρεάν Αξιολόγηση",
+                  title: isEnglish ? "On-site Assessment" : "Αυτοψία στον Χώρο",
                   desc: isEnglish
-                    ? "We assess your project needs at no cost and provide honest guidance."
-                    : "Αξιολογούμε τις ανάγκες σας δωρεάν και σας δίνουμε ειλικρινή συμβουλές.",
+                    ? "We record the property conditions and the work you want us to quote."
+                    : "Καταγράφουμε την κατάσταση του ακινήτου και τις εργασίες για τις οποίες ζητάτε προσφορά.",
                 },
                 {
                   title: isEnglish ? "Professional Advice" : "Επαγγελματική Συμβουλή",
