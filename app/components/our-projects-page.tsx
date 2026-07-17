@@ -13,6 +13,26 @@ import { ProjectCard } from "./project-card"
 
 const projects = [
   {
+    id: 48,
+    title: "Ολοκληρωμένη βίλα με ορθογώνια πισίνα",
+    titleEn: "Completed Villa with Rectangular Pool",
+    description: "Εναέρια άποψη ολοκληρωμένης βίλας με πισίνα και πέτρινους εξωτερικούς χώρους",
+    descriptionEn: "Aerial view of a completed villa with a swimming pool and stone-paved outdoor areas",
+    location: "Κασσιόπη, Κέρκυρα",
+    locationEn: "Kassiopi, Corfu",
+    image: "/images/projects/2026/completed-villa-kassiopi-rectangular-pool-01.jpg",
+  },
+  {
+    id: 49,
+    title: "Ολοκληρωμένη βίλα με καμπύλη πισίνα",
+    titleEn: "Completed Villa with Curved Pool",
+    description: "Εναέρια άποψη ολοκληρωμένης βίλας με καμπύλη πισίνα και διαμορφωμένο περιβάλλοντα χώρο",
+    descriptionEn: "Aerial view of a completed villa with a curved swimming pool and landscaped surroundings",
+    location: "Κασσιόπη, Κέρκυρα",
+    locationEn: "Kassiopi, Corfu",
+    image: "/images/projects/2026/completed-villa-kassiopi-curved-pool-01.jpg",
+  },
+  {
     id: 43,
     title: "Ανακαίνιση παραδοσιακής κατοικίας — εξωτερική όψη",
     titleEn: "Traditional Residence Renovation — Exterior",
