@@ -491,7 +491,6 @@ const categoryLabels: Array<{ id: ProjectCategory; el: string; en: string }> = [
   { id: "villas", el: "Βίλες", en: "Villas" },
   { id: "renovations", el: "Ανακαινίσεις", en: "Renovations" },
   { id: "new-builds", el: "Νέες κατασκευές", en: "New builds" },
-  { id: "technical", el: "Τεχνικές εργασίες", en: "Technical works" },
 ]
 
 function getProjectCategory(project: (typeof projects)[number]): Exclude<ProjectCategory, "all"> {
