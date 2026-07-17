@@ -187,10 +187,9 @@ export function RenovationCostCalculator() {
     if (numericArea > 125) totalCost *= 0.92
 
     if (poolType !== "none" && !isNaN(poolSize)) {
-      const poolCost =
-        (poolCostsPerM2[poolType as keyof typeof poolCostsPerM2][renovationQuality as keyof typeof qualityMultipliers] -
-          100) *
-        poolSize
+      const selectedPoolCosts = poolCostsPerM2[poolType as keyof typeof poolCostsPerM2]
+      const poolQuality = renovationQuality as keyof typeof selectedPoolCosts
+      const poolCost = (selectedPoolCosts[poolQuality] - 100) * poolSize
       totalCost += poolCost > 0 ? poolCost : 0
     }
 
@@ -431,8 +430,8 @@ export function RenovationCostCalculator() {
                 {
                   title: isEnglish ? "Top Quality Products & Materials" : "Προϊόντα & Υλικά Κορυφαίας Ποιότητας",
                   description: isEnglish
-                    ? "We use materials of guaranteed durability (certified by European standards), offering long-term performance and safety."
-                    : "Χρησιμοποιούμε εγγυημένης ανθεκτικότητας υλικά (πιστοποιημένα με ευρωπαϊκά πρότυπα), που προσφέρουν μακροχρόνια απόδοση και ασφάλεια.",
+                    ? "We use durable materials certified to applicable European standards for long-term performance and safety."
+                    : "Χρησιμοποιούμε ανθεκτικά υλικά, πιστοποιημένα σύμφωνα με τα ισχύοντα ευρωπαϊκά πρότυπα, για μακροχρόνια απόδοση και ασφάλεια.",
                 },
               ].map((item, index) => (
                 <div key={index} className="flex items-start gap-4">

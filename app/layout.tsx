@@ -1,6 +1,6 @@
 import "./globals.css"
-// Next.js Google Fonts with latin subset only
-import { Outfit, Playfair_Display, Oswald } from "next/font/google"
+// Bilingual type system with native Greek and Latin glyphs
+import { Noto_Sans, Noto_Serif, Oswald } from "next/font/google"
 import type React from "react"
 import { Toaster } from "sonner"
 import { CookieConsent } from "./components/cookie-consent"
@@ -8,20 +8,23 @@ import { WebVitals } from "./components/web-vitals"
 import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import { LocalBusinessSchema, WebsiteSchema, RenovationCalculatorSchema, ServiceSchema } from "./components/structured-data"
+import { LocalBusinessSchema, WebsiteSchema } from "./components/structured-data"
+import { HtmlLanguageSync } from "./components/html-language-sync"
 import GoogleAnalytics from "./components/google-analytics"
 import { DEFAULT_SOCIAL_IMAGE, SITE_URL } from "@/lib/seo"
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
+const notoSans = Noto_Sans({
+  subsets: ["greek", "latin"],
+  variable: "--font-sans",
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 })
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
+const notoSerif = Noto_Serif({
+  subsets: ["greek", "latin"],
+  variable: "--font-serif",
   display: "swap",
+  weight: ["500", "600", "700"],
 })
 
 const oswald = Oswald({
@@ -125,7 +128,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="el" className={`scroll-smooth ${outfit.variable} ${playfair.variable} ${oswald.variable}`}>
+    <html lang="el" className={`scroll-smooth ${notoSans.variable} ${notoSerif.variable} ${oswald.variable}`}>
       <head>
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
@@ -137,10 +140,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="shortcut icon" href="/favicon.ico" />
         <LocalBusinessSchema />
         <WebsiteSchema />
-        <RenovationCalculatorSchema />
-        <ServiceSchema />
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
+        <HtmlLanguageSync />
         <GoogleAnalytics GA_MEASUREMENT_ID="G-Y7K0K222D9" />
         <WebVitals />
         {children}

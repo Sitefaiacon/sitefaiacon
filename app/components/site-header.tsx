@@ -74,19 +74,19 @@ export function SiteHeader() {
         <div className="flex items-center h-16">
           <Link
             href={`/${lang}`}
-            className="font-serif text-2xl font-bold text-white tracking-tight hover:text-secondary transition-colors mr-8"
+            className="mr-6 whitespace-nowrap font-serif text-2xl font-bold tracking-tight text-white transition-colors hover:text-secondary xl:mr-8"
           >
             ΦαιάCon
           </Link>
 
-          <nav className="hidden lg:flex items-center justify-center flex-1">
+          <nav className="hidden flex-1 items-center justify-center xl:flex">
             {navItems.map((item, index) => {
               if (item.type === "dropdown") {
                 return (
                   <div key={index} className="relative" ref={dropdownRef}>
                     <button
                       onClick={() => setDropdownOpen(!dropdownOpen)}
-                      className={`px-4 py-2 text-sm font-normal text-white hover:text-secondary transition-colors flex items-center gap-1 ${
+                      className={`flex items-center gap-1 whitespace-nowrap px-3 py-2 text-xs font-normal text-white transition-colors hover:text-secondary xl:px-4 xl:text-sm ${
                         isServiceActive ? "text-secondary" : ""
                       }`}
                     >
@@ -116,7 +116,7 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={`/${lang}${item.href}`}
-                  className={`px-4 py-2 text-sm font-normal text-white hover:text-secondary transition-colors ${
+                  className={`whitespace-nowrap px-3 py-2 text-xs font-normal text-white transition-colors hover:text-secondary xl:px-4 xl:text-sm ${
                     pathname === `/${lang}${item.href}` ? "text-secondary" : ""
                   }`}
                 >
@@ -130,7 +130,7 @@ export function SiteHeader() {
             <LanguageSwitcher />
           </div>
 
-          <div className="lg:hidden ml-auto">
+          <div className="ml-auto xl:hidden">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-white" aria-label="Άνοιγμα μενού">

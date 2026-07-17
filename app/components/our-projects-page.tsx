@@ -10,6 +10,7 @@ import { SectionBackground } from "./section-background"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { ProjectCard } from "./project-card"
+import { MapPin } from "lucide-react"
 
 const projects = [
   {
@@ -480,9 +481,46 @@ const projects = [
   },
 ]
 
+type ProjectCategory = "all" | "villas" | "renovations" | "new-builds" | "technical"
+
+// Hidden from the public portfolio at the owner's request.
+const hiddenProjectIds = new Set([20, 46])
+
+const categoryLabels: Array<{ id: ProjectCategory; el: string; en: string }> = [
+  { id: "all", el: "Όλα", en: "All" },
+  { id: "villas", el: "Βίλες", en: "Villas" },
+  { id: "renovations", el: "Ανακαινίσεις", en: "Renovations" },
+  { id: "new-builds", el: "Νέες κατασκευές", en: "New builds" },
+]
+
+function getProjectCategory(project: (typeof projects)[number]): Exclude<ProjectCategory, "all"> {
+  const text = `${project.titleEn} ${project.descriptionEn}`.toLowerCase()
+
+  if (text.includes("villa")) return "villas"
+  if (text.includes("new residence") || text.includes("foundation") || text.includes("construction stage")) {
+    return "new-builds"
+  }
+  if (text.includes("renovation") || text.includes("restoration") || text.includes("completed interior")) {
+    return "renovations"
+  }
+  return "technical"
+}
+
+function isProjectInProgress(project: (typeof projects)[number]) {
+  const text = `${project.titleEn} ${project.descriptionEn}`.toLowerCase()
+  return ["progress", "foundation", "site preparation", "construction stage", "before", "works"].some((term) =>
+    text.includes(term),
+  )
+}
+
 export default function OurProjectsPage({ lang }: { lang: string }) {
   const { isEnglish } = useLanguage()
-  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>("all")
+  const publishedProjects = projects.filter((project) => !hiddenProjectIds.has(project.id))
+  const visibleProjects =
+    selectedCategory === "all"
+      ? publishedProjects
+      : publishedProjects.filter((project) => getProjectCategory(project) === selectedCategory)
 
   return (
     <>
@@ -532,13 +570,31 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
       <section className="relative py-16 md:py-24">
         <SectionBackground />
         <div className="container relative z-10 px-4">
+          <div className="mb-10 flex flex-wrap justify-center gap-2" aria-label={isEnglish ? "Project categories" : "Κατηγορίες έργων"}>
+            {categoryLabels.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                onClick={() => setSelectedCategory(category.id)}
+                className={`rounded-full border px-5 py-2.5 text-sm font-medium transition sm:text-base ${
+                  selectedCategory === category.id
+                    ? "border-primary bg-primary text-white shadow-md"
+                    : "border-slate-200 bg-white text-slate-700 hover:border-primary/40 hover:text-primary"
+                }`}
+                aria-pressed={selectedCategory === category.id}
+              >
+                {isEnglish ? category.en : category.el}
+              </button>
+            ))}
+          </div>
+
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
             style={{
               viewTransitionName: "projects-grid",
             }}
           >
-            {projects.map((project, index) => (
+            {visibleProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 10 }}
@@ -548,28 +604,59 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
               >
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div onClick={() => setSelectedProject(project)}>
+                    <button
+                      type="button"
+                      className="h-full w-full rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-4"
+                      aria-label={`${isEnglish ? "View project" : "Προβολή έργου"}: ${isEnglish ? project.titleEn : project.title}`}
+                    >
                       <ProjectCard
                         title={isEnglish ? project.titleEn : project.title}
-                        location=""
+                        location={isEnglish ? project.locationEn : project.location}
                         image={project.image}
                         priority={index < 6}
-                        hideText={true}
+                        badge={
+                          isProjectInProgress(project)
+                            ? isEnglish
+                              ? "In progress"
+                              : "Σε εξέλιξη"
+                            : isEnglish
+                              ? "Completed"
+                              : "Ολοκληρωμένο"
+                        }
                       />
-                    </div>
+                    </button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
-                    <div className="relative aspect-video w-full overflow-hidden">
+                  <DialogContent className="overflow-hidden p-0 sm:max-w-[900px]">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-950 sm:aspect-video">
                       <Image
                         src={project.image}
                         alt={isEnglish ? project.titleEn : project.title}
                         fill
-                        className="object-cover"
+                        quality={88}
+                        sizes="(max-width: 900px) 100vw, 900px"
+                        className="object-contain"
                         onError={(e) => {
                           const img = e.target as HTMLImageElement
                           img.style.display = "none"
                         }}
                       />
+                    </div>
+                    <div className="space-y-3 p-6 sm:p-8">
+                      <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                        <MapPin className="h-4 w-4" aria-hidden="true" />
+                        <span>{isEnglish ? project.locationEn : project.location}</span>
+                      </div>
+                      <h2 className="!text-left text-2xl font-semibold text-slate-900 sm:text-3xl">
+                        {isEnglish ? project.titleEn : project.title}
+                      </h2>
+                      <p className="!text-left leading-relaxed text-slate-600">
+                        {isEnglish ? project.descriptionEn : project.description}
+                      </p>
+                      <Button className="mt-2 bg-primary text-white hover:bg-primary/90" asChild>
+                        <a href={`/${lang}/appointment`}>
+                          {isEnglish ? "Discuss a similar project" : "Συζητήστε ένα παρόμοιο έργο"}
+                        </a>
+                      </Button>
                     </div>
                   </DialogContent>
                 </Dialog>

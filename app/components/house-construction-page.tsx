@@ -120,8 +120,8 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                         </span>{" "}
                         <p className="text-justify-content">
                           {isEnglish
-                            ? "Years of industry activity and dozens of successful projects are the best guarantee."
-                            : "Χρόνια δραστηριότητας στον κλάδο και δεκάδες επιτυχημένα έργα είναι η καλύτερη εγγύηση."}
+                            ? "Years of industry activity and dozens of completed projects demonstrate our experience."
+                            : "Τα χρόνια δραστηριότητας και τα ολοκληρωμένα έργα αποδεικνύουν την εμπειρία μας."}
                         </p>
                       </div>
                     </li>
@@ -218,8 +218,8 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                 icon: Tool,
                 title: isEnglish ? "Construction" : "Κατασκευή",
                 description: isEnglish
-                  ? "Quality in construction is the foundation for a durable and aesthetically pleasing result. We undertake high-standard constructions, with attention to detail and use of top-quality materials. Whether it's new construction or renovation, we guarantee an excellent result that combines functionality and aesthetics."
-                  : "Η ποιότητα στην κατασκευή είναι η βάση για ένα ανθεκτικό και καλαίσθητο αποτέλεσμα. Αναλαμβάνουμε κατασκευές υψηλών προδιαγραφών, με προσοχή στη λεπτομέρεια και χρήση κορυφαίων υλικών. Είτε πρόκειται για νέα οικοδόμηση είτε για ανακαίνιση, εγγυόμαστε άρτιο αποτέλεσμα που συνδυάζει λειτουργικότητα και αισθητική.",
+                  ? "Quality in construction is the foundation for a durable and aesthetically pleasing result. We undertake high-standard construction and renovation work with attention to detail, strong materials and careful quality control."
+                  : "Η ποιότητα στην κατασκευή είναι η βάση για ένα ανθεκτικό και καλαίσθητο αποτέλεσμα. Αναλαμβάνουμε κατασκευές και ανακαινίσεις υψηλών προδιαγραφών, με προσοχή στη λεπτομέρεια, ποιοτικά υλικά και προσεκτικό έλεγχο.",
                 href: "/services/construction",
               },
               {
