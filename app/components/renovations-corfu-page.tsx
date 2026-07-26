@@ -144,7 +144,7 @@ export default function RenovationsCorfuPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white/10"
+                className="border-[#25D366] bg-[#25D366] text-white shadow-lg hover:border-[#1ebe5d] hover:bg-[#1ebe5d] hover:text-white"
                 asChild
               >
                 <Link href={whatsappLink} target="_blank" rel="noopener noreferrer">
@@ -623,7 +623,7 @@ export default function RenovationsCorfuPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white/10"
+                className="border-[#25D366] bg-[#25D366] text-white shadow-lg hover:border-[#1ebe5d] hover:bg-[#1ebe5d] hover:text-white"
                 asChild
               >
                 <Link href={whatsappLink} target="_blank" rel="noopener noreferrer">
