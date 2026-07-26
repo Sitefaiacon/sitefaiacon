@@ -12,6 +12,7 @@ import {
   Users,
   MapPin,
   Clock,
+  MessageCircle,
 } from "lucide-react"
 import Link from "next/link"
 import { ArchitecturalBackground } from "./architectural-background"
@@ -111,6 +112,9 @@ export default function RenovationsCorfuPage() {
   const { isEnglish } = useLanguage()
   const [showQuoteModal, setShowQuoteModal] = useState(false)
   const lang = isEnglish ? "en" : "el"
+  const whatsappMessage =
+    "Hello, I'd like to discuss a renovation project in Corfu and receive an initial estimate."
+  const whatsappLink = `https://wa.me/306987797679?text=${encodeURIComponent(whatsappMessage)}`
 
   if (!isEnglish) return null
 
@@ -143,7 +147,10 @@ export default function RenovationsCorfuPage() {
                 className="border-white text-white hover:bg-white/10"
                 asChild
               >
-                <Link href="#contact">Talk to Our Team</Link>
+                <Link href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="w-5 h-5" />
+                  Chat on WhatsApp
+                </Link>
               </Button>
             </div>
           </AnimatedSection>
@@ -487,7 +494,7 @@ export default function RenovationsCorfuPage() {
                   Professional house and villa construction services with complete project management from permits to final delivery.
                 </p>
                 <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
-                  <Link href="/house-construction">
+                  <Link href={`/${lang}/house-construction`}>
                     Explore Construction →
                   </Link>
                 </Button>
@@ -500,7 +507,7 @@ export default function RenovationsCorfuPage() {
                   Upscale villa renovations, luxury finishes, and premium property improvements designed for discerning clients.
                 </p>
                 <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
-                  <Link href="/services/villa-luxury-home-construction">
+                  <Link href={`/${lang}/services/villa-luxury-home-construction`}>
                     Explore Villas →
                   </Link>
                 </Button>
@@ -513,24 +520,13 @@ export default function RenovationsCorfuPage() {
                   Custom swimming pools, outdoor entertaining spaces, and premium landscape improvements for property value.
                 </p>
                 <Button variant="ghost" className="text-primary p-0 h-auto font-semibold hover:text-primary/80" asChild>
-                  <Link href="/pool-construction">
+                  <Link href={`/${lang}/pool-construction`}>
                     Explore Pools →
                   </Link>
                 </Button>
               </AnimatedSection>
             </div>
 
-            <div className="mt-12 sm:mt-16 p-6 sm:p-8 bg-white rounded-lg border-2 border-primary/20">
-              <h3 className="text-lg font-semibold text-primary mb-4">Considering Property Development in Corfu?</h3>
-              <p className="text-gray-700 mb-6">
-                If you own land or have a property with development potential, we also offer professional partnerships for property exploitation and land development. Faiacon approaches each opportunity with technical expertise and transparent planning.
-              </p>
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary/5" asChild>
-                <Link href="/antiparoxes-kerkira">
-                  Learn About Property Development
-                </Link>
-              </Button>
-            </div>
           </div>
         </div>
       </section>
@@ -630,7 +626,10 @@ export default function RenovationsCorfuPage() {
                 className="border-white text-white hover:bg-white/10"
                 asChild
               >
-                <Link href="/#contact">Contact Our Team</Link>
+                <Link href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="w-5 h-5" />
+                  Chat on WhatsApp
+                </Link>
               </Button>
             </div>
           </AnimatedSection>
