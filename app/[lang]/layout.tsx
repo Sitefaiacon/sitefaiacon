@@ -137,8 +137,8 @@ export default async function RootLanguageLayout({
       <head>
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
-        <LocalBusinessSchema />
-        <WebsiteSchema />
+        <LocalBusinessSchema lang={lang} />
+        <WebsiteSchema lang={lang} />
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
         <LanguageProvider initialLang={lang}>

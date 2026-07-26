@@ -22,11 +22,18 @@ function row(label: string, value: string) {
 }
 
 export async function POST(req: NextRequest) {
+  let isEnglish = false
+
   try {
     const body = await req.json()
+    isEnglish = readString(body.lang, 2) === "en"
+    const message = (english: string, greek: string) => (isEnglish ? english : greek)
 
     if (readString(body.website, 120)) {
-      return NextResponse.json({ success: true, message: "Η αίτησή σας στάλθηκε." })
+      return NextResponse.json({
+        success: true,
+        message: message("Your application has been sent.", "Η αίτησή σας στάλθηκε."),
+      })
     }
 
     const name = readString(body.fullName, 120)
@@ -41,15 +48,33 @@ export async function POST(req: NextRequest) {
     const phoneDigits = phone.replace(/\D/g, "")
 
     if (!name || !phone || !email || !position || !privacyConsent) {
-      return NextResponse.json({ success: false, message: "Συμπληρώστε τα υποχρεωτικά πεδία." }, { status: 400 })
+      return NextResponse.json(
+        {
+          success: false,
+          message: message("Complete all required fields.", "Συμπληρώστε τα υποχρεωτικά πεδία."),
+        },
+        { status: 400 },
+      )
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ success: false, message: "Γράψτε ένα έγκυρο email." }, { status: 400 })
+      return NextResponse.json(
+        {
+          success: false,
+          message: message("Enter a valid email address.", "Γράψτε ένα έγκυρο email."),
+        },
+        { status: 400 },
+      )
     }
 
     if (phoneDigits.length < 7 || phoneDigits.length > 15) {
-      return NextResponse.json({ success: false, message: "Γράψτε ένα έγκυρο τηλέφωνο επικοινωνίας." }, { status: 400 })
+      return NextResponse.json(
+        {
+          success: false,
+          message: message("Enter a valid contact phone number.", "Γράψτε ένα έγκυρο τηλέφωνο επικοινωνίας."),
+        },
+        { status: 400 },
+      )
     }
 
     const details = [
@@ -76,7 +101,21 @@ export async function POST(req: NextRequest) {
       </div>
     `
 
-    const confirmHtml = `
+    const confirmHtml = isEnglish
+      ? `
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1f2937;">
+        <div style="background:#1e3771;color:#fff;padding:24px 28px;border-radius:10px 10px 0 0;">
+          <h1 style="margin:0;font-size:22px;">Faiacon — Application confirmation</h1>
+        </div>
+        <div style="padding:24px 28px;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 10px 10px;line-height:1.6;">
+          <p>Dear <strong>${escapeHtml(name)}</strong>,</p>
+          <p>We have received your application for <strong>${escapeHtml(position)}</strong>. Thank you for your interest in joining our team.</p>
+          <p>We will review your application and contact you if a suitable opportunity is available.</p>
+          <p style="margin-top:24px;">Kind regards,<br/><strong>The Faiacon team</strong><br/>Corfu | <a href="https://faiacon.gr" style="color:#1e3771;">faiacon.gr</a></p>
+        </div>
+      </div>
+    `
+      : `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1f2937;">
         <div style="background:#1e3771;color:#fff;padding:24px 28px;border-radius:10px 10px 0 0;">
           <h1 style="margin:0;font-size:22px;">Φαιάcon — Επιβεβαίωση αίτησης</h1>
@@ -105,9 +144,9 @@ export async function POST(req: NextRequest) {
     }
 
     const { error: confirmationError } = await resend.emails.send({
-      from: `Φαιάcon <${LEADS_FROM_EMAIL}>`,
+      from: `Faiacon <${LEADS_FROM_EMAIL}>`,
       to: [email],
-      subject: "Λάβαμε την αίτησή σας — Φαιάcon",
+      subject: isEnglish ? "We received your application — Faiacon" : "Λάβαμε την αίτησή σας — ΦαιάCon",
       html: confirmHtml,
     })
 
@@ -117,12 +156,20 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: "Η αίτησή σας στάλθηκε. Θα επικοινωνήσουμε μαζί σας, εφόσον υπάρχει σχετική ανάγκη.",
+      message: message(
+        "Your application has been sent. We will contact you if a suitable opportunity is available.",
+        "Η αίτησή σας στάλθηκε. Θα επικοινωνήσουμε μαζί σας, εφόσον υπάρχει σχετική ανάγκη.",
+      ),
     })
   } catch (error) {
     console.error("Career application error:", error)
     return NextResponse.json(
-      { success: false, message: "Η αίτηση δεν στάλθηκε. Παρακαλούμε δοκιμάστε ξανά." },
+      {
+        success: false,
+        message: isEnglish
+          ? "Your application could not be sent. Please try again."
+          : "Η αίτηση δεν στάλθηκε. Παρακαλούμε δοκιμάστε ξανά.",
+      },
       { status: 500 },
     )
   }

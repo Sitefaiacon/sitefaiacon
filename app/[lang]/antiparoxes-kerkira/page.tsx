@@ -53,34 +53,39 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function AntiparoxesKerkiraPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
+  const isEnglish = lang === "en"
   
   // JSON-LD structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Αντιπαροχές στην Κέρκυρα",
-    "description": "Αναλαμβάνουμε αντιπαροχές στην Κέρκυρα και συνεργασίες αξιοποίησης οικοπέδων και ακινήτων με επαγγελματική τεχνική υποστήριξη, σχεδιασμό και κατασκευή.",
+    "name": isEnglish ? "Property Development Partnerships in Corfu" : "Αντιπαροχές στην Κέρκυρα",
+    "description": isEnglish
+      ? "Property development partnerships in Corfu with professional technical support, planning and construction."
+      : "Αναλαμβάνουμε αντιπαροχές στην Κέρκυρα και συνεργασίες αξιοποίησης οικοπέδων και ακινήτων με επαγγελματική τεχνική υποστήριξη, σχεδιασμό και κατασκευή.",
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Faiacon - Τεχνική Κατασκευαστική",
+      "name": isEnglish ? "Faiacon - Construction Company" : "Faiacon - Τεχνική Κατασκευαστική",
       "telephone": "+30 698 779 7679",
       "email": "info@faiacon.gr",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Κέρκυρα",
-        "addressRegion": "Ποταμός",
+        "addressLocality": isEnglish ? "Corfu" : "Κέρκυρα",
+        "addressRegion": isEnglish ? "Potamos" : "Ποταμός",
         "postalCode": "491 00",
         "addressCountry": "GR"
       },
       "areaServed": {
         "@type": "Place",
-        "name": "Κέρκυρα, Ελλάδα"
+        "name": isEnglish ? "Corfu, Greece" : "Κέρκυρα, Ελλάδα"
       }
     },
-    "serviceType": ["Αντιπαροχές", "Αξιοποίηση Οικοπέδων", "Αξιοποίηση Ακινήτων", "Κατασκευή", "Ανακαίνιση"],
+    "serviceType": isEnglish
+      ? ["Property Development Partnerships", "Land Development", "Property Development", "Construction", "Renovation"]
+      : ["Αντιπαροχές", "Αξιοποίηση Οικοπέδων", "Αξιοποίηση Ακινήτων", "Κατασκευή", "Ανακαίνιση"],
     "offers": {
       "@type": "Offer",
-      "description": "Δωρεάν αρχική αξιολόγηση ακινήτου"
+      "description": isEnglish ? "Free initial property assessment" : "Δωρεάν αρχική αξιολόγηση ακινήτου"
     }
   }
 

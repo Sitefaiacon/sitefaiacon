@@ -1,14 +1,16 @@
 import { SITE_URL } from "@/lib/seo"
 
-export function LocalBusinessSchema() {
+export function LocalBusinessSchema({ lang = "el" }: { lang?: string }) {
+  const isEnglish = lang === "en"
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${SITE_URL}/#organization`,
-    name: "ΦαιάCon - Τεχνική Κατασκευαστική",
-    alternateName: "FaiaCon",
-    description:
-      "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Ανακαίνιση σπιτιών, βιλών, κατασκευή νέων κατοικιών, πισίνες, και λύσεις ανάπτυξης ακινήτων. 35+ χρόνια εμπειρίας. Εξυπηρετούμε ιδιοκτήτες ακινήτων, επενδυτές και ξένους ιδιοκτήτες.",
+    name: isEnglish ? "Faiacon - Construction Company" : "ΦαιάCon - Τεχνική Κατασκευαστική",
+    alternateName: "Faiacon",
+    description: isEnglish
+      ? "Leading construction company in Corfu for house and villa renovations, new home construction, swimming pools and property development. More than 35 years of local experience."
+      : "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Ανακαίνιση σπιτιών, βιλών, κατασκευή νέων κατοικιών, πισίνες και λύσεις ανάπτυξης ακινήτων. 35+ χρόνια εμπειρίας.",
     url: SITE_URL,
     logo: `${SITE_URL}/logo-faiacon.png`,
     image: `${SITE_URL}/images/petrinI-vila-kerkira.jpg`,
@@ -20,10 +22,10 @@ export function LocalBusinessSchema() {
     paymentAccepted: "Cash, Credit Card, Bank Transfer",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Ποταμός",
+      streetAddress: isEnglish ? "Potamos" : "Ποταμός",
       postalCode: "49100",
-      addressLocality: "Κέρκυρα",
-      addressRegion: "Κέρκυρα",
+      addressLocality: isEnglish ? "Corfu" : "Κέρκυρα",
+      addressRegion: isEnglish ? "Corfu" : "Κέρκυρα",
       addressCountry: "GR",
     },
     geo: {
@@ -60,18 +62,21 @@ export function LocalBusinessSchema() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
-export function WebsiteSchema() {
+export function WebsiteSchema({ lang = "el" }: { lang?: string }) {
+  const isEnglish = lang === "en"
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
-    name: "ΦαιάCon",
+    name: isEnglish ? "Faiacon" : "ΦαιάCon",
     url: SITE_URL,
-    description: "Τεχνική Κατασκευαστική Εταιρεία Κέρκυρας - Ανακαίνιση, Κατασκευή, Πισίνες",
+    description: isEnglish
+      ? "Construction company in Corfu for renovations, new builds and swimming pools"
+      : "Τεχνική Κατασκευαστική Εταιρεία Κέρκυρας - Ανακαίνιση, Κατασκευή, Πισίνες",
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },
-    inLanguage: ["el-GR", "en-US"],
+    inLanguage: isEnglish ? "en-US" : "el-GR",
   }
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />

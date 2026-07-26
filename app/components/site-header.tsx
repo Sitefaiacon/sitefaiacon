@@ -133,7 +133,12 @@ export function SiteHeader() {
           <div className="ml-auto xl:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white" aria-label="Άνοιγμα μενού">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white"
+                  aria-label={isEnglish ? "Open menu" : "Άνοιγμα μενού"}
+                >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
