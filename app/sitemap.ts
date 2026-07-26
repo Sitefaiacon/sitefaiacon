@@ -27,6 +27,7 @@ const englishOnlyPaths = [
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date("2026-07-26")
   const localizedRoutes: MetadataRoute.Sitemap = localizedPaths.flatMap((path) => {
     const languages = {
       "el-GR": `${SITE_URL}/el${path}`,
@@ -37,12 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [
       {
         url: `${SITE_URL}/el${path}`,
+        lastModified,
         changeFrequency: path === "" ? "weekly" : "monthly",
         priority: path === "" ? 1 : 0.8,
         alternates: { languages },
       },
       {
         url: `${SITE_URL}/en${path}`,
+        lastModified,
         changeFrequency: path === "" ? "weekly" : "monthly",
         priority: path === "" ? 0.9 : 0.75,
         alternates: { languages },
@@ -52,6 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const englishRoutes: MetadataRoute.Sitemap = englishOnlyPaths.map((path) => ({
     url: `${SITE_URL}/en${path}`,
+    lastModified,
     changeFrequency: "monthly",
     priority: path === "/renovations-corfu" ? 0.85 : 0.7,
   }))

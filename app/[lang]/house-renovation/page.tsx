@@ -1,7 +1,7 @@
 import SiteLayout from "../../components/site-layout"
 import HouseRenovationPage from "../../components/house-renovation-page"
 import type { Metadata } from "next"
-import { HowToSchema, BreadcrumbSchema } from "../../components/structured-data"
+import { BreadcrumbSchema } from "../../components/structured-data"
 import { DEFAULT_SOCIAL_IMAGE, localizedAlternates, SITE_URL } from "@/lib/seo"
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -34,7 +34,6 @@ export default async function HouseRenovation({ params }: { params: Promise<{ la
   
   return (
     <SiteLayout>
-      <HowToSchema isEnglish={isEnglish} />
       <BreadcrumbSchema 
         items={[
           { name: isEnglish ? "Home" : "Αρχική", url: `${SITE_URL}/${lang}` },

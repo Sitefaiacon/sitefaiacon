@@ -35,7 +35,8 @@ export default function HomePage({ lang }: { lang: string }) {
             className="object-cover"
             priority
             sizes="100vw"
-            quality={75}
+            quality={65}
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/90 via-primary-dark/80 to-primary/70" />
         </div>
@@ -466,7 +467,7 @@ export default function HomePage({ lang }: { lang: string }) {
                     asChild
                   >
                     <Link href={`/${lang}/antiparoxes-kerkira`}>
-                      {isEnglish ? "Learn More" : "Μάθετε Περισσότερα"}
+                      {isEnglish ? "Learn About Land Development" : "Μάθετε για την Αξιοποίηση Ακινήτων"}
                     </Link>
                   </Button>
                 </div>

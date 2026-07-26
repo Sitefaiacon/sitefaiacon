@@ -32,6 +32,18 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   poweredByHeader: false,
+  async redirects() {
+    return [
+      { source: '/', destination: '/el', permanent: true },
+      { source: '/appointment', destination: '/el/appointment', permanent: true },
+      { source: '/business-card', destination: '/el', permanent: true },
+      { source: '/house-construction', destination: '/el/house-construction', permanent: true },
+      { source: '/house-renovation', destination: '/el/house-renovation', permanent: true },
+      { source: '/listed-houses', destination: '/el/listed-houses', permanent: true },
+      { source: '/pool-construction', destination: '/el/pool-construction', permanent: true },
+      { source: '/projects', destination: '/el/our-projects', permanent: true },
+    ]
+  },
   async headers() {
     const securityHeaders = [
       {

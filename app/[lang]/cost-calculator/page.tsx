@@ -72,7 +72,7 @@ export default async function CostCalculator({ params }: { params: Promise<{ lan
   return (
     <SiteLayout>
       <HowToSchema isEnglish={isEnglish} />
-      <PriceRangeSchema />
+      <PriceRangeSchema lang={lang} />
       <BreadcrumbSchema 
         items={[
           { name: isEnglish ? "Home" : "Αρχική", url: `${SITE_URL}/${lang}` },

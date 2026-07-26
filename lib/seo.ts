@@ -3,10 +3,10 @@ import type { Metadata } from "next"
 export const SITE_URL = "https://www.faiacon.gr"
 
 export const DEFAULT_SOCIAL_IMAGE = {
-  url: `${SITE_URL}/images/petrinI-vila-kerkira.jpg`,
-  width: 616,
-  height: 448,
-  alt: "Πέτρινη βίλα στην Κέρκυρα από τη ΦαιάCon",
+  url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/final_cleaned_logo%20test.JPG-FSlTAEvg6sCAKPe8rqG14XlINZsV8d.jpeg",
+  width: 1600,
+  height: 750,
+  alt: "Faiacon construction and renovation services in Corfu",
 }
 
 export function localizedAlternates(lang: string, path = ""): Metadata["alternates"] {

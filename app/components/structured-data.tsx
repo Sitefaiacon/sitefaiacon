@@ -315,20 +315,23 @@ export function ReviewSchema() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
-export function PriceRangeSchema() {
+export function PriceRangeSchema({ lang = "el" }: { lang?: string }) {
+  const isEnglish = lang === "en"
   const schema = {
     "@context": "https://schema.org",
     "@type": "PriceSpecification",
-    "@id": `${SITE_URL}/el/cost-calculator#pricing`,
+    "@id": `${SITE_URL}/${lang}/cost-calculator#pricing`,
     priceCurrency: "EUR",
     eligibleRegion: {
       "@type": "Place",
-      name: "Κέρκυρα, Ελλάδα",
+      name: isEnglish ? "Corfu, Greece" : "Κέρκυρα, Ελλάδα",
     },
-    description: "Ενδεικτικές τιμές ανακαίνισης ανά τ.μ.",
+    description: isEnglish
+      ? "Indicative renovation prices per square metre."
+      : "Ενδεικτικές τιμές ανακαίνισης ανά τ.μ.",
     minPrice: "490",
     maxPrice: "780",
-    unitText: "ανά τ.μ.",
+    unitText: isEnglish ? "per m²" : "ανά τ.μ.",
   }
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
