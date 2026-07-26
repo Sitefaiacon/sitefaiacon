@@ -141,14 +141,16 @@ export default async function RootLanguageLayout({
         <WebsiteSchema />
       </head>
       <body className="min-h-screen bg-background antialiased font-sans">
-        <LanguageProvider initialLang={lang}>{children}</LanguageProvider>
-        <GoogleAnalytics GA_MEASUREMENT_ID="G-Y7K0K222D9" />
-        <WebVitals />
-        <Suspense fallback={null}>
-          <CookieConsent />
-        </Suspense>
-        <Toaster position="top-center" />
-        <Analytics />
+        <LanguageProvider initialLang={lang}>
+          {children}
+          <GoogleAnalytics GA_MEASUREMENT_ID="G-Y7K0K222D9" />
+          <WebVitals />
+          <Suspense fallback={null}>
+            <CookieConsent />
+          </Suspense>
+          <Toaster position="top-center" />
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   )
