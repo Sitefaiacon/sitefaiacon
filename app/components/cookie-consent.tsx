@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { X } from "lucide-react"
+import { useLanguage } from "../contexts/language-context"
 
 export function CookieConsent() {
   const [showConsent, setShowConsent] = useState(false)
+  const { isEnglish } = useLanguage()
 
   useEffect(() => {
     const hasConsented = localStorage.getItem("cookieConsent")
@@ -39,21 +41,23 @@ export function CookieConsent() {
           size="icon"
           onClick={handleClose}
           className="absolute right-2 top-2"
-          aria-label="Κλείσιμο"
+          aria-label={isEnglish ? "Close" : "Κλείσιμο"}
         >
           <X className="h-4 w-4" />
         </Button>
         <div className="space-y-3">
-          <h3 className="font-medium">Πολιτική Cookies 🍪</h3>
+          <h3 className="font-medium">{isEnglish ? "Cookie Policy 🍪" : "Πολιτική Cookies 🍪"}</h3>
           <p className="text-sm text-gray-600">
-            Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία περιήγησής σας.
+            {isEnglish
+              ? "We use cookies to improve your browsing experience."
+              : "Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία περιήγησής σας."}
           </p>
           <div className="flex gap-2">
             <Button onClick={acceptAll} size="sm" className="bg-primary hover:bg-primary/90">
-              Αποδοχή Όλων
+              {isEnglish ? "Accept All" : "Αποδοχή Όλων"}
             </Button>
             <Button onClick={acceptEssential} variant="outline" size="sm">
-              Μόνο Απαραίτητα
+              {isEnglish ? "Essential Only" : "Μόνο Απαραίτητα"}
             </Button>
           </div>
         </div>
