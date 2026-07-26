@@ -18,6 +18,7 @@ import { useLanguage } from "../contexts/language-context"
 
 export default function HotelConstructionRenovationPage() {
   const { isEnglish } = useLanguage()
+  const lang = isEnglish ? "en" : "el"
 
   const services = [
     {
@@ -163,7 +164,7 @@ export default function HotelConstructionRenovationPage() {
       <div className="bg-muted py-4 px-4">
         <div className="container max-w-7xl mx-auto">
           <nav className="text-sm text-muted-foreground flex items-center gap-2">
-            <Link href="/" className="hover:text-primary transition-colors">
+              <Link href={`/${lang}`} className="hover:text-primary transition-colors">
               {isEnglish ? "Home" : "Αρχική"}
             </Link>
             <span>/</span>
@@ -193,7 +194,7 @@ export default function HotelConstructionRenovationPage() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-lg"
                 asChild
               >
-                <Link href="/appointment">{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
+                  <Link href={`/${lang}/appointment`}>{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
               </Button>
             </div>
           </AnimatedSection>
@@ -388,7 +389,7 @@ export default function HotelConstructionRenovationPage() {
       className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold"
       asChild
     >
-      <Link href="/appointment">{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
+                  <Link href={`/${lang}/appointment`}>{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
     </Button>
   </div>
           </AnimatedSection>

@@ -118,7 +118,7 @@ export default function HomePage({ lang }: { lang: string }) {
       </section>
 
       {/* Trust Section - NEW */}
-      <section className="relative py-16 sm:py-24 md:py-32 bg-white">
+      <section id="services" className="relative py-16 sm:py-24 md:py-32 bg-white scroll-mt-20">
         <div className="container relative z-10 px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">

@@ -18,6 +18,8 @@ import { useLanguage } from "../contexts/language-context"
 
 export default function VillaLuxuryConstructionPage() {
   const { isEnglish } = useLanguage()
+  const lang = isEnglish ? "en" : "el"
+  const renovationHref = isEnglish ? "/en/renovations-corfu" : "/el/house-renovation"
 
   const services = [
     {
@@ -151,7 +153,7 @@ export default function VillaLuxuryConstructionPage() {
       <div className="bg-muted py-4 px-4">
         <div className="container max-w-7xl mx-auto">
           <nav className="text-sm text-muted-foreground flex items-center gap-2">
-            <Link href="/" className="hover:text-primary transition-colors">
+              <Link href={`/${lang}`} className="hover:text-primary transition-colors">
               {isEnglish ? "Home" : "Αρχική"}
             </Link>
             <span>/</span>
@@ -181,7 +183,7 @@ export default function VillaLuxuryConstructionPage() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-lg"
                 asChild
               >
-                <Link href="/appointment">{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
+                  <Link href={`/${lang}/appointment`}>{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
               </Button>
             </div>
           </AnimatedSection>
@@ -377,7 +379,7 @@ export default function VillaLuxuryConstructionPage() {
                   Comprehensive renovation services for homes and villas already in use. Interior updates, exterior improvements, modernization, and structural upgrades all managed professionally with minimal disruption.
                 </p>
                 <Button className="w-full" variant="outline" asChild>
-                  <Link href="/renovations-corfu">
+                  <Link href={renovationHref}>
                     Explore Renovation Services
                   </Link>
                 </Button>
@@ -388,7 +390,7 @@ export default function VillaLuxuryConstructionPage() {
                   Preparing a villa for Airbnb, vacation rental, or short-term lease? We specialize in renovations that maximize guest appeal and rental income while maintaining quality and durability.
                 </p>
                 <Button className="w-full" variant="outline" asChild>
-                  <Link href="/renovations-corfu">
+                  <Link href={renovationHref}>
                     Learn About Rental Upgrades
                   </Link>
                 </Button>
@@ -416,14 +418,14 @@ export default function VillaLuxuryConstructionPage() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold"
                 asChild
               >
-                <Link href="/appointment">{isEnglish ? "Schedule Design Consultation" : "Προγραμματίστε Σχεδιαστική Συζήτηση"}</Link>
+                <Link href={`/${lang}/appointment`}>{isEnglish ? "Schedule Design Consultation" : "Προγραμματίστε Σχεδιαστική Συζήτηση"}</Link>
               </Button>
               <Button
                 size="lg"
                 className="bg-transparent text-white border-2 border-white hover:bg-white/10 px-8 py-6 text-lg font-semibold"
                 asChild
               >
-                <Link href="/our-projects">{isEnglish ? "View Our Villas" : "Δείτε τις Βίλες μας"}</Link>
+                <Link href={`/${lang}/our-projects`}>{isEnglish ? "View Our Villas" : "Δείτε τις Βίλες μας"}</Link>
               </Button>
             </div>
           </AnimatedSection>

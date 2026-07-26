@@ -317,7 +317,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
               </p>
               <Button
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-primary-dark"
+                className="border-white bg-transparent text-white hover:bg-white hover:text-primary-dark"
                 asChild
               >
                 <Link href={`/${lang}/our-projects`}>

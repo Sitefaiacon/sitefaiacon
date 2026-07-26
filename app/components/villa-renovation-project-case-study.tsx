@@ -175,7 +175,7 @@ export default function VillaRenovationCaseStudy({ lang }: { lang: string }) {
                       <h3 className="font-semibold text-primary mb-2">{service.title}</h3>
                       <p className="text-sm text-gray-600 mb-4">{service.description}</p>
                       <Button variant="ghost" className="text-primary p-0 h-auto font-semibold" asChild>
-                        <Link href={service.link}>
+                        <Link href={`/${lang}${service.link}`}>
                           {service.label} →
                         </Link>
                       </Button>

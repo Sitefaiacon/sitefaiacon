@@ -18,6 +18,7 @@ import { useLanguage } from "../contexts/language-context"
 
 export default function VapsimatаElaiokromatismoiPage() {
   const { isEnglish } = useLanguage()
+  const lang = isEnglish ? "en" : "el"
 
   const services = [
     {
@@ -212,11 +213,11 @@ export default function VapsimatаElaiokromatismoiPage() {
       <div className="bg-muted py-4 px-4">
         <div className="container max-w-7xl mx-auto">
           <nav className="text-sm text-muted-foreground flex items-center gap-2">
-            <Link href="/" className="hover:text-primary transition-colors">
+              <Link href={`/${lang}`} className="hover:text-primary transition-colors">
               {isEnglish ? "Home" : "Αρχική"}
             </Link>
             <span>/</span>
-            <Link href="/services" className="hover:text-primary transition-colors">
+              <Link href={`/${lang}#services`} className="hover:text-primary transition-colors">
               {isEnglish ? "Services" : "Υπηρεσίες"}
             </Link>
             <span>/</span>
@@ -246,7 +247,7 @@ export default function VapsimatаElaiokromatismoiPage() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-lg"
                 asChild
               >
-                <Link href="/appointment">{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
+                  <Link href={`/${lang}/appointment`}>{isEnglish ? "Book Appointment" : "Κλείστε Ραντεβού"}</Link>
               </Button>
             </div>
           </AnimatedSection>
@@ -479,15 +480,15 @@ export default function VapsimatаElaiokromatismoiPage() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-lg"
                 asChild
               >
-                <Link href="/appointment">{isEnglish ? "Contact Us" : "Επικοινωνήστε Μαζί μας"}</Link>
+                <Link href={`/${lang}/appointment`}>{isEnglish ? "Contact Us" : "Επικοινωνήστε Μαζί μας"}</Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold"
+                className="border-[#25D366] bg-[#25D366] text-white shadow-lg hover:border-[#1ebe5d] hover:bg-[#1ebe5d] hover:text-white px-8 py-6 text-lg font-semibold"
                 asChild
               >
-                <Link href="https://wa.me/306942123456" target="_blank" rel="noopener noreferrer">
+                <Link href="https://wa.me/306987797679" target="_blank" rel="noopener noreferrer">
                   {isEnglish ? "WhatsApp Estimate" : "WhatsApp Εκτίμηση"}
                 </Link>
               </Button>
