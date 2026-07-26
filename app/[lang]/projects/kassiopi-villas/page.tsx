@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle2, MapPin } from "lucide-react"
 import SiteLayout from "@/app/components/site-layout"
 import { Button } from "@/components/ui/button"
 import { localizedAlternates, SITE_URL } from "@/lib/seo"
+import { PhotoWatermark } from "@/app/components/photo-watermark"
 
 const images = [
   {
@@ -72,7 +73,17 @@ export default async function KassiopiVillasPage({ params }: { params: Promise<{
           <div className="grid gap-8 lg:grid-cols-2">
             {images.map((image) => (
               <figure key={image.src} className="overflow-hidden rounded-2xl bg-slate-100 shadow-lg">
-                <div className="relative aspect-[4/3]"><Image src={image.src} alt={en ? image.altEn : image.altEl} fill quality={90} className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" /></div>
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={image.src}
+                    alt={en ? image.altEn : image.altEl}
+                    fill
+                    quality={90}
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <PhotoWatermark className="sm:text-base" />
+                </div>
               </figure>
             ))}
           </div>

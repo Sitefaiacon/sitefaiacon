@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
+import { PhotoWatermark } from "./photo-watermark"
 
 interface OptimizedImageProps {
   src: string
@@ -30,6 +31,7 @@ export function OptimizedImage({ src, alt, width, height, className = "" }: Opti
         onLoadingComplete={() => setLoading(false)}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
+      <PhotoWatermark />
     </div>
   )
 }
