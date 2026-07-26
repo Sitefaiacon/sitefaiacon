@@ -10,6 +10,7 @@ import { SectionBackground } from "./section-background"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { ProjectCard } from "./project-card"
+import { PhotoWatermark } from "./photo-watermark"
 import { MapPin } from "lucide-react"
 
 const projects = [
@@ -640,6 +641,7 @@ export default function OurProjectsPage({ lang }: { lang: string }) {
                           img.style.display = "none"
                         }}
                       />
+                      <PhotoWatermark className="sm:text-base" />
                     </div>
                     <div className="space-y-3 p-6 sm:p-8">
                       <div className="flex items-center gap-2 text-sm font-medium text-primary">

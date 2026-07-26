@@ -9,6 +9,7 @@ import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { PhotoWatermark } from "./photo-watermark"
 
 // This is a placeholder. Replace with your actual project data.
 const projects = [
@@ -114,6 +115,7 @@ export default function PortfolioPage({ lang }: { lang: string }) {
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           className="object-cover transition-transform duration-300 group-hover:scale-110"
                         />
+                        <PhotoWatermark />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       <h3 className="text-xl font-semibold mb-1">{isEnglish ? project.title : project.titleEl}</h3>
@@ -128,6 +130,7 @@ export default function PortfolioPage({ lang }: { lang: string }) {
                         fill
                         className="object-cover"
                       />
+                      <PhotoWatermark className="sm:text-base" />
                     </div>
                     <h2 className="text-2xl font-bold mt-4">{isEnglish ? project.title : project.titleEl}</h2>
                     <p className="text-gray-600">{isEnglish ? project.location : project.locationEl}</p>

@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { PhotoWatermark } from "./photo-watermark"
 
 interface ProjectCardProps {
   title: string
@@ -28,6 +29,7 @@ export function ProjectCard({ title, location, image, priority = false, hideText
             img.style.display = "none"
           }}
         />
+        <PhotoWatermark />
         {badge && (
           <span className="absolute left-3 top-3 rounded-full bg-slate-950/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white shadow-sm backdrop-blur-sm">
             {badge}

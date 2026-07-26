@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { CheckCircle, PenToolIcon as Tool, Shield, Zap } from "lucide-react"
 import { PenToolIcon } from "lucide-react"
 import Image from "next/image"
+import { PhotoWatermark } from "./photo-watermark"
 import Link from "next/link"
 import { ArchitecturalBackground } from "./architectural-background"
 import { SectionBackground } from "./section-background"
@@ -386,6 +387,7 @@ export default function HouseConstructionPage({ lang }: { lang: string }) {
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
                     />
+                    <PhotoWatermark />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <h3 className="text-xl font-semibold mb-1">{project.title}</h3>

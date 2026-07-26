@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { PhotoWatermark } from "./photo-watermark"
 
 const featuredProjects = [
   {
@@ -92,6 +93,7 @@ export function HomeProjectCarousel({ isEnglish, lang }: HomeProjectCarouselProp
             />
           ))}
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
+          <PhotoWatermark className="bottom-3 right-3 sm:bottom-4 sm:right-4 sm:text-base" />
 
           <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-8 lg:p-10">
             <div className="max-w-2xl">
