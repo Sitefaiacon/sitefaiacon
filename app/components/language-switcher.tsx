@@ -20,6 +20,14 @@ export function LanguageSwitcher() {
 
   const switchLanguage = (lang: string) => {
     if (lang === currentLang) return
+    if (lang === "en" && pathname === "/el/house-renovation") {
+      router.push("/en/renovations-corfu")
+      return
+    }
+    if (lang === "el" && pathname === "/en/renovations-corfu") {
+      router.push("/el/house-renovation")
+      return
+    }
     // Remove any existing language prefix and add the new one
     const pathWithoutLang = pathname.replace(/^\/(en|el)/, "") || ""
     const newPathname = `/${lang}${pathWithoutLang}`

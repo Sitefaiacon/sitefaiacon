@@ -12,7 +12,7 @@ const servicesItems = [
   { href: "/services/hotel-construction-renovation", label: "Ξενοδοχεία", labelEn: "Hotels" },
   { href: "/services/villa-luxury-home-construction", label: "Βίλες", labelEn: "Villas" },
   { href: "/house-construction", label: "Κατασκευή Σπιτιού", labelEn: "House Construction" },
-  { href: "/house-renovation", label: "Ανακαίνιση Σπιτιού", labelEn: "House Renovation" },
+  { href: "/house-renovation", hrefEn: "/renovations-corfu", label: "Ανακαίνιση Σπιτιού", labelEn: "Renovations in Corfu" },
   { href: "/listed-houses", label: "Διατηρητέα", labelEn: "Listed Buildings" },
   { href: "/pool-construction", label: "Πισίνες", labelEn: "Pools" },
   { href: "/services/thermoprosopsi", label: "Θερμοπρόσοψη", labelEn: "Insulation" },
@@ -37,6 +37,8 @@ export function SiteHeader() {
   const { isEnglish } = useLanguage()
   const pathname = usePathname()
   const lang = isEnglish ? "en" : "el"
+  const getServiceHref = (item: (typeof servicesItems)[number]) =>
+    isEnglish && "hrefEn" in item ? item.hrefEn : item.href
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,7 +64,7 @@ export function SiteHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
-  const isServiceActive = servicesItems.some(item => pathname === `/${lang}${item.href}`)
+  const isServiceActive = servicesItems.some(item => pathname === `/${lang}${getServiceHref(item)}`)
 
   return (
     <header
@@ -98,10 +100,10 @@ export function SiteHeader() {
                         {item.items?.map((subItem) => (
                           <Link
                             key={subItem.href}
-                            href={`/${lang}${subItem.href}`}
+                            href={`/${lang}${getServiceHref(subItem)}`}
                             onClick={() => setDropdownOpen(false)}
                             className={`block px-4 py-2 text-sm text-white hover:bg-white/10 hover:text-secondary transition-colors ${
-                              pathname === `/${lang}${subItem.href}` ? "text-secondary bg-white/5" : ""
+                              pathname === `/${lang}${getServiceHref(subItem)}` ? "text-secondary bg-white/5" : ""
                             }`}
                           >
                             {isEnglish ? subItem.labelEn : subItem.label}
@@ -162,9 +164,9 @@ export function SiteHeader() {
                               {item.items?.map((subItem) => (
                                 <Link
                                   key={subItem.href}
-                                  href={`/${lang}${subItem.href}`}
+                                  href={`/${lang}${getServiceHref(subItem)}`}
                                   className={`block text-base text-white/80 hover:text-secondary transition-colors ${
-                                    pathname === `/${lang}${subItem.href}` ? "text-secondary" : ""
+                                    pathname === `/${lang}${getServiceHref(subItem)}` ? "text-secondary" : ""
                                   }`}
                                 >
                                   {isEnglish ? subItem.labelEn : subItem.label}

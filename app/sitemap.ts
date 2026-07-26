@@ -4,7 +4,6 @@ import { SITE_URL } from "@/lib/seo"
 const localizedPaths = [
   "",
   "/cost-calculator",
-  "/house-renovation",
   "/house-construction",
   "/listed-houses",
   "/pool-construction",
@@ -20,7 +19,6 @@ const localizedPaths = [
 ]
 
 const englishOnlyPaths = [
-  "/renovations-corfu",
   "/projects/house-renovation-corfu",
   "/projects/villa-renovation-corfu",
   "/projects/apartment-renovation-corfu",
@@ -60,5 +58,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/renovations-corfu" ? 0.85 : 0.7,
   }))
 
-  return [...localizedRoutes, ...englishRoutes]
+  const renovationLanguages = {
+    "el-GR": `${SITE_URL}/el/house-renovation`,
+    "en-US": `${SITE_URL}/en/renovations-corfu`,
+    "x-default": `${SITE_URL}/el/house-renovation`,
+  }
+  const renovationRoutes: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/el/house-renovation`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: { languages: renovationLanguages },
+    },
+    {
+      url: `${SITE_URL}/en/renovations-corfu`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+      alternates: { languages: renovationLanguages },
+    },
+  ]
+
+  return [...localizedRoutes, ...renovationRoutes, ...englishRoutes]
 }

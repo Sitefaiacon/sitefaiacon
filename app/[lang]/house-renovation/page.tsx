@@ -3,15 +3,30 @@ import HouseRenovationPage from "../../components/house-renovation-page"
 import type { Metadata } from "next"
 import { BreadcrumbSchema } from "../../components/structured-data"
 import { DEFAULT_SOCIAL_IMAGE, localizedAlternates, SITE_URL } from "@/lib/seo"
+import { permanentRedirect } from "next/navigation"
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
   const isEnglish = lang === "en"
 
-  const title = isEnglish ? "House Renovation in Corfu" : "Ανακαίνιση Σπιτιού στην Κέρκυρα"
-  const description = isEnglish
-    ? "Complete house and villa renovations in Corfu, including kitchens, bathrooms, roofs, insulation and exterior work. Request a free initial estimate."
-    : "Ολική ανακαίνιση σπιτιού και βίλας στην Κέρκυρα: κουζίνα, μπάνιο, στέγη, μόνωση και εξωτερικές εργασίες. Ζητήστε δωρεάν αρχική εκτίμηση."
+  if (isEnglish) {
+    return {
+      title: "Renovations in Corfu",
+      description: "Professional home, villa and property renovations across Corfu.",
+      alternates: {
+        canonical: `${SITE_URL}/en/renovations-corfu`,
+        languages: {
+          "el-GR": `${SITE_URL}/el/house-renovation`,
+          "en-US": `${SITE_URL}/en/renovations-corfu`,
+          "x-default": `${SITE_URL}/el/house-renovation`,
+        },
+      },
+    }
+  }
+
+  const title = "Ανακαίνιση Σπιτιού στην Κέρκυρα"
+  const description =
+    "Ολική ανακαίνιση σπιτιού και βίλας στην Κέρκυρα: κουζίνα, μπάνιο, στέγη, μόνωση και εξωτερικές εργασίες. Ζητήστε δωρεάν αρχική εκτίμηση."
 
   return {
     title,
@@ -21,23 +36,33 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       description,
       url: `${SITE_URL}/${lang}/house-renovation`,
       type: "website",
-      locale: isEnglish ? "en_US" : "el_GR",
+      locale: "el_GR",
       images: [DEFAULT_SOCIAL_IMAGE],
     },
-    alternates: localizedAlternates(lang, "house-renovation"),
+    alternates: {
+      canonical: `${SITE_URL}/el/house-renovation`,
+      languages: {
+        "el-GR": `${SITE_URL}/el/house-renovation`,
+        "en-US": `${SITE_URL}/en/renovations-corfu`,
+        "x-default": `${SITE_URL}/el/house-renovation`,
+      },
+    },
   }
 }
 
 export default async function HouseRenovation({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
-  const isEnglish = lang === "en"
+
+  if (lang === "en") {
+    permanentRedirect("/en/renovations-corfu")
+  }
   
   return (
     <SiteLayout>
       <BreadcrumbSchema 
         items={[
-          { name: isEnglish ? "Home" : "Αρχική", url: `${SITE_URL}/${lang}` },
-          { name: isEnglish ? "House Renovation" : "Ανακαίνιση Σπιτιού", url: `${SITE_URL}/${lang}/house-renovation` },
+          { name: "Αρχική", url: `${SITE_URL}/el` },
+          { name: "Ανακαίνιση Σπιτιού", url: `${SITE_URL}/el/house-renovation` },
         ]} 
       />
       <HouseRenovationPage lang={lang} />
