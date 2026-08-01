@@ -2,12 +2,6 @@
 const nextConfig = {
   cleanDistDir: true,
   reactStrictMode: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -69,6 +63,10 @@ const nextConfig = {
       {
         key: 'X-DNS-Prefetch-Control',
         value: 'on',
+      },
+      {
+        key: 'Content-Security-Policy',
+        value: "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://translate.google.com https://translate.googleapis.com; style-src 'self' 'unsafe-inline' https://translate.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://translate.googleapis.com https://vitals.vercel-insights.com; frame-src https://www.googletagmanager.com; upgrade-insecure-requests",
       },
     ]
 

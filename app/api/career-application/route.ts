@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
+import { isAllowedFormRequest, isOversizedRequest, isRateLimited } from "@/lib/server/request-security"
 
 const LEADS_FROM_EMAIL = process.env.LEADS_FROM_EMAIL || "onboarding@resend.dev"
 const HR_RECEIVER_EMAIL = process.env.HR_RECEIVER_EMAIL || "info@faiacon.gr"
@@ -25,6 +26,10 @@ export async function POST(req: NextRequest) {
   let isEnglish = false
 
   try {
+    if (!isAllowedFormRequest(req)) return NextResponse.json({ success: false, message: "Invalid request origin." }, { status: 403 })
+    if (isOversizedRequest(req)) return NextResponse.json({ success: false, message: "Request too large." }, { status: 413 })
+    if (isRateLimited(req, "career")) return NextResponse.json({ success: false, message: "Too many requests." }, { status: 429 })
+
     const body = await req.json()
     isEnglish = readString(body.lang, 2) === "en"
     const message = (english: string, greek: string) => (isEnglish ? english : greek)
@@ -129,6 +134,7 @@ export async function POST(req: NextRequest) {
       </div>
     `
 
+    if (!process.env.RESEND_API_KEY) throw new Error("Email service is not configured")
     const resend = new Resend(process.env.RESEND_API_KEY)
     const { error: hrError } = await resend.emails.send({
       from: `Φαιάcon Careers <${LEADS_FROM_EMAIL}>`,

@@ -58,11 +58,11 @@ export async function sendEmail(formData: FormData) {
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY)
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: `Faiacon Website <${LEADS_FROM_EMAIL}>`,
       to: [LEADS_TO_EMAIL],
       replyTo: email,
-      subject: `Νέα Φόρμα Επικοινωνίας από ${name || email}`,
+      subject: `Νέα Φόρμα Επικοινωνίας από ${(name || email).replace(/[\r\n]/g, " ")}`,
       text: `
         Όνομα: ${name || "Δεν δόθηκε"}
         Email: ${email}
@@ -87,7 +87,6 @@ export async function sendEmail(formData: FormData) {
       throw new Error(error.message)
     }
 
-    console.log("Email sent successfully:", data)
     return {
       success: true,
       message: "Το μήνυμά σας στάλθηκε με επιτυχία! Θα επικοινωνήσουμε μαζί σας σύντομα.",

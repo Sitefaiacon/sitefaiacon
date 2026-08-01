@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import type { CalculatorLead } from '@/lib/types/calculator-lead'
 import type { QuoteBreakdown, RenovationBreakdown, WindowsBreakdown } from '@/lib/calculator/pricing'
 import { fmtEur, fmtNum, QUALITY_LABELS_EL, MATERIAL_LABELS_EL, POOL_TYPE_LABELS_EL } from '@/lib/calculator/pricing'
+import { isAllowedFormRequest, isOversizedRequest } from '@/lib/server/request-security'
 
 // Email configuration from environment variables with fallbacks
 const LEADS_TO_EMAIL = process.env.LEADS_TO_EMAIL || 'info@faiacon.gr'
@@ -516,14 +517,13 @@ ${fmtEur(grandTotal)}`
 
 // ─── Lead storage (optional) ─────────────────────────────────────────────────
 
-async function storeLead(lead: CalculatorLead): Promise<void> {
-  console.log('[Calculator Lead]', JSON.stringify({ contact: lead.contact, submittedAt: lead.submittedAt, grandTotal: lead.breakdown?.grandTotal ?? lead.selections.totalCost }, null, 2))
-}
-
 // ─── POST handler ─────────────────────────────────────────────────────────────
 
 export async function POST(request: NextRequest) {
   try {
+    if (!isAllowedFormRequest(request)) return NextResponse.json({ success: false, errors: ['Invalid request origin.'] }, { status: 403 })
+    if (isOversizedRequest(request)) return NextResponse.json({ success: false, errors: ['Request too large.'] }, { status: 413 })
+
     // Rate limit per IP to mitigate spam/abuse
     if (isRateLimited(getClientIp(request))) {
       return NextResponse.json(
@@ -587,12 +587,6 @@ export async function POST(request: NextRequest) {
         { success: false, errors: ['Αποτυχία αποστολής email. Παρακαλώ δοκιμάστε ξανά.'] },
         { status: 500 }
       )
-    }
-
-    try {
-      await storeLead(lead)
-    } catch (storeError) {
-      console.error('Failed to store lead:', storeError)
     }
 
     return NextResponse.json({
