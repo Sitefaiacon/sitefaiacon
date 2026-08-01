@@ -34,7 +34,7 @@ export function CookieConsent() {
   if (!showConsent) return null
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm z-50">
+    <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-4 right-4 z-50 md:left-auto md:right-4 md:max-w-sm">
       <div className="bg-white rounded-lg shadow-lg p-4 relative">
         <Button
           variant="ghost"
@@ -52,11 +52,11 @@ export function CookieConsent() {
               ? "We use cookies to improve your browsing experience."
               : "Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία περιήγησής σας."}
           </p>
-          <div className="flex gap-2">
-            <Button onClick={acceptAll} size="sm" className="bg-primary hover:bg-primary/90">
+          <div className="flex flex-col gap-2 min-[390px]:flex-row">
+            <Button onClick={acceptAll} className="min-h-11 flex-1 bg-primary hover:bg-primary/90">
               {isEnglish ? "Accept All" : "Αποδοχή Όλων"}
             </Button>
-            <Button onClick={acceptEssential} variant="outline" size="sm">
+            <Button onClick={acceptEssential} variant="outline" className="min-h-11 flex-1">
               {isEnglish ? "Essential Only" : "Μόνο Απαραίτητα"}
             </Button>
           </div>

@@ -2,8 +2,13 @@
   "name": "ΦαιάCon - Τεχνική Κατασκευαστική Κέρκυρας",
   "short_name": "ΦαιάCon",
   "description": "Κορυφαία τεχνική κατασκευαστική εταιρεία στην Κέρκυρα. Υπολογιστής κόστους ανακαίνισης, κατασκευή σπιτιού, ανακαίνιση.",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "lang": "el",
   "background_color": "#ffffff",
   "theme_color": "#1e3a5f",
   "icons": [
@@ -17,12 +22,32 @@
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/apple-icon.png",
       "sizes": "180x180",
       "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Υπολογιστής Κόστους",
+      "short_name": "Κόστος",
+      "url": "/el/cost-calculator",
+      "icons": [{ "src": "/logo-faiacon.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Κλείστε Ραντεβού",
+      "short_name": "Ραντεβού",
+      "url": "/el/appointment",
+      "icons": [{ "src": "/logo-faiacon.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }

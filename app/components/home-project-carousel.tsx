@@ -127,19 +127,24 @@ export function HomeProjectCarousel({ isEnglish, lang }: HomeProjectCarouselProp
       </div>
 
       <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-        <div className="flex items-center gap-2" role="tablist" aria-label={isEnglish ? "Featured projects" : "Επιλεγμένα έργα"}>
+        <div className="flex items-center" role="tablist" aria-label={isEnglish ? "Featured projects" : "Επιλεγμένα έργα"}>
           {featuredProjects.map((project, index) => (
             <button
               key={project.image}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className={`h-2.5 rounded-full transition-all ${
-                index === activeIndex ? "w-9 bg-primary" : "w-2.5 bg-slate-300 hover:bg-slate-400"
-              }`}
+              className="group flex h-11 w-11 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               aria-label={`${isEnglish ? "Show" : "Προβολή"} ${isEnglish ? project.titleEn : project.title}`}
               aria-selected={index === activeIndex}
               role="tab"
-            />
+            >
+              <span
+                className={`h-2.5 rounded-full transition-all ${
+                  index === activeIndex ? "w-8 bg-primary" : "w-2.5 bg-slate-300 group-hover:bg-slate-400"
+                }`}
+                aria-hidden="true"
+              />
+            </button>
           ))}
         </div>
         <Button className="ml-2 bg-primary text-white hover:bg-primary/90" asChild>

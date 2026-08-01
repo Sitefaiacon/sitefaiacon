@@ -25,7 +25,7 @@ export default function HomePage({ lang }: { lang: string }) {
   return (
     <>
       {/* Enhanced Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#2c3e5c] via-[#3d5175] to-[#5c7191]">
+      <section className="relative flex min-h-[calc(100svh-4rem-env(safe-area-inset-top))] items-center justify-center overflow-hidden bg-gradient-to-b from-[#2c3e5c] via-[#3d5175] to-[#5c7191] py-8 sm:min-h-[calc(100dvh-4rem-env(safe-area-inset-top))] sm:py-12">
         {/* Optimized Background - CSS only, no heavy image */}
         <div className="absolute inset-0">
           <Image

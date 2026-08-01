@@ -36,7 +36,7 @@ export function LanguageSwitcher() {
 
   return (
     <div className="flex items-center gap-1">
-      <Globe className="w-4 h-4 text-white/70" />
+      <Globe className="hidden h-4 w-4 text-white/70 sm:block" aria-hidden="true" />
       <div className="flex rounded-lg overflow-hidden">
         {(Object.entries(languages) as [keyof typeof languages, string][]).map(([code, name]) => (
           <Button
@@ -44,13 +44,16 @@ export function LanguageSwitcher() {
             onClick={() => switchLanguage(code)}
             variant={code === currentLang ? "secondary" : "ghost"}
             size="sm"
+            aria-label={code === "el" ? "Ελληνικά" : "English"}
+            aria-pressed={code === currentLang}
             className={cn(
-              "px-3 py-1 text-sm font-medium transition-all duration-200 rounded-none",
+              "h-11 min-w-11 rounded-none px-2 text-sm font-medium transition-all duration-200 sm:h-10 sm:min-w-0 sm:px-3",
               code === currentLang ? "bg-white text-primary" : "text-white hover:bg-white/10",
               code === "el" ? "rounded-l-lg" : "rounded-r-lg",
             )}
           >
-            {name}
+            <span className="sm:hidden">{code.toUpperCase()}</span>
+            <span className="hidden sm:inline">{name}</span>
           </Button>
         ))}
       </div>

@@ -37,7 +37,8 @@ const oswald = Oswald({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0f172a",
+  viewportFit: "cover",
+  themeColor: "#1e3771",
 }
 
 export function generateStaticParams() {
@@ -68,7 +69,13 @@ export async function generateMetadata({
     authors: [{ name: "Faiacon", url: SITE_URL }],
     creator: "Faiacon",
     publisher: "Faiacon",
+    applicationName: "ΦαιάCon",
     manifest: "/manifest.json",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title: "ΦαιάCon",
+    },
     icons: {
       icon: [
         { url: "/favicon.ico", type: "image/x-icon" },

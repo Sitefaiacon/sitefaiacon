@@ -8,6 +8,35 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background-color: #1e3771;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  -webkit-tap-highlight-color: rgba(43, 75, 140, 0.16);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

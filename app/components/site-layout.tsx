@@ -12,9 +12,9 @@ interface SiteLayoutProps {
 // Εξάγουμε τη συνάρτηση ως named export
 export function SiteLayout({ children, showHero = false }: SiteLayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <main className={`flex-grow ${showHero ? "pt-16" : ""}`}>{children}</main>
+      <main className="flex-grow pt-[calc(4rem+env(safe-area-inset-top))]">{children}</main>
       <Footer />
     </div>
   )

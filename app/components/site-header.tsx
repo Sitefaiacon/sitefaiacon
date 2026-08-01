@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, ChevronDown } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useState, useEffect, useRef } from "react"
 import { LanguageSwitcher } from "./language-switcher"
 import { useLanguage } from "../contexts/language-context"
@@ -33,12 +33,16 @@ export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const { isEnglish } = useLanguage()
   const pathname = usePathname()
   const lang = isEnglish ? "en" : "el"
   const getServiceHref = (item: (typeof servicesItems)[number]) =>
     isEnglish && "hrefEn" in item ? item.hrefEn : item.href
+  const closeMobileMenuAfterNavigation = () => {
+    window.setTimeout(() => setMobileMenuOpen(false), 0)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +53,7 @@ export function SiteHeader() {
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -64,19 +68,23 @@ export function SiteHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
+
   const isServiceActive = servicesItems.some(item => pathname === `/${lang}${getServiceHref(item)}`)
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#1e3771] ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#1e3771] pt-[env(safe-area-inset-top)] transition-all duration-300 ${
         isScrolled ? "shadow-lg" : ""
       }`}
     >
-      <div className="max-w-[1800px] mx-auto px-4">
+      <div className="mx-auto max-w-[1800px] px-3 sm:px-4">
         <div className="flex items-center h-16">
           <Link
             href={`/${lang}`}
-            className="mr-6 whitespace-nowrap font-serif text-2xl font-bold tracking-tight text-white transition-colors hover:text-secondary xl:mr-8"
+            className="mr-2 whitespace-nowrap font-serif text-xl font-bold tracking-tight text-white transition-colors hover:text-secondary sm:mr-4 sm:text-2xl xl:mr-8"
           >
             ΦαιάCon
           </Link>
@@ -128,31 +136,34 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="ml-auto">
+          <div className="ml-auto shrink-0">
             <LanguageSwitcher />
           </div>
 
-          <div className="ml-auto xl:hidden">
-            <Sheet>
+          <div className="ml-1 shrink-0 xl:hidden sm:ml-2">
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-white"
+                  className="h-11 w-11 text-white hover:bg-white/10 hover:text-white"
                   aria-label={isEnglish ? "Open menu" : "Άνοιγμα μενού"}
                 >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-[#1e3771] w-[300px]">
-                <nav className="flex flex-col space-y-4 mt-8">
+              <SheetContent side="right" className="w-[min(88vw,340px)] overflow-y-auto bg-[#1e3771] pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-[calc(1.5rem+env(safe-area-inset-top))]">
+                <SheetTitle className="sr-only">
+                  {isEnglish ? "Navigation menu" : "Μενού πλοήγησης"}
+                </SheetTitle>
+                <nav className="mt-8 flex flex-col space-y-2">
                   {navItems.map((item, index) => {
                     if (item.type === "dropdown") {
                       return (
                         <div key={index}>
                           <button
                             onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                            className={`text-lg font-medium text-white hover:text-secondary transition-colors flex items-center gap-2 w-full ${
+                            className={`flex min-h-11 w-full items-center gap-2 rounded-md px-2 text-left text-lg font-medium text-white transition-colors hover:bg-white/10 hover:text-secondary ${
                               isServiceActive ? "text-secondary" : ""
                             }`}
                           >
@@ -160,12 +171,13 @@ export function SiteHeader() {
                             <ChevronDown className={`w-4 h-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
                           </button>
                           {mobileServicesOpen && (
-                            <div className="pl-4 mt-2 space-y-2 border-l border-white/20">
+                            <div className="mt-2 space-y-1 border-l border-white/20 pl-4">
                               {item.items?.map((subItem) => (
                                 <Link
                                   key={subItem.href}
                                   href={`/${lang}${getServiceHref(subItem)}`}
-                                  className={`block text-base text-white/80 hover:text-secondary transition-colors ${
+                                  onClick={closeMobileMenuAfterNavigation}
+                                  className={`flex min-h-11 items-center rounded-md px-2 text-base text-white/80 transition-colors hover:bg-white/10 hover:text-secondary ${
                                     pathname === `/${lang}${getServiceHref(subItem)}` ? "text-secondary" : ""
                                   }`}
                                 >
@@ -181,7 +193,8 @@ export function SiteHeader() {
                       <Link
                         key={item.href}
                         href={`/${lang}${item.href}`}
-                        className={`text-lg font-medium text-white hover:text-secondary transition-colors ${
+                        onClick={closeMobileMenuAfterNavigation}
+                        className={`flex min-h-11 items-center rounded-md px-2 text-lg font-medium text-white transition-colors hover:bg-white/10 hover:text-secondary ${
                           pathname === `/${lang}${item.href}` ? "text-secondary" : ""
                         }`}
                       >
