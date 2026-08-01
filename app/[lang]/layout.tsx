@@ -72,10 +72,10 @@ export async function generateMetadata({
     icons: {
       icon: [
         { url: "/favicon.ico", type: "image/x-icon" },
-        { url: "/images/faiacon-logo-round.jpg", type: "image/jpeg", sizes: "192x192" },
+        { url: "/logo-faiacon.png", type: "image/png", sizes: "192x192" },
       ],
       shortcut: "/favicon.ico",
-      apple: [{ url: "/images/faiacon-logo-round.jpg", sizes: "180x180", type: "image/jpeg" }],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
     },
     formatDetection: {
       email: false,
